@@ -1,0 +1,1339 @@
+[2025-03-21 14:14:41.770] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 14:14:59.431] [Engine] [info] CompileVertexShader returned 1.
+[2025-03-21 14:15:05.020] [Engine] [error] ERROR: 0:3: 'layout (points)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (line_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-component 
+[2025-03-21 14:46:11.996] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 14:46:40.255] [Engine] [info] CompileShader returned 1.
+[2025-03-21 14:46:46.224] [Engine] [info] CompileShader returned 2.
+[2025-03-21 14:46:57.296] [Engine] [info] CompileShader returned 4.
+[2025-03-21 14:47:02.940] [Engine] [info] CompileShader returned 5.
+[2025-03-21 14:47:07.700] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:47:15.038] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.049] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.191] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.353] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.489] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.625] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.777] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:23.920] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:24.066] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:24.210] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.173] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.354] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.492] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.638] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.801] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:28.958] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.114] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.271] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.426] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.587] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.753] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:29.905] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.133] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.317] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.466] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.627] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.781] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:31.952] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.120] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.289] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.442] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.605] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.775] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:32.942] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.105] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.277] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.435] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.610] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.777] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:33.937] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.097] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.262] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.433] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.610] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.769] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:34.929] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:35.099] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:35.271] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:35.433] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:35.579] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:39.915] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:42.377] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:44.289] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:44.491] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:44.678] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:44.865] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.051] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.210] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.399] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.570] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.756] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:45.930] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.133] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.291] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.470] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.646] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.816] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:46.997] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:47.166] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:47.345] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:47.510] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:47.696] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:47.862] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.038] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.223] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.396] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.568] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.752] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:48.923] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.096] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.272] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.445] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.620] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.789] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:49.969] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:50.149] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:50.327] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:50.496] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:50.678] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:50.840] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.019] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.208] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.402] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.531] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.706] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:51.884] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:51:52.050] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:09.335] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:11.231] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:11.416] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:11.581] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:11.935] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:12.090] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:12.241] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:12.398] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:32.863] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:33.611] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:40.246] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:40.400] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:40.540] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:41.159] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:41.282] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:41.426] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:58.860] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:59.408] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:59.566] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:52:59.712] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_s[2025-03-21 14:53:24.813] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 14:53:33.551] [Engine] [info] CompileShader returned 1.
+[2025-03-21 14:53:53.970] [Engine] [info] CompileShader returned 2.
+[2025-03-21 14:53:54.131] [Engine] [info] CompileShader returned 4.
+[2025-03-21 14:53:54.254] [Engine] [info] CompileShader returned 5.
+[2025-03-21 14:53:54.395] [Engine] [info] CompileShader returned 6.
+[2025-03-21 14:53:54.549] [Engine] [info] CompileShader returned 7.
+[2025-03-21 14:53:54.684] [Engine] [info] CompileShader returned 8.
+[2025-03-21 14:53:54.828] [Engine] [info] CompileShader returned 9.
+[2025-03-21 14:53:54.975] [Engine] [info] CompileShader returned 10.
+[2025-03-21 14:53:55.129] [Engine] [info] CompileShader returned 11.
+[2025-03-21 14:53:55.269] [Engine] [info] CompileShader returned 12.
+[2025-03-21 14:53:55.416] [Engine] [info] CompileShader returned 13.
+[2025-03-21 14:53:55.569] [Engine] [info] CompileShader returned 14.
+[2025-03-21 14:53:55.723] [Engine] [info] CompileShader returned 15.
+[2025-03-21 14:53:55.867] [Engine] [info] CompileShader returned 16.
+[2025-03-21 14:53:56.018] [Engine] [info] CompileShader returned 17.
+[2025-03-21 14:53:56.170] [Engine] [info] CompileShader returned 18.
+[2025-03-21 14:53:56.330] [Engine] [info] CompileShader returned 19.
+[2025-03-21 14:53:56.481] [Engine] [info] CompileShader returned 20.
+[2025-03-21 14:53:56.634] [Engine] [info] CompileShader returned 21.
+[2025-03-21 14:53:56.795] [Engine] [info] CompileShader returned 22.
+[2025-03-21 14:53:56.965] [Engine] [info] CompileShader returned 23.
+[2025-03-21 14:53:57.125] [Engine] [info] CompileShader returned 24.
+[2025-03-21 14:53:57.284] [Engine] [info] CompileShader returned 25.
+[2025-03-21 14:53:57.451] [Engine] [info] CompileShader returned 26.
+[2025-03-21 14:53:57.616] [Engine] [info] CompileShader returned 27.
+[2025-03-21 14:53:57.782] [Engine] [info] CompileShader returned 28.
+[2025-03-21 14:53:57.947] [Engine] [info] CompileShader returned 29.
+[2025-03-21 14:53:58.111] [Engine] [info] CompileShader returned 30.
+[2025-03-21 14:53:58.277] [Engine] [info] CompileShader returned 31.
+[2025-03-21 14:53:58.449] [Engine] [info] CompileShader returned 32.
+[2025-03-21 14:53:58.611] [Engine] [info] CompileShader returned 33.
+[2025-03-21 14:53:58.767] [Engine] [info] CompileShader returned 34.
+[2025-03-21 14:53:58.934] [Engine] [info] CompileShader returned 35.
+[2025-03-21 14:53:59.097] [Engine] [info] CompileShader returned 36.
+[2025-03-21 14:53:59.255] [Engine] [info] CompileShader returned 37.
+[2025-03-21 14:53:59.426] [Engine] [info] CompileShader returned 38.
+[2025-03-21 14:53:59.594] [Engine] [info] CompileShader returned 39.
+[2025-03-21 14:53:59.765] [Engine] [info] CompileShader returned 40.
+[2025-03-21 14:53:59.926] [Engine] [info] CompileShader returned 41.
+[2025-03-21 14:54:00.086] [Engine] [info] CompileShader returned 42.
+[2025-03-21 14:54:00.256] [Engine] [info] CompileShader returned 43.
+[2025-03-21 14:54:00.405] [Engine] [info] CompileShader returned 44.
+[2025-03-21 14:54:00.573] [Engine] [info] CompileShader returned 45.
+[2025-03-21 14:54:00.722] [Engine] [info] CompileShader returned 46.
+[2025-03-21 14:54:00.885] [Engine] [info] CompileShader returned 47.
+[2025-03-21 14:54:01.047] [Engine] [info] CompileShader returned 48.
+[2025-03-21 14:54:01.213] [Engine] [info] CompileShader returned 49.
+[2025-03-21 14:54:01.388] [Engine] [info] CompileShader returned 50.
+[2025-03-21 14:54:01.554] [Engine] [info] CompileShader returned 51.
+[2025-03-21 14:54:01.712] [Engine] [info] CompileShader returned 52.
+[2025-03-21 14:54:01.872] [Engine] [info] CompileShader returned 53.
+[2025-03-21 14:54:02.036] [Engine] [info] CompileShader returned 54.
+[2025-03-21 14:54:02.199] [Engine] [info] CompileShader returned 55.
+[2025-03-21 14:54:02.359] [Engine] [info] CompileShader returned 56.
+[2025-03-21 14:54:02.515] [Engine] [info] CompileShader returned 57.
+[2025-03-21 14:54:02.678] [Engine] [info] CompileShader returned 58.
+[2025-03-21 14:54:02.838] [Engine] [info] CompileShader returned 59.
+[2025-03-21 14:54:03.015] [Engine] [info] CompileShader returned 60.
+[2025-03-21 14:54:03.191] [Engine] [info] CompileShader returned 61.
+[2025-03-21 14:54:03.369] [Engine] [info] CompileShader returned 62.
+[2025-03-21 14:54:03.535] [Engine] [info] CompileShader returned 63.
+[2025-03-21 14:54:04.030] [Engine] [info] CompileShader returned 64.
+[2025-03-21 14:54:15.452] [Engine] [info] CompileShader returned 65.
+[2025-03-21 14:54:15.607] [Engine] [info] CompileShader returned 66.
+[2025-03-21 14:54:15.767] [Engine] [info] CompileShader returned 67.
+[2025-03-21 14:54:15.918] [Engine] [info] CompileShader returned 68.
+[2025-03-21 14:54:16.072] [Engine] [info] CompileShader returned 69.
+[2025-03-21 14:54:16.242] [Engine] [info] CompileShader returned 70.
+[2025-03-21 14:54:16.393] [Engine] [info] CompileShader returned 71.
+[2025-03-21 14:54:16.559] [Engine] [info] CompileShader returned 72.
+[2025-03-21 14:54:16.708] [Engine] [info] CompileShader returned 73.
+[2025-03-21 14:54:16.876] [Engine] [info] CompileShader returned 74.
+[2025-03-21 14:54:17.041] [Engine] [info] CompileShader returned 75.
+[2025-03-21 14:54:17.203] [Engine] [info] CompileShader returned 76.
+[2025-03-21 14:54:17.376] [Engine] [info] CompileShader returned 77.
+[2025-03-21 14:54:17.537] [Engine] [info] CompileShader returned 78.
+[2025-03-21 14:54:17.692] [Engine] [info] CompileShader returned 79.
+[2025-03-21 14:54:17.857] [Engine] [info] CompileShader returned 80.
+[2025-03-21 14:54:18.182] [Engine] [info] CompileShader returned 81.
+[2025-03-21 14:54:18.521] [Engine] [info] CompileShader returned 82.
+[2025-03-21 14:54:18.846] [Engine] [info] CompileShader returned 83.
+[2025-03-21 14:54:19.004] [Engine] [info] CompileShader returned 84.
+[2025-03-21 14:54:20.001] [Engine] [info] CompileShader returned 85.
+[2025-03-21 14:54:20.163] [Engine] [info] CompileShader returned 86.
+[2025-03-21 14:54:20.328] [Engine] [info] CompileShader returned 87.
+[2025-03-21 14:54:20.484] [Engine] [info] CompileShader returned 88.
+[2025-03-21 14:54:20.652] [Engine] [info] CompileShader returned 89.
+[2025-03-21 14:54:20.810] [Engine] [info] CompileShader returned 90.
+[2025-03-21 14:54:20.959] [Engine] [info] CompileShader returned 91.
+[2025-03-21 14:54:24.792] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:25.166] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:25.454] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:25.625] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:25.796] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:25.969] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.139] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.300] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.459] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.619] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.774] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:26.953] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.118] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.286] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.447] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.624] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.788] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:27.954] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:28.123] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:28.288] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:29.909] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.092] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.262] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.421] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.588] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.755] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:30.927] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:31.102] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:31.258] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:38.028] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:38.434] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:38.612] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:38.790] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:38.963] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.139] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.309] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.477] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.648] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.817] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:39.987] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (triangle_strip)' :  supported in geometry shaders only  
+ERROR: 0:4: 'layout (max_vertices)' :  supported in geometry shaders only  
+ERROR: 0:11: 'gl_in' : undeclared identifier 
+ERROR: 0:11: 'gl_in' :  left of '[' is not of type array, matrix, or vector  
+ERROR: 0:11: 'gl_Position' :  field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:11: '=' :  cannot convert from 'float' to '4-compone
+[2025-03-21 14:54:40.156] [Engine] [error] ERROR: 0:3: 'layout (lines)' :  [2025-03-21 14:59:18.200] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:07:06.074] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:07:32.265] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:08:04.098] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:08:20.536] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:16:26.893] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:16:59.874] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:17:43.539] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:18:03.737] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:28:14.248] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:28:32.002] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:28:52.068] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:33:35.461] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:35:54.428] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:39:52.420] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:40:28.216] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:45:48.252] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:46:05.062] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:46:25.115] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:46:42.772] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:47:07.878] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 15:49:39.660] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 16:38:57.869] [Engine] [info] gladLoadGL succeeded.
+[2025-03-21 16:39:27.957] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:27.957] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:27.957] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:39.238] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aNormal;
+layout (location = 1) in vec3 aPos;
+
+out vec3 FragPos;
+out vec3 Normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = mat3(transpose(inverse(model))) * aNormal;  
+    
+    gl_Position = projection * view * vec4(FragPos, 1.0);
+}
+
+[2025-03-21 16:39:39.238] [Engine] [debug] CompileShader returned 2.
+[2025-03-21 16:39:46.818] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+
+in vec3 Normal;  
+in vec3 FragPos;  
+  
+uniform vec3 lightPos; 
+uniform vec3 viewPos; 
+uniform vec3 lightColor;
+uniform vec3 objectColor;
+
+void main()
+{
+    // ambient
+    float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * lightColor;
+  	
+    // diffuse 
+    vec3 norm = normalize(Normal);
+	if (gl_FrontFacing)
+		norm *= -1.0;
+    vec3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightColor;
+    
+    // specular
+    float specularStrength = 0.5;
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * lightColor;  
+        
+    vec3 result = (ambient + diffuse + specular) * objectColor;
+    FragColor = vec4(result, 1.0);
+} 
+
+[2025-03-21 16:39:46.820] [Engine] [debug] CompileShader returned 4.
+[2025-03-21 16:39:50.056] [Engine] [debug] LinkProgram returned 5.
+[2025-03-21 16:39:54.637] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:54.637] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:54.638] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:56.459] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:56.459] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:56.459] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:56.885] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:56.885] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:56.886] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.077] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.077] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.077] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.254] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.254] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.254] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.436] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.436] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.436] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.627] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.628] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.628] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.811] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.811] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.817] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.987] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:57.987] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:57.987] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.162] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:58.162] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.162] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.350] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:58.350] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.350] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.529] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:58.529] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.529] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.715] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:58.715] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.715] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.901] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:58.901] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:58.901] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:59.081] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:59.081] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:59.081] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:59.273] [Engine] [error] either program or shader is not a value generated by OpenGL.
+[2025-03-21 16:39:59.273] [Engine] [warning] shader it not a value generated by OpenGL.
+[2025-03-21 16:39:59.273] [Engine] [warning] shader it not a value generated by OpenGL.
