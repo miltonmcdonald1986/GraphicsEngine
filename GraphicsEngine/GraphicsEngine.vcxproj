@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;$(GLM_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -97,7 +97,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;$(GLM_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -116,7 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;$(GLM_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Interfaces;$(GLAD_DIR)\include;$(SPDLOG_DIR)\include;$(GLM_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="..\Interfaces\Color.h" />
     <ClInclude Include="..\Interfaces\Engine.h" />
+    <ClInclude Include="..\Interfaces\GLUtilities.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\ShaderUtilities.h" />
     <ClInclude Include="framework.h" />
@@ -163,6 +164,7 @@
     </ClCompile>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="GLUtilities.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

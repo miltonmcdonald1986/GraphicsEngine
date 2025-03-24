@@ -261,6 +261,30 @@ int main(void)
     GraphicsEngine::Color backgroundColor(0.2f, 0.3f, 0.3f, 1.f);
     engine.SetBackgroundColor(backgroundColor);
 
+    auto optVertexShader = GraphicsEngine::ShaderUtilities::CompileVertexShader(std::string("#version 330 core\n"
+        "layout (location = 0) in vec3 aPos;\n"
+        "void main()\n"
+        "{\n"
+        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "}\0"));
+    auto optFragmentShader = GraphicsEngine::ShaderUtilities::CompileFragmentShader(std::string("#version 330 core\n"
+        "out vec4 FragColor;\n"
+        "void main()\n"
+        "{\n"
+        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+        "}\n\0"));
+    
+    if (optVertexShader && optFragmentShader)
+    {
+        auto optShaderProgram = GraphicsEngine::ShaderUtilities::LinkProgram({ *optVertexShader, *optFragmentShader });
+        if (optShaderProgram)
+            glUseProgram(*optShaderProgram);
+    }
+
+    GLuint vao = 0;
+    if (auto optVAO = engine.AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
+        vao = *optVAO;
+
     // Declare ImGui widgets
     BackgroundColorWidget backgroundColorWidget(engine);
     CompileShaderWidget compileShaderWidget(engine);
@@ -276,6 +300,12 @@ int main(void)
 
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+
+        if (vao != 0)
+        {
+            glBindVertexArray(vao);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+        }
 
         backgroundColorWidget.Iterate();
         compileShaderWidget.Iterate();

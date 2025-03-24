@@ -12,6 +12,8 @@
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 
+#include "GLUtilities.h"
+
 namespace GraphicsEngine
 {
 
@@ -60,6 +62,71 @@ namespace GraphicsEngine
 
 	Engine::~Engine()
 	{
+	}
+
+	std::optional<GLuint> Engine::AddTriangle(const std::array<glm::vec3, 3>& vertices)
+	{
+		using namespace GraphicsEngine::Utilities;
+
+		auto logger = spdlog::get("Engine");
+
+		std::vector<float> v = {
+			vertices[0].x, vertices[0].y, vertices[0].z,
+			vertices[1].x, vertices[1].y, vertices[1].z,
+			vertices[2].x, vertices[2].y, vertices[2].z
+		};
+
+		auto optVAO = GenOneVertexArray();
+		if (!optVAO)
+		{
+			logger->error("GenOneVertexArray return nullopt.");
+			return std::nullopt;
+		}
+
+		auto optBuffer = GenOneBuffer();
+		if (!optBuffer)
+		{
+			logger->error("GenOneBuffer returned nullopt.");
+			return std::nullopt;
+		}
+
+		if (!BindVertexArray(*optVAO))
+		{
+			logger->error("BindVertexArray returned false.");
+			return std::nullopt;
+		}
+
+		if (!BindArrayBuffer(*optBuffer))
+		{
+			logger->error("BindArrayBuffer returned false.");
+			return std::nullopt;
+		}
+
+		if (!BufferFloatData(BufferBindingTarget::Array, v, DataUsagePattern::StaticDraw))
+		{
+			logger->error("BufferData returned false.");
+			return std::nullopt;
+		}
+
+		if (!VertexAttribPointer(0, AttributeSize::Three, DataType::Float, GL_FALSE, 3 * sizeof(float), 0))
+		{
+			logger->error("VertexAttribPointer returned false.");
+			return std::nullopt;
+		}
+
+		if (!EnableVertexAttribArray(0))
+		{
+			logger->error("EnableVertexAttribArray returned false.");
+			return std::nullopt;
+		}
+
+		if (!UnbindArrayBuffer())
+			logger->warn("UnbindArrayBuffer returned false.");
+
+		if (!UnbindVertexArray())
+			logger->warn("UnbindVertexArray returned false.");
+
+		return *optVAO;
 	}
 
 	std::vector<std::string> Engine::GetLatestLogMessages() const

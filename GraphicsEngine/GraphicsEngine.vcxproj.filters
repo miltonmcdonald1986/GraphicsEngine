@@ -39,6 +39,9 @@
     <ClInclude Include="..\Interfaces\ShaderUtilities.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="..\Interfaces\GLUtilities.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShaderUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

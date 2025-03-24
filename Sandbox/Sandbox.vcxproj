@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN32_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN32_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -98,7 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN32_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN32_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -142,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

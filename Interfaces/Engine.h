@@ -7,6 +7,8 @@
 
 #include "glad/glad.h"
 
+#include "glm/vec3.hpp"
+
 #include "Color.h"
 #include "GraphicsEngineImpExp.h"
 
@@ -19,6 +21,8 @@ namespace GraphicsEngine
 
 		Engine();
 		~Engine();
+
+		std::optional<GLuint> AddTriangle(const std::array<glm::vec3, 3>& vertices);
 
 		std::vector<std::string> GetLatestLogMessages() const;
 
