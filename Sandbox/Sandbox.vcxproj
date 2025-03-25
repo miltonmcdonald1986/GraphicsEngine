@@ -167,7 +167,11 @@
     <ClCompile Include="$(IMGUI_DIR)\imgui_tables.cpp" />
     <ClCompile Include="$(IMGUI_DIR)\imgui_widgets.cpp" />
     <ClCompile Include="$(GLAD_DIR)\src\glad.c" />
+    <ClCompile Include="DemoTriangleApp.cpp" />
     <ClCompile Include="Sandbox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DemoTriangleApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1378,3 +1378,593 @@ void main()
 
 [2025-03-24 09:58:44.114] [Engine] [debug] CompileShader returned 2.
 [2025-03-24 09:58:44.116] [Engine] [debug] LinkProgram returned 3.
+[2025-03-24 16:35:23.723] [Engine] [info] gladLoadGL succeeded.
+[2025-03-24 16:35:23.725] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-24 16:35:23.728] [Engine] [debug] CompileShader returned 1.
+[2025-03-24 16:35:23.729] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-24 16:35:23.729] [Engine] [debug] CompileShader returned 2.
+[2025-03-24 16:35:23.730] [Engine] [debug] LinkProgram returned 3.
+[2025-03-24 16:35:23.733] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 29	 No error has been recorded.
+[2025-03-24 16:35:23.733] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 20	 No error has been recorded.
+[2025-03-24 16:35:23.733] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 20	 No error has been recorded.
+[2025-03-24 16:35:23.733] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 29	 No error has been recorded.
+[2025-03-25 07:10:25.195] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:10:25.197] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:10:25.197] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 58	 No error has been recorded.
+[2025-03-25 07:10:25.200] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:10:25.200] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:10:25.200] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 58	 No error has been recorded.
+[2025-03-25 07:10:25.201] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:10:25.202] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 106	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 78	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 29	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 20	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 42	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 168	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 68	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 20	 No error has been recorded.
+[2025-03-25 07:10:25.205] [Engine] [debug] File: C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	Line: 29	 No error has been recorded.
+[2025-03-25 07:15:37.072] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:15:37.074] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:15:37.074] [Engine] [debug] File: GLUtilities	Line: 60	 No error has been recorded.
+[2025-03-25 07:15:37.077] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:15:37.078] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:15:37.078] [Engine] [debug] File: GLUtilities	Line: 60	 No error has been recorded.
+[2025-03-25 07:15:37.078] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:15:37.080] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:15:37.082] [Engine] [debug] File: GLUtilities	Line: 108	 No error has been recorded.
+[2025-03-25 07:15:37.082] [Engine] [debug] File: GLUtilities	Line: 80	 No error has been recorded.
+[2025-03-25 07:15:37.082] [Engine] [debug] File: GraphicsEngine	Line: 31	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GLUtilities	Line: 22	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GLUtilities	Line: 44	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GLUtilities	Line: 172	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GLUtilities	Line: 70	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GLUtilities	Line: 22	 No error has been recorded.
+[2025-03-25 07:15:37.083] [Engine] [debug] File: GraphicsEngine	Line: 31	 No error has been recorded.
+[2025-03-25 07:18:18.430] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:18:18.432] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:18:18.433] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:18:18.436] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:18:18.436] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:18:18.436] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:18:18.436] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:18:18.438] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:18:18.440] [Engine] [debug] File:           GLUtilities.cpp	Line: 108	 No error has been recorded.
+[2025-03-25 07:18:18.441] [Engine] [debug] File:           GLUtilities.cpp	Line: 80	 No error has been recorded.
+[2025-03-25 07:18:18.441] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:18:18.441] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:18:18.441] [Engine] [debug] File:           GLUtilities.cpp	Line: 44	 No error has been recorded.
+[2025-03-25 07:18:18.441] [Engine] [debug] File:           GLUtilities.cpp	Line: 172	 No error has been recorded.
+[2025-03-25 07:18:18.442] [Engine] [debug] File:           GLUtilities.cpp	Line: 70	 No error has been recorded.
+[2025-03-25 07:18:18.442] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:18:18.442] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:22:39.643] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:22:39.644] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:22:39.645] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:22:39.648] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:22:39.648] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:22:39.648] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:22:39.648] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:22:39.650] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:22:39.653] [Engine] [debug] File:           GLUtilities.cpp	Line: 108	 No error has been recorded.
+[2025-03-25 07:22:39.653] [Engine] [debug] File:           GLUtilities.cpp	Line: 80	 No error has been recorded.
+[2025-03-25 07:22:39.653] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:22:39.653] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:22:39.654] [Engine] [debug] File:           GLUtilities.cpp	Line: 44	 No error has been recorded.
+[2025-03-25 07:22:39.654] [Engine] [debug] File:           GLUtilities.cpp	Line: 172	 No error has been recorded.
+[2025-03-25 07:22:39.654] [Engine] [debug] File:           GLUtilities.cpp	Line: 70	 No error has been recorded.
+[2025-03-25 07:22:39.654] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:22:39.654] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:23:45.610] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:23:45.612] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:23:45.612] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:23:45.615] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:23:45.615] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:23:45.615] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:23:45.616] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:23:45.617] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:23:45.620] [Engine] [debug] File:           GLUtilities.cpp	Line: 108	 No error has been recorded.
+[2025-03-25 07:23:45.620] [Engine] [debug] File:           GLUtilities.cpp	Line: 80	 No error has been recorded.
+[2025-03-25 07:23:45.620] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:23:45.620] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:23:45.620] [Engine] [debug] File:           GLUtilities.cpp	Line: 44	 No error has been recorded.
+[2025-03-25 07:23:45.621] [Engine] [debug] File:           GLUtilities.cpp	Line: 174	 No error has been recorded.
+[2025-03-25 07:23:45.621] [Engine] [debug] File:           GLUtilities.cpp	Line: 70	 No error has been recorded.
+[2025-03-25 07:23:45.621] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:23:45.621] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:24:25.004] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:24:25.006] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:24:25.006] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:24:25.009] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:24:25.009] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:24:25.009] [Engine] [debug] File:           GLUtilities.cpp	Line: 60	 No error has been recorded.
+[2025-03-25 07:24:25.010] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:24:25.011] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:24:25.013] [Engine] [debug] File:           GLUtilities.cpp	Line: 108	 No error has been recorded.
+[2025-03-25 07:24:25.013] [Engine] [debug] File:           GLUtilities.cpp	Line: 80	 No error has been recorded.
+[2025-03-25 07:24:25.013] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File:           GLUtilities.cpp	Line: 44	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File:           GLUtilities.cpp	Line: 174	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File:           GLUtilities.cpp	Line: 70	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File:           GLUtilities.cpp	Line: 22	 No error has been recorded.
+[2025-03-25 07:24:25.014] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line: 31	 No error has been recorded.
+[2025-03-25 07:25:00.934] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:25:00.936] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:25:00.936] [Engine] [debug] File:           GLUtilities.cpp	Line:     60	 No error has been recorded.
+[2025-03-25 07:25:00.940] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:25:00.940] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:25:00.940] [Engine] [debug] File:           GLUtilities.cpp	Line:     60	 No error has been recorded.
+[2025-03-25 07:25:00.940] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:25:00.942] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:25:00.944] [Engine] [debug] File:           GLUtilities.cpp	Line:    108	 No error has been recorded.
+[2025-03-25 07:25:00.945] [Engine] [debug] File:           GLUtilities.cpp	Line:     80	 No error has been recorded.
+[2025-03-25 07:25:00.945] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line:     31	 No error has been recorded.
+[2025-03-25 07:25:00.945] [Engine] [debug] File:           GLUtilities.cpp	Line:     22	 No error has been recorded.
+[2025-03-25 07:25:00.945] [Engine] [debug] File:           GLUtilities.cpp	Line:     44	 No error has been recorded.
+[2025-03-25 07:25:00.945] [Engine] [debug] File:           GLUtilities.cpp	Line:    174	 No error has been recorded.
+[2025-03-25 07:25:00.946] [Engine] [debug] File:           GLUtilities.cpp	Line:     70	 No error has been recorded.
+[2025-03-25 07:25:00.946] [Engine] [debug] File:           GLUtilities.cpp	Line:     22	 No error has been recorded.
+[2025-03-25 07:25:00.946] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line:     31	 No error has been recorded.
+[2025-03-25 07:25:24.351] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:25:24.353] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:25:24.354] [Engine] [debug] File:           GLUtilities.cpp	Line:   60	 No error has been recorded.
+[2025-03-25 07:25:24.357] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:25:24.357] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:25:24.357] [Engine] [debug] File:           GLUtilities.cpp	Line:   60	 No error has been recorded.
+[2025-03-25 07:25:24.357] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:25:24.358] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:25:24.360] [Engine] [debug] File:           GLUtilities.cpp	Line:  108	 No error has been recorded.
+[2025-03-25 07:25:24.360] [Engine] [debug] File:           GLUtilities.cpp	Line:   80	 No error has been recorded.
+[2025-03-25 07:25:24.360] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line:   31	 No error has been recorded.
+[2025-03-25 07:25:24.360] [Engine] [debug] File:           GLUtilities.cpp	Line:   22	 No error has been recorded.
+[2025-03-25 07:25:24.360] [Engine] [debug] File:           GLUtilities.cpp	Line:   44	 No error has been recorded.
+[2025-03-25 07:25:24.360] [Engine] [debug] File:           GLUtilities.cpp	Line:  174	 No error has been recorded.
+[2025-03-25 07:25:24.361] [Engine] [debug] File:           GLUtilities.cpp	Line:   70	 No error has been recorded.
+[2025-03-25 07:25:24.361] [Engine] [debug] File:           GLUtilities.cpp	Line:   22	 No error has been recorded.
+[2025-03-25 07:25:24.361] [Engine] [debug] File: GraphicsEngine::Utilities::BindVertexArray	Line:   31	 No error has been recorded.
+[2025-03-25 07:26:33.236] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:26:33.238] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:26:33.238] [Engine] [debug]           GLUtilities.cpp|  60:No error has been recorded.
+[2025-03-25 07:26:33.241] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:26:33.242] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:26:33.242] [Engine] [debug]           GLUtilities.cpp|  60:No error has been recorded.
+[2025-03-25 07:26:33.242] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:26:33.244] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:26:33.246] [Engine] [debug]           GLUtilities.cpp| 108:No error has been recorded.
+[2025-03-25 07:26:33.246] [Engine] [debug]           GLUtilities.cpp|  80:No error has been recorded.
+[2025-03-25 07:26:33.246] [Engine] [debug] GraphicsEngine::Utilities::BindVertexArray|  31:No error has been recorded.
+[2025-03-25 07:26:33.247] [Engine] [debug]           GLUtilities.cpp|  22:No error has been recorded.
+[2025-03-25 07:26:33.247] [Engine] [debug]           GLUtilities.cpp|  44:No error has been recorded.
+[2025-03-25 07:26:33.247] [Engine] [debug]           GLUtilities.cpp| 174:No error has been recorded.
+[2025-03-25 07:26:33.247] [Engine] [debug]           GLUtilities.cpp|  70:No error has been recorded.
+[2025-03-25 07:26:33.247] [Engine] [debug]           GLUtilities.cpp|  22:No error has been recorded.
+[2025-03-25 07:26:33.248] [Engine] [debug] GraphicsEngine::Utilities::BindVertexArray|  31:No error has been recorded.
+[2025-03-25 07:36:37.550] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:36:37.552] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:36:37.553] [Engine] [debug] GLUtilities.cpp	CreateShader	60:No error has been recorded.
+[2025-03-25 07:36:37.556] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:36:37.556] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:36:37.556] [Engine] [debug] GLUtilities.cpp	CreateShader	60:No error has been recorded.
+[2025-03-25 07:36:37.556] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:36:37.558] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:36:37.561] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108:No error has been recorded.
+[2025-03-25 07:36:37.561] [Engine] [debug] GLUtilities.cpp	GenBuffers	80:No error has been recorded.
+[2025-03-25 07:36:37.561] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31:No error has been recorded.
+[2025-03-25 07:36:37.561] [Engine] [debug] GLUtilities.cpp	BindBuffer	22:No error has been recorded.
+[2025-03-25 07:36:37.561] [Engine] [debug] GLUtilities.cpp	BufferData	44:No error has been recorded.
+[2025-03-25 07:36:37.562] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	173:No error has been recorded.
+[2025-03-25 07:36:37.562] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70:No error has been recorded.
+[2025-03-25 07:36:37.562] [Engine] [debug] GLUtilities.cpp	BindBuffer	22:No error has been recorded.
+[2025-03-25 07:36:37.562] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31:No error has been recorded.
+[2025-03-25 07:37:06.076] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:37:06.078] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:37:06.078] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 07:37:06.081] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:37:06.081] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:37:06.081] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 07:37:06.082] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:37:06.083] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:37:06.086] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108	No error has been recorded.
+[2025-03-25 07:37:06.086] [Engine] [debug] GLUtilities.cpp	GenBuffers	80	No error has been recorded.
+[2025-03-25 07:37:06.086] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 07:37:06.086] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 07:37:06.086] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 07:37:06.087] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	173	No error has been recorded.
+[2025-03-25 07:37:06.087] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70	No error has been recorded.
+[2025-03-25 07:37:06.087] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 07:37:06.087] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 07:56:37.468] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 07:56:37.470] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 07:56:37.470] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 07:56:37.473] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 07:56:37.473] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 07:56:37.473] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 07:56:37.473] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 07:56:37.475] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 07:56:37.477] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108	No error has been recorded.
+[2025-03-25 07:56:37.477] [Engine] [debug] GLUtilities.cpp	GenBuffers	80	No error has been recorded.
+[2025-03-25 07:56:37.477] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 07:56:37.477] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 07:56:37.478] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 07:56:37.478] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	190	No error has been recorded.
+[2025-03-25 07:56:37.478] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70	No error has been recorded.
+[2025-03-25 07:56:37.478] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 07:56:37.479] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:02:57.016] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:02:57.019] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:02:57.020] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:02:59.529] [Engine] [debug] GLUtilities.cpp	ShaderSource	160	No error has been recorded.
+[2025-03-25 08:02:59.531] [Engine] [error] FLEX: Unknown char Ý
+ERROR: 0:1: 'Ý' : syntax error syntax error
+
+
+[2025-03-25 08:02:59.532] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:02:59.532] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:03:02.175] [Engine] [debug] GLUtilities.cpp	ShaderSource	160	No error has been recorded.
+[2025-03-25 08:03:02.175] [Engine] [error] FLEX: Unknown char Ý
+ERROR: 0:1: 'Ý' : syntax error syntax error
+
+
+[2025-03-25 08:03:02.175] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	GenBuffers	80	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	190	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:03:02.176] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:04:54.236] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:04:54.238] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:04:54.238] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:04:56.035] [Engine] [debug] GLUtilities.cpp	ShaderSource	158	No error has been recorded.
+[2025-03-25 08:04:56.038] [Engine] [error] FLEX: Unknown char Ý
+ERROR: 0:1: 'Ý' : syntax error syntax error
+
+
+[2025-03-25 08:04:56.038] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:04:56.038] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:04:56.854] [Engine] [debug] GLUtilities.cpp	ShaderSource	158	No error has been recorded.
+[2025-03-25 08:04:56.855] [Engine] [error] FLEX: Unknown char Ý
+ERROR: 0:1: 'Ý' : syntax error syntax error
+
+
+[2025-03-25 08:04:56.855] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108	No error has been recorded.
+[2025-03-25 08:04:56.855] [Engine] [debug] GLUtilities.cpp	GenBuffers	80	No error has been recorded.
+[2025-03-25 08:04:56.855] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:04:56.856] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:04:56.856] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 08:04:56.856] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	188	No error has been recorded.
+[2025-03-25 08:04:56.856] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70	No error has been recorded.
+[2025-03-25 08:04:56.857] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:04:56.857] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:07:44.337] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:07:44.339] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:07:44.339] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:07:45.526] [Engine] [debug] GLUtilities.cpp	ShaderSource	158	No error has been recorded.
+[2025-03-25 08:07:45.529] [Engine] [debug] CompileShader returned 1.
+[2025-03-25 08:07:45.529] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:07:45.529] [Engine] [debug] GLUtilities.cpp	CreateShader	60	No error has been recorded.
+[2025-03-25 08:07:46.192] [Engine] [debug] GLUtilities.cpp	ShaderSource	158	No error has been recorded.
+[2025-03-25 08:07:46.193] [Engine] [debug] CompileShader returned 2.
+[2025-03-25 08:07:46.194] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 08:07:46.196] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	108	No error has been recorded.
+[2025-03-25 08:07:46.196] [Engine] [debug] GLUtilities.cpp	GenBuffers	80	No error has been recorded.
+[2025-03-25 08:07:46.196] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:07:46.196] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:07:46.197] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 08:07:46.197] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	188	No error has been recorded.
+[2025-03-25 08:07:46.197] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	70	No error has been recorded.
+[2025-03-25 08:07:46.197] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:07:46.197] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:16:01.136] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:16:01.138] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:16:01.138] [Engine] [debug] GLUtilities.cpp	CreateShader	83	No error has been recorded.
+[2025-03-25 08:16:01.139] [Engine] [debug] GLUtilities.cpp	ShaderSource	181	No error has been recorded.
+[2025-03-25 08:16:01.142] [Engine] [debug] GLUtilities.cpp	CompileShader	58	No error has been recorded.
+[2025-03-25 08:16:01.142] [Engine] [debug] GLUtilities.cpp	CompileShader	63	No error has been recorded.
+[2025-03-25 08:16:01.142] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:16:01.142] [Engine] [debug] GLUtilities.cpp	CreateShader	83	No error has been recorded.
+[2025-03-25 08:16:01.142] [Engine] [debug] GLUtilities.cpp	ShaderSource	181	No error has been recorded.
+[2025-03-25 08:16:01.143] [Engine] [debug] GLUtilities.cpp	CompileShader	58	No error has been recorded.
+[2025-03-25 08:16:01.143] [Engine] [debug] GLUtilities.cpp	CompileShader	63	No error has been recorded.
+[2025-03-25 08:16:01.145] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 08:16:01.147] [Engine] [debug] GLUtilities.cpp	GenVertexArrays	131	No error has been recorded.
+[2025-03-25 08:16:01.147] [Engine] [debug] GLUtilities.cpp	GenBuffers	103	No error has been recorded.
+[2025-03-25 08:16:01.148] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:16:01.148] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:16:01.148] [Engine] [debug] GLUtilities.cpp	BufferData	44	No error has been recorded.
+[2025-03-25 08:16:01.148] [Engine] [debug] GLUtilities.cpp	VertexAttribPointer	211	No error has been recorded.
+[2025-03-25 08:16:01.149] [Engine] [debug] GLUtilities.cpp	EnableVertexAttribArray	93	No error has been recorded.
+[2025-03-25 08:16:01.149] [Engine] [debug] GLUtilities.cpp	BindBuffer	22	No error has been recorded.
+[2025-03-25 08:16:01.149] [Engine] [debug] GLUtilities.cpp	BindVertexArray	31	No error has been recorded.
+[2025-03-25 08:17:51.161] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:17:51.163] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:17:51.167] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:17:51.168] [Engine] [error] ERROR: Definition for "void main()" not found.
+
+[2025-03-25 08:22:37.734] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:22:37.736] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Poesition = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:22:49.019] [Engine] [error] C:\Users\milto\source\repos\GraphicsEngine\GraphicsEngine\GLUtilities.cpp	CompileShader	71	ERROR: 0:5: 'gl_Poesition' : undeclared identifier 
+ERROR: 0:5: 'assign' :  cannot convert from '4-component vector of float' to 'float'
+
+
+[2025-03-25 08:22:49.020] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:23:59.077] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:23:59.079] [Engine] [debug] Vertex Shader Source:
+#version 330 core
+layout (location = 0) in vec3 aPos;
+void main()
+{
+   gl_Poesition = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+}
+[2025-03-25 08:23:59.083] [Engine] [error] GLUtilities.cpp	CompileShader	71	ERROR: 0:5: 'gl_Poesition' : undeclared identifier 
+ERROR: 0:5: 'assign' :  cannot convert from '4-component vector of float' to 'float'
+
+
+[2025-03-25 08:23:59.083] [Engine] [debug] Fragment Shader Source:
+#version 330 core
+out vec4 FragColor;
+void main()
+{
+   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+}
+
+[2025-03-25 08:24:35.283] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:24:35.289] [Engine] [error] GLUtilities.cpp	CompileShader	71	ERROR: 0:5: 'gl_Poesition' : undeclared identifier 
+ERROR: 0:5: 'assign' :  cannot convert from '4-component vector of float' to 'float'
+
+
+[2025-03-25 08:24:58.406] [Engine] [info] gladLoadGL succeeded.
+[2025-03-25 08:24:58.414] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 08:27:14.144] [Engine] [debug] LinkProgram returned 3.
+[2025-03-25 08:49:22.162] [Engine] [error] GLUtilities.cpp	CreateProgram	83	An error occurred creating the program object.

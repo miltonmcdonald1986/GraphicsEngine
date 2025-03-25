@@ -9,7 +9,6 @@
 
 #include "glm/vec3.hpp"
 
-#include "Color.h"
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine
@@ -25,10 +24,6 @@ namespace GraphicsEngine
 		std::optional<GLuint> AddTriangle(const std::array<glm::vec3, 3>& vertices);
 
 		std::vector<std::string> GetLatestLogMessages() const;
-
-		std::optional<Color> GetBackgroundColor();
-
-		void SetBackgroundColor(const Color& color);
 
 	private:
 

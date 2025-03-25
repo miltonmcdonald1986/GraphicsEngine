@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Interfaces\Color.h" />
     <ClInclude Include="..\Interfaces\Engine.h" />
     <ClInclude Include="..\Interfaces\GLUtilities.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngineImpExp.h" />
@@ -162,7 +161,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Color.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GLUtilities.cpp" />
     <ClCompile Include="pch.cpp">

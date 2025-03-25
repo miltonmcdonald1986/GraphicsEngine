@@ -33,9 +33,6 @@
     <ClInclude Include="..\Interfaces\GraphicsEngineImpExp.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\Color.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Interfaces\ShaderUtilities.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -54,9 +51,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(GLAD_DIR)\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShaderUtilities.cpp">

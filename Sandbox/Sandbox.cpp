@@ -14,6 +14,8 @@
 #include "Engine.h"
 #include "ShaderUtilities.h"
 
+#include "DemoTriangleApp.h"
+
 std::string PWSTRToString(PWSTR wideStr) {
     if (!wideStr) {
         return std::string(); // Return an empty string if the input is null
@@ -86,9 +88,9 @@ public:
     BackgroundColorWidget(GraphicsEngine::Engine& engine)
         : m_Engine(engine)
     {
-        auto optBackgroundColor = engine.GetBackgroundColor();
+        auto optBackgroundColor = GraphicsEngine::Utilities::GetColorClearValue();
         if (optBackgroundColor)
-            std::copy(**optBackgroundColor, **optBackgroundColor + 4, m_Color);
+            std::copy(optBackgroundColor->data(), optBackgroundColor->data() + 4, m_Color);
     }
 
     void Iterate()
@@ -96,7 +98,7 @@ public:
         ImGui::Begin("Background Color", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
         if (ImGui::ColorEdit4("MyColor##2f", m_Color, ImGuiColorEditFlags_Float))
-            m_Engine.SetBackgroundColor(GraphicsEngine::Color(m_Color));
+            GraphicsEngine::Utilities::ClearColor(m_Color[0], m_Color[1], m_Color[2], m_Color[3]);
 
         ImGui::End();
     }
@@ -131,7 +133,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##VS"))
         {
-            if (auto optId = GraphicsEngine::ShaderUtilities::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
+            if (auto optId = GraphicsEngine::Utilities::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
                 m_VertexShader = *optId;
         }
 
@@ -147,7 +149,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##FS"))
         {
-            if (auto optId = GraphicsEngine::ShaderUtilities::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
+            if (auto optId = GraphicsEngine::Utilities::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
                 m_FragmentShader = *optId;
         }
 
@@ -171,13 +173,13 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Link Program"))
         {
-            if (auto optId = GraphicsEngine::ShaderUtilities::LinkProgram({ m_VertexShader, m_FragmentShader }))
+            if (auto optId = GraphicsEngine::Utilities::LinkProgram({ m_VertexShader, m_FragmentShader }))
                 m_Program = *optId;
 
-            if (auto optResultVS = GraphicsEngine::ShaderUtilities::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
+            if (auto optResultVS = GraphicsEngine::Utilities::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
                 m_VertexShader = 0;
 
-            if (auto optResultFS = GraphicsEngine::ShaderUtilities::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
+            if (auto optResultFS = GraphicsEngine::Utilities::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
                 m_FragmentShader = 0;
         }
         ImGui::End();
@@ -257,33 +259,9 @@ int main(void)
     ImGui_ImplOpenGL3_Init();
 
     GraphicsEngine::Engine engine;
-    
-    GraphicsEngine::Color backgroundColor(0.2f, 0.3f, 0.3f, 1.f);
-    engine.SetBackgroundColor(backgroundColor);
 
-    auto optVertexShader = GraphicsEngine::ShaderUtilities::CompileVertexShader(std::string("#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-        "}\0"));
-    auto optFragmentShader = GraphicsEngine::ShaderUtilities::CompileFragmentShader(std::string("#version 330 core\n"
-        "out vec4 FragColor;\n"
-        "void main()\n"
-        "{\n"
-        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n\0"));
-    
-    if (optVertexShader && optFragmentShader)
-    {
-        auto optShaderProgram = GraphicsEngine::ShaderUtilities::LinkProgram({ *optVertexShader, *optFragmentShader });
-        if (optShaderProgram)
-            glUseProgram(*optShaderProgram);
-    }
-
-    GLuint vao = 0;
-    if (auto optVAO = engine.AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
-        vao = *optVAO;
+    GraphicsEngine::Utilities::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
+    DemoTriangleApp demoTriangleApp(engine);
 
     // Declare ImGui widgets
     BackgroundColorWidget backgroundColorWidget(engine);
@@ -298,14 +276,9 @@ int main(void)
         ImGui::NewFrame();
         ImGui::ShowDemoWindow(); // Show demo window! :)
 
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        GraphicsEngine::Utilities::ClearColorBuffers();
 
-        if (vao != 0)
-        {
-            glBindVertexArray(vao);
-            glDrawArrays(GL_TRIANGLES, 0, 3);
-        }
+        demoTriangleApp.Render();
 
         backgroundColorWidget.Iterate();
         compileShaderWidget.Iterate();

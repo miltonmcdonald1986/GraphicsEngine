@@ -1,8 +1,22 @@
 #include "pch.h"
 #include "GLUtilities.h"
 
+#include <filesystem>
+
+#include "spdlog/spdlog.h"
+
+#define GL_ERROR() GetError(__FILE__, __func__, __LINE__) != ErrorFlag::NoError
+
 namespace GraphicsEngine::Utilities
 {
+	auto AttachShader(GLuint program, GLuint shader) -> bool
+	{
+		glAttachShader(program, shader);
+		if (GL_ERROR())
+			return false;
+
+		return true;
+	}
 
 	auto BindArrayBuffer(GLuint buffer) -> bool
 	{
@@ -15,15 +29,8 @@ namespace GraphicsEngine::Utilities
 
 		GLenum targetGL = static_cast<GLenum>(target);
 		glBindBuffer(targetGL, buffer);
-		switch (glGetError())
-		{
-		case GL_INVALID_ENUM:
-			logger->error("target is not one of the allowable values");
+		if (GL_ERROR())
 			return false;
-		case GL_INVALID_VALUE:
-			logger->error("buffer is not a name previously returned from a call to glGenBuffers");
-			return false;
-		}
 
 		return true;
 	}
@@ -31,12 +38,8 @@ namespace GraphicsEngine::Utilities
 	auto BindVertexArray(GLuint array) -> bool
 	{
 		glBindVertexArray(array);
-		switch (glGetError())
-		{
-		case GL_INVALID_OPERATION:
-			spdlog::get("Engine")->error("array is not zero or the name of a vertex array object previously returned from a call to glGenVertexArrays.");
+		if (GL_ERROR())
 			return false;
-		}
 
 		return true;
 	}
@@ -48,25 +51,8 @@ namespace GraphicsEngine::Utilities
 		GLenum targetGL = static_cast<GLenum>(target);
 		GLenum usageGL = static_cast<GLenum>(usage);
 		glBufferData(targetGL, size, data, usageGL);
-		switch (glGetError())
-		{
-		case GL_INVALID_ENUM:
-			logger->error("target is not one of the accepted buffer targets OR usage is not GL_STREAM_DRAW, "
-				"GL_STREAM_READ, GL_STREAM_COPY, GL_STATIC_DRAW, GL_STATIC_READ, GL_STATIC_COPY, "
-				"GL_DYNAMIC_DRAW, GL_DYNAMIC_READ, or GL_DYNAMIC_COPY.");
+		if (GL_ERROR())
 			return false;
-		case GL_INVALID_VALUE:
-			logger->error("size is negative");
-			return false;
-		case GL_INVALID_OPERATION:
-			logger->error("the reserved buffer object name 0 is bound to target OR "
-				"buffer is not the name of an existing buffer object OR "
-				"the GL_BUFFER_IMMUTABLE_STORAGE flag of the buffer object is GL_TRUE.");
-			return false;
-		case GL_OUT_OF_MEMORY:
-			logger->error("the GL is unable to create a data store with the specified size.");
-			return false;
-		}
 
 		return true;
 	}
@@ -76,20 +62,81 @@ namespace GraphicsEngine::Utilities
 		return BufferData(target, data.size() * sizeof(float), data.data(), usage);
 	}
 
+	auto ClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) -> void
+	{
+		glClearColor(red, green, blue, alpha);
+	}
+
+	auto ClearColorBuffers() -> bool
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		if (GL_ERROR())
+			return false;
+
+		return true;
+	}
+
+	auto CompileShader(GLuint shader) -> bool
+	{
+		glCompileShader(shader);
+		if (GL_ERROR())
+			return false;
+
+		int success;
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		if (GL_ERROR())
+			return false;
+
+		if (!success)
+		{
+			char infoLog[512];
+			glGetShaderInfoLog(shader, 512, NULL, infoLog);
+			GetError(__FILE__, __func__, __LINE__);
+			spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
+			return false;
+		}
+
+		return true;
+	}
+
+	auto CreateProgram() -> std::optional<GLuint>
+	{
+		GLuint shaderProgram = glCreateProgram();
+		if (shaderProgram == 0)
+		{
+			spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, "An error occurred creating the program object."));
+			return std::nullopt;
+		}
+
+		return shaderProgram;
+	}
+
+	auto CreateShader(ShaderType type) -> std::optional<GLuint>
+	{
+		auto logger = spdlog::get("Engine");
+
+		GLuint shader = glCreateShader(static_cast<GLenum>(type));
+		if (GL_ERROR())
+			return std::nullopt;
+
+		return shader;
+	}
+
+	GRAPHICSENGINE_API auto DeleteShader(GLuint shader) -> bool
+	{
+		glDeleteShader(shader);
+		if (GL_ERROR())
+			return false;
+		
+		return true;
+	}
+
 	auto EnableVertexAttribArray(GLuint index) -> bool
 	{
 		auto logger = spdlog::get("Engine");
 		glEnableVertexAttribArray(index);
-		switch (glGetError())
-		{
-		case GL_INVALID_OPERATION:
-			logger->error("no vertex array object is bound "
-				"OR vaobj is not the name of an existing vertex array object.");
+		if (GL_ERROR())
 			return false;
-		case GL_INVALID_VALUE:
-			logger->error("index is greater than or equal to GL_MAX_VERTEX_ATTRIBS.");
-			return false;
-		}
 
 		return true;
 	}
@@ -98,12 +145,8 @@ namespace GraphicsEngine::Utilities
 	{
 		std::vector<GLuint> buffers(n);
 		glGenBuffers(n, buffers.data());
-		switch (glGetError())
-		{
-		case GL_INVALID_VALUE:
-			spdlog::get("Engine")->error("n is negative");
+		if (GL_ERROR())
 			return {};
-		}
 
 		return buffers;
 	}
@@ -112,10 +155,7 @@ namespace GraphicsEngine::Utilities
 	{
 		auto buffers = GenBuffers(1);
 		if (buffers.empty())
-		{
-			spdlog::get("Engine")->error("GenBuffers returned empty vector.");
 			return std::nullopt;
-		}
 
 		return buffers.front();
 	}
@@ -124,10 +164,7 @@ namespace GraphicsEngine::Utilities
 	{
 		auto VAOs = GenVertexArrays(1);
 		if (VAOs.empty())
-		{
-			spdlog::get("Engine")->error("GenVertexArrays returned empty vector.");
 			return std::nullopt;
-		}
 
 		return VAOs.front();
 	}
@@ -136,14 +173,106 @@ namespace GraphicsEngine::Utilities
 	{
 		std::vector<GLuint> VAOs(n);
 		glGenVertexArrays(n, VAOs.data());
-		switch (glGetError())
-		{
-		case GL_INVALID_VALUE:
-			spdlog::get("Engine")->error("n is negative.");
+		if (GL_ERROR())
 			return {};
-		}
 
 		return VAOs;
+	}
+
+	auto GetColorClearValue() -> std::optional<std::array<float, 4>>
+	{
+		float data[4];
+		glGetFloatv(GL_COLOR_CLEAR_VALUE, data);
+		if (GL_ERROR())
+			return std::nullopt;
+
+		return std::array<float, 4> { data[0], data[1], data[2], data[3] };
+	}
+
+	auto GetError(const char* file, const char* function, int line) -> ErrorFlag
+	{
+		auto filename = std::filesystem::path(file).filename().string();
+
+		const auto formatMsg = "{}\t{}\t{}\t{}";
+		const std::map<ErrorFlag, std::string> errorMsgMap = {
+			{ ErrorFlag::NoError, "No error has been recorded." },
+			{ ErrorFlag::InvalidEnum,  "An unacceptable value is specified for an enumerated argument." },
+			{ ErrorFlag::InvalidValue, "A numeric argument is out of range." },
+			{ ErrorFlag::InvalidOperation, "The specified operation is not allowed in the current state." },
+			{ ErrorFlag::InvalidFramebufferOperation, "The framebuffer object is not complete." },
+			{ ErrorFlag::OutOfMemory, "There is not enough memory left to execute the command." }};
+
+		auto logger = spdlog::get("Engine");
+		ErrorFlag flag = static_cast<ErrorFlag>(glGetError());
+		auto errorMsg = errorMsgMap.at(flag);
+		switch (flag)
+		{
+		case GraphicsEngine::Utilities::ErrorFlag::NoError:
+			logger->trace(std::format(formatMsg, filename, function, line, errorMsg));
+			break;
+		case GraphicsEngine::Utilities::ErrorFlag::InvalidEnum:
+		case GraphicsEngine::Utilities::ErrorFlag::InvalidValue:
+		case GraphicsEngine::Utilities::ErrorFlag::InvalidOperation:
+		case GraphicsEngine::Utilities::ErrorFlag::InvalidFramebufferOperation:
+		case GraphicsEngine::Utilities::ErrorFlag::OutOfMemory:
+			logger->error(std::format(formatMsg, filename, function, line, errorMsg));
+			break;
+		default:
+			logger->warn(std::format(formatMsg, filename, function, line, "Unknown error flag."));
+			break;
+		}
+
+		return flag;
+	}
+
+	auto GetShaderDeleteStatus(GLuint shader) -> std::optional<bool>
+	{
+		auto logger = spdlog::get("Engine");
+
+		GLint param;
+		glGetShaderiv(shader, GL_DELETE_STATUS, &param);
+		if (GL_ERROR())
+			return std::nullopt;
+		
+		return (param == GL_TRUE) ? true : false;
+	}
+
+	auto LinkProgram(GLuint program) -> bool
+	{
+		glLinkProgram(program);
+		if (GL_ERROR())
+			return false;
+
+		int success;
+		glGetProgramiv(program, GL_LINK_STATUS, &success);
+		if (GL_ERROR())
+			return false;
+
+		if (!success)
+		{
+			char infoLog[512];
+			glGetProgramInfoLog(program, 512, NULL, infoLog);
+			GetError(__FILE__, __func__, __LINE__);
+			spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
+			return false;
+		}
+
+		return true;
+	}
+
+	auto ShaderSource(GLuint shader, const std::vector<std::string>& sources) -> bool
+	{
+		std::vector<const GLchar*> strings;
+		for (const auto &source : sources)
+		{
+			strings.push_back(source.c_str());
+		}
+
+		glShaderSource(shader, static_cast<GLsizei>(sources.size()), strings.data(), nullptr);
+		if (GL_ERROR())
+			return false;
+
+		return true;
 	}
 
 	auto UnbindArrayBuffer() -> bool
@@ -170,24 +299,8 @@ namespace GraphicsEngine::Utilities
 		GLboolean normalizedGL = normalized ? GL_TRUE : GL_FALSE;
 		void* offsetOfFirstComponentGL = (void*)offsetOfFirstComponent;
 		glVertexAttribPointer(index, sizeGL, typeGL, normalizedGL, stride, offsetOfFirstComponentGL);
-		switch (glGetError())
-		{
-		case GL_INVALID_VALUE:
-			logger->error("index is greater than or equal to GL_MAX_VERTEX_ATTRIBS OR"
-				"size is not 1, 2, 3, 4 or (for glVertexAttribPointer), GL_BGRA OR"
-				"stride is negative.");
+		if (GL_ERROR())
 			return false;
-		case GL_INVALID_ENUM:
-			logger->error("type is not an accepted value.");
-			return false;
-		case GL_INVALID_OPERATION:
-			logger->error("size is GL_BGRA and type is not GL_UNSIGNED_BYTE, GL_INT_2_10_10_10_REV or GL_UNSIGNED_INT_2_10_10_10_REV OR"
-				"type is GL_INT_2_10_10_10_REV or GL_UNSIGNED_INT_2_10_10_10_REV and size is not 4 or GL_BGRA OR"
-				"type is GL_UNSIGNED_INT_10F_11F_11F_REV and size is not 3 OR"
-				"size is GL_BGRA and normalized is GL_FALSE OR"
-				"zero is bound to the GL_ARRAY_BUFFER buffer object binding point and the pointer argument is not NULL.");
-			return false;
-		}
 
 		return true;
 	}

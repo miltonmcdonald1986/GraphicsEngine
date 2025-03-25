@@ -1,10 +1,10 @@
 #pragma once
 
+#include <optional>
+#include <string>
 #include <vector>
 
 #include "glad/glad.h"
-
-#include "spdlog/spdlog.h"
 
 #include "GraphicsEngineImpExp.h"
 
@@ -155,9 +155,61 @@ namespace GraphicsEngine::Utilities
 		DynamicCopy = GL_DYNAMIC_COPY
 	};
 
+	enum class ErrorFlag : GLenum
+	{
+		/// <summary>
+		/// No error has been recorded.
+		/// </summary>
+		NoError = GL_NO_ERROR,
+		
+		/// <summary>
+		/// An unacceptable value is specified for an enumerated argument.
+		/// </summary>
+		InvalidEnum = GL_INVALID_ENUM,
+		
+		/// <summary>
+		/// A numeric argument is out of range.
+		/// </summary>
+		InvalidValue = GL_INVALID_VALUE,
+		
+		/// <summary>
+		/// The specified operation is not allowed in the current state.
+		/// </summary>
+		InvalidOperation = GL_INVALID_OPERATION,
+		
+		/// <summary>
+		/// The framebuffer object is not complete.
+		/// </summary>
+		InvalidFramebufferOperation = GL_INVALID_FRAMEBUFFER_OPERATION,
+		
+		/// <summary>
+		/// There is not enough memory left to execute the command.
+		/// </summary>
+		OutOfMemory = GL_OUT_OF_MEMORY
+	};
+
+	/// <summary>
+	/// Types of shader
+	/// </summary>
+	enum class ShaderType : GLenum
+	{
+		Vertex		= GL_VERTEX_SHADER,
+		Geometry	= GL_GEOMETRY_SHADER,
+		Fragment	= GL_FRAGMENT_SHADER
+	};
+
 #pragma endregion
 
 #pragma region Functions
+
+	/// <summary>
+	/// Attaches a shader object to a program object.
+	/// </summary>
+	/// <param name="program"> Specifies the program object to which a shader object
+	///                        will be attached. </param>
+	/// <param name="shader"> Specifies the shader object that is to be attached. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto AttachShader(GLuint program, GLuint shader) -> bool;
 
 	/// <summary>
 	/// Bind a named buffer object for the purpose of Vertex Attributes.
@@ -202,6 +254,48 @@ namespace GraphicsEngine::Utilities
 	GRAPHICSENGINE_API auto BufferFloatData(BufferBindingTarget target, const std::vector<float>& data, DataUsagePattern usage) -> bool;
 
 	/// <summary>
+	/// Specify clear values for the color buffers.
+	/// </summary>
+	/// <param name="red"> Specify the red value used when the color buffers are cleared. </param>
+	/// <param name="green"> Specify the green value used when the color buffers are cleared. </param>
+	/// <param name="blue"> Specify the blue value used when the color buffers are cleared. </param>
+	/// <param name="alpha"> Specify the alpha value used when the color buffers are cleared. </param>
+	GRAPHICSENGINE_API auto ClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha = 1.f) -> void;
+
+	/// <summary>
+	/// Clear the color buffers to preset values.
+	/// </summary>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto ClearColorBuffers() -> bool;
+
+	/// <summary>
+	/// Compiles a shader object.
+	/// </summary>
+	/// <param name="shader"> Specifies the shader object to be compiled. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto CompileShader(GLuint shader) -> bool;
+
+	/// <summary>
+	/// Creates a program object.
+	/// </summary>
+	/// <returns> A handle to the program object that was created. </returns>
+	GRAPHICSENGINE_API auto CreateProgram() -> std::optional<GLuint>;
+
+	/// <summary>
+	/// Creates a shader object.
+	/// </summary>
+	/// <param name="type"> Specifies the type of shader to be created. </param>
+	/// <returns> A shader object, if it succeeds; nullopt otherwise. </returns>
+	GRAPHICSENGINE_API auto CreateShader(ShaderType type) -> std::optional<GLuint>;
+
+	/// <summary>
+	/// Deletes a shader object.
+	/// </summary>
+	/// <param name="shader"> Specifies the shader object to be deleted. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto DeleteShader(GLuint shader) -> bool;
+
+	/// <summary>
 	/// Enable a generic vertex attribute array.
 	/// </summary>
 	/// <param name="index"> Specifies the index of the generic vertex attribute to be enabled. </param>
@@ -233,6 +327,45 @@ namespace GraphicsEngine::Utilities
 	/// <param name="n"> Specifies the number of vertex array object names to generate </param>
 	/// <returns> A vector in which the generated vertex array object names are stored. </returns>
 	GRAPHICSENGINE_API auto GenVertexArrays (GLsizei n) -> std::vector<GLuint>;
+
+	/// <summary>
+	/// Get the four values used to clear the color buffers.
+	/// </summary>
+	/// <returns> the red, green, blue, and alpha values. </returns>
+	GRAPHICSENGINE_API auto GetColorClearValue() -> std::optional<std::array<float, 4> >;
+
+	/// <summary>
+	/// Gets the error flag; if an error is indicated, logs the error.
+	/// </summary>
+	/// <param name="file"> Use __FILE__ for logging purposes. </param>
+	/// <param name="function"> Use __func__, __FUNCTION__, or __PRETTY_FUNCTION__ for logging purposes. </param>
+	/// <param name="line"> Use __LINE__ for logging purposes. </param>
+	/// <returns> The error flag. </returns>
+	GRAPHICSENGINE_API auto GetError(const char* file, const char* function, int line) -> ErrorFlag;
+
+	/// <summary>
+	/// Check a shader's delete status.
+	/// </summary>
+	/// <param name="shader"> Specifies the shader object to be queried. </param>
+	/// <returns> true if shader is currently flagged for deletion; false if shader is 
+	///           currently not flagged for deletion; nullopt if an error occurred while 
+	///           querying the shader object. </returns>
+	GRAPHICSENGINE_API auto GetShaderDeleteStatus(GLuint shader) -> std::optional<bool>;
+
+	/// <summary>
+	/// Links a program object.
+	/// </summary>
+	/// <param name="program"> Speifies the handle of the program object to be linked. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto LinkProgram(GLuint program) -> bool;
+
+	/// <summary>
+	/// Replaces the source code in a shader object.
+	/// </summary>
+	/// <param name="shader"> Specifies the handle of the shader object whose source code is to be replaced. </param>
+	/// <param name="sources"> A vector of strings containing the source code to be loaded into the shader. </param>
+	/// <returns> true if it succeeded; false otherwise </returns>
+	GRAPHICSENGINE_API auto ShaderSource(GLuint shader, const std::vector<std::string>& sources) -> bool;
 
 	/// <summary>
 	/// Unbind any buffer object previously bound for the purpose of Vertex Attributes.
