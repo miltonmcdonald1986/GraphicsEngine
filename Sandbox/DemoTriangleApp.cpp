@@ -1,15 +1,20 @@
 #include "DemoTriangleApp.h"
 
-#include <array>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
-#include "glm/vec3.hpp"
+#include "BackgroundColorWidget.h"
+#include "PolygonModeWidget.h"
+#include "EngineLogWidget.h"
 
-#include "Engine.h"
-#include "ShaderUtilities.h"
-
-DemoTriangleApp::DemoTriangleApp(GraphicsEngine::Engine& engine)
-    : m_Engine(engine)
+DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+    : App(spWindow, spEngine)
 {
+    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
+    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
+    m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, spEngine)));
+
     auto optVertexShader = GraphicsEngine::Utilities::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
@@ -31,16 +36,62 @@ DemoTriangleApp::DemoTriangleApp(GraphicsEngine::Engine& engine)
     }
 
     GLuint vao = 0;
-    if (auto optVAO = m_Engine.AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
+    if (auto optVAO = m_spEngine->AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
         m_VAO = *optVAO;
 }
 
-void DemoTriangleApp::Render()
+auto DemoTriangleApp::Run() -> void
+{
+    bool keepGoing = true;
+
+    glfwSetWindowUserPointer(m_spWindow.get(), (void*)&keepGoing);
+
+    auto NewKeyCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
+        {
+            if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+            {
+                printf("Escape key pressed. Closing window...\n");
+                bool* pKeepGoing = (bool*)glfwGetWindowUserPointer(window);
+                *pKeepGoing = false;
+            }
+        };
+
+    glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
+
+    while (keepGoing)
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        GraphicsEngine::GL::Utilities::ClearColorBuffers();
+
+        Render();
+
+        IterateWidgets();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(m_spWindow.get());
+
+        /* Poll for and process events */
+        glfwPollEvents();
+
+        keepGoing = keepGoing && !glfwWindowShouldClose(m_spWindow.get());
+    }
+
+    glfwSetWindowUserPointer(m_spWindow.get(), nullptr);
+    glfwSetKeyCallback(m_spWindow.get(), nullptr);
+}
+
+void DemoTriangleApp::Render() const
 {
     if (m_VAO == 0)
         return;
 
-    if (!GraphicsEngine::Utilities::BindVertexArray(m_VAO))
+    if (!GraphicsEngine::GL::Utilities::BindVertexArray(m_VAO))
         return;
 
     glDrawArrays(GL_TRIANGLES, 0, 3);

@@ -9,7 +9,7 @@
 #include "glad/glad.h"
 
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 
 #include "GLUtilities.h"
@@ -25,12 +25,12 @@ namespace GraphicsEngine
 	Engine::Engine()
 		: m_upImpl(std::unique_ptr<Impl>(new Impl()))
 	{
-		auto ringbuffer_sink = std::make_shared<spdlog::sinks::ringbuffer_sink_mt>(128);
-
 		std::vector<spdlog::sink_ptr> sinks;
-		sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("EngineLog.txt"));
+		
+		sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("logs\\GraphicsEngine.log", 1024*1024*5, 3));
+		
+		auto ringbuffer_sink = std::make_shared<spdlog::sinks::ringbuffer_sink_mt>(128);
 		sinks.push_back(ringbuffer_sink);
-
 
 		auto logger = std::make_shared<spdlog::logger>("Engine", std::begin(sinks), std::end(sinks));
 		logger->set_level(spdlog::level::debug);
@@ -45,8 +45,6 @@ namespace GraphicsEngine
 
 	std::optional<GLuint> Engine::AddTriangle(const std::array<glm::vec3, 3>& vertices)
 	{
-		using namespace GraphicsEngine::Utilities;
-
 		auto logger = spdlog::get("Engine");
 
 		std::vector<float> v = {
@@ -55,45 +53,33 @@ namespace GraphicsEngine
 			vertices[2].x, vertices[2].y, vertices[2].z
 		};
 
-		auto optVAO = GenOneVertexArray();
+		auto optVAO = GL::Utilities::GenOneVertexArray();
 		if (!optVAO)
 			return std::nullopt;
 
-		auto optBuffer = GenOneBuffer();
+		auto optBuffer = GL::Utilities::GenOneBuffer();
 		if (!optBuffer)
 			return std::nullopt;
 
-		if (!BindVertexArray(*optVAO))
+		if (!GL::Utilities::BindVertexArray(*optVAO))
 			return std::nullopt;
 
-		if (!BindArrayBuffer(*optBuffer))
+		if (!GL::Utilities::BindArrayBuffer(*optBuffer))
 			return std::nullopt;
 
-		if (!BufferFloatData(BufferBindingTarget::Array, v, DataUsagePattern::StaticDraw))
+		if (!GL::Utilities::BufferFloatData(GL::Utilities::BufferBindingTarget::Array, v, GL::Utilities::DataUsagePattern::StaticDraw))
 			return std::nullopt;
 
-		if (!VertexAttribPointer(0, AttributeSize::Three, DataType::Float, GL_FALSE, 3 * sizeof(float), 0))
+		if (!GL::Utilities::VertexAttribPointer(0, GL::Utilities::AttributeSize::Three, GL::Utilities::DataType::Float, GL_FALSE, 3 * sizeof(float), 0))
 			return std::nullopt;
 
-		if (!EnableVertexAttribArray(0))
+		if (!GL::Utilities::EnableVertexAttribArray(0))
 			return std::nullopt;
 
-		UnbindArrayBuffer();
-		UnbindVertexArray();
+		GL::Utilities::UnbindArrayBuffer();
+		GL::Utilities::UnbindVertexArray();
 
 		return *optVAO;
-	}
-
-	std::vector<std::string> Engine::GetLatestLogMessages() const
-	{
-		auto sinks = spdlog::get("Engine")->sinks();
-		for (auto sink : sinks)
-		{
-			if (auto spRingbuffer = std::dynamic_pointer_cast<spdlog::sinks::ringbuffer_sink_mt>(sink))
-				return spRingbuffer->last_formatted();
-		}
-
-		return {};
 	}
 
 }

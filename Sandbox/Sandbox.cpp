@@ -1,20 +1,32 @@
-#include <array>
+#include "Header.h"
 
-#include "glad/glad.h"
+#include <string>
 
-#include "GLFW/glfw3.h"
+#include <ShObjIdl_core.h>
+#include <Windows.h>
 
+//#include <array>
+//
+//#include "glad/glad.h"
+//
+//#include "GLFW/glfw3.h"
+//
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+//
+//#include <windows.h>
+//#include <ShObjIdl_core.h>
+//
+//#include "Engine.h"
+//#include "ShaderUtilities.h"
+//
+//#include "DemoTriangleApp.h"
+//#include "ImGuiDemoWindowApp.h"
 
-#include <windows.h>
-#include <ShObjIdl_core.h>
-
-#include "Engine.h"
-#include "ShaderUtilities.h"
-
+#include "BackgroundColorWidget.h"
 #include "DemoTriangleApp.h"
+#include "ImGuiDemoWindowApp.h"
 
 std::string PWSTRToString(PWSTR wideStr) {
     if (!wideStr) {
@@ -81,32 +93,6 @@ std::string OpenFileDialogBox()
 
     return filename;
 }
-
-class BackgroundColorWidget
-{
-public:
-    BackgroundColorWidget(GraphicsEngine::Engine& engine)
-        : m_Engine(engine)
-    {
-        auto optBackgroundColor = GraphicsEngine::Utilities::GetColorClearValue();
-        if (optBackgroundColor)
-            std::copy(optBackgroundColor->data(), optBackgroundColor->data() + 4, m_Color);
-    }
-
-    void Iterate()
-    {
-        ImGui::Begin("Background Color", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-
-        if (ImGui::ColorEdit4("MyColor##2f", m_Color, ImGuiColorEditFlags_Float))
-            GraphicsEngine::Utilities::ClearColor(m_Color[0], m_Color[1], m_Color[2], m_Color[3]);
-
-        ImGui::End();
-    }
-
-private:
-    GraphicsEngine::Engine& m_Engine;
-    float m_Color[4] = { 0.f, 0.f, 0.f, 1.f };
-};
 
 class CompileShaderWidget
 {
@@ -194,28 +180,6 @@ private:
     char m_FilenameFS[MAX_PATH];
 };
 
-class EngineLogWidget
-{
-public:
-    EngineLogWidget(GraphicsEngine::Engine& engine)
-        : m_Engine(engine)
-    {
-    }
-
-    void Iterate()
-    {
-        ImGui::Begin("Engine Log");
-        auto msgs = m_Engine.GetLatestLogMessages();
-        std::reverse(msgs.begin(), msgs.end());
-        for (auto msg : msgs)
-            ImGui::Text(msg.c_str());
-        ImGui::End();
-    }
-
-private:
-    GraphicsEngine::Engine& m_Engine;
-};
-
 void OnFramebufferSize(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -223,27 +187,35 @@ void OnFramebufferSize(GLFWwindow* window, int width, int height)
 
 int main(void)
 {
-    GLFWwindow* window;
+    auto CreateGLFWWindow = [](int width, int height, const char* title) -> std::shared_ptr<GLFWwindow>
+        {
+            if (!glfwInit())
+                return nullptr;
 
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    const int windowWidthInitial = 800;
-    const int windowHeightInitial = 600;
+            std::shared_ptr<GLFWwindow> spWindow = std::shared_ptr<GLFWwindow>(glfwCreateWindow(width, height, "Hello World", NULL, NULL), [](GLFWwindow* pWindow) {
+                glfwDestroyWindow(pWindow);
+                glfwTerminate();
+                });
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(windowWidthInitial, windowHeightInitial, "Hello World", NULL, NULL);
-    if (!window)
+            return spWindow;
+        };
+
+    auto spWindow = CreateGLFWWindow(800, 600, "Graphics Engine Sandbox");
+    if (!spWindow)
     {
         glfwTerminate();
         return -1;
     }
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, OnFramebufferSize);
+    glfwMakeContextCurrent(spWindow.get());
+    glfwSetFramebufferSizeCallback(spWindow.get(), OnFramebufferSize);
+
+    glfwSwapInterval(1);
 
     gladLoadGL();
 
@@ -255,40 +227,95 @@ int main(void)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(window, true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
+    ImGui_ImplGlfw_InitForOpenGL(spWindow.get(), true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
     ImGui_ImplOpenGL3_Init();
 
-    GraphicsEngine::Engine engine;
+    std::shared_ptr<GraphicsEngine::Engine> spEngine = std::shared_ptr<GraphicsEngine::Engine>(new GraphicsEngine::Engine());
+    if (!spEngine)
+        return -1;
 
-    GraphicsEngine::Utilities::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
-    DemoTriangleApp demoTriangleApp(engine);
+    GraphicsEngine::GL::Utilities::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
 
     // Declare ImGui widgets
-    BackgroundColorWidget backgroundColorWidget(engine);
-    CompileShaderWidget compileShaderWidget(engine);
-    EngineLogWidget engineLogWidget(engine);
+    io.Fonts->AddFontFromFileTTF("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF", 18);
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGui::ShowDemoWindow(); // Show demo window! :)
+    while (!glfwWindowShouldClose(spWindow.get()))
+    {       
+        GraphicsEngine::GL::Utilities::ClearColorBuffers();
 
-        GraphicsEngine::Utilities::ClearColorBuffers();
+        static bool runMainMenu = true;
+        static int selectedItem = 0;
+        if (runMainMenu)
+        {
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
 
-        demoTriangleApp.Render();
+            ImGui::OpenPopup("Main Menu");
 
-        backgroundColorWidget.Iterate();
-        compileShaderWidget.Iterate();
-        engineLogWidget.Iterate();
+            // Ensure the popup fills the entire screen
+            ImVec2 displaySize = ImGui::GetIO().DisplaySize; // Get the size of the whole application window
+            ImGui::SetNextWindowSize(displaySize);
+            ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+            if (ImGui::BeginPopupModal("Main Menu", nullptr, ImGuiWindowFlags_NoTitleBar))
+            {
+                // Calculate position to center the contents
+                ImVec2 contentSize = ImVec2(300, 200); // Define the size of your content
+                ImVec2 windowSize = ImGui::GetWindowSize();
+                ImVec2 centerPos = ImVec2((windowSize.x - contentSize.x) * 0.5f, (windowSize.y - contentSize.y) * 0.5f);
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+                // Move the cursor to the calculated center position
+                ImGui::SetCursorPos(centerPos);
+
+                const size_t NUM_ITEMS = 2;
+                static const char* items[NUM_ITEMS] = { "Demo triangle", "Dear ImGui demo window" };
+
+                ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Graphics Engine Sandbox").x) * 0.5f);
+                ImGui::Text("Graphics Engine Sandbox");
+                ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Please make a selection").x) * 0.5f);
+                ImGui::Text("Please make a selection");
+                ImGui::SetNextWindowSize(ImVec2(400, NUM_ITEMS*ImGui::GetTextLineHeight() + 2*ImGui::GetStyle().ItemSpacing.y + 2*ImGui::GetStyle().FramePadding.y));
+                ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 400) * 0.5f);
+                ImGui::ListBox("##Items", &selectedItem, items, IM_ARRAYSIZE(items));
+                float windowWidth = ImGui::GetWindowSize().x;
+                float buttonWidth = 100.0f; // Set your button width
+                ImGui::SetCursorPosX((windowWidth - buttonWidth) * 0.5f);
+                if (ImGui::Button("Run", ImVec2(buttonWidth, 30.f)))
+                {
+                    ImGui::CloseCurrentPopup();
+                    runMainMenu = false;
+                }
+
+                ImGui::EndPopup();
+            }
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        }
+        else
+        {
+			switch (selectedItem)
+			{
+			case 0:
+			{
+				DemoTriangleApp app(spWindow, spEngine);
+				app.Run();
+				break;
+			}
+			case 1:
+			{
+				ImGuiDemoWindowApp app(spWindow, spEngine);
+                app.Run();
+				break;
+			}
+			}
+
+            runMainMenu = true;
+        }
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(spWindow.get());
 
         /* Poll for and process events */
         glfwPollEvents();
@@ -298,8 +325,5 @@ int main(void)
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    glfwTerminate();
-
     return 0;
 }
-

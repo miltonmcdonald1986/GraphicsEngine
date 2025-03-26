@@ -19,42 +19,93 @@
     <Filter Include="Source Files\glad">
       <UniqueIdentifier>{8d1bf949-b016-4519-a1db-8b2a2c52c9e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Apps">
+      <UniqueIdentifier>{3346f4dc-96fc-4726-b063-a628579675db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Widgets">
+      <UniqueIdentifier>{5ab471cb-f739-40d0-ac47-1731cb934d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Apps">
+      <UniqueIdentifier>{238abe12-ae07-4f8b-8a92-7c0bd4c94e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widgets">
+      <UniqueIdentifier>{42810222-c610-4fed-8732-8aaa151453e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sandbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(IMGUI_DIR)\backends\imgui_impl_glfw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(IMGUI_DIR)\backends\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DemoTriangleApp.cpp">
+      <Filter>Source Files\Apps</Filter>
     </ClCompile>
     <ClCompile Include="$(IMGUI_DIR)\imgui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui-1.91.9b</Filter>
     </ClCompile>
     <ClCompile Include="$(IMGUI_DIR)\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui-1.91.9b</Filter>
     </ClCompile>
     <ClCompile Include="$(IMGUI_DIR)\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui-1.91.9b</Filter>
+    </ClCompile>
+    <ClCompile Include="$(IMGUI_DIR)\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\imgui-1.91.9b</Filter>
+    </ClCompile>
+    <ClCompile Include="$(IMGUI_DIR)\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\imgui-1.91.9b</Filter>
     </ClCompile>
     <ClCompile Include="$(IMGUI_DIR)\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui-1.91.9b</Filter>
     </ClCompile>
     <ClCompile Include="$(IMGUI_DIR)\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui-1.91.9b</Filter>
     </ClCompile>
     <ClCompile Include="$(GLAD_DIR)\src\glad.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\glad</Filter>
     </ClCompile>
-    <ClCompile Include="DemoTriangleApp.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ImGuiDemoWindowApp.cpp">
+      <Filter>Source Files\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundColorWidget.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="PolygonModeWidget.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Source Files\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineLogWidget.cpp">
+      <Filter>Source Files\Widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DemoTriangleApp.h">
+    <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoTriangleApp.h">
+      <Filter>Header Files\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiDemoWindowApp.h">
+      <Filter>Header Files\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundColorWidget.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="PolygonModeWidget.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Header Files\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineLogWidget.h">
+      <Filter>Header Files\Widgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

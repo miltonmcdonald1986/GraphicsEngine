@@ -7,7 +7,7 @@
 
 #define GL_ERROR() GetError(__FILE__, __func__, __LINE__) != ErrorFlag::NoError
 
-namespace GraphicsEngine::Utilities
+namespace GraphicsEngine::GL::Utilities
 {
 	auto AttachShader(GLuint program, GLuint shader) -> bool
 	{
@@ -207,14 +207,14 @@ namespace GraphicsEngine::Utilities
 		auto errorMsg = errorMsgMap.at(flag);
 		switch (flag)
 		{
-		case GraphicsEngine::Utilities::ErrorFlag::NoError:
+		case ErrorFlag::NoError:
 			logger->trace(std::format(formatMsg, filename, function, line, errorMsg));
 			break;
-		case GraphicsEngine::Utilities::ErrorFlag::InvalidEnum:
-		case GraphicsEngine::Utilities::ErrorFlag::InvalidValue:
-		case GraphicsEngine::Utilities::ErrorFlag::InvalidOperation:
-		case GraphicsEngine::Utilities::ErrorFlag::InvalidFramebufferOperation:
-		case GraphicsEngine::Utilities::ErrorFlag::OutOfMemory:
+		case ErrorFlag::InvalidEnum:
+		case ErrorFlag::InvalidValue:
+		case ErrorFlag::InvalidOperation:
+		case ErrorFlag::InvalidFramebufferOperation:
+		case ErrorFlag::OutOfMemory:
 			logger->error(std::format(formatMsg, filename, function, line, errorMsg));
 			break;
 		default:
@@ -256,6 +256,15 @@ namespace GraphicsEngine::Utilities
 			spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
 			return false;
 		}
+
+		return true;
+	}
+
+	auto PolygonMode(PolygonModeType mode) -> bool
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, static_cast<GLenum>(mode));
+		if (GL_ERROR())
+			return false;
 
 		return true;
 	}

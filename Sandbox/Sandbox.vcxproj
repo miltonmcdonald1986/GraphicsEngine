@@ -167,11 +167,24 @@
     <ClCompile Include="$(IMGUI_DIR)\imgui_tables.cpp" />
     <ClCompile Include="$(IMGUI_DIR)\imgui_widgets.cpp" />
     <ClCompile Include="$(GLAD_DIR)\src\glad.c" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="BackgroundColorWidget.cpp" />
     <ClCompile Include="DemoTriangleApp.cpp" />
+    <ClCompile Include="EngineLogWidget.cpp" />
+    <ClCompile Include="ImGuiDemoWindowApp.cpp" />
+    <ClCompile Include="PolygonModeWidget.cpp" />
     <ClCompile Include="Sandbox.cpp" />
+    <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="BackgroundColorWidget.h" />
     <ClInclude Include="DemoTriangleApp.h" />
+    <ClInclude Include="EngineLogWidget.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="ImGuiDemoWindowApp.h" />
+    <ClInclude Include="PolygonModeWidget.h" />
+    <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

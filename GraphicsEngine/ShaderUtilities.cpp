@@ -31,10 +31,10 @@ namespace GraphicsEngine::Utilities
 
 	auto CompileFragmentShader(const std::string& source) -> std::optional<GLuint>
 	{
-		return CompileShader(ShaderType::Fragment, source);
+		return CompileShader(GL::Utilities::ShaderType::Fragment, source);
 	}
 
-	auto CompileShader(ShaderType shaderType, const std::string& source) -> std::optional<GLuint>
+	auto CompileShader(GL::Utilities::ShaderType shaderType, const std::string& source) -> std::optional<GLuint>
 	{
 		auto optShader = CreateShader(shaderType);
 		if (!optShader)
@@ -42,10 +42,10 @@ namespace GraphicsEngine::Utilities
 
 		GLuint shader = *optShader;
 
-		if (!ShaderSource(shader, { source }))
+		if (!GL::Utilities::ShaderSource(shader, { source }))
 			return std::nullopt;
 
-		if (!CompileShader(shader))
+		if (!GL::Utilities::CompileShader(shader))
 			return std::nullopt;
 
 		return shader;
@@ -58,14 +58,14 @@ namespace GraphicsEngine::Utilities
 
 	auto CompileVertexShader(const std::string& source) -> std::optional<GLuint>
 	{
-		return CompileShader(ShaderType::Vertex, source);
+		return CompileShader(GL::Utilities::ShaderType::Vertex, source);
 	}
 
 	auto LinkProgram(const std::vector<GLuint>& shaders) -> std::optional<GLuint>
 	{
 		auto logger = spdlog::get("Engine");
 
-		auto optProgram = CreateProgram();
+		auto optProgram = GL::Utilities::CreateProgram();
 		if (!optProgram)
 			return std::nullopt;
 
@@ -73,16 +73,16 @@ namespace GraphicsEngine::Utilities
 
 		for (auto shader : shaders)
 		{
-			if (!AttachShader(shaderProgram, shader))
+			if (!GL::Utilities::AttachShader(shaderProgram, shader))
 				return std::nullopt;
 		}
 		
-		if (!LinkProgram(shaderProgram))
+		if (!GL::Utilities::LinkProgram(shaderProgram))
 			return std::nullopt;
 
 		for (auto shader : shaders)
 		{
-			if (!DeleteShader(shader))
+			if (!GL::Utilities::DeleteShader(shader))
 				spdlog::get("Engine")->warn(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, "DeleteShader returned false."));
 		}
 
@@ -91,7 +91,7 @@ namespace GraphicsEngine::Utilities
 
 	auto ShaderIsDeleted(GLuint shader) -> std::optional<bool>
 	{
-		return GetShaderDeleteStatus(shader);
+		return GL::Utilities::GetShaderDeleteStatus(shader);
 	}
 
 }

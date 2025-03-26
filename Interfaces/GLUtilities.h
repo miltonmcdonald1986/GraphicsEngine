@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <optional>
 #include <string>
 #include <vector>
@@ -8,7 +9,7 @@
 
 #include "GraphicsEngineImpExp.h"
 
-namespace GraphicsEngine::Utilities
+namespace GraphicsEngine::GL::Utilities
 {
 	
 #pragma region Enumerations
@@ -188,6 +189,13 @@ namespace GraphicsEngine::Utilities
 		OutOfMemory = GL_OUT_OF_MEMORY
 	};
 
+	enum class PolygonModeType : GLenum
+	{
+		Point	= GL_POINT,
+		Line	= GL_LINE,
+		Fill	= GL_FILL
+	};
+
 	/// <summary>
 	/// Types of shader
 	/// </summary>
@@ -358,6 +366,13 @@ namespace GraphicsEngine::Utilities
 	/// <param name="program"> Speifies the handle of the program object to be linked. </param>
 	/// <returns> true if it succeeded; false otherwise. </returns>
 	GRAPHICSENGINE_API auto LinkProgram(GLuint program) -> bool;
+
+	/// <summary>
+	/// Select a polygon rasterization mode.
+	/// </summary>
+	/// <param name="mode"> Specifies how polygons will be rasterized. </param>
+	/// <returns> true if it succeeded; false otherwise </returns>
+	GRAPHICSENGINE_API auto PolygonMode(PolygonModeType mode) -> bool;
 
 	/// <summary>
 	/// Replaces the source code in a shader object.
