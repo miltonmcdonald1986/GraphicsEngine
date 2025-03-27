@@ -4,7 +4,7 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 
-namespace GraphicsEngine::Log::Utilities
+namespace GraphicsEngine::Log
 {
 	
 	auto SetMaxNumItems(size_t maxNumItems) -> bool
@@ -75,25 +75,25 @@ namespace GraphicsEngine::Log::Utilities
 
 		switch (level)
 		{
-		case Log::Utilities::LogLevel::Trace:
+		case LogLevel::Trace:
 			logger->set_level(spdlog::level::trace);
 			break;
-		case Log::Utilities::LogLevel::Debug:
+		case LogLevel::Debug:
 			logger->set_level(spdlog::level::debug);
 			break;
-		case Log::Utilities::LogLevel::Info:
+		case LogLevel::Info:
 			logger->set_level(spdlog::level::info);
 			break;
-		case Log::Utilities::LogLevel::Warn:
+		case LogLevel::Warn:
 			logger->set_level(spdlog::level::warn);
 			break;
-		case Log::Utilities::LogLevel::Error:
+		case LogLevel::Error:
 			logger->set_level(spdlog::level::err);
 			break;
-		case Log::Utilities::LogLevel::Critical:
+		case LogLevel::Critical:
 			logger->set_level(spdlog::level::critical);
 			break;
-		case Log::Utilities::LogLevel::Off:
+		case LogLevel::Off:
 			logger->set_level(spdlog::level::off);
 			break;
 		default:

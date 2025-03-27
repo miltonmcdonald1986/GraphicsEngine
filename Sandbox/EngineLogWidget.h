@@ -13,5 +13,5 @@ public:
 
 private:
 
-    int m_LogLevel = static_cast<int>(GraphicsEngine::Log::Utilities::LogLevel::Warn);
+    int m_LogLevel = static_cast<int>(GraphicsEngine::Log::LogLevel::Warn);
 };

@@ -7,7 +7,7 @@ using namespace GraphicsEngine;
 EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : Widget(spWindow, spEngine)
 {
-    auto optLevel = Log::Utilities::GetLevel();
+    auto optLevel = Log::GetLevel();
     if (optLevel)
         m_LogLevel = static_cast<int>(*optLevel);
 }
@@ -40,9 +40,9 @@ auto EngineLogWidget::Iterate() -> void
         update = true;
 
     if (update)
-        Log::Utilities::SetLevel(static_cast<Log::Utilities::LogLevel>(m_LogLevel));
+        Log::SetLevel(static_cast<Log::LogLevel>(m_LogLevel));
 
-    auto msgs = Log::Utilities::GetRecentLogMessages();
+    auto msgs = Log::GetRecentLogMessages();
 
     if (msgs.empty())
         ImGui::Text("Log is empty.");

@@ -6,7 +6,7 @@
 
 #include "GraphicsEngineImpExp.h"
 
-namespace GraphicsEngine::Log::Utilities
+namespace GraphicsEngine::Log
 {
 
 	enum class LogLevel : int
