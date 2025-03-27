@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "GLUtilities.h"
+#include "GraphicsEngine/GLUtilities.h"
 
 #include <filesystem>
 
@@ -7,7 +7,7 @@
 
 #define GL_ERROR() GetError(__FILE__, __func__, __LINE__) != ErrorFlag::NoError
 
-namespace GraphicsEngine::GL::Utilities
+namespace GraphicsEngine::GL
 {
 	auto AttachShader(GLuint program, GLuint shader) -> bool
 	{
@@ -35,6 +35,11 @@ namespace GraphicsEngine::GL::Utilities
 		return true;
 	}
 
+	auto BindElementArrayBuffer(GLuint buffer) -> bool
+	{
+		return BindBuffer(BufferBindingTarget::ElementArray, buffer);
+	}
+
 	auto BindVertexArray(GLuint array) -> bool
 	{
 		glBindVertexArray(array);
@@ -60,6 +65,11 @@ namespace GraphicsEngine::GL::Utilities
 	auto BufferFloatData(BufferBindingTarget target, const std::vector<float>& data, DataUsagePattern usage) -> bool
 	{
 		return BufferData(target, data.size() * sizeof(float), data.data(), usage);
+	}
+
+	auto BufferUnsignedIntData(BufferBindingTarget target, const std::vector<unsigned int>& data, DataUsagePattern usage) -> bool
+	{
+		return BufferData(target, data.size() * sizeof(unsigned int), data.data(), usage);
 	}
 
 	auto ClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) -> void
@@ -122,12 +132,30 @@ namespace GraphicsEngine::GL::Utilities
 		return shader;
 	}
 
-	GRAPHICSENGINE_API auto DeleteShader(GLuint shader) -> bool
+	auto DeleteShader(GLuint shader) -> bool
 	{
 		glDeleteShader(shader);
 		if (GL_ERROR())
 			return false;
 		
+		return true;
+	}
+
+	auto DrawArrays(DrawMode mode, GLint first, GLsizei count) -> bool
+	{
+		glDrawArrays(static_cast<GLenum>(mode), first, count);
+		if (GL_ERROR())
+			return false;
+
+		return true;
+	}
+
+	auto DrawElements(DrawMode mode, GLsizei count, IndexType type, int offset) -> bool
+	{
+		glDrawElements(static_cast<GLenum>(mode), count, static_cast<GLenum>(type), (void*)offset);
+		if (GL_ERROR())
+			return false;
+
 		return true;
 	}
 

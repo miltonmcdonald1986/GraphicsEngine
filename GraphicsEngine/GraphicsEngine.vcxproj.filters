@@ -27,19 +27,22 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\Engine.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\Engine.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngineImpExp.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\GLUtilities.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\ShaderUtilities.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GLUtilities.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\LogUtilities.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\LogUtilities.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\ShaderUtilities.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LogUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexedPoints.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

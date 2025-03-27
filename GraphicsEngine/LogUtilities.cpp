@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "LogUtilities.h"
+#include "GraphicsEngine/LogUtilities.h"
 
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/ringbuffer_sink.h"

@@ -81,6 +81,9 @@
     <ClCompile Include="EngineLogWidget.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="DemoIndexedPointsApp.cpp">
+      <Filter>Source Files\Apps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="EngineLogWidget.h">
       <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoIndexedPointsApp.h">
+      <Filter>Header Files\Apps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

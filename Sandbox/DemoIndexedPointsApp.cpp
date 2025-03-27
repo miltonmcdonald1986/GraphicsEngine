@@ -1,4 +1,4 @@
-#include "DemoTriangleApp.h"
+#include "DemoIndexedPointsApp.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -8,7 +8,7 @@
 #include "PolygonModeWidget.h"
 #include "EngineLogWidget.h"
 
-DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
     : App(spWindow, spEngine)
 {
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
@@ -35,12 +35,23 @@ DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shar
             glUseProgram(*optShaderProgram);
     }
 
-    GLuint vao = 0;
-    if (auto optVAO = m_spEngine->AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
+    std::vector<glm::vec3> vertices = {
+        glm::vec3(0.5f, 0.5f, 0.0f),
+        glm::vec3(0.5f, -0.5f, 0.0f),
+        glm::vec3(-0.5f, -0.5f, 0.0f),
+        glm::vec3(-0.5f,  0.5f, 0.0f) 
+        };
+
+    m_Indices = std::vector<unsigned int> {
+        0, 1, 3,
+        1, 2, 3
+    };
+
+    if (auto optVAO = GraphicsEngine::AddIndexedPoints(vertices, m_Indices); optVAO)
         m_VAO = *optVAO;
 }
 
-auto DemoTriangleApp::Run() -> void
+auto DemoIndexedPointsApp::Run() -> void
 {
     bool keepGoing = true;
 
@@ -86,7 +97,7 @@ auto DemoTriangleApp::Run() -> void
     glfwSetKeyCallback(m_spWindow.get(), nullptr);
 }
 
-void DemoTriangleApp::Render() const
+void DemoIndexedPointsApp::Render() const
 {
     if (m_VAO == 0)
         return;
@@ -94,5 +105,5 @@ void DemoTriangleApp::Render() const
     if (!GraphicsEngine::GL::BindVertexArray(m_VAO))
         return;
 
-    GraphicsEngine::GL::DrawArrays(GraphicsEngine::GL::DrawMode::Triangles, 0, 3);
+    GraphicsEngine::GL::DrawElements(GraphicsEngine::GL::DrawMode::Triangles, m_Indices.size(), GraphicsEngine::GL::IndexType::UnsignedInt, 0);
 }

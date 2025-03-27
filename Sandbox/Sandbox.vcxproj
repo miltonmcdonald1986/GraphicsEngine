@@ -169,6 +169,7 @@
     <ClCompile Include="$(GLAD_DIR)\src\glad.c" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BackgroundColorWidget.cpp" />
+    <ClCompile Include="DemoIndexedPointsApp.cpp" />
     <ClCompile Include="DemoTriangleApp.cpp" />
     <ClCompile Include="EngineLogWidget.cpp" />
     <ClCompile Include="ImGuiDemoWindowApp.cpp" />
@@ -179,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BackgroundColorWidget.h" />
+    <ClInclude Include="DemoIndexedPointsApp.h" />
     <ClInclude Include="DemoTriangleApp.h" />
     <ClInclude Include="EngineLogWidget.h" />
     <ClInclude Include="Header.h" />

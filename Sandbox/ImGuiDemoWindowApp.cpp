@@ -32,7 +32,7 @@ void ImGuiDemoWindowApp::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GraphicsEngine::GL::Utilities::ClearColorBuffers();
+        GraphicsEngine::GL::ClearColorBuffers();
 
         ImGui::ShowDemoWindow();
 

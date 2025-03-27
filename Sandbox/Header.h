@@ -4,8 +4,9 @@
 // All header files in Sandbox should include Header.h before
 // any other headers to make compilation run smoothly.
 
-#include "Engine.h"
-#include "ShaderUtilities.h"
-#include "LogUtilities.h"
+#include "GraphicsEngine/Engine.h"
+#include "GraphicsEngine/IndexedPoints.h"
+#include "GraphicsEngine/ShaderUtilities.h"
+#include "GraphicsEngine/LogUtilities.h"
 
 #include "GLFW/glfw3.h"

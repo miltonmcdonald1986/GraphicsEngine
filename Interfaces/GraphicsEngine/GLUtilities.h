@@ -9,7 +9,7 @@
 
 #include "GraphicsEngineImpExp.h"
 
-namespace GraphicsEngine::GL::Utilities
+namespace GraphicsEngine::GL
 {
 	
 #pragma region Enumerations
@@ -156,6 +156,27 @@ namespace GraphicsEngine::GL::Utilities
 		DynamicCopy = GL_DYNAMIC_COPY
 	};
 
+	/// <summary>
+	/// Specifies what kind of primitives to render.
+	/// </summary>
+	enum class DrawMode : GLenum
+	{
+		Points = GL_POINTS,
+		LineStrip = GL_LINE_STRIP,
+		LineLoop = GL_LINE_LOOP,
+		Lines = GL_LINES,
+		LineStripAdjacency = GL_LINE_STRIP_ADJACENCY,
+		LinesAdjacency = GL_LINES_ADJACENCY,
+		TriangleStrip = GL_TRIANGLE_STRIP,
+		TriangleFan = GL_TRIANGLE_FAN,
+		Triangles = GL_TRIANGLES,
+		TriangleStripAdjacency = GL_TRIANGLE_STRIP_ADJACENCY,
+		TrianglesAdjacency = GL_TRIANGLES_ADJACENCY
+	};
+
+	/// <summary>
+	/// Error information
+	/// </summary>
 	enum class ErrorFlag : GLenum
 	{
 		/// <summary>
@@ -189,6 +210,16 @@ namespace GraphicsEngine::GL::Utilities
 		OutOfMemory = GL_OUT_OF_MEMORY
 	};
 
+	/// <summary>
+	/// Specifies the type of the values in indices.
+	/// </summary>
+	enum class IndexType : GLenum
+	{
+		UnsignedByte = GL_UNSIGNED_BYTE,
+		UnsignedShort = GL_UNSIGNED_SHORT,
+		UnsignedInt = GL_UNSIGNED_INT
+	};
+
 	enum class PolygonModeType : GLenum
 	{
 		Point	= GL_POINT,
@@ -220,7 +251,7 @@ namespace GraphicsEngine::GL::Utilities
 	GRAPHICSENGINE_API auto AttachShader(GLuint program, GLuint shader) -> bool;
 
 	/// <summary>
-	/// Bind a named buffer object for the purpose of Vertex Attributes.
+	/// Bind a named buffer object for the purpose of vertex attributes.
 	/// </summary>
 	/// <param name="buffer"> Specifies the name of a buffer object. </param>
 	/// <returns> true if it succeeded; false otherwise. </returns>
@@ -233,6 +264,13 @@ namespace GraphicsEngine::GL::Utilities
 	/// <param name="buffer"> Specifies the name of a buffer object. </param>
 	/// <returns> true if it succeeded; false otherwise. </returns>
 	GRAPHICSENGINE_API auto BindBuffer(BufferBindingTarget target, GLuint buffer) -> bool;
+
+	/// <summary>
+	/// Bind a named buffer object for the purpose of vertex array indices.
+	/// </summary>
+	/// <param name="buffer"> Specifies the name of a buffer object. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto BindElementArrayBuffer(GLuint buffer) -> bool;
 
 	/// <summary>
 	/// Bind a vertex array object.
@@ -260,6 +298,15 @@ namespace GraphicsEngine::GL::Utilities
 	/// <param name="usage"> Specifies the expected usage pattern of the data store. </param>
 	/// <returns> true if it succeeded; false otherwise. </returns>
 	GRAPHICSENGINE_API auto BufferFloatData(BufferBindingTarget target, const std::vector<float>& data, DataUsagePattern usage) -> bool;
+
+	/// <summary>
+	/// Creates and initializes a buffer object's data store with unsigned ints.
+	/// </summary>
+	/// <param name="target"> Specifies the target to which the buffer object is bound. </param>
+	/// <param name="data"> A vector of unsigned ints that will be copied into the data store for initialization. </param>
+	/// <param name="usage"> Specifies the expected usage pattern of the data store. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto BufferUnsignedIntData(BufferBindingTarget target, const std::vector<unsigned int>& data, DataUsagePattern usage) -> bool;
 
 	/// <summary>
 	/// Specify clear values for the color buffers.
@@ -302,6 +349,30 @@ namespace GraphicsEngine::GL::Utilities
 	/// <param name="shader"> Specifies the shader object to be deleted. </param>
 	/// <returns> true if it succeeded; false otherwise. </returns>
 	GRAPHICSENGINE_API auto DeleteShader(GLuint shader) -> bool;
+
+	/// <summary>
+	/// Render primitives from array data.
+	/// </summary>
+	/// <param name="mode"> Specifies what kind of primitives to render. </param>
+	/// <param name="first"> Specifies the starting index in the enabled arrays. </param>
+	/// <param name="count"> Specifies the number of indices to be rendered. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	GRAPHICSENGINE_API auto DrawArrays(DrawMode mode, GLint first, GLsizei count) -> bool;
+
+	/// <summary>
+	/// Render primitives from array data.
+	/// </summary>
+	/// <param name="mode"> Specifies what kind of primitives to render. </param>
+	/// <param name="count"> Specifies the number of elements to be rendered. </param>
+	/// <param name="type"> Specifies the type of the values in indices. </param>
+	/// <param name="indices"> Specifies an offset into the currently bound element array buffer. </param>
+	/// <returns> true if it succeeded; false otherwise. </returns>
+	/// <remarks>
+	/// This wrapper function around glDrawElements assumes that an element array buffer is bound, and
+	/// that we will therefore not be providing a direct pointer to an array of indices. Hence the offset
+	/// parameter is an int, and not a pointer.
+	/// </remarks>
+	GRAPHICSENGINE_API auto DrawElements(DrawMode mode, GLsizei count, IndexType type, int offset) -> bool;
 
 	/// <summary>
 	/// Enable a generic vertex attribute array.

@@ -5,27 +5,13 @@
 #include <ShObjIdl_core.h>
 #include <Windows.h>
 
-//#include <array>
-//
-//#include "glad/glad.h"
-//
-//#include "GLFW/glfw3.h"
-//
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-//
-//#include <windows.h>
-//#include <ShObjIdl_core.h>
-//
-//#include "Engine.h"
-//#include "ShaderUtilities.h"
-//
-//#include "DemoTriangleApp.h"
-//#include "ImGuiDemoWindowApp.h"
 
 #include "BackgroundColorWidget.h"
 #include "DemoTriangleApp.h"
+#include "DemoIndexedPointsApp.h"
 #include "ImGuiDemoWindowApp.h"
 
 std::string PWSTRToString(PWSTR wideStr) {
@@ -234,7 +220,7 @@ int main(void)
     if (!spEngine)
         return -1;
 
-    GraphicsEngine::GL::Utilities::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
+    GraphicsEngine::GL::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
 
     // Declare ImGui widgets
     io.Fonts->AddFontFromFileTTF("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF", 18);
@@ -242,7 +228,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(spWindow.get()))
     {       
-        GraphicsEngine::GL::Utilities::ClearColorBuffers();
+        GraphicsEngine::GL::ClearColorBuffers();
 
         static bool runMainMenu = true;
         static int selectedItem = 0;
@@ -268,8 +254,8 @@ int main(void)
                 // Move the cursor to the calculated center position
                 ImGui::SetCursorPos(centerPos);
 
-                const size_t NUM_ITEMS = 2;
-                static const char* items[NUM_ITEMS] = { "Demo triangle", "Dear ImGui demo window" };
+                const size_t NUM_ITEMS = 3;
+                static const char* items[NUM_ITEMS] = { "Demo triangle", "Demo indexed points", "Dear ImGui demo window" };
 
                 ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Graphics Engine Sandbox").x) * 0.5f);
                 ImGui::Text("Graphics Engine Sandbox");
@@ -303,7 +289,13 @@ int main(void)
 				app.Run();
 				break;
 			}
-			case 1:
+            case 1:
+            {
+                DemoIndexedPointsApp app(spWindow, spEngine);
+                app.Run();
+                break;
+            }
+			case 2:
 			{
 				ImGuiDemoWindowApp app(spWindow, spEngine);
                 app.Run();

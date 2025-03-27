@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Engine.h"
+#include "GraphicsEngine/Engine.h"
 
 #include <fstream>
 #include <memory>
@@ -12,7 +12,7 @@
 #include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 
-#include "GLUtilities.h"
+#include "GraphicsEngine/GLUtilities.h"
 
 namespace GraphicsEngine
 {
@@ -53,31 +53,31 @@ namespace GraphicsEngine
 			vertices[2].x, vertices[2].y, vertices[2].z
 		};
 
-		auto optVAO = GL::Utilities::GenOneVertexArray();
+		auto optVAO = GL::GenOneVertexArray();
 		if (!optVAO)
 			return std::nullopt;
 
-		auto optBuffer = GL::Utilities::GenOneBuffer();
+		auto optBuffer = GL::GenOneBuffer();
 		if (!optBuffer)
 			return std::nullopt;
 
-		if (!GL::Utilities::BindVertexArray(*optVAO))
+		if (!GL::BindVertexArray(*optVAO))
 			return std::nullopt;
 
-		if (!GL::Utilities::BindArrayBuffer(*optBuffer))
+		if (!GL::BindArrayBuffer(*optBuffer))
 			return std::nullopt;
 
-		if (!GL::Utilities::BufferFloatData(GL::Utilities::BufferBindingTarget::Array, v, GL::Utilities::DataUsagePattern::StaticDraw))
+		if (!GL::BufferFloatData(GL::BufferBindingTarget::Array, v, GL::DataUsagePattern::StaticDraw))
 			return std::nullopt;
 
-		if (!GL::Utilities::VertexAttribPointer(0, GL::Utilities::AttributeSize::Three, GL::Utilities::DataType::Float, GL_FALSE, 3 * sizeof(float), 0))
+		if (!GL::VertexAttribPointer(0, GL::AttributeSize::Three, GL::DataType::Float, GL_FALSE, 3 * sizeof(float), 0))
 			return std::nullopt;
 
-		if (!GL::Utilities::EnableVertexAttribArray(0))
+		if (!GL::EnableVertexAttribArray(0))
 			return std::nullopt;
 
-		GL::Utilities::UnbindArrayBuffer();
-		GL::Utilities::UnbindVertexArray();
+		GL::UnbindArrayBuffer();
+		GL::UnbindVertexArray();
 
 		return *optVAO;
 	}
