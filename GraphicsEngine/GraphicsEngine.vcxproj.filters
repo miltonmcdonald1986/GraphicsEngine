@@ -33,9 +33,6 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\LogUtilities.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Interfaces\GraphicsEngine\ShaderUtilities.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -43,6 +40,9 @@
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\Interfaces\GraphicsEngine\GL.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
