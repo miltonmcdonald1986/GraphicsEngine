@@ -17,13 +17,13 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, spEngine)));
 
-    auto optVertexShader = Utilities::CompileVertexShader(std::string("#version 330 core\n"
+    auto optVertexShader = Shader::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
         "{\n"
         "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
         "}\0"));
-    auto optFragmentShader = Utilities::CompileFragmentShader(std::string("#version 330 core\n"
+    auto optFragmentShader = Shader::CompileFragmentShader(std::string("#version 330 core\n"
         "out vec4 FragColor;\n"
         "void main()\n"
         "{\n"
@@ -32,7 +32,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
 
     if (optVertexShader && optFragmentShader)
     {
-        auto optShaderProgram = Utilities::LinkProgram({ *optVertexShader, *optFragmentShader });
+        auto optShaderProgram = Shader::LinkProgram({ *optVertexShader, *optFragmentShader });
         if (optShaderProgram)
             glUseProgram(*optShaderProgram);
     }

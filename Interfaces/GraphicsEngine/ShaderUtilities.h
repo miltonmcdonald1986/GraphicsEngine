@@ -8,7 +8,7 @@
 #include "GL.h"
 #include "GraphicsEngineImpExp.h"
 
-namespace GraphicsEngine::Utilities
+namespace GraphicsEngine::Shader
 {
 
 	/// <summary>

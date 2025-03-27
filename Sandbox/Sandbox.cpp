@@ -107,7 +107,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##VS"))
         {
-            if (auto optId = Utilities::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
+            if (auto optId = Shader::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
                 m_VertexShader = *optId;
         }
 
@@ -123,7 +123,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##FS"))
         {
-            if (auto optId = Utilities::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
+            if (auto optId = Shader::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
                 m_FragmentShader = *optId;
         }
 
@@ -147,13 +147,13 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Link Program"))
         {
-            if (auto optId = Utilities::LinkProgram({ m_VertexShader, m_FragmentShader }))
+            if (auto optId = Shader::LinkProgram({ m_VertexShader, m_FragmentShader }))
                 m_Program = *optId;
 
-            if (auto optResultVS = Utilities::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
+            if (auto optResultVS = Shader::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
                 m_VertexShader = 0;
 
-            if (auto optResultFS = Utilities::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
+            if (auto optResultFS = Shader::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
                 m_FragmentShader = 0;
         }
         ImGui::End();

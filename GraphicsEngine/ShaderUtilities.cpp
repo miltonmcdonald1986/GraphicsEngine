@@ -21,7 +21,7 @@ namespace
 
 }
 
-namespace GraphicsEngine::Utilities
+namespace GraphicsEngine::Shader
 {
 
 	auto CompileFragmentShader(const std::filesystem::path& path) -> std::optional<GLuint>
