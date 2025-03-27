@@ -3,7 +3,7 @@
 
 #include <iterator>
 
-#include "GraphicsEngine/GLUtilities.h"
+#include "GraphicsEngine/GL.h"
 
 namespace GraphicsEngine
 {

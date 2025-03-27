@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "GraphicsEngine/GLUtilities.h"
+#include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/ShaderUtilities.h"
 
 #include <fstream>

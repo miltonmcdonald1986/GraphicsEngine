@@ -2,10 +2,12 @@
 
 #include "imgui.h"
 
-EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : Widget(spWindow, spEngine)
 {
-    auto optLevel = GraphicsEngine::Log::Utilities::GetLevel();
+    auto optLevel = Log::Utilities::GetLevel();
     if (optLevel)
         m_LogLevel = static_cast<int>(*optLevel);
 }
@@ -38,9 +40,9 @@ auto EngineLogWidget::Iterate() -> void
         update = true;
 
     if (update)
-        GraphicsEngine::Log::Utilities::SetLevel(static_cast<GraphicsEngine::Log::Utilities::LogLevel>(m_LogLevel));
+        Log::Utilities::SetLevel(static_cast<Log::Utilities::LogLevel>(m_LogLevel));
 
-    auto msgs = GraphicsEngine::Log::Utilities::GetRecentLogMessages();
+    auto msgs = Log::Utilities::GetRecentLogMessages();
 
     if (msgs.empty())
         ImGui::Text("Log is empty.");

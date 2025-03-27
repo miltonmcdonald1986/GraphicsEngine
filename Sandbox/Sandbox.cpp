@@ -14,6 +14,8 @@
 #include "DemoIndexedPointsApp.h"
 #include "ImGuiDemoWindowApp.h"
 
+using namespace GraphicsEngine;
+
 std::string PWSTRToString(PWSTR wideStr) {
     if (!wideStr) {
         return std::string(); // Return an empty string if the input is null
@@ -83,7 +85,7 @@ std::string OpenFileDialogBox()
 class CompileShaderWidget
 {
 public:
-    CompileShaderWidget(GraphicsEngine::Engine& engine)
+    CompileShaderWidget(Engine& engine)
         : m_Engine(engine)
     {
         std::fill(m_FilenameVS, m_FilenameVS + MAX_PATH, '\0');
@@ -105,7 +107,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##VS"))
         {
-            if (auto optId = GraphicsEngine::Utilities::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
+            if (auto optId = Utilities::CompileVertexShader(std::filesystem::path(m_FilenameVS)))
                 m_VertexShader = *optId;
         }
 
@@ -121,7 +123,7 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Compile##FS"))
         {
-            if (auto optId = GraphicsEngine::Utilities::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
+            if (auto optId = Utilities::CompileFragmentShader(std::filesystem::path(m_FilenameFS)))
                 m_FragmentShader = *optId;
         }
 
@@ -145,20 +147,20 @@ public:
         ImGui::SameLine();
         if (ImGui::Button("Link Program"))
         {
-            if (auto optId = GraphicsEngine::Utilities::LinkProgram({ m_VertexShader, m_FragmentShader }))
+            if (auto optId = Utilities::LinkProgram({ m_VertexShader, m_FragmentShader }))
                 m_Program = *optId;
 
-            if (auto optResultVS = GraphicsEngine::Utilities::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
+            if (auto optResultVS = Utilities::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
                 m_VertexShader = 0;
 
-            if (auto optResultFS = GraphicsEngine::Utilities::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
+            if (auto optResultFS = Utilities::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
                 m_FragmentShader = 0;
         }
         ImGui::End();
     }
 
 private:
-    GraphicsEngine::Engine& m_Engine;
+    Engine& m_Engine;
     GLuint m_VertexShader = 0;
     GLuint m_FragmentShader = 0;
     GLuint m_Program = 0;
@@ -216,11 +218,11 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(spWindow.get(), true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
     ImGui_ImplOpenGL3_Init();
 
-    std::shared_ptr<GraphicsEngine::Engine> spEngine = std::shared_ptr<GraphicsEngine::Engine>(new GraphicsEngine::Engine());
+    std::shared_ptr<Engine> spEngine = std::shared_ptr<Engine>(new Engine());
     if (!spEngine)
         return -1;
 
-    GraphicsEngine::GL::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
+    GL::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
 
     // Declare ImGui widgets
     io.Fonts->AddFontFromFileTTF("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF", 18);
@@ -228,7 +230,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(spWindow.get()))
     {       
-        GraphicsEngine::GL::ClearColorBuffers();
+        GL::ClearColorBuffers();
 
         static bool runMainMenu = true;
         static int selectedItem = 0;

@@ -1,7 +1,9 @@
 #include "App.h"
 #include "Widget.h"
 
-App::App(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+App::App(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
 	: m_spWindow(spWindow),
 	  m_spEngine(spEngine)
 {

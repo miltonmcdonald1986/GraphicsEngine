@@ -4,19 +4,21 @@
 
 #include "imgui.h"
 
-#include "GraphicsEngine/GLUtilities.h"
+#include "GraphicsEngine/GL.h"
 
-PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : Widget(spWindow, spEngine)
 {
     GLint param[2];
     glGetIntegerv(GL_POLYGON_MODE, param);
     
-    if (static_cast<GraphicsEngine::GL::PolygonModeType>(param[0]) == GraphicsEngine::GL::PolygonModeType::Point)
+    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Point)
         m_Mode = 0;
-    if (static_cast<GraphicsEngine::GL::PolygonModeType>(param[0]) == GraphicsEngine::GL::PolygonModeType::Line)
+    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Line)
         m_Mode = 1;
-    if (static_cast<GraphicsEngine::GL::PolygonModeType>(param[0]) == GraphicsEngine::GL::PolygonModeType::Fill)
+    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Fill)
         m_Mode = 2;
 }
 
@@ -24,21 +26,21 @@ void PolygonModeWidget::Iterate()
 {
     auto UpdatePolygonMode = [](int mode)
     {
-        GraphicsEngine::GL::PolygonModeType modeType = GraphicsEngine::GL::PolygonModeType::Fill;
+        GL::PolygonModeType modeType = GL::PolygonModeType::Fill;
         switch (mode)
         {
         case 0:
-            modeType = GraphicsEngine::GL::PolygonModeType::Point;
+            modeType = GL::PolygonModeType::Point;
             break;
         case 1:
-            modeType = GraphicsEngine::GL::PolygonModeType::Line;
+            modeType = GL::PolygonModeType::Line;
             break;
         case 2:
-            modeType = GraphicsEngine::GL::PolygonModeType::Fill;
+            modeType = GL::PolygonModeType::Fill;
             break;
         }
 
-        GraphicsEngine::GL::PolygonMode(modeType);
+        GL::PolygonMode(modeType);
     };
 
     ImGui::Begin("Polygon Mode", nullptr, ImGuiWindowFlags_AlwaysAutoResize);

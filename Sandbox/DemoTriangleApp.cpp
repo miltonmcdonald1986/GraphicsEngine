@@ -8,20 +8,22 @@
 #include "PolygonModeWidget.h"
 #include "EngineLogWidget.h"
 
-DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : App(spWindow, spEngine)
 {
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, spEngine)));
 
-    auto optVertexShader = GraphicsEngine::Utilities::CompileVertexShader(std::string("#version 330 core\n"
+    auto optVertexShader = Utilities::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
         "{\n"
         "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
         "}\0"));
-    auto optFragmentShader = GraphicsEngine::Utilities::CompileFragmentShader(std::string("#version 330 core\n"
+    auto optFragmentShader = Utilities::CompileFragmentShader(std::string("#version 330 core\n"
         "out vec4 FragColor;\n"
         "void main()\n"
         "{\n"
@@ -30,7 +32,7 @@ DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shar
 
     if (optVertexShader && optFragmentShader)
     {
-        auto optShaderProgram = GraphicsEngine::Utilities::LinkProgram({ *optVertexShader, *optFragmentShader });
+        auto optShaderProgram = Utilities::LinkProgram({ *optVertexShader, *optFragmentShader });
         if (optShaderProgram)
             glUseProgram(*optShaderProgram);
     }
@@ -64,7 +66,7 @@ auto DemoTriangleApp::Run() -> void
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GraphicsEngine::GL::ClearColorBuffers();
+        GL::ClearColorBuffers();
 
         Render();
 
@@ -91,8 +93,8 @@ void DemoTriangleApp::Render() const
     if (m_VAO == 0)
         return;
 
-    if (!GraphicsEngine::GL::BindVertexArray(m_VAO))
+    if (!GL::BindVertexArray(m_VAO))
         return;
 
-    GraphicsEngine::GL::DrawArrays(GraphicsEngine::GL::DrawMode::Triangles, 0, 3);
+    GL::DrawArrays(GL::DrawMode::Triangles, 0, 3);
 }

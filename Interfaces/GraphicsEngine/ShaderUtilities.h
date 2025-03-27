@@ -5,7 +5,7 @@
 
 #include "glad/glad.h"
 
-#include "GLUtilities.h"
+#include "GL.h"
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine::Utilities
@@ -31,7 +31,7 @@ namespace GraphicsEngine::Utilities
 	/// <param name="shaderType"> Specifies the type of shader to be created. </param>
 	/// <param name="source"> The source code for the shader. </param>
 	/// <returns> An identifier for the shader object, if successful; nullopt otherwise. </returns>
-	GRAPHICSENGINE_API auto CompileShader(GraphicsEngine::GL::ShaderType shaderType, const std::string& source) -> std::optional<GLuint>;
+	GRAPHICSENGINE_API auto CompileShader(GL::ShaderType shaderType, const std::string& source) -> std::optional<GLuint>;
 
 	/// <summary>
 	/// Compile a vertex shader from a file containing the source code.

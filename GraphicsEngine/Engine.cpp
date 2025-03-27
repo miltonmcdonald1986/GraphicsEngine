@@ -12,7 +12,7 @@
 #include "spdlog/sinks/rotating_file_sink.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 
-#include "GraphicsEngine/GLUtilities.h"
+#include "GraphicsEngine/GL.h"
 
 namespace GraphicsEngine
 {

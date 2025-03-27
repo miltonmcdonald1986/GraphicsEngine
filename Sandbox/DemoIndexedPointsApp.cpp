@@ -8,20 +8,22 @@
 #include "PolygonModeWidget.h"
 #include "EngineLogWidget.h"
 
-DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : App(spWindow, spEngine)
 {
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, spEngine)));
 
-    auto optVertexShader = GraphicsEngine::Utilities::CompileVertexShader(std::string("#version 330 core\n"
+    auto optVertexShader = Utilities::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
         "{\n"
         "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
         "}\0"));
-    auto optFragmentShader = GraphicsEngine::Utilities::CompileFragmentShader(std::string("#version 330 core\n"
+    auto optFragmentShader = Utilities::CompileFragmentShader(std::string("#version 330 core\n"
         "out vec4 FragColor;\n"
         "void main()\n"
         "{\n"
@@ -30,7 +32,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
 
     if (optVertexShader && optFragmentShader)
     {
-        auto optShaderProgram = GraphicsEngine::Utilities::LinkProgram({ *optVertexShader, *optFragmentShader });
+        auto optShaderProgram = Utilities::LinkProgram({ *optVertexShader, *optFragmentShader });
         if (optShaderProgram)
             glUseProgram(*optShaderProgram);
     }
@@ -47,7 +49,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
         1, 2, 3
     };
 
-    if (auto optVAO = GraphicsEngine::AddIndexedPoints(vertices, m_Indices); optVAO)
+    if (auto optVAO = AddIndexedPoints(vertices, m_Indices); optVAO)
         m_VAO = *optVAO;
 }
 
@@ -75,7 +77,7 @@ auto DemoIndexedPointsApp::Run() -> void
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GraphicsEngine::GL::ClearColorBuffers();
+        GL::ClearColorBuffers();
 
         Render();
 
@@ -102,8 +104,8 @@ void DemoIndexedPointsApp::Render() const
     if (m_VAO == 0)
         return;
 
-    if (!GraphicsEngine::GL::BindVertexArray(m_VAO))
+    if (!GL::BindVertexArray(m_VAO))
         return;
 
-    GraphicsEngine::GL::DrawElements(GraphicsEngine::GL::DrawMode::Triangles, m_Indices.size(), GraphicsEngine::GL::IndexType::UnsignedInt, 0);
+    GL::DrawElements(GL::DrawMode::Triangles, m_Indices.size(), GL::IndexType::UnsignedInt, 0);
 }

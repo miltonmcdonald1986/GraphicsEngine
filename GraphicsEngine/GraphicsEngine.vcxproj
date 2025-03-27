@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Interfaces\GraphicsEngine\Engine.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\GLUtilities.h" />
+    <ClInclude Include="..\Interfaces\GraphicsEngine\GL.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\LogUtilities.h" />

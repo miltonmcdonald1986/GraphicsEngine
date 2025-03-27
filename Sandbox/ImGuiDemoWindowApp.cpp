@@ -4,7 +4,9 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-ImGuiDemoWindowApp::ImGuiDemoWindowApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+using namespace GraphicsEngine;
+
+ImGuiDemoWindowApp::ImGuiDemoWindowApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
 	: App(spWindow, spEngine)
 {
 }
@@ -32,7 +34,7 @@ void ImGuiDemoWindowApp::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GraphicsEngine::GL::ClearColorBuffers();
+        GL::ClearColorBuffers();
 
         ImGui::ShowDemoWindow();
 

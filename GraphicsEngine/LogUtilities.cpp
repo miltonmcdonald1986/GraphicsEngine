@@ -75,25 +75,25 @@ namespace GraphicsEngine::Log::Utilities
 
 		switch (level)
 		{
-		case GraphicsEngine::Log::Utilities::LogLevel::Trace:
+		case Log::Utilities::LogLevel::Trace:
 			logger->set_level(spdlog::level::trace);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Debug:
+		case Log::Utilities::LogLevel::Debug:
 			logger->set_level(spdlog::level::debug);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Info:
+		case Log::Utilities::LogLevel::Info:
 			logger->set_level(spdlog::level::info);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Warn:
+		case Log::Utilities::LogLevel::Warn:
 			logger->set_level(spdlog::level::warn);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Error:
+		case Log::Utilities::LogLevel::Error:
 			logger->set_level(spdlog::level::err);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Critical:
+		case Log::Utilities::LogLevel::Critical:
 			logger->set_level(spdlog::level::critical);
 			break;
-		case GraphicsEngine::Log::Utilities::LogLevel::Off:
+		case Log::Utilities::LogLevel::Off:
 			logger->set_level(spdlog::level::off);
 			break;
 		default:
