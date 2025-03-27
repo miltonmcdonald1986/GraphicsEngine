@@ -6,7 +6,7 @@
 
 #include "GraphicsEngine/Engine.h"
 #include "GraphicsEngine/IndexedPoints.h"
-#include "GraphicsEngine/ShaderUtilities.h"
+#include "GraphicsEngine/Shader.h"
 #include "GraphicsEngine/Log.h"
 
 #include "GLFW/glfw3.h"

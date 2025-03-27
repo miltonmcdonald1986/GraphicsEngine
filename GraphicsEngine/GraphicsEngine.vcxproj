@@ -152,7 +152,7 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\ShaderUtilities.h" />
+    <ClInclude Include="..\Interfaces\GraphicsEngine\Shader.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "GraphicsEngine/GL.h"
-#include "GraphicsEngine/ShaderUtilities.h"
+#include "GraphicsEngine/Shader.h"
 
 #include <fstream>
 
