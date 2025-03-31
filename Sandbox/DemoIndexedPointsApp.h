@@ -1,15 +1,12 @@
 #pragma once
 
-#include "Header.h"
 #include "App.h"
-
-class Widget;
 
 class DemoIndexedPointsApp : public App
 {
 public:
 
-	DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine);
+	DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
 
 	virtual auto Run() -> void override;
 

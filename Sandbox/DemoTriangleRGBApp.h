@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Header.h"
 #include "App.h"
 
 class Widget;
@@ -9,7 +8,7 @@ class DemoTriangleRGBApp : public App
 {
 public:
 
-	DemoTriangleRGBApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine);
+	DemoTriangleRGBApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
 
 	virtual auto Run() -> void override;
 

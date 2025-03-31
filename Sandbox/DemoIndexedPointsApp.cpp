@@ -1,5 +1,13 @@
 #include "DemoIndexedPointsApp.h"
 
+// ALWAYS include GraphicsEngine BEFORE GLFW.
+#include "GraphicsEngine/IndexedPoints.h"
+#include "GraphicsEngine/Shader.h"
+
+#include "GLFW/glfw3.h"
+
+#include "glm/glm.hpp"
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -10,7 +18,7 @@
 
 using namespace GraphicsEngine;
 
-DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
     : App(spWindow, spEngine)
 {
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));

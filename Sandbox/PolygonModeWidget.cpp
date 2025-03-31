@@ -8,7 +8,7 @@
 
 using namespace GraphicsEngine;
 
-PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     GLint param[2];

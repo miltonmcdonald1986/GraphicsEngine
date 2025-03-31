@@ -1,7 +1,11 @@
 #pragma once
 
-#include "Header.h"
 #include "Widget.h"
+
+#include <string>
+#include <vector>
+
+#include "glad/glad.h"
 
 struct Uniform
 {
@@ -12,7 +16,7 @@ struct Uniform
 class ShaderWidget : public Widget
 {
 public:
-    ShaderWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine);
+    ShaderWidget(GLFWwindowSharedPtr, GraphicsEngine::IEngineSharedPtr spEngine);
 
     virtual auto Iterate() -> void override;
 

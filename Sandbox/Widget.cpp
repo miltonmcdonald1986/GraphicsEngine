@@ -1,8 +1,6 @@
 #include "Widget.h"
 
-using namespace GraphicsEngine;
-
-Widget::Widget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+Widget::Widget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine)
 	: m_spWindow(spWindow),
 	  m_spEngine(spEngine)
 {

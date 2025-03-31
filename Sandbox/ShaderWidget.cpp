@@ -1,10 +1,12 @@
 #include "ShaderWidget.h"
 
+#include <algorithm>
+
 #include "Windows.h"
 
 #include "imgui.h"
 
-ShaderWidget::ShaderWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine)
+ShaderWidget::ShaderWidget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine)
 	: Widget(spWindow, spEngine)
 {
 	GLint prog = 0;

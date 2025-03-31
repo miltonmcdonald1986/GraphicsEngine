@@ -3,7 +3,7 @@
 
 using namespace GraphicsEngine;
 
-App::App(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+App::App(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
 	: m_spWindow(spWindow),
 	  m_spEngine(spEngine)
 {

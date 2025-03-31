@@ -1,5 +1,10 @@
 #include "DemoTriangleApp.h"
 
+// ALWAYS include GraphicsEngine BEFORE GLFW.
+#include "GraphicsEngine/Shader.h"
+
+#include "GLFW/glfw3.h"
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -11,7 +16,7 @@
 
 using namespace GraphicsEngine;
 
-DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+DemoTriangleApp::DemoTriangleApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine)
     : App(spWindow, spEngine)
 {
     auto optVertexShader = Shader::CompileVertexShader(std::string("#version 330 core\n"
@@ -49,9 +54,83 @@ DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shar
         }
     }
 
-    GLuint vao = 0;
-    if (auto optVAO = m_spEngine->AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
-        m_VAO = *optVAO;
+    std::vector<float> v = {
+        -0.5f, -0.5f, 0.f,
+         0.5f, -0.5f, 0.f,
+         0.f,   0.5f, 0.f
+        };
+
+    // Example code to get a model matrix (M) from a list of triangle vertices.
+    
+    //glm::mat4 A;
+    //A[0] = glm::vec4(vertices[0], 1.f);
+    //A[1] = glm::vec4(vertices[1], 1.f);
+    //A[2] = glm::vec4(vertices[2], 1.f);
+    //A[3] = glm::vec4(1.f, 1.f, 1.f, 1.f);
+    //auto det = glm::determinant(A);
+
+    //glm::mat4 B;
+    //B[0] = glm::vec4(2.f, 2.f, 0.f, 1.f);
+    //B[1] = glm::vec4(2.f, 3.f, 0.f, 1.f);
+    //B[2] = glm::vec4(3.f, 2.f, 0.f, 1.f);
+    //B[3] = glm::vec4(1.f, 1.f, 1.f, 1.f);
+
+    //auto M = B * glm::inverse(A);
+
+    // Local vertices for every triangle are (-0.5, -0.5, 0), (0.5, -0.5, 0), (0, 0.5, 0)
+    // We build a local coordinate matrix out of these vertices.
+    //glm::mat4 localCoordinates;
+    //localCoordinates[0] = glm::vec4(-0.5f, -0.5f, 0.f, 1.f);
+    //localCoordinates[1] = glm::vec4(0.5f, -0.5f, 0.f, 1.f);
+    //localCoordinates[2] = glm::vec4(0.f, 0.5f, 0.f, 1.f);
+    //localCoordinates[3] = glm::vec4(1.f, 1.f, 1.f, 1.f);
+
+    //auto model = M;
+
+    //auto newPositions = model * localCoordinates;
+
+    //auto transformed = 
+
+    GLuint vao;
+    glGenVertexArrays(1, &vao);
+    if (GL_ERROR())
+        return;
+
+    /*DataStore dataStore =
+    {
+        .m_Target	= GL::BufferBindingTarget::Array,
+        .m_NumBytes = static_cast<signed long long int>(v.size()*sizeof(float)),
+        .m_pData	= v.data(),
+        .m_Usage	= GL::DataUsagePattern::StaticDraw
+    };*/
+
+    //Buffer buffer(dataStore);
+
+    GLuint buffer;
+    glGenBuffers(1, &buffer);
+
+    glBindVertexArray(vao);
+    if (GL_ERROR())
+        return;
+
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), v.data(), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    if (GL_ERROR())
+        return;
+
+    glEnableVertexAttribArray(0);
+    if (GL_ERROR())
+        return;
+
+    m_VAO = vao;
+
+
+    //GLuint vao = 0;
+    //if (auto optVAO = m_spEngine->AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
+        //m_VAO = *optVAO;
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));

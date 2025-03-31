@@ -6,7 +6,7 @@
 
 using namespace GraphicsEngine;
 
-BackgroundColorWidget::BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+BackgroundColorWidget::BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     float backgroundColor[4];

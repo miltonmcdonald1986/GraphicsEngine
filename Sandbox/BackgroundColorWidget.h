@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Header.h"
 #include "Widget.h"
 
 class BackgroundColorWidget : public Widget
 {
 public:
-    BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<GraphicsEngine::Engine> spEngine);
+    BackgroundColorWidget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
 
     virtual auto Iterate() -> void override;
 

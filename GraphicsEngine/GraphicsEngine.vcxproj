@@ -147,15 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\Buffer.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\Engine.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\GL.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
+    <ClInclude Include="..\Interfaces\GraphicsEngine\IEngine.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Shader.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Texture.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\VertexArrayObject.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="StaticAssertions.cpp" />
@@ -167,7 +166,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GL.cpp" />
     <ClCompile Include="IndexedPoints.cpp" />
@@ -181,7 +179,6 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="VertexArrayObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

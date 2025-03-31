@@ -1,9 +1,14 @@
-#include "Header.h"
-
 #include <string>
 
 #include <ShObjIdl_core.h>
 #include <Windows.h>
+
+#include "GraphicsEngine/Shader.h"
+#include "GraphicsEngine/IEngine.h"
+
+#include "GLFW/glfw3.h"
+
+#include "glad/glad.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -86,8 +91,8 @@ std::string OpenFileDialogBox()
 class CompileShaderWidget
 {
 public:
-    CompileShaderWidget(Engine& engine)
-        : m_Engine(engine)
+    CompileShaderWidget(GraphicsEngine::IEngineSharedPtr spEngine)
+        : m_spEngine(spEngine)
     {
         std::fill(m_FilenameVS, m_FilenameVS + MAX_PATH, '\0');
         std::fill(m_FilenameFS, m_FilenameFS + MAX_PATH, '\0');
@@ -161,7 +166,7 @@ public:
     }
 
 private:
-    Engine& m_Engine;
+    GraphicsEngine::IEngineSharedPtr m_spEngine;
     GLuint m_VertexShader = 0;
     GLuint m_FragmentShader = 0;
     GLuint m_Program = 0;
@@ -219,7 +224,7 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(spWindow.get(), true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
     ImGui_ImplOpenGL3_Init();
 
-    std::shared_ptr<Engine> spEngine = std::shared_ptr<Engine>(new Engine());
+    GraphicsEngine::IEngineSharedPtr spEngine = GraphicsEngine::CreateEngine();
     if (!spEngine)
         return -1;
 

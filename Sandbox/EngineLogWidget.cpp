@@ -1,10 +1,12 @@
 #include "EngineLogWidget.h"
 
+#include <format>
+
 #include "imgui.h"
 
 using namespace GraphicsEngine;
 
-EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     auto optLevel = Log::GetLevel();
