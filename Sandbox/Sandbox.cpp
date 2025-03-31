@@ -11,6 +11,7 @@
 
 #include "BackgroundColorWidget.h"
 #include "DemoTriangleApp.h"
+#include "DemoTriangleRGBApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "ImGuiDemoWindowApp.h"
 
@@ -222,7 +223,7 @@ int main(void)
     if (!spEngine)
         return -1;
 
-    GL::ClearColor(0.2f, 0.3f, 0.3f, 1.f);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.f);
 
     // Declare ImGui widgets
     io.Fonts->AddFontFromFileTTF("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF", 18);
@@ -230,7 +231,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(spWindow.get()))
     {       
-        GL::ClearColorBuffers();
+        glClear(GL_COLOR_BUFFER_BIT);
 
         static bool runMainMenu = true;
         static int selectedItem = 0;
@@ -256,14 +257,14 @@ int main(void)
                 // Move the cursor to the calculated center position
                 ImGui::SetCursorPos(centerPos);
 
-                const size_t NUM_ITEMS = 3;
-                static const char* items[NUM_ITEMS] = { "Demo triangle", "Demo indexed points", "Dear ImGui demo window" };
+                const size_t NUM_ITEMS = 4;
+                static const char* items[NUM_ITEMS] = { "Demo triangle", "Demo triangle RGB", "Demo indexed points", "Dear ImGui demo window" };
 
                 ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Graphics Engine Sandbox").x) * 0.5f);
                 ImGui::Text("Graphics Engine Sandbox");
                 ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Please make a selection").x) * 0.5f);
                 ImGui::Text("Please make a selection");
-                ImGui::SetNextWindowSize(ImVec2(400, NUM_ITEMS*ImGui::GetTextLineHeight() + 2*ImGui::GetStyle().ItemSpacing.y + 2*ImGui::GetStyle().FramePadding.y));
+                ImGui::SetNextWindowSize(ImVec2(400, NUM_ITEMS*ImGui::GetTextLineHeight() + 2*ImGui::GetStyle().ItemSpacing.y + 4*ImGui::GetStyle().FramePadding.y));
                 ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 400) * 0.5f);
                 ImGui::ListBox("##Items", &selectedItem, items, IM_ARRAYSIZE(items));
                 float windowWidth = ImGui::GetWindowSize().x;
@@ -293,11 +294,17 @@ int main(void)
 			}
             case 1:
             {
+                DemoTriangleRGBApp app(spWindow, spEngine);
+                app.Run();
+                break;
+            }
+            case 2:
+            {
                 DemoIndexedPointsApp app(spWindow, spEngine);
                 app.Run();
                 break;
             }
-			case 2:
+			case 3:
 			{
 				ImGuiDemoWindowApp app(spWindow, spEngine);
                 app.Run();

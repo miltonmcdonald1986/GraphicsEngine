@@ -171,10 +171,12 @@
     <ClCompile Include="BackgroundColorWidget.cpp" />
     <ClCompile Include="DemoIndexedPointsApp.cpp" />
     <ClCompile Include="DemoTriangleApp.cpp" />
+    <ClCompile Include="DemoTriangleRGBApp.cpp" />
     <ClCompile Include="EngineLogWidget.cpp" />
     <ClCompile Include="ImGuiDemoWindowApp.cpp" />
     <ClCompile Include="PolygonModeWidget.cpp" />
     <ClCompile Include="Sandbox.cpp" />
+    <ClCompile Include="ShaderWidget.cpp" />
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,10 +184,12 @@
     <ClInclude Include="BackgroundColorWidget.h" />
     <ClInclude Include="DemoIndexedPointsApp.h" />
     <ClInclude Include="DemoTriangleApp.h" />
+    <ClInclude Include="DemoTriangleRGBApp.h" />
     <ClInclude Include="EngineLogWidget.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="ImGuiDemoWindowApp.h" />
     <ClInclude Include="PolygonModeWidget.h" />
+    <ClInclude Include="ShaderWidget.h" />
     <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

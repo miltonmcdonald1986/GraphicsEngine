@@ -14,11 +14,11 @@ PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, std::
     GLint param[2];
     glGetIntegerv(GL_POLYGON_MODE, param);
     
-    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Point)
+    if (param[0] == GL_POINT)
         m_Mode = 0;
-    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Line)
+    if (param[0] == GL_LINE)
         m_Mode = 1;
-    if (static_cast<GL::PolygonModeType>(param[0]) == GL::PolygonModeType::Fill)
+    if (param[0] == GL_FILL)
         m_Mode = 2;
 }
 
@@ -26,21 +26,22 @@ void PolygonModeWidget::Iterate()
 {
     auto UpdatePolygonMode = [](int mode)
     {
-        GL::PolygonModeType modeType = GL::PolygonModeType::Fill;
+        int modeGl;
         switch (mode)
         {
         case 0:
-            modeType = GL::PolygonModeType::Point;
+            modeGl = GL_POINT;
             break;
         case 1:
-            modeType = GL::PolygonModeType::Line;
+            modeGl = GL_LINE;
             break;
         case 2:
-            modeType = GL::PolygonModeType::Fill;
+            modeGl = GL_FILL;
             break;
         }
-
-        GL::PolygonMode(modeType);
+        
+        glPolygonMode(GL_FRONT_AND_BACK, static_cast<GLenum>(modeGl));
+        GL_ERROR();
     };
 
     ImGui::Begin("Polygon Mode", nullptr, ImGuiWindowFlags_AlwaysAutoResize);

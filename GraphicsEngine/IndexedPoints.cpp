@@ -20,49 +20,53 @@ namespace GraphicsEngine
 
 		// Generate and bind the vertex array object.
 
-		std::optional<GLuint> optVAO = GL::GenOneVertexArray();
-		if (!optVAO)
+		GLuint vao;
+		glGenVertexArrays(1, &vao);
+		if (GL_ERROR())
 			return std::nullopt;
-
-		GLuint vao = *optVAO;
-
-		if (!GL::BindVertexArray(vao))
+		
+		glBindVertexArray(vao);
+		if (GL_ERROR())
 			return std::nullopt;
 
 		// Generate and bind a buffer for the vertices, and fill it with data.
 
-		std::optional<GLuint> optVBO = GL::GenOneBuffer();
-		if (!optVBO)
+		GLuint vbo;
+		glGenBuffers(1, &vbo);
+		if (GL_ERROR())
 			return std::nullopt;
-
-		GLuint vbo = *optVBO;
-
-		if (!GL::BindArrayBuffer(vbo))
+		
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		if (GL_ERROR())
 			return std::nullopt;
-
-		if (!GL::BufferFloatData(GL::BufferBindingTarget::Array, verticesData, GL::DataUsagePattern::StaticDraw))
+		
+		glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(float), verticesData.data(), GL_STATIC_DRAW);
+		if (GL_ERROR())
 			return std::nullopt;
 
 		// Specify the layout of the only vertex attribute (position), and enable that attribute.
 
-		if (!GL::VertexAttribPointer(0, GL::AttributeSize::Three, GL::DataType::Float, false, 3 * sizeof(float), 0))
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
+		if (GL_ERROR())
 			return std::nullopt;
 
-		if (!GL::EnableVertexAttribArray(0))
+		glEnableVertexAttribArray(0);
+		if (GL_ERROR())
 			return std::nullopt;
 
 		// Generate and bind a buffer for the indices, and fill it with data.
 
-		std::optional<GLuint> optEBO = GL::GenOneBuffer();
-		if (!optEBO)
+		GLuint ebo;
+		glGenBuffers(1, &ebo);
+		if (GL_ERROR())
 			return std::nullopt;
 
-		GLuint ebo = *optEBO;
-
-		if (!GL::BindElementArrayBuffer(ebo))
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		if (GL_ERROR())
 			return std::nullopt;
-
-		if (!GL::BufferUnsignedIntData(GL::BufferBindingTarget::ElementArray, indices, GL::DataUsagePattern::StaticDraw))
+		
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
+		if (GL_ERROR())
 			return std::nullopt;
 
 		return vao;

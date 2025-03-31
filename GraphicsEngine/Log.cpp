@@ -7,6 +7,33 @@
 namespace GraphicsEngine::Log
 {
 	
+	GRAPHICSENGINE_API auto LogMessage(LogLevel level, const char* file, const char* func, int line, const char* message) -> void
+	{
+		auto logger = spdlog::get("Engine");
+
+		switch (level)
+		{
+		case GraphicsEngine::Log::LogLevel::Trace:
+			logger->trace(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		case GraphicsEngine::Log::LogLevel::Debug:
+			logger->debug(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		case GraphicsEngine::Log::LogLevel::Info:
+			logger->info(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		case GraphicsEngine::Log::LogLevel::Warn:
+			logger->warn(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		case GraphicsEngine::Log::LogLevel::Error:
+			logger->error(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		case GraphicsEngine::Log::LogLevel::Critical:
+			logger->critical(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+			break;
+		}
+	}
+
 	auto SetMaxNumItems(size_t maxNumItems) -> bool
 	{
 		auto logger = spdlog::get("Engine");

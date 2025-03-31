@@ -34,7 +34,7 @@ void ImGuiDemoWindowApp::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GL::ClearColorBuffers();
+        glClear(GL_COLOR_BUFFER_BIT);
 
         ImGui::ShowDemoWindow();
 

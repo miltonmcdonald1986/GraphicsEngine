@@ -1,4 +1,4 @@
-#include "DemoTriangleApp.h"
+#include "DemoTriangleRGBApp.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -11,24 +11,32 @@
 
 using namespace GraphicsEngine;
 
-DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
+DemoTriangleRGBApp::DemoTriangleRGBApp(std::shared_ptr<GLFWwindow> spWindow, std::shared_ptr<Engine> spEngine)
     : App(spWindow, spEngine)
 {
     auto optVertexShader = Shader::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
+        "layout(location = 1) in vec3 aColor;\n"
+
+        "out vec3 ourColor;\n"
+
         "void main()\n"
         "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "   gl_Position = vec4(aPos, 1.0);\n"
+        "   ourColor = aColor;\n"
         "}\0"));
+
     auto optFragmentShader = Shader::CompileFragmentShader(std::string("#version 330 core\n"
         "out vec4 FragColor;\n"
 
-        "uniform vec4 ourColor;\n"
+        "in vec3 ourColor;\n"
+
+        "uniform vec4 colorStrength;\n"
 
         "void main()\n"
         "{\n"
-            "FragColor = ourColor;\n"
-        "}\n"));
+        "FragColor = vec4(ourColor.x*colorStrength.x, ourColor.y*colorStrength.y, ourColor.z*colorStrength.z, 1.0*colorStrength.a);\n"
+        "}\0"));
 
     if (optVertexShader && optFragmentShader)
     {
@@ -37,21 +45,92 @@ DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shar
         {
             glUseProgram(*optShaderProgram);
 
-            GLint res = glGetUniformLocation(*optShaderProgram, "ourColor");
+            GLint res = glGetUniformLocation(*optShaderProgram, "colorStrength");
             if (GL_ERROR())
                 return;
 
             if (res == -1)
                 return;
-            
-            glUniform4f(res, 1.f, 0.5f, 0.2f, 1.f);
+
+            glUniform4f(res, 1.f, 1.f, 1.f, 1.f);
             GL_ERROR();
         }
     }
 
-    GLuint vao = 0;
-    if (auto optVAO = m_spEngine->AddTriangle({ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec3(0.5f, -0.5f, 0.f) , glm::vec3(0.f, 0.5f, 0.f) }); optVAO)
-        m_VAO = *optVAO;
+    glGenVertexArrays(1, &m_VAO);
+    if (GL_ERROR())
+        return;
+
+    glBindVertexArray(m_VAO);
+    if (GL_ERROR())
+        return;
+
+    std::vector<GLuint> buffers(2);
+    glGenBuffers(2, buffers.data());
+    if (GL_ERROR())
+        return;
+
+    glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+    if (GL_ERROR())
+        return;
+
+
+    //GraphicsEngine::VertexArrayObject vao;
+    //m_VAO = vao.GetId();
+
+    std::vector<float> vertices =
+    {
+        0.5f, -0.5f, 0.0f,
+       -0.5f, -0.5f, 0.0f,
+        0.0f,  0.5f, 0.0f
+    };
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9, vertices.data(), GL_STATIC_DRAW);
+    if (GL_ERROR())
+        return;
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    if (GL_ERROR())
+        return;
+
+    glEnableVertexAttribArray(0);
+
+    //GraphicsEngine::DataStore verticesDataStore;
+    //verticesDataStore.m_NumBytes = static_cast<signed long long int>(vertices.size() * sizeof(float));
+    //verticesDataStore.m_pData = vertices.data();
+
+    //GraphicsEngine::Buffer verticesBuffer(verticesDataStore);
+
+    //vao.DefineVertexAttribute(0, verticesBuffer);
+
+    glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+    if (GL_ERROR())
+        return;
+
+    std::vector<float> vertexRGBs =
+    {
+        1.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f
+    };
+
+    //GraphicsEngine::DataStore vertexRGBsDataStore;
+    //vertexRGBsDataStore.m_NumBytes = static_cast<signed long long int>(vertexRGBs.size() * sizeof(float));
+    //vertexRGBsDataStore.m_pData = vertexRGBs.data();
+
+    //GraphicsEngine::Buffer vertexRGBsBuffer(vertexRGBsDataStore);
+
+    //vao.DefineVertexAttribute(1, vertexRGBsBuffer);
+
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertexRGBs.data(), GL_STATIC_DRAW);
+    if (GL_ERROR())
+        return;
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    if (GL_ERROR())
+        return;
+
+    glEnableVertexAttribArray(1);
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
@@ -59,7 +138,7 @@ DemoTriangleApp::DemoTriangleApp(std::shared_ptr<GLFWwindow> spWindow, std::shar
     m_Widgets.push_back(std::unique_ptr<ShaderWidget>(new ShaderWidget(spWindow, spEngine)));
 }
 
-auto DemoTriangleApp::Run() -> void
+auto DemoTriangleRGBApp::Run() -> void
 {
     bool keepGoing = true;
 
@@ -105,7 +184,7 @@ auto DemoTriangleApp::Run() -> void
     glfwSetKeyCallback(m_spWindow.get(), nullptr);
 }
 
-void DemoTriangleApp::Render() const
+void DemoTriangleRGBApp::Render() const
 {
     if (m_VAO == 0)
         return;

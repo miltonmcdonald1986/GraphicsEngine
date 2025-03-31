@@ -20,6 +20,8 @@ namespace GraphicsEngine::Log
 		Off
 	};
 
+	GRAPHICSENGINE_API auto LogMessage(LogLevel level, const char* file, const char* func, int line, const char* message) -> void;
+
 	/// <summary>
 	/// The engine log contains a ringbuffer sink that contains
 	/// up to a specified number of messages in memory. We can
@@ -49,3 +51,6 @@ namespace GraphicsEngine::Log
 	GRAPHICSENGINE_API auto SetLevel(LogLevel level) -> bool;
 
 }
+
+#define LOG_ERROR(msg)		GraphicsEngine::Log::LogMessage(GraphicsEngine::Log::LogLevel::Error,	__FILE__, __func__, __LINE__, msg)
+#define LOG_WARNING(msg)	GraphicsEngine::Log::LogMessage(GraphicsEngine::Log::LogLevel::Warning,	__FILE__, __func__, __LINE__, msg)

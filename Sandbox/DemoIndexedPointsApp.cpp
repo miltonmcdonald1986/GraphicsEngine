@@ -77,7 +77,7 @@ auto DemoIndexedPointsApp::Run() -> void
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        GL::ClearColorBuffers();
+        glClear(GL_COLOR_BUFFER_BIT);           
 
         Render();
 
@@ -104,8 +104,10 @@ void DemoIndexedPointsApp::Render() const
     if (m_VAO == 0)
         return;
 
-    if (!GL::BindVertexArray(m_VAO))
+    glBindVertexArray(m_VAO);
+    if (GL_ERROR())
         return;
 
-    GL::DrawElements(GL::DrawMode::Triangles, m_Indices.size(), GL::IndexType::UnsignedInt, 0);
+    glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, (void*)0);
+    GL_ERROR();
 }
