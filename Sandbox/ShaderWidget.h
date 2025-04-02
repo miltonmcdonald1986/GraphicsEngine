@@ -2,16 +2,11 @@
 
 #include "Widget.h"
 
+#include "GraphicsEngine/fwd.h"
+#include "GraphicsEngine/GL.h"
+
 #include <string>
 #include <vector>
-
-#include "glad/glad.h"
-
-struct Uniform
-{
-	GLenum type = 0;
-	std::string name;
-};
 
 class ShaderWidget : public Widget
 {
@@ -21,5 +16,5 @@ public:
     virtual auto Iterate() -> void override;
 
 private:
-	std::vector<Uniform> m_Uniforms;
+	std::vector<GraphicsEngine::GL::Uniform> m_Uniforms;
 };

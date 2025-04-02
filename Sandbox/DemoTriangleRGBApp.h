@@ -8,13 +8,7 @@ class DemoTriangleRGBApp : public App
 {
 public:
 
-	DemoTriangleRGBApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+	DemoTriangleRGBApp(GLFWwindowSharedPtr spWindow);
 
 	virtual auto Run() -> void override;
-
-private:
-
-	void Render() const;
-
-	unsigned int m_VAO = 0;
 };

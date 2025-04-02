@@ -18,6 +18,9 @@ auto EngineLogWidget::Iterate() -> void
 {
     bool update = false;
 
+    auto windowSize = ImGui::GetIO().DisplaySize;
+    ImGui::SetNextWindowSize(ImVec2(windowSize.x, 0.25f*windowSize.y), ImGuiCond_Once);
+    ImGui::SetNextWindowPos(ImVec2(0, 0.75f*windowSize.y), ImGuiCond_Once);
     ImGui::Begin("Graphics Engine Log");
     ImGui::Text("Log Level");
     if (ImGui::RadioButton("Trace", &m_LogLevel, 0))

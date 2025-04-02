@@ -1,11 +1,12 @@
 #include "App.h"
+
+#include "GraphicsEngine/IEngine.h"
+
 #include "Widget.h"
 
-using namespace GraphicsEngine;
-
-App::App(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
+App::App(std::shared_ptr<GLFWwindow> spWindow)
 	: m_spWindow(spWindow),
-	  m_spEngine(spEngine)
+	  m_spEngine(GraphicsEngine::CreateEngine())
 {
 }
 

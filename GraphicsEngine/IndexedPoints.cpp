@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "GraphicsEngine/IndexedPoints.h"
 
-#include <iterator>
-
 #include "GraphicsEngine/GL.h"
 
 namespace GraphicsEngine
@@ -21,53 +19,27 @@ namespace GraphicsEngine
 		// Generate and bind the vertex array object.
 
 		GLuint vao;
-		glGenVertexArrays(1, &vao);
-		if (GL_ERROR())
-			return std::nullopt;
-		
-		glBindVertexArray(vao);
-		if (GL_ERROR())
-			return std::nullopt;
+		GL::GenVertexArrays(1, &vao);
+		GL::BindVertexArray(vao);
 
 		// Generate and bind a buffer for the vertices, and fill it with data.
 
 		GLuint vbo;
 		glGenBuffers(1, &vbo);
-		if (GL_ERROR())
-			return std::nullopt;
-		
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		if (GL_ERROR())
-			return std::nullopt;
-		
-		glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(float), verticesData.data(), GL_STATIC_DRAW);
-		if (GL_ERROR())
-			return std::nullopt;
+		GL::BindBuffer(GL_ARRAY_BUFFER, vbo);
+		GL::BufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(float), verticesData.data(), GL_STATIC_DRAW);
 
 		// Specify the layout of the only vertex attribute (position), and enable that attribute.
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
-		if (GL_ERROR())
-			return std::nullopt;
-
 		glEnableVertexAttribArray(0);
-		if (GL_ERROR())
-			return std::nullopt;
-
+		
 		// Generate and bind a buffer for the indices, and fill it with data.
 
 		GLuint ebo;
 		glGenBuffers(1, &ebo);
-		if (GL_ERROR())
-			return std::nullopt;
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		if (GL_ERROR())
-			return std::nullopt;
-		
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
-		if (GL_ERROR())
-			return std::nullopt;
+		GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
 		return vao;
 	}

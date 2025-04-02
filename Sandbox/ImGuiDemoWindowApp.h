@@ -6,7 +6,7 @@ class ImGuiDemoWindowApp : public App
 {
 public:
 
-	ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+	ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow);
 
 	virtual auto Run() -> void override;
 

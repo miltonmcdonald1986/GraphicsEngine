@@ -25,7 +25,7 @@ class App
 {
 public:
 
-	App(std::shared_ptr<GLFWwindow> spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+	App(std::shared_ptr<GLFWwindow> spWindow);
 	virtual ~App();
 
 	virtual auto Run() -> void = 0;

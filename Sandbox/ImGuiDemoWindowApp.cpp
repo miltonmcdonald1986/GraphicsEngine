@@ -1,5 +1,7 @@
 #include "ImGuiDemoWindowApp.h"
 
+#include "GraphicsEngine/GL.h"
+
 #include "GLFW/glfw3.h"
 
 #include "imgui.h"
@@ -8,8 +10,8 @@
 
 using namespace GraphicsEngine;
 
-ImGuiDemoWindowApp::ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine)
-	: App(spWindow, spEngine)
+ImGuiDemoWindowApp::ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow)
+	: App(spWindow)
 {
 }
 

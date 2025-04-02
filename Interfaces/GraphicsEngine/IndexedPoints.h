@@ -1,12 +1,10 @@
 #pragma once
 
 #include <optional>
-#include <vector>
 
-#include "glad/glad.h"
+#include "glm/fwd.hpp"
 
-#include "glm/vec3.hpp"
-
+#include "GraphicsEngine/fwd.h"
 #include "GraphicsEngine/GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine

@@ -1,14 +1,11 @@
 #include <string>
 
 #include <ShObjIdl_core.h>
-#include <Windows.h>
 
 #include "GraphicsEngine/Shader.h"
 #include "GraphicsEngine/IEngine.h"
 
 #include "GLFW/glfw3.h"
-
-#include "glad/glad.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -211,7 +208,7 @@ int main(void)
 
     glfwSwapInterval(1);
 
-    gladLoadGL();
+    // gladLoadGL();
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -224,20 +221,12 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(spWindow.get(), true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
     ImGui_ImplOpenGL3_Init();
 
-    GraphicsEngine::IEngineSharedPtr spEngine = GraphicsEngine::CreateEngine();
-    if (!spEngine)
-        return -1;
-
-    glClearColor(0.2f, 0.3f, 0.3f, 1.f);
-
     // Declare ImGui widgets
     io.Fonts->AddFontFromFileTTF("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF", 18);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(spWindow.get()))
     {       
-        glClear(GL_COLOR_BUFFER_BIT);
-
         static bool runMainMenu = true;
         static int selectedItem = 0;
         if (runMainMenu)
@@ -293,25 +282,25 @@ int main(void)
 			{
 			case 0:
 			{
-				DemoTriangleApp app(spWindow, spEngine);
+				DemoTriangleApp app(spWindow);
 				app.Run();
 				break;
 			}
             case 1:
             {
-                DemoTriangleRGBApp app(spWindow, spEngine);
+                DemoTriangleRGBApp app(spWindow);
                 app.Run();
                 break;
             }
             case 2:
             {
-                DemoIndexedPointsApp app(spWindow, spEngine);
+                DemoIndexedPointsApp app(spWindow);
                 app.Run();
                 break;
             }
 			case 3:
 			{
-				ImGuiDemoWindowApp app(spWindow, spEngine);
+				ImGuiDemoWindowApp app(spWindow);
                 app.Run();
 				break;
 			}

@@ -1,11 +1,8 @@
 #pragma once
 
 #include <filesystem>
-#include <optional>
 
-#include "glad/glad.h"
-
-#include "GL.h"
+#include "GraphicsEngine/fwd.h"
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine::Shader

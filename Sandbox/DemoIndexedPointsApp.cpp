@@ -1,6 +1,7 @@
 #include "DemoIndexedPointsApp.h"
 
 // ALWAYS include GraphicsEngine BEFORE GLFW.
+#include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/IndexedPoints.h"
 #include "GraphicsEngine/Shader.h"
 
@@ -18,13 +19,9 @@
 
 using namespace GraphicsEngine;
 
-DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
-    : App(spWindow, spEngine)
+DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow)
+    : App(spWindow)
 {
-    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, spEngine)));
-    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, spEngine)));
-    m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, spEngine)));
-
     auto optVertexShader = Shader::CompileVertexShader(std::string("#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
@@ -42,7 +39,9 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
     {
         auto optShaderProgram = Shader::LinkProgram({ *optVertexShader, *optFragmentShader });
         if (optShaderProgram)
-            glUseProgram(*optShaderProgram);
+        {
+            GraphicsEngine::GL::UseProgram(*optShaderProgram);
+        }
     }
 
     std::vector<glm::vec3> vertices = {
@@ -59,6 +58,10 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow,
 
     if (auto optVAO = AddIndexedPoints(vertices, m_Indices); optVAO)
         m_VAO = *optVAO;
+
+    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, m_spEngine)));
 }
 
 auto DemoIndexedPointsApp::Run() -> void
@@ -112,10 +115,7 @@ void DemoIndexedPointsApp::Render() const
     if (m_VAO == 0)
         return;
 
-    glBindVertexArray(m_VAO);
-    if (GL_ERROR())
-        return;
+    GraphicsEngine::GL::BindVertexArray(m_VAO);
 
-    glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, (void*)0);
-    GL_ERROR();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_Indices.size()), GL_UNSIGNED_INT, (void*)0);
 }

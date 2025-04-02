@@ -1,13 +1,5 @@
 #pragma once
 
-#include <filesystem>
-#include <map>
-#include <optional>
-
-#include "glad/glad.h"
-
-#include "stb-master/stb_image.h"
-
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine::Texture
@@ -76,13 +68,29 @@ namespace GraphicsEngine::Texture
 
         GLuint texture;
         glGenTextures(1, &texture);
+        if (GL_ERROR())
+            return std::nullopt;
+
         glBindTexture(GL_TEXTURE_2D, texture);
+        if (GL_ERROR())
+            return std::nullopt;
 
         // set the texture wrapping/filtering options (on the currently bound texture object)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, WrapOptionToGLint.at(wrapS));
+        if (GL_ERROR())
+            return std::nullopt;
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, WrapOptionToGLint.at(wrapT));
+        if (GL_ERROR())
+            return std::nullopt;
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, MinifyingOptionToGLint.at(filterMin));
+        if (GL_ERROR())
+            return std::nullopt;
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, MagnifyingOptionToGLint.at(filterMag));
+        if (GL_ERROR())
+            return std::nullopt;
         
         // load and generate the texture
         int width, height, nrChannels;
@@ -93,7 +101,12 @@ namespace GraphicsEngine::Texture
         {
             success = true;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            if (GL_ERROR())
+                return std::nullopt;
+
             glGenerateMipmap(GL_TEXTURE_2D);
+            if (GL_ERROR())
+                return std::nullopt;
         }
         
         stbi_image_free(data);

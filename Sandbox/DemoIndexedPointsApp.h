@@ -6,7 +6,7 @@ class DemoIndexedPointsApp : public App
 {
 public:
 
-	DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+	DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow);
 
 	virtual auto Run() -> void override;
 

@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "GraphicsEngine/Log.h"
 
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/ringbuffer_sink.h"
-
 namespace GraphicsEngine::Log
 {
 	
