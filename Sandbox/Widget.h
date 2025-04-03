@@ -2,31 +2,20 @@
 
 #include <memory>
 
-#pragma region Forward declarations
-
-struct GLFWwindow;
-using GLFWwindowSharedPtr = std::shared_ptr<GLFWwindow>;
-
-namespace GraphicsEngine
-{
-	class IEngine;
-	using IEngineSharedPtr = std::shared_ptr<IEngine>;
-}
-
-#pragma endregion
+#include "fwd.h"
 
 class Widget
 {
 public:
 
-	Widget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+	Widget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine);
 
 	virtual auto Iterate() -> void = 0;
 
 protected:
 
 	GLFWwindowSharedPtr m_spWindow;
-	GraphicsEngine::IEngineSharedPtr m_spEngine;
+	GEengineSharedPtr m_spEngine;
 
 };
 

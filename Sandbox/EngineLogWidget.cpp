@@ -6,7 +6,7 @@
 
 using namespace GraphicsEngine;
 
-EngineLogWidget::EngineLogWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
+EngineLogWidget::EngineLogWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     auto optLevel = Log::GetLevel();

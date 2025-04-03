@@ -11,7 +11,7 @@
 class ShaderWidget : public Widget
 {
 public:
-    ShaderWidget(GLFWwindowSharedPtr, GraphicsEngine::IEngineSharedPtr spEngine);
+    ShaderWidget(GLFWwindowSharedPtr, GEengineSharedPtr spEngine);
 
     virtual auto Iterate() -> void override;
 

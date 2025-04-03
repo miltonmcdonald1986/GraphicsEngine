@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Engine.h"
 
+#include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/EntityType.h"
 
@@ -13,6 +14,26 @@ const std::string NamedVAOTriangleRGB = "Triangle RGB";
 // Shader names
 const std::string NamedShaderTriangleBasic = "Triangle Basic";
 const std::string NamedShaderTriangleRGB = "Triangle RGB";
+
+GEengine* geCreateGraphicsEngine()
+{
+	return new GEengine();
+}
+
+void geDestroyGraphicsEngine(GEengine* pEngine)
+{
+	delete pEngine;
+}
+
+unsigned int geGenerateEntity(GEengine* pEngine, GEentityType type)
+{
+	return pEngine->GenerateEntity(type);
+}
+
+void geRender(GEengine* pEngine)
+{
+	pEngine->Render();
+}
 
 namespace
 {
@@ -180,38 +201,38 @@ namespace
 
 }
 
-namespace GraphicsEngine
-{
+//namespace GraphicsEngine
+//{
 
-	Engine::Engine()
+	GEengine::GEengine()
 	{
 		InitializeLogging();
 		InitializeOpenGL();
 		InitializeVAOs();
 		InitializeShaders();
 
-		GL::ClearColor(0.f, 0.f, 0.f, 1.f);
-		GL::ClearColorBuffer();
+		GraphicsEngine::GL::ClearColor(0.f, 0.f, 0.f, 1.f);
+		GraphicsEngine::GL::ClearColorBuffer();
 	}
 
-	Engine::~Engine()
+	GEengine::~GEengine()
 	{
 		spdlog::drop_all();
 	}
 
-	auto Engine::GenerateEntity(EntityType type) -> unsigned int
+	auto GEengine::GenerateEntity(GEentityType type) -> unsigned int
 	{
-		Entity entity;
+		GraphicsEngine::Entity entity;
 		entity.m_Type = type;
 		entity.m_Id = NextAvailableEntityId();
 		
 		switch (type)
 		{
-		case GraphicsEngine::EntityType::TriangleBasic:
+		case GE_ENTITY_TYPE_TRIANGLE_BASIC:
 			entity.m_Shader = m_Shaders[NamedShaderTriangleBasic];
 			entity.m_VAO = m_VAOs[NamedVAOTriangleBasic];
 			break;
-		case GraphicsEngine::EntityType::TriangleRGB:
+		case GE_ENTITY_TYPE_TRIANGLE_RGB:
 			entity.m_Shader = m_Shaders[NamedShaderTriangleRGB];
 			entity.m_VAO = m_VAOs[NamedVAOTriangleRGB];
 			break;
@@ -225,18 +246,18 @@ namespace GraphicsEngine
 		return entity.m_Id;
 	}
 
-	auto Engine::Render() const -> void
+	auto GEengine::Render() const -> void
 	{
-		GL::ClearColorBuffer();
+		GraphicsEngine::GL::ClearColorBuffer();
 		
 		for (const auto& entity : m_Entities)
 		{
-			GL::UseProgram(entity.m_Shader);
-			GL::BindVertexArray(entity.m_VAO);
+			GraphicsEngine::GL::UseProgram(entity.m_Shader);
+			GraphicsEngine::GL::BindVertexArray(entity.m_VAO);
 			switch (entity.m_Type)
 			{
-			case GraphicsEngine::EntityType::TriangleBasic:
-			case GraphicsEngine::EntityType::TriangleRGB:
+			case GE_ENTITY_TYPE_TRIANGLE_BASIC:
+			case GE_ENTITY_TYPE_TRIANGLE_RGB:
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 				break;
 			default:
@@ -246,15 +267,15 @@ namespace GraphicsEngine
 		}
 	}
 
-	Engine::operator bool() const
+	GEengine::operator bool() const
 	{
 		return m_Initialized;
 	}
 
-	auto Engine::InitializeVAOs() -> bool
+	auto GEengine::InitializeVAOs() -> bool
 	{
 		std::vector<GLuint> vaos(2);
-		GL::GenVertexArrays(2, vaos.data());
+		GraphicsEngine::GL::GenVertexArrays(2, vaos.data());
 
 		m_VAOs[NamedVAOTriangleBasic] = vaos[0];
 		m_VAOs[NamedVAOTriangleRGB] = vaos[1];
@@ -268,10 +289,10 @@ namespace GraphicsEngine
 		return true;
 	}
 
-	auto Engine::InitializeShaders() -> bool
+	auto GEengine::InitializeShaders() -> bool
 	{
-		m_Shaders[NamedShaderTriangleBasic] = GL::CreateProgram();
-		m_Shaders[NamedShaderTriangleRGB] = GL::CreateProgram();
+		m_Shaders[NamedShaderTriangleBasic] = GraphicsEngine::GL::CreateProgram();
+		m_Shaders[NamedShaderTriangleRGB] = GraphicsEngine::GL::CreateProgram();
 		
 		if (!InitializeShaderTriangleBasic(m_Shaders[NamedShaderTriangleBasic]))
 			return false;
@@ -282,7 +303,7 @@ namespace GraphicsEngine
 		return true;
 	}
 
-	auto Engine::InitializeLogging() -> bool
+	auto GEengine::InitializeLogging() -> bool
 	{
 		std::vector<spdlog::sink_ptr> sinks;
 
@@ -314,16 +335,16 @@ namespace GraphicsEngine
 		return true;
 	}
 
-	auto Engine::InitializeOpenGL() -> bool
+	auto GEengine::InitializeOpenGL() -> bool
 	{
 		return (gladLoadGL() != 0);
 	}
 
-	auto Engine::NextAvailableEntityId() const -> unsigned int
+	auto GEengine::NextAvailableEntityId() const -> unsigned int
 	{
 		unsigned int id = 1;
 
-		auto EntityHasId = [&id](const Entity entity)
+		auto EntityHasId = [&id](const GraphicsEngine::Entity entity)
 			{
 				return entity.m_Id == id;
 			};
@@ -336,9 +357,9 @@ namespace GraphicsEngine
 		return id;
 	}
 
-	auto CreateEngine() -> IEngineSharedPtr
-	{
-		return IEngineSharedPtr(new Engine());
-	}
+	//auto CreateEngine() -> IEngineSharedPtr
+	//{
+	//	return IEngineSharedPtr(new Engine());
+	//}
 
-}
+//}

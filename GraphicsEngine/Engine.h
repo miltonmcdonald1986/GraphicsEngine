@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/EntityType.h"
 
 #include <set>
 
@@ -24,35 +25,30 @@ namespace spdlog
 
 using LoggerSharedPtr = std::shared_ptr<spdlog::logger>;
 
-namespace GraphicsEngine
+struct GEengine/* : public IEngine*/
 {
+public:
 
-	class Engine : public IEngine
-	{
-	public:
+	GEengine();
 
-		Engine();
+	~GEengine();
 
-		virtual ~Engine() override;
+	auto GenerateEntity(GEentityType type) -> unsigned int;
+	auto Render() const -> void;
 
-		virtual auto GenerateEntity(EntityType type) -> unsigned int override;
-		virtual auto Render() const -> void override;
+	operator bool() const;
 
-		operator bool() const;
+private:
 
-	private:
+	auto InitializeVAOs() -> bool;
+	auto InitializeShaders() -> bool;
+	auto InitializeLogging() -> bool;
+	auto InitializeOpenGL() -> bool;
+	auto NextAvailableEntityId() const -> unsigned int;
 
-		auto InitializeVAOs() -> bool;
-		auto InitializeShaders() -> bool;
-		auto InitializeLogging() -> bool;
-		auto InitializeOpenGL() -> bool;
-		auto NextAvailableEntityId() const -> unsigned int;
-
-		bool m_Initialized = false;
-		std::map<std::string, GLuint> m_VAOs;
-		std::map<std::string, GLuint> m_Shaders;
-		LoggerSharedPtr m_spLogger = nullptr;
-		std::set<Entity> m_Entities;
-	};
-
-}
+	bool m_Initialized = false;
+	std::map<std::string, GLuint> m_VAOs;
+	std::map<std::string, GLuint> m_Shaders;
+	LoggerSharedPtr m_spLogger = nullptr;
+	std::set<GraphicsEngine::Entity> m_Entities;
+};

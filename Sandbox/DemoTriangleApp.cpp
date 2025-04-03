@@ -39,7 +39,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindowSharedPtr spWindow)
     glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
 
     // Create a triangle.
-    m_spEngine->GenerateEntity(GraphicsEngine::EntityType::TriangleBasic);
+    geGenerateEntity(m_spEngine.get(), GE_ENTITY_TYPE_TRIANGLE_BASIC);
 
     // Add an engine log widget.
     m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, m_spEngine)));
@@ -61,7 +61,7 @@ auto DemoTriangleApp::Run() -> void
         ImGui::NewFrame();
 
         // Render the graphics engine
-        m_spEngine->Render();
+        geRender(m_spEngine.get());
 
         // Make the imgui widgets do their thing.
         IterateWidgets();

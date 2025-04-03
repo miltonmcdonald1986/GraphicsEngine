@@ -116,5 +116,8 @@
     <ClInclude Include="DemoTriangleRGBApp.h">
       <Filter>Header Files\Apps</Filter>
     </ClInclude>
+    <ClInclude Include="fwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

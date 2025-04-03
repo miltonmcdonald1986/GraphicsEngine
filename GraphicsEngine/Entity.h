@@ -1,13 +1,13 @@
 #pragma once
 
-enum class EntityType;
+enum GEentityType;
 
 namespace GraphicsEngine
 {
 
 	struct Entity
 	{
-		EntityType m_Type;
+		GEentityType m_Type;
 		unsigned int m_Id;
 		unsigned int m_Shader;
 		unsigned int m_VAO;

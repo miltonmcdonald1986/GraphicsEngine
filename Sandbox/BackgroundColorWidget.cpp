@@ -8,7 +8,7 @@
 
 using namespace GraphicsEngine;
 
-BackgroundColorWidget::BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
+BackgroundColorWidget::BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, GEengineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     glm::vec4 backgroundColor = GraphicsEngine::GL::GetColorClearValue();

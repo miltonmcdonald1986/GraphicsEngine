@@ -21,7 +21,7 @@ using namespace GraphicsEngine;
 DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindowSharedPtr spWindow)
     : App(spWindow)
 {
-    m_spEngine->GenerateEntity(EntityType::TriangleRGB);
+    geGenerateEntity(m_spEngine.get(), GE_ENTITY_TYPE_TRIANGLE_RGB);
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
@@ -53,7 +53,7 @@ auto DemoTriangleRGBApp::Run() -> void
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        m_spEngine->Render();
+        geRender(m_spEngine.get());
 
         IterateWidgets();
 

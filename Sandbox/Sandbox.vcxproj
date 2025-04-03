@@ -116,6 +116,7 @@
     <ClInclude Include="DemoTriangleApp.h" />
     <ClInclude Include="DemoTriangleRGBApp.h" />
     <ClInclude Include="EngineLogWidget.h" />
+    <ClInclude Include="fwd.h" />
     <ClInclude Include="ImGuiDemoWindowApp.h" />
     <ClInclude Include="PolygonModeWidget.h" />
     <ClInclude Include="ShaderWidget.h" />

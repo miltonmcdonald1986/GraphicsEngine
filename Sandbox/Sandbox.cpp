@@ -89,7 +89,7 @@ std::string OpenFileDialogBox()
 class CompileShaderWidget
 {
 public:
-    CompileShaderWidget(GraphicsEngine::IEngineSharedPtr spEngine)
+    CompileShaderWidget(GEengineSharedPtr spEngine)
         : m_spEngine(spEngine)
     {
         std::fill(m_FilenameVS, m_FilenameVS + MAX_PATH, '\0');
@@ -164,7 +164,7 @@ public:
     }
 
 private:
-    GraphicsEngine::IEngineSharedPtr m_spEngine;
+    GEengineSharedPtr m_spEngine;
     GLuint m_VertexShader = 0;
     GLuint m_FragmentShader = 0;
     GLuint m_Program = 0;

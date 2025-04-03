@@ -1,21 +1,27 @@
-#pragma once
+#ifndef GRAPHICS_ENGINE_H
+#define GRAPHICS_ENGINE_H
 
 #include "GraphicsEngineImpExp.h"
 
-namespace GraphicsEngine
-{
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-	enum class EntityType;
-
-	class IEngine
+	enum GEentityType
 	{
-	public:
-		virtual ~IEngine() = default;
-		virtual auto GenerateEntity(EntityType type) -> unsigned int = 0;
-		virtual auto Render() const -> void = 0;
+		GE_ENTITY_TYPE_TRIANGLE_BASIC,
+		GE_ENTITY_TYPE_TRIANGLE_RGB
 	};
 
-	using IEngineSharedPtr = std::shared_ptr<IEngine>;
-	auto GRAPHICSENGINE_API CreateEngine() -> IEngineSharedPtr;
+	typedef struct GEengine GEengine;
 
+	GRAPHICSENGINE_API GEengine*	geCreateGraphicsEngine();
+	GRAPHICSENGINE_API void			geDestroyGraphicsEngine(GEengine* pEngine);
+	GRAPHICSENGINE_API unsigned int	geGenerateEntity(GEengine* pEngine, GEentityType type);
+	GRAPHICSENGINE_API void			geRender(GEengine* pEngine);
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif // GRAPHICS_ENGINE_H

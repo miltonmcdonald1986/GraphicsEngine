@@ -8,7 +8,7 @@ class EngineLogWidget : public Widget
 {
 public:
 
-    EngineLogWidget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine);
+    EngineLogWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine);
 
     virtual auto Iterate() -> void override;
 

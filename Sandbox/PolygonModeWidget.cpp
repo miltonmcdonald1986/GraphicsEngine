@@ -6,7 +6,7 @@
 
 using namespace GraphicsEngine;
 
-PolygonModeWidget::PolygonModeWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
+PolygonModeWidget::PolygonModeWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
     switch (GraphicsEngine::GL::GetPolygonMode())

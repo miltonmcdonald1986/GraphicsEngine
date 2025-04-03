@@ -6,11 +6,13 @@
 
 App::App(std::shared_ptr<GLFWwindow> spWindow)
 	: m_spWindow(spWindow),
-	  m_spEngine(GraphicsEngine::CreateEngine())
+	  m_spEngine(std::shared_ptr<GEengine>(geCreateGraphicsEngine(), [](GEengine* pEngine) { geDestroyGraphicsEngine(pEngine); }))
 {
 }
 
-App::~App() = default;
+App::~App()
+{
+}
 
 auto App::IterateWidgets() -> void
 {

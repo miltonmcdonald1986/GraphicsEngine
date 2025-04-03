@@ -7,7 +7,7 @@
 
 #include "GraphicsEngine/GL.h"
 
-ShaderWidget::ShaderWidget(GLFWwindowSharedPtr spWindow, GraphicsEngine::IEngineSharedPtr spEngine)
+ShaderWidget::ShaderWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
 	: Widget(spWindow, spEngine)
 {
 	auto prog = GraphicsEngine::GL::GetCurrentProgram();
