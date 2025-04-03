@@ -2,8 +2,8 @@
 
 #include "Widget.h"
 
-#include "GraphicsEngine/fwd.h"
 #include "GraphicsEngine/GL.h"
+#include "GraphicsEngine/Uniform.h"
 
 #include <string>
 #include <vector>
@@ -16,5 +16,5 @@ public:
     virtual auto Iterate() -> void override;
 
 private:
-	std::vector<GraphicsEngine::GL::Uniform> m_Uniforms;
+	std::vector<GraphicsEngine::Uniform> m_Uniforms;
 };

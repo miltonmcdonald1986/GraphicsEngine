@@ -22,7 +22,20 @@ namespace
 		std::vector<GLuint> shaders;
 		for (auto [shaderType, source] : shaderMap)
 		{
-			auto shader = GraphicsEngine::GL::CreateShader(shaderType);
+			GLuint shader = 0;
+			switch (shaderType)
+			{
+			case GL_FRAGMENT_SHADER:
+				shader = GraphicsEngine::GL::CreateFragmentShader();
+				break;
+			case GL_GEOMETRY_SHADER:
+				shader = GraphicsEngine::GL::CreateGeometryShader();
+				break;
+			case GL_VERTEX_SHADER:
+				shader = GraphicsEngine::GL::CreateVertexShader();
+				break;
+			}
+
 			shaders.push_back(shader);
 
 			std::vector<const GLchar*> strings;
@@ -31,8 +44,7 @@ namespace
 			GraphicsEngine::GL::ShaderSource(shader, static_cast<GLsizei>(strings.size()), strings.data(), nullptr);
 			GraphicsEngine::GL::CompileShader(shader);
 
-			int success;
-			GraphicsEngine::GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
+			bool success = GraphicsEngine::GL::GetCompileStatus(shader);
 			if (!success)
 			{
 				char infoLog[512];
@@ -120,7 +132,7 @@ namespace
 
 		GLuint buffer;
 		glGenBuffers(1, &buffer);
-		GraphicsEngine::GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
+		GraphicsEngine::GL::BindArrayBuffer(buffer);
 
 		float vertices[] =
 		{
@@ -129,7 +141,7 @@ namespace
 			 0.f,   0.5f, 0.f
 		};
 
-		GraphicsEngine::GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		GraphicsEngine::GL::ArrayBufferDataStaticDraw(sizeof(vertices), vertices);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 		glEnableVertexAttribArray(0);
@@ -150,8 +162,8 @@ namespace
 
 		GLuint buffer;
 		glGenBuffers(1, &buffer);
-		GraphicsEngine::GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
-		GraphicsEngine::GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		GraphicsEngine::GL::BindArrayBuffer(buffer);
+		GraphicsEngine::GL::ArrayBufferDataStaticDraw(sizeof(vertices), vertices);
 
 		// Set up the positions
 

@@ -4,6 +4,7 @@
 
 #include "GraphicsEngine/Shader.h"
 #include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/GL.h"
 
 #include "GLFW/glfw3.h"
 
@@ -153,10 +154,10 @@ public:
             if (auto optId = Shader::LinkProgram({ m_VertexShader, m_FragmentShader }))
                 m_Program = *optId;
 
-            if (auto optResultVS = Shader::ShaderIsDeleted(m_VertexShader); optResultVS && *optResultVS)
+            if (GraphicsEngine::GL::GetDeleteStatus(m_VertexShader))
                 m_VertexShader = 0;
 
-            if (auto optResultFS = Shader::ShaderIsDeleted(m_FragmentShader); optResultFS && *optResultFS)
+            if (GraphicsEngine::GL::GetDeleteStatus(m_FragmentShader))
                 m_FragmentShader = 0;
         }
         ImGui::End();

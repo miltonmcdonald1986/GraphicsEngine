@@ -2,6 +2,8 @@
 
 #include "imgui.h"
 
+#include "glm/gtc/type_ptr.hpp"
+
 #include "GraphicsEngine/GL.h"
 
 using namespace GraphicsEngine;
@@ -9,10 +11,9 @@ using namespace GraphicsEngine;
 BackgroundColorWidget::BackgroundColorWidget(std::shared_ptr<GLFWwindow> spWindow, IEngineSharedPtr spEngine)
     : Widget(spWindow, spEngine)
 {
-    float backgroundColor[4];
-    GraphicsEngine::GL::GetFloatv(GraphicsEngine::GL::StateVariable::ColorClearValue, backgroundColor);
-
-    std::copy(backgroundColor, backgroundColor + 4, m_Color);
+    glm::vec4 backgroundColor = GraphicsEngine::GL::GetColorClearValue();
+    float* pBackgroundColor = glm::value_ptr(backgroundColor);
+    std::copy(pBackgroundColor, pBackgroundColor + 4, m_Color);
 }
 
 void BackgroundColorWidget::Iterate()

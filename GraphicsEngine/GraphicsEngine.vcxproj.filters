@@ -63,7 +63,7 @@
     <ClInclude Include="Error.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\fwd.h">
+    <ClInclude Include="..\Interfaces\GraphicsEngine\Uniform.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
@@ -72,9 +72,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(GLAD_DIR)\src\glad.c">
@@ -99,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

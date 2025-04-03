@@ -1,22 +1,14 @@
 #pragma once
 
-#include <string>
-#include <variant>
 #include <vector>
 
 #include "glm/vec4.hpp"
 
-#include "GraphicsEngine/fwd.h"
+#include "GraphicsEngine/Uniform.h"
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine::GL
 {
-
-	enum class StateVariable
-	{
-		ColorClearValue,
-		PolygonMode
-	};
 
 	enum class PolygonMode
 	{
@@ -25,52 +17,44 @@ namespace GraphicsEngine::GL
 		Fill
 	};
 
-	using UniformVariant = std::variant<
-		std::monostate, 
-		glm::vec4>;
-
-	struct Uniform
-	{
-		std::string m_Name;
-		GLint m_Location;
-		UniformVariant m_Value;
-	};
-
 	// Get data
-	GRAPHICSENGINE_API auto GetActiveUniform(GLuint programId, GLuint index) -> Uniform;
-	GRAPHICSENGINE_API auto GetActiveUniforms(GLuint programId) -> std::vector<Uniform>;
+	GRAPHICSENGINE_API auto GetActiveUniform(unsigned int programId, unsigned int index) -> Uniform;
+	GRAPHICSENGINE_API auto GetActiveUniforms(unsigned int programId) -> std::vector<Uniform>;
+	GRAPHICSENGINE_API auto GetColorClearValue() -> glm::vec4;
 	GRAPHICSENGINE_API auto GetPolygonMode() -> PolygonMode;
-	GRAPHICSENGINE_API auto GetCurrentProgram() -> GLuint;
-	GRAPHICSENGINE_API auto GetLinkStatus(GLuint program) -> bool;
-	GRAPHICSENGINE_API auto GetNumActiveUniformVariables(GLuint programId) -> GLint;
+	GRAPHICSENGINE_API auto GetCompileStatus(unsigned int shaderId) -> bool;
+	GRAPHICSENGINE_API auto GetDeleteStatus(unsigned int shaderId) -> bool;
+	GRAPHICSENGINE_API auto GetCurrentProgram() -> unsigned int;
+	GRAPHICSENGINE_API auto GetLinkStatus(unsigned int program) -> bool;
+	GRAPHICSENGINE_API auto GetNumActiveUniformVariables(unsigned int programId) -> int;
 
 	// Set data
+	GRAPHICSENGINE_API auto ArrayBufferDataStaticDraw(long long int size, const void* data) -> void;
+	GRAPHICSENGINE_API auto ElementArrayBufferDataStaticDraw(long long int size, const void* data) -> void;
 	GRAPHICSENGINE_API auto SetPolygonMode(PolygonMode mode) -> void;
 	GRAPHICSENGINE_API auto SetUniform(const Uniform& uniform) -> void;
 
 	// Do things
+	GRAPHICSENGINE_API auto BindArrayBuffer(unsigned int buffer) -> void;
+	GRAPHICSENGINE_API auto BindElementArrayBuffer(unsigned int buffer) -> void;
 	GRAPHICSENGINE_API auto ClearColorBuffer() -> void;
+	GRAPHICSENGINE_API auto CreateFragmentShader() -> unsigned int;
+	GRAPHICSENGINE_API auto CreateGeometryShader() -> unsigned int;
+	GRAPHICSENGINE_API auto CreateVertexShader() -> unsigned int;
 
 	// OpenGL wrappers with error handling and logging built in
-	GRAPHICSENGINE_API auto AttachShader(GLuint program, GLuint shader) -> void;
-	GRAPHICSENGINE_API auto BindBuffer(GLenum target, GLuint buffer) -> void;
-	GRAPHICSENGINE_API auto BindVertexArray(GLuint array) -> void;
-	GRAPHICSENGINE_API auto BufferData(GLenum target, GLsizeiptr size, const void* data, GLenum usage) -> void;
-	GRAPHICSENGINE_API auto ClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) -> void;
-	GRAPHICSENGINE_API auto CompileShader(GLuint shader) -> void;
-	GRAPHICSENGINE_API auto CreateProgram() -> GLuint;
-	GRAPHICSENGINE_API auto CreateShader(GLenum shaderType) -> GLuint;
-	GRAPHICSENGINE_API auto GenVertexArrays(GLsizei n, GLuint* arrays) -> void;
-	GRAPHICSENGINE_API auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void;
-	GRAPHICSENGINE_API auto GetFloatv(StateVariable pname, GLfloat* data) -> void;
-	GRAPHICSENGINE_API auto GetIntegerv(StateVariable pname, GLint* data) -> void;
-	GRAPHICSENGINE_API auto GetShaderInfoLog(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog) -> void;
-	GRAPHICSENGINE_API auto GetShaderiv(GLuint shader, GLenum pname, GLint* params) -> void;
-	GRAPHICSENGINE_API auto GetUniformfv(GLuint program, GLint location, GLfloat* params) -> void;
-	GRAPHICSENGINE_API auto GetUniformLocation(GLuint program, const GLchar* name) -> GLint;
-	GRAPHICSENGINE_API auto LinkProgram(GLuint program) -> void;
-	GRAPHICSENGINE_API auto ShaderSource(GLuint shader, GLsizei count, const GLchar** string, const GLint* length) -> void;
-	GRAPHICSENGINE_API auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void;
-	GRAPHICSENGINE_API auto UseProgram(GLuint program) -> void;
+	GRAPHICSENGINE_API auto AttachShader(unsigned int program, unsigned int shader) -> void;
+	GRAPHICSENGINE_API auto BindVertexArray(unsigned int array) -> void;
+	GRAPHICSENGINE_API auto ClearColor(float red, float green, float blue, float alpha) -> void;
+	GRAPHICSENGINE_API auto CompileShader(unsigned int shader) -> void;
+	GRAPHICSENGINE_API auto CreateProgram() -> unsigned int;
+	GRAPHICSENGINE_API auto GenVertexArrays(int n, unsigned int* arrays) -> void;
+	GRAPHICSENGINE_API auto GetShaderInfoLog(unsigned int shader, int maxLength, int* length, char* infoLog) -> void;
+	GRAPHICSENGINE_API auto GetUniformfv(unsigned int program, int location, float* params) -> void;
+	GRAPHICSENGINE_API auto GetUniformLocation(unsigned int program, const char* name) -> int;
+	GRAPHICSENGINE_API auto LinkProgram(unsigned int program) -> void;
+	GRAPHICSENGINE_API auto ShaderSource(unsigned int shader, int count, const char** string, const int* length) -> void;
+	GRAPHICSENGINE_API auto Uniform4f(int location, float v0, float v1, float v2, float v3) -> void;
+	GRAPHICSENGINE_API auto UseProgram(unsigned int program) -> void;
 
 }
