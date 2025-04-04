@@ -10,10 +10,6 @@ public:
 
 	DemoTriangleApp(GLFWwindowSharedPtr spWindow);
 	~DemoTriangleApp();
-
+	virtual auto GetUserDataPointer(void) -> void* override;
 	virtual auto Run() -> void override;
-
-private:
-	
-	bool m_Running = true;
 };

@@ -66,6 +66,9 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\Uniform.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="SafeGL.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

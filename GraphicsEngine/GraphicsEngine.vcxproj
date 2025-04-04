@@ -96,6 +96,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SafeGL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(GLAD_DIR)\src\glad.c">
@@ -113,6 +114,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SafeGL.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
   </ItemGroup>

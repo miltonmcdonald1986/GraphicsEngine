@@ -33,8 +33,11 @@ public:
 
 	~GEengine();
 
-	auto GenerateEntity(GEentityType type) -> unsigned int;
+	auto GenerateEntity_IndexedPoints3DBasic(ByteCount vertexBytes, float* vertices, ByteCount indexBytes, Index* indices) -> unsigned int;
+	auto GenerateEntity_Triangle3DBasic() -> unsigned int;
+	auto GenerateEntity_Triangle3DRGB() -> unsigned int;
 	auto Render() const -> void;
+	auto SetVertices(unsigned int entId, unsigned long long size, float* data) -> bool;
 
 	operator bool() const;
 

@@ -15,24 +15,27 @@ ImGuiDemoWindowApp::ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow)
 {
 }
 
+auto ImGuiDemoWindowApp::GetUserDataPointer() -> void*
+{
+    return static_cast<void*>(&m_Running);
+}
+
 void ImGuiDemoWindowApp::Run()
 {
-    bool keepGoing = true;
-
-    glfwSetWindowUserPointer(m_spWindow.get(), (void*)&keepGoing);
+    glfwSetWindowUserPointer(m_spWindow.get(), GetUserDataPointer());
 
     auto NewKeyCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
         {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             {
-                bool* pKeepGoing = (bool*)glfwGetWindowUserPointer(window);
-                *pKeepGoing = false;
+                bool* pRunning= (bool*)glfwGetWindowUserPointer(window);
+                *pRunning = false;
             }
         };
 
     glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
 
-    while (keepGoing)
+    while (m_Running)
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -51,7 +54,7 @@ void ImGuiDemoWindowApp::Run()
         /* Poll for and process events */
         glfwPollEvents();
 
-        keepGoing = keepGoing && !glfwWindowShouldClose(m_spWindow.get());
+        m_Running = m_Running && !glfwWindowShouldClose(m_spWindow.get());
     }
 
     glfwSetWindowUserPointer(m_spWindow.get(), nullptr);

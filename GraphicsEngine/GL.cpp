@@ -4,6 +4,7 @@
 #include "glm/vec4.hpp"
 
 #include "Error.h"
+#include "SafeGL.h"
 
 namespace GLHelpers
 {
@@ -14,12 +15,6 @@ namespace GLHelpers
 		std::make_pair(GraphicsEngine::GL::PolygonMode::Line, GL_LINE),
 		std::make_pair(GraphicsEngine::GL::PolygonMode::Fill, GL_FILL)
 	};
-
-	auto BindBuffer(GLenum target, GLuint buffer) -> void
-	{
-		glBindBuffer(target, buffer);
-		GraphicsEngine::HandleError(__FUNCTION__);
-	}
 
 	auto BufferData(GLenum target, GLsizeiptr size, const void* data, GLenum usage) -> void
 	{
@@ -34,6 +29,13 @@ namespace GLHelpers
 
 		return result;
 	}
+
+	auto DrawArrays(GLenum mode, GLint first, GLsizei count) -> void
+	{
+		glDrawArrays(mode, first, count);
+		GraphicsEngine::HandleError(__FUNCTION__);
+	}
+
 
 	auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void
 	{
@@ -53,24 +55,17 @@ namespace GLHelpers
 		GraphicsEngine::HandleError(__FUNCTION__);
 	}
 
-	auto GetProgramiv(GLuint program, GLenum pname, GLint* params) -> void
-	{
-		glGetProgramiv(program, pname, params);
-		GraphicsEngine::HandleError(__FUNCTION__);
-	}
-
-	auto GetShaderiv(GLuint shader, GLenum pname, GLint* params) -> void
-	{
-		glGetShaderiv(shader, pname, params);
-		GraphicsEngine::HandleError(__FUNCTION__);
-	}
-
 	auto PolygonMode(GLenum face, GLenum mode) -> void
 	{
 		glPolygonMode(face, mode);
 		GraphicsEngine::HandleError(__FUNCTION__);
 	}
 
+	auto VertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer) -> void
+	{
+		glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+		GraphicsEngine::HandleError(__FUNCTION__);
+	}
 }
 
 namespace GraphicsEngine::GL
@@ -105,6 +100,18 @@ namespace GraphicsEngine::GL
 		HandleError(__FUNCTION__);
 
 		return result;
+	}
+
+	auto EnableVertexAttribArray(unsigned int index) -> void
+	{
+		glEnableVertexAttribArray(index);
+		HandleError(__FUNCTION__);
+	}
+
+	auto GenBuffers(int n, unsigned int* buffers) -> void
+	{
+		glGenBuffers(n, buffers);
+		HandleError(__FUNCTION__);
 	}
 
 	auto GenVertexArrays(GLsizei n, GLuint* arrays) -> void
@@ -183,22 +190,6 @@ namespace GraphicsEngine::GL
 		}
 	}
 
-	auto GetCompileStatus(GLuint shaderId) -> bool
-	{
-		GLint success;
-		GLHelpers::GetShaderiv(shaderId, GL_COMPILE_STATUS, &success);
-
-		return (success == GL_TRUE) ? true : false;
-	}
-
-	auto GetDeleteStatus(GLuint shaderId) -> bool
-	{
-		GLint deleted;
-		GLHelpers::GetShaderiv(shaderId, GL_DELETE_STATUS, &deleted);
-		
-		return (deleted == GL_TRUE) ? true : false;
-	}
-
 	auto ArrayBufferDataStaticDraw(GLsizeiptr size, const void* data) -> void
 	{
 		GLHelpers::BufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -227,14 +218,9 @@ namespace GraphicsEngine::GL
 		}
 	}
 
-	auto BindArrayBuffer(GLuint buffer) -> void
+	auto VertexAttribFloatPointer(unsigned int index, int size, bool normalized, int stride, const void* pointer) -> void
 	{
-		GLHelpers::BindBuffer(GL_ARRAY_BUFFER, buffer);
-	}
-
-	auto BindElementArrayBuffer(GLuint buffer) -> void
-	{
-		GLHelpers::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+		GLHelpers::VertexAttribPointer(index, size, GL_FLOAT, normalized ? GL_TRUE : GL_FALSE, stride, pointer);
 	}
 
 	auto ClearColorBuffer() -> void
@@ -258,6 +244,11 @@ namespace GraphicsEngine::GL
 		return GLHelpers::CreateShader(GL_VERTEX_SHADER);
 	}
 
+	auto DrawArraysAsTriangles(int first, int count) -> void
+	{
+		GLHelpers::DrawArrays(GL_TRIANGLES, first, count);
+	}
+
 	auto GetCurrentProgram() -> GLuint
 	{
 		GLint prog = 0;
@@ -266,19 +257,13 @@ namespace GraphicsEngine::GL
 		return prog;
 	}
 
-	auto GetLinkStatus(GLuint program) -> bool
-	{
-		GLint success;
-		glGetProgramiv(program, GL_LINK_STATUS, &success);
-		HandleError(__FUNCTION__);
-
-		return (success == 0) ? false : true;
-	}
-
 	auto GetNumActiveUniformVariables(GLuint programId) -> GLint
 	{
+		if (programId == 0)
+			return 0;
+
 		GLint count;
-		GLHelpers::GetProgramiv(programId, GL_ACTIVE_UNIFORMS, &count);
+		GL::GetProgramiv(programId, GL_ACTIVE_UNIFORMS, &count);
 
 		return count;
 	}

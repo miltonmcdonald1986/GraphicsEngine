@@ -2,6 +2,7 @@
 #include "GraphicsEngine/IndexedPoints.h"
 
 #include "GraphicsEngine/GL.h"
+#include "SafeGL.h"
 
 namespace GraphicsEngine
 {
@@ -26,7 +27,7 @@ namespace GraphicsEngine
 
 		GLuint vbo;
 		glGenBuffers(1, &vbo);
-		GL::BindArrayBuffer(vbo);
+		GL::BindBuffer(GL_ARRAY_BUFFER, vbo);
 		GL::ArrayBufferDataStaticDraw(verticesData.size() * sizeof(float), verticesData.data());
 
 		// Specify the layout of the only vertex attribute (position), and enable that attribute.
@@ -38,7 +39,7 @@ namespace GraphicsEngine
 
 		GLuint ebo;
 		glGenBuffers(1, &ebo);
-		GL::BindElementArrayBuffer(ebo);
+		GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		GL::ElementArrayBufferDataStaticDraw(sizeof(unsigned int) * indices.size(), indices.data());
 
 		return vao;

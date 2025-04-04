@@ -13,36 +13,32 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+#include "GraphicsEngine/IEngine.h"
+
 #include "BackgroundColorWidget.h"
 #include "PolygonModeWidget.h"
 #include "EngineLogWidget.h"
 
-using namespace GraphicsEngine;
-
-DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow)
-    : App(spWindow)
+namespace
 {
-    auto optVertexShader = Shader::CompileVertexShader(std::string("#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-        "}\0"));
-    auto optFragmentShader = Shader::CompileFragmentShader(std::string("#version 330 core\n"
-        "out vec4 FragColor;\n"
-        "void main()\n"
-        "{\n"
-        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n\0"));
 
-    if (optVertexShader && optFragmentShader)
+    auto KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) -> void
     {
-        auto optShaderProgram = Shader::LinkProgram({ *optVertexShader, *optFragmentShader });
-        if (optShaderProgram)
+        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
-            GraphicsEngine::GL::UseProgram(*optShaderProgram);
+            printf("Escape key pressed. Closing window...\n");
+            bool* pKeepGoing = (bool*)glfwGetWindowUserPointer(window);
+            *pKeepGoing = false;
         }
     }
+
+}
+
+DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow)
+    : App(spWindow)
+{
+    glfwSetWindowUserPointer(m_spWindow.get(), GetUserDataPointer());
+    glfwSetKeyCallback(m_spWindow.get(), KeyCallback);
 
     std::vector<glm::vec3> vertices = {
         glm::vec3(0.5f, 0.5f, 0.0f),
@@ -51,38 +47,40 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(std::shared_ptr<GLFWwindow> spWindow)
         glm::vec3(-0.5f,  0.5f, 0.0f) 
         };
 
-    m_Indices = std::vector<unsigned int> {
+    std::vector<unsigned int> indices = {
         0, 1, 3,
         1, 2, 3
     };
 
-    if (auto optVAO = AddIndexedPoints(vertices, m_Indices); optVAO)
-        m_VAO = *optVAO;
+    geGenerateEntity_IndexedPoints3DBasic(m_spEngine.get(), 3*vertices.size()*sizeof(float), &vertices[0][0], indices.size()*sizeof(unsigned int), indices.data());
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, m_spEngine)));
 }
 
+auto DemoIndexedPointsApp::GetUserDataPointer() -> void*
+{
+    return static_cast<void*>(&m_Running);
+}
+
 auto DemoIndexedPointsApp::Run() -> void
 {
-    bool keepGoing = true;
-
-    glfwSetWindowUserPointer(m_spWindow.get(), (void*)&keepGoing);
+    glfwSetWindowUserPointer(m_spWindow.get(), GetUserDataPointer());
 
     auto NewKeyCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
         {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             {
                 printf("Escape key pressed. Closing window...\n");
-                bool* pKeepGoing = (bool*)glfwGetWindowUserPointer(window);
-                *pKeepGoing = false;
+                bool* pRunning = (bool*)glfwGetWindowUserPointer(window);
+                *pRunning = false;
             }
         };
 
     glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
 
-    while (keepGoing)
+    while (m_Running)
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -90,7 +88,7 @@ auto DemoIndexedPointsApp::Run() -> void
 
         glClear(GL_COLOR_BUFFER_BIT);           
 
-        Render();
+        geRender(m_spEngine.get());
 
         IterateWidgets();
 
@@ -103,19 +101,9 @@ auto DemoIndexedPointsApp::Run() -> void
         /* Poll for and process events */
         glfwPollEvents();
 
-        keepGoing = keepGoing && !glfwWindowShouldClose(m_spWindow.get());
+        m_Running = m_Running && !glfwWindowShouldClose(m_spWindow.get());
     }
 
     glfwSetWindowUserPointer(m_spWindow.get(), nullptr);
     glfwSetKeyCallback(m_spWindow.get(), nullptr);
-}
-
-void DemoIndexedPointsApp::Render() const
-{
-    if (m_VAO == 0)
-        return;
-
-    GraphicsEngine::GL::BindVertexArray(m_VAO);
-
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_Indices.size()), GL_UNSIGNED_INT, (void*)0);
 }

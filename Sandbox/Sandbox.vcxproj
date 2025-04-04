@@ -51,7 +51,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp23</LanguageStandard>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -74,7 +74,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(GLAD_DIR)\include;$(GLFW_WIN64_DIR)\include;$(IMGUI_DIR);$(IMGUI_DIR)\backends;$(ProjectDir)..\Interfaces;$(GLM_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp23</LanguageStandard>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

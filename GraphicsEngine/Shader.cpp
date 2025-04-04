@@ -2,6 +2,9 @@
 #include "GraphicsEngine/Shader.h"
 
 #include "GraphicsEngine/GL.h"
+#include "SafeGL.h"
+
+using namespace GraphicsEngine;
 
 namespace 
 {
@@ -22,26 +25,27 @@ namespace
 		switch (shaderType)
 		{
 		case GL_FRAGMENT_SHADER:
-			shader = GraphicsEngine::GL::CreateFragmentShader();
+			shader = GL::CreateFragmentShader();
 			break;
 		case GL_GEOMETRY_SHADER:
-			shader = GraphicsEngine::GL::CreateGeometryShader();
+			shader = GL::CreateGeometryShader();
 			break;
 		case GL_VERTEX_SHADER:
-			shader = GraphicsEngine::GL::CreateVertexShader();
+			shader = GL::CreateVertexShader();
 			break;
 		}
 
 		std::vector<const char*> strings;
 		strings.push_back(source.c_str());
 
-		GraphicsEngine::GL::ShaderSource(shader, static_cast<int>(strings.size()), strings.data(), nullptr);
-		GraphicsEngine::GL::CompileShader(shader);
-		bool success = GraphicsEngine::GL::GetCompileStatus(shader);
+		GL::ShaderSource(shader, static_cast<int>(strings.size()), strings.data(), nullptr);
+		GL::CompileShader(shader);
+		GLint success;
+		GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
 		if (!success)
 		{
 			char infoLog[512];
-			GraphicsEngine::GL::GetShaderInfoLog(shader, 512, NULL, infoLog);
+			GL::GetShaderInfoLog(shader, 512, NULL, infoLog);
 			spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
 			return std::nullopt;
 		}
