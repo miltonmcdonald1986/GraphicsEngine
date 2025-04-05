@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GraphicsEngine/IEngine.h"
+#include "Engine.h"
+#include "Shader.h"
 
 namespace GraphicsEngine
 {
@@ -8,7 +9,7 @@ namespace GraphicsEngine
 	{
 		GEentityType m_Type = GE_ENTITY_TYPE_TRIANGLE_BASIC;
 		unsigned int m_Id = 0;
-		unsigned int m_Shader = 0;
+		GEshader* m_pShader = nullptr;
 		unsigned int m_VAO = 0;
 		int m_NumIndices = 0;
 	};

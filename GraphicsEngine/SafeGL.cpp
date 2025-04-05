@@ -64,6 +64,12 @@ namespace GraphicsEngine::GL
 		return result;
 	}
 
+	auto DeleteShader(GLuint shader) -> void
+	{
+		glDeleteShader(shader);
+		HandleError(__FUNCTION__);
+	}
+
 	auto DrawArrays(GLenum mode, GLint first, GLsizei count) -> void
 	{
 		glDrawArrays(mode, first, count);
@@ -74,6 +80,12 @@ namespace GraphicsEngine::GL
 	{
 		glEnableVertexAttribArray(index);
 		HandleError(__FUNCTION__);
+	}
+
+	auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void
+	{
+		glGetActiveUniform(program, index, bufSize, length, size, type, name);
+		GraphicsEngine::HandleError(__FUNCTION__);
 	}
 
 	auto GenBuffers(GLsizei n, GLuint* buffers) -> void
@@ -97,6 +109,12 @@ namespace GraphicsEngine::GL
 	auto GetIntegerv(GLenum pname, GLint* data) -> void
 	{
 		glGetIntegerv(pname, data);
+		HandleError(__FUNCTION__);
+	}
+
+	auto GetProgramInfoLog(GLuint program, GLsizei maxLength, GLsizei* length, GLchar* infoLog) -> void
+	{
+		glGetProgramInfoLog(program, maxLength, length, infoLog);
 		HandleError(__FUNCTION__);
 	}
 

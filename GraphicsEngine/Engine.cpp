@@ -2,6 +2,7 @@
 #include "Engine.h"
 
 #include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IShader.h"
 #include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/EntityType.h"
 
@@ -47,6 +48,11 @@ unsigned int geGenerateEntity_Triangle3DRGB(GEengine* pEngine)
 void geGetBackgroundColor(float color[4])
 {
 	GL::GetFloatv(GL_COLOR_CLEAR_VALUE, color);
+}
+
+GEshader* geGetCurrentShaderProgram(GEengine* pEngine)
+{
+	return pEngine->GetCurrentShaderProgram();
 }
 
 GEpolygonMode geGetPolygonMode()
@@ -143,56 +149,6 @@ namespace
 		return true;
 	}
 
-	auto InitializeShaderTriangleBasic(GLuint program) -> bool
-	{
-		std::map<GLenum, const char*> shaderMap =
-		{
-			std::make_pair(GL_VERTEX_SHADER, "#version 330 core\n"
-				"layout (location = 0) in vec3 aPos;\n"
-				"void main()\n"
-				"{\n"
-				"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-				"}\0"),
-			std::make_pair(GL_FRAGMENT_SHADER, "#version 330 core\n"
-				"out vec4 FragColor;\n"
-				"void main()\n"
-				"{\n"
-				"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-				"}\n\0")
-		};
-
-		return BuildProgram(shaderMap, program);
-	}
-
-	auto InitializeShaderTriangleRGB(GLuint program) -> bool
-	{
-		std::map<GLenum, const char*> shaderMap =
-		{
-			std::make_pair(GL_VERTEX_SHADER, "#version 330 core\n"
-				"layout (location = 0) in vec3 aPos;\n"
-				"layout(location = 1) in vec3 aColor;\n"
-
-				"out vec3 ourColor;\n"
-
-				"void main()\n"
-				"{\n"
-				"   gl_Position = vec4(aPos, 1.0);\n"
-				"   ourColor = aColor;\n"
-				"}\0"),
-			std::make_pair(GL_FRAGMENT_SHADER, "#version 330 core\n"
-				"out vec4 FragColor;\n"
-
-				"in vec3 ourColor;\n"
-
-				"void main()\n"
-				"{\n"
-				"FragColor = vec4(ourColor.x, ourColor.y, ourColor.z, 1.0);\n"
-				"}\0")
-		};
-
-		return BuildProgram(shaderMap, program);
-	}
-
 	auto InitializeVAOTriangleBasic(GLuint vao) -> bool
 	{
 		GL::BindVertexArray(vao);
@@ -261,6 +217,10 @@ GEengine::GEengine()
 GEengine::~GEengine()
 {
 	spdlog::drop_all();
+	for (auto [_, pShader] : m_Shaders)
+	{
+		geDestroyShader(pShader);
+	}
 }
 
 void DrawIndexedPoints3DBasic(const Entity& entity)
@@ -268,7 +228,7 @@ void DrawIndexedPoints3DBasic(const Entity& entity)
 	if (entity.m_Type != GE_ENTITY_TYPE_INDEXED_POINTS_BASIC)
 		return;
 
-	GL::UseProgram(entity.m_Shader);
+	GL::UseProgram(entity.m_pShader->GetId());
 	GL::BindVertexArray(entity.m_VAO);
 	
 	// Wrap this into safe gl handler.
@@ -281,7 +241,7 @@ void DrawTriangle3DBasic(const Entity& entity)
 	if (entity.m_Type != GE_ENTITY_TYPE_TRIANGLE_BASIC)
 		return;
 
-	GL::UseProgram(entity.m_Shader);
+	GL::UseProgram(entity.m_pShader->GetId());
 	GL::BindVertexArray(entity.m_VAO);
 	GL::DrawArrays(GL_TRIANGLES, 0, 3);
 }
@@ -291,7 +251,7 @@ void DrawTriangle3DRGB(const Entity& entity)
 	if (entity.m_Type != GE_ENTITY_TYPE_TRIANGLE_RGB)
 		return;
 
-	GL::UseProgram(entity.m_Shader);
+	GL::UseProgram(entity.m_pShader->GetId());
 	GL::BindVertexArray(entity.m_VAO);
 	GL::DrawArrays(GL_TRIANGLES, 0, 3);
 }
@@ -321,7 +281,7 @@ auto GEengine::GenerateEntity_IndexedPoints3DBasic(unsigned long long numVertexB
 	Entity entity;
 	entity.m_Type = GE_ENTITY_TYPE_INDEXED_POINTS_BASIC;
 	entity.m_Id = NextAvailableEntityId();
-	entity.m_Shader = m_Shaders[NamedShaderTriangleBasic];
+	entity.m_pShader = m_Shaders[NamedShaderTriangleBasic];
 	entity.m_VAO = CreateVAO_IndexedPoints3DBasic(numVertexBytes, vertices, numIndexBytes, indices);
 	entity.m_NumIndices = static_cast<int>(numIndexBytes / sizeof(unsigned int));
 	m_Entities.insert(entity);
@@ -333,7 +293,7 @@ auto GEengine::GenerateEntity_Triangle3DBasic() -> unsigned int
 	Entity entity;
 	entity.m_Type = GE_ENTITY_TYPE_TRIANGLE_BASIC;
 	entity.m_Id = NextAvailableEntityId();
-	entity.m_Shader = m_Shaders[NamedShaderTriangleBasic];
+	entity.m_pShader = m_Shaders[NamedShaderTriangleBasic];
 	entity.m_VAO = m_VAOs[NamedVAOTriangleBasic];
 	m_Entities.insert(entity);
 	return entity.m_Id;
@@ -344,10 +304,25 @@ auto GEengine::GenerateEntity_Triangle3DRGB() -> unsigned int
 	Entity entity;
 	entity.m_Type = GE_ENTITY_TYPE_TRIANGLE_RGB;
 	entity.m_Id = NextAvailableEntityId();
-	entity.m_Shader = m_Shaders[NamedShaderTriangleRGB];
+	entity.m_pShader = m_Shaders[NamedShaderTriangleRGB];
 	entity.m_VAO = m_VAOs[NamedVAOTriangleRGB];
 	m_Entities.insert(entity);
 	return entity.m_Id;
+}
+
+auto GEengine::GetCurrentShaderProgram() -> GEshader*
+{
+	GLint prog;
+	GL::GetIntegerv(GL_CURRENT_PROGRAM, &prog);
+	auto it = std::find_if(m_Shaders.begin(), m_Shaders.end(), [&prog](const std::pair<std::string, GEshader*>& nameAndShader) 
+		{
+			return nameAndShader.second->GetId() == prog;
+		});
+
+	if (it == m_Shaders.end())
+		return 0;
+	else
+		return it->second;
 }
 
 auto GEengine::Render() const -> void
@@ -390,15 +365,68 @@ auto GEengine::InitializeVAOs() -> bool
 	return true;
 }
 
-auto GEengine::InitializeShaders() -> bool
+auto GEengine::InitializeShaderTriangleBasic() -> bool
 {
-	m_Shaders[NamedShaderTriangleBasic] = GL::CreateProgram();
-	m_Shaders[NamedShaderTriangleRGB] = GL::CreateProgram();
+	const std::string vertexShader = "#version 330 core\n"
+		"layout (location = 0) in vec3 aPos;\n"
+		"void main()\n"
+		"{\n"
+		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+		"}";
 
-	if (!InitializeShaderTriangleBasic(m_Shaders[NamedShaderTriangleBasic]))
+	const std::string fragmentShader = "#version 330 core\n"
+		"out vec4 FragColor;\n"
+		"void main()\n"
+		"{\n"
+		"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+		"}";
+
+	auto pShader = geCreateShaderFromStrings(vertexShader.c_str(), nullptr, fragmentShader.c_str());
+	if (!pShader)
 		return false;
 
-	if (!InitializeShaderTriangleRGB(m_Shaders[NamedShaderTriangleRGB]))
+	m_Shaders.insert(std::make_pair(NamedShaderTriangleBasic, pShader));
+	return true;
+}
+
+auto GEengine::InitializeShaderTriangleRGB() -> bool
+{
+	const std::string vertexShader = "#version 330 core\n"
+		"layout (location = 0) in vec3 aPos;\n"
+		"layout(location = 1) in vec3 aColor;\n"
+
+		"out vec3 ourColor;\n"
+
+		"void main()\n"
+		"{\n"
+		"   gl_Position = vec4(aPos, 1.0);\n"
+		"   ourColor = aColor;\n"
+		"}";
+
+	const std::string fragmentShader = "#version 330 core\n"
+		"out vec4 FragColor;\n"
+
+		"in vec3 ourColor;\n"
+
+		"void main()\n"
+		"{\n"
+		"FragColor = vec4(ourColor.x, ourColor.y, ourColor.z, 1.0);\n"
+		"}";
+
+	auto pShader = geCreateShaderFromStrings(vertexShader.c_str(), nullptr, fragmentShader.c_str());
+	if (!pShader)
+		return false;
+
+	m_Shaders.insert(std::make_pair(NamedShaderTriangleRGB, pShader));
+	return true;
+}
+
+auto GEengine::InitializeShaders() -> bool
+{
+	if (!InitializeShaderTriangleBasic())
+		return false;
+
+	if (!InitializeShaderTriangleRGB())
 		return false;
 
 	return true;

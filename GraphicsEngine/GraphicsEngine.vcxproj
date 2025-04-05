@@ -87,8 +87,8 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IEngine.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h" />
+    <ClInclude Include="..\Interfaces\GraphicsEngine\IShader.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\Shader.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Texture.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Uniform.h" />
     <ClInclude Include="Engine.h" />
@@ -97,6 +97,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SafeGL.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(GLAD_DIR)\src\glad.c">

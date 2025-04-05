@@ -14,12 +14,15 @@ namespace GraphicsEngine::GL
 	auto CompileShader(GLuint shader) -> void;
 	auto CreateProgram() -> GLuint;
 	auto CreateShader(GLenum shaderType) -> GLuint;
+	auto DeleteShader(GLuint shader) -> void;
 	auto DrawArrays(GLenum mode, GLint first, GLsizei count) -> void;
 	auto EnableVertexAttribArray(GLuint index) -> void;
+	auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void;
 	auto GenBuffers(GLsizei n, GLuint* buffers) -> void;
 	auto GenVertexArrays(GLsizei n, GLuint* arrays) -> void;
 	auto GetFloatv(GLenum pname, GLfloat* data) -> void;
 	auto GetIntegerv(GLenum pname, GLint* data) -> void;
+	auto GetProgramInfoLog(GLuint program, GLsizei maxLength, GLsizei* length, GLchar* infoLog) -> void;
 	auto GetProgramiv(GLuint program, GLenum pname, GLint* params) -> void;
 	auto GetShaderInfoLog(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog) -> void;
 	auto GetShaderiv(GLuint shader, GLenum pname, GLint* params) -> void;

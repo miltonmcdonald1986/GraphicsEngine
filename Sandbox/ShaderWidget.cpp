@@ -6,24 +6,23 @@
 #include "imgui.h"
 
 #include "GraphicsEngine/GL.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IShader.h"
 
 ShaderWidget::ShaderWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
 	: Widget(spWindow, spEngine)
 {
-	auto prog = GraphicsEngine::GL::GetCurrentProgram();
-	auto count = GraphicsEngine::GL::GetNumActiveUniformVariables(prog);
-
-	for (int i = 0; i < count; ++i)
-	{
-		m_Uniforms.push_back(GraphicsEngine::GL::GetActiveUniform(prog, i));	
-	}
 }
 
 auto ShaderWidget::Iterate() -> void
 {
-	auto prog = GraphicsEngine::GL::GetCurrentProgram();
-	for (auto& uniform : GraphicsEngine::GL::GetActiveUniforms(prog))
+	int numUniforms;
+	GEuniform* uniforms = nullptr;
+	auto pShader = geGetCurrentShaderProgram(m_spEngine.get());
+	geGetActiveUniforms(pShader, &numUniforms, uniforms);
+	for (int i = 0; i < numUniforms; ++i)
 	{
+		GEuniform& uniform = uniforms[i];
 		switch (uniform.m_Type)
 		{
 		case GE_UNIFORM_TYPE_VEC4:
@@ -39,7 +38,7 @@ auto ShaderWidget::Iterate() -> void
 			float *v = uniform.m_Data.vec4;
 			if (ImGui::DragFloat4(uniform.m_Name, v, bound ? 1.0f / 255.0f : 1.0F, 0.0F, bound ? 1.0F : 0.0F))
 			{
-				GraphicsEngine::GL::SetUniform(uniform);
+				geSetUniform(pShader, &uniform);
 			}
 
 			break; 

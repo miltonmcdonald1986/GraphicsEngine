@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_ENGINE_H
 #define GRAPHICS_ENGINE_H
 
+#include "GraphicsEngine/IShader.h"
 #include "GraphicsEngineImpExp.h"
 
 #ifdef __cplusplus
@@ -29,6 +30,7 @@ extern "C" {
 	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Triangle3DBasic(GEengine* pEngine);
 	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Triangle3DRGB(GEengine* pEngine);
 	GRAPHICSENGINE_API void				geGetBackgroundColor(float color[4]);
+	GRAPHICSENGINE_API GEshader*		geGetCurrentShaderProgram(GEengine* pEngine);
 	GRAPHICSENGINE_API GEpolygonMode	geGetPolygonMode();
 	GRAPHICSENGINE_API void				geRender(GEengine* pEngine);
 	GRAPHICSENGINE_API void				geSetBackgroundColor(float color[4]);

@@ -3,7 +3,6 @@
 // ALWAYS include GraphicsEngine BEFORE GLFW.
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/EntityType.h"
-#include "GraphicsEngine/Shader.h"
 
 #include "GLFW/glfw3.h"
 

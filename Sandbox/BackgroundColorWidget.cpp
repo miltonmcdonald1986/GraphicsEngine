@@ -4,10 +4,7 @@
 
 #include "glm/gtc/type_ptr.hpp"
 
-#include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/IEngine.h"
-
-using namespace GraphicsEngine;
 
 BackgroundColorWidget::BackgroundColorWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
     : Widget(spWindow, spEngine)

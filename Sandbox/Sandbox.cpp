@@ -2,9 +2,7 @@
 
 #include <ShObjIdl_core.h>
 
-#include "GraphicsEngine/Shader.h"
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/GL.h"
 
 #include "GLFW/glfw3.h"
 
@@ -17,74 +15,6 @@
 #include "DemoTriangleRGBApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "ImGuiDemoWindowApp.h"
-
-using namespace GraphicsEngine;
-
-std::string PWSTRToString(PWSTR wideStr) {
-    if (!wideStr) {
-        return std::string(); // Return an empty string if the input is null
-    }
-
-    // Determine the size of the resulting string
-    int bufferSize = WideCharToMultiByte(CP_UTF8, 0, wideStr, -1, nullptr, 0, nullptr, nullptr);
-
-    // Allocate buffer for the converted string
-    std::string result(bufferSize, '\0');
-
-    // Perform the conversion
-    WideCharToMultiByte(CP_UTF8, 0, wideStr, -1, &result[0], bufferSize, nullptr, nullptr);
-
-    // Remove the trailing null character added by WideCharToMultiByte
-    result.resize(bufferSize - 1);
-
-    return result;
-}
-
-std::string OpenFileDialogBox()
-{
-    std::string filename;
-
-    HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-        COINIT_DISABLE_OLE1DDE);
-    if (SUCCEEDED(hr))
-    {
-        IFileOpenDialog* pFileOpen;
-
-        // Create the FileOpenDialog object.
-        hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
-            IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-
-        if (SUCCEEDED(hr))
-        {
-            // Show the Open dialog box.
-            hr = pFileOpen->Show(NULL);
-
-            // Get the file name from the dialog box.
-            if (SUCCEEDED(hr))
-            {
-                IShellItem* pItem;
-                hr = pFileOpen->GetResult(&pItem);
-                if (SUCCEEDED(hr))
-                {
-                    PWSTR pszFilePath;
-                    hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-
-                    // Display the file name to the user.
-                    if (SUCCEEDED(hr))
-                    {
-                        filename = PWSTRToString(pszFilePath);
-                        CoTaskMemFree(pszFilePath);
-                    }
-                    pItem->Release();
-                }
-            }
-            pFileOpen->Release();
-        }
-        CoUninitialize();
-    }
-
-    return filename;
-}
 
 void OnFramebufferSize(GLFWwindow* window, int width, int height)
 {

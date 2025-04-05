@@ -3,7 +3,6 @@
 // ALWAYS include GraphicsEngine BEFORE GLFW.
 #include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/IndexedPoints.h"
-#include "GraphicsEngine/Shader.h"
 
 #include "GLFW/glfw3.h"
 
