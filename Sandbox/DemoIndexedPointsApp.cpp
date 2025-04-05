@@ -1,9 +1,5 @@
 #include "DemoIndexedPointsApp.h"
 
-// ALWAYS include GraphicsEngine BEFORE GLFW.
-#include "GraphicsEngine/GL.h"
-#include "GraphicsEngine/IndexedPoints.h"
-
 #include "GLFW/glfw3.h"
 
 #include "glm/glm.hpp"

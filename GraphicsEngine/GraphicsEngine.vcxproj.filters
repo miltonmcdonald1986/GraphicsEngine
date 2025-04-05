@@ -36,9 +36,6 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\GL.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -53,9 +50,6 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\EntityType.h">
-      <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Error.h">
       <Filter>Source Files</Filter>

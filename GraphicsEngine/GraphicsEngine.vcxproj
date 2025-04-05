@@ -82,8 +82,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\EntityType.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\GL.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IEngine.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h" />

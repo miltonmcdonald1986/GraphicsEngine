@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Shader.h"
 
-#include "GraphicsEngine/GL.h"
 #include "SafeGL.h"
 
 using namespace GraphicsEngine;

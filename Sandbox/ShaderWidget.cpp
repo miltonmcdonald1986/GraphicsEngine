@@ -5,7 +5,6 @@
 
 #include "imgui.h"
 
-#include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/IShader.h"
 

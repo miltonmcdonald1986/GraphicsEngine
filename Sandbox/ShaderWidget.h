@@ -2,7 +2,6 @@
 
 #include "Widget.h"
 
-#include "GraphicsEngine/GL.h"
 #include "GraphicsEngine/Uniform.h"
 
 #include <string>

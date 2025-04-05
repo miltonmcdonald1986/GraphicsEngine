@@ -3,8 +3,6 @@
 
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/IShader.h"
-#include "GraphicsEngine/GL.h"
-#include "GraphicsEngine/EntityType.h"
 
 #include "Entity.h"
 #include "Error.h"
