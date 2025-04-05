@@ -16,5 +16,5 @@ public:
     virtual auto Iterate() -> void override;
 
 private:
-	std::vector<GraphicsEngine::Uniform> m_Uniforms;
+	std::vector<GEuniform> m_Uniforms;
 };

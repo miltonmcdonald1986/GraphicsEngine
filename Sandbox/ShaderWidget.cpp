@@ -26,7 +26,7 @@ auto ShaderWidget::Iterate() -> void
 	{
 		switch (uniform.m_Type)
 		{
-		case GraphicsEngine::UNIFORM_TYPE_VEC4:
+		case GE_UNIFORM_TYPE_VEC4:
 		{
 			// The convention for this shader widget is
 			// 1) If the uniform's name contains the substring "color", then we bound the DragFloat4 values between 0 and 1.

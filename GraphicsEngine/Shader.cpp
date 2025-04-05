@@ -21,19 +21,7 @@ namespace
 
 	auto CompileShader(GLenum shaderType, const std::string& source) -> std::optional<GLuint>
 	{
-		GLuint shader = 0;
-		switch (shaderType)
-		{
-		case GL_FRAGMENT_SHADER:
-			shader = GL::CreateFragmentShader();
-			break;
-		case GL_GEOMETRY_SHADER:
-			shader = GL::CreateGeometryShader();
-			break;
-		case GL_VERTEX_SHADER:
-			shader = GL::CreateVertexShader();
-			break;
-		}
+		GLuint shader = GL::CreateShader(shaderType);
 
 		std::vector<const char*> strings;
 		strings.push_back(source.c_str());

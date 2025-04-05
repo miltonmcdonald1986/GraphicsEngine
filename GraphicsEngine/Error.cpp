@@ -17,7 +17,7 @@ namespace GraphicsEngine
 
 #ifdef _DEBUG
 
-				loggerOutputStream << "\n\nStack trace:\n============\n" << std::stacktrace::current();
+				loggerOutputStream << "\nStack trace:\n============\n" << std::stacktrace::current();
 				DebugBreak();
 
 #endif

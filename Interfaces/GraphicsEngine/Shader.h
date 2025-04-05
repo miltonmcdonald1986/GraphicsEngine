@@ -4,6 +4,20 @@
 
 #include "GraphicsEngineImpExp.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+	typedef struct GEshader GEshader;
+
+	GRAPHICSENGINE_API GEshader*	geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag);
+	GRAPHICSENGINE_API GEshader*	geCreateShaderFromStrings(const char* vert, const char* geom, const char* frag);
+	GRAPHICSENGINE_API void			geDestroyShader(GEshader* pShader);
+
+#ifdef __cplusplus
+}
+#endif
+
 namespace GraphicsEngine::Shader
 {
 

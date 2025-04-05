@@ -11,11 +11,11 @@
 
 using namespace GraphicsEngine;
 
-// Shared VAO names
+//// Shared VAO names
 const std::string NamedVAOTriangleBasic = "Triangle Basic";
 const std::string NamedVAOTriangleRGB = "Triangle RGB";
 
-// Shared Shader names
+//// Shared Shader names
 const std::string NamedShaderTriangleBasic = "Triangle Basic";
 const std::string NamedShaderTriangleRGB = "Triangle RGB";
 
@@ -29,9 +29,9 @@ void geDestroyGraphicsEngine(GEengine* pEngine)
 	delete pEngine;
 }
 
-unsigned int geGenerateEntity_IndexedPoints3DBasic(GEengine* pEngine, ByteCount vertexBytes, float* vertices, ByteCount indexBytes, Index* indices)
+unsigned int geGenerateEntity_IndexedPoints3DBasic(GEengine* pEngine, unsigned long long numVertexBytes, float* vertices, unsigned long long numIndexBytes, unsigned int* indices)
 {
-	return pEngine->GenerateEntity_IndexedPoints3DBasic(vertexBytes, vertices, indexBytes, indices);
+	return pEngine->GenerateEntity_IndexedPoints3DBasic(numVertexBytes, vertices, numIndexBytes, indices);
 }
 
 unsigned int geGenerateEntity_Triangle3DBasic(GEengine* pEngine)
@@ -44,14 +44,52 @@ unsigned int geGenerateEntity_Triangle3DRGB(GEengine* pEngine)
 	return pEngine->GenerateEntity_Triangle3DRGB();
 }
 
+void geGetBackgroundColor(float color[4])
+{
+	GL::GetFloatv(GL_COLOR_CLEAR_VALUE, color);
+}
+
+GEpolygonMode geGetPolygonMode()
+{
+	std::vector<GLint> param(2);
+	GL::GetIntegerv(GL_POLYGON_MODE, param.data());
+	switch (param[0])
+	{
+	case GL_POINT:
+		return GE_POLYGON_MODE_POINT;
+	case GL_LINE:
+		return GE_POLYGON_MODE_LINE;
+	case GL_FILL:
+	default:
+		return GE_POLYGON_MODE_FILL;
+	}
+}
+
 void geRender(GEengine* pEngine)
 {
 	pEngine->Render();
 }
 
-int geSetVertices(GEengine* pEngine, unsigned int entId, unsigned long long size, float* data)
+void geSetBackgroundColor(float color[4])
 {
-	return pEngine->SetVertices(entId, size, data);
+	GL::ClearColor(color[0], color[1], color[2], color[3]);
+}
+
+void geSetPolygonMode(GEpolygonMode mode)
+{
+	switch (mode)
+	{
+	case GE_POLYGON_MODE_POINT:
+		GL::PolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+		break;
+	case GE_POLYGON_MODE_LINE:
+		GL::PolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		break;
+	case GE_POLYGON_MODE_FILL:
+	default:
+		GL::PolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		break;
+	}
 }
 
 namespace
@@ -62,20 +100,7 @@ namespace
 		std::vector<GLuint> shaders;
 		for (auto [shaderType, source] : shaderMap)
 		{
-			GLuint shader = 0;
-			switch (shaderType)
-			{
-			case GL_FRAGMENT_SHADER:
-				shader = GL::CreateFragmentShader();
-				break;
-			case GL_GEOMETRY_SHADER:
-				shader = GL::CreateGeometryShader();
-				break;
-			case GL_VERTEX_SHADER:
-				shader = GL::CreateVertexShader();
-				break;
-			}
-
+			GLuint shader = GL::CreateShader(shaderType);
 			shaders.push_back(shader);
 
 			std::vector<const GLchar*> strings;
@@ -183,7 +208,7 @@ namespace
 			 0.f,   0.5f, 0.f
 		};
 
-		GL::ArrayBufferDataStaticDraw(sizeof(vertices), vertices);
+		GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 		glEnableVertexAttribArray(0);
@@ -205,7 +230,7 @@ namespace
 		GLuint buffer;
 		glGenBuffers(1, &buffer);
 		GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
-		GL::ArrayBufferDataStaticDraw(sizeof(vertices), vertices);
+		GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 		// Set up the positions
 
@@ -222,9 +247,6 @@ namespace
 
 }
 
-//namespace GraphicsEngine
-//{
-
 GEengine::GEengine()
 {
 	InitializeLogging();
@@ -233,7 +255,7 @@ GEengine::GEengine()
 	InitializeShaders();
 
 	GL::ClearColor(0.f, 0.f, 0.f, 1.f);
-	GL::ClearColorBuffer();
+	GL::Clear(GL_COLOR_BUFFER_BIT);
 }
 
 GEengine::~GEengine()
@@ -261,7 +283,7 @@ void DrawTriangle3DBasic(const Entity& entity)
 
 	GL::UseProgram(entity.m_Shader);
 	GL::BindVertexArray(entity.m_VAO);
-	GL::DrawArraysAsTriangles(0, 3);
+	GL::DrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void DrawTriangle3DRGB(const Entity& entity)
@@ -271,10 +293,10 @@ void DrawTriangle3DRGB(const Entity& entity)
 
 	GL::UseProgram(entity.m_Shader);
 	GL::BindVertexArray(entity.m_VAO);
-	GL::DrawArraysAsTriangles(0, 3);
+	GL::DrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-auto CreateVAO_IndexedPoints3DBasic(ByteCount vertexBytes, float* vertices, ByteCount indexBytes, Index* indices) -> GLuint
+auto CreateVAO_IndexedPoints3DBasic(unsigned long long vertexBytes, float* vertices, unsigned long long indexBytes, unsigned int* indices) -> GLuint
 {
 	GLuint vao;
 	GL::GenVertexArrays(1, &vao);
@@ -284,24 +306,24 @@ auto CreateVAO_IndexedPoints3DBasic(ByteCount vertexBytes, float* vertices, Byte
 	GL::GenBuffers(2, buffers.data());
 
 	GL::BindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-	GL::ArrayBufferDataStaticDraw(vertexBytes, vertices);
-	GL::VertexAttribFloatPointer(0, 3, false, 3 * sizeof(float), (void*)0);
+	GL::BufferData(GL_ARRAY_BUFFER, vertexBytes, vertices, GL_STATIC_DRAW);
+	GL::VertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), (void*)0);
 	GL::EnableVertexAttribArray(0);
 
 	GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-	GL::ElementArrayBufferDataStaticDraw(indexBytes, indices);
+	GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, indexBytes, indices, GL_STATIC_DRAW);
 
 	return vao;
 }
 
-auto GEengine::GenerateEntity_IndexedPoints3DBasic(ByteCount vertexBytes, float* vertices, ByteCount indexBytes, Index* indices) -> unsigned int
+auto GEengine::GenerateEntity_IndexedPoints3DBasic(unsigned long long numVertexBytes, float* vertices, unsigned long long numIndexBytes, unsigned int* indices) -> unsigned int
 {
 	Entity entity;
 	entity.m_Type = GE_ENTITY_TYPE_INDEXED_POINTS_BASIC;
 	entity.m_Id = NextAvailableEntityId();
 	entity.m_Shader = m_Shaders[NamedShaderTriangleBasic];
-	entity.m_VAO = CreateVAO_IndexedPoints3DBasic(vertexBytes, vertices, indexBytes, indices);
-	entity.m_NumIndices = static_cast<int>(indexBytes / sizeof(Index));
+	entity.m_VAO = CreateVAO_IndexedPoints3DBasic(numVertexBytes, vertices, numIndexBytes, indices);
+	entity.m_NumIndices = static_cast<int>(numIndexBytes / sizeof(unsigned int));
 	m_Entities.insert(entity);
 	return entity.m_Id;
 }
@@ -330,8 +352,7 @@ auto GEengine::GenerateEntity_Triangle3DRGB() -> unsigned int
 
 auto GEengine::Render() const -> void
 {
-	GL::ClearColorBuffer();
-
+	GL::Clear(GL_COLOR_BUFFER_BIT);
 	for (const auto& entity : m_Entities)
 	{
 		switch (entity.m_Type)
@@ -350,11 +371,6 @@ auto GEengine::Render() const -> void
 			break;
 		}
 	}
-}
-
-GEengine::operator bool() const
-{
-	return m_Initialized;
 }
 
 auto GEengine::InitializeVAOs() -> bool
@@ -440,26 +456,4 @@ auto GEengine::NextAvailableEntityId() const -> unsigned int
 	}
 
 	return id;
-}
-
-auto GEengine::SetVertices(unsigned int entId, unsigned long long size, float* data) -> bool
-{
-	if (auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&entId](const Entity& entity) { return entity.m_Id == entId; }); entity != m_Entities.end())
-	{
-		switch (entity->m_Type)
-		{
-		case GE_ENTITY_TYPE_INDEXED_POINTS_BASIC:
-		{
-			// WHAT TO DO???
-			break;
-		}
-		case GE_ENTITY_TYPE_TRIANGLE_BASIC:
-			DebugBreak(); // Not implemented yet.
-			break;
-		case GE_ENTITY_TYPE_TRIANGLE_RGB:
-			DebugBreak(); // Not implemented yet.
-			break;
-		}
-	}
-	return false;
 }

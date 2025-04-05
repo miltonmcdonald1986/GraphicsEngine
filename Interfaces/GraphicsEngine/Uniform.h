@@ -5,24 +5,19 @@
 
 #include "glm/fwd.hpp"
 
-namespace GraphicsEngine
+enum GEuniformType
 {
+	GE_UNIFORM_TYPE_EMPTY,
+	GE_UNIFORM_TYPE_VEC4,
+};
 
-	enum UniformType
+struct GEuniform
+{
+	GEuniformType m_Type;
+	const char* m_Name;
+	int m_Location;
+	union
 	{
-		UNIFORM_TYPE_EMPTY,
-		UNIFORM_TYPE_VEC4,
-	};
-
-	struct Uniform
-	{
-		UniformType m_Type;
-		const char* m_Name;
-		int m_Location;
-		union 
-		{
-			float vec4[4];
-		} m_Data;
-	};
-
-}
+		float vec4[4];
+	} m_Data;
+};

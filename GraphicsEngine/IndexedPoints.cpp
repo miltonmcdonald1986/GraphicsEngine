@@ -28,7 +28,7 @@ namespace GraphicsEngine
 		GLuint vbo;
 		glGenBuffers(1, &vbo);
 		GL::BindBuffer(GL_ARRAY_BUFFER, vbo);
-		GL::ArrayBufferDataStaticDraw(verticesData.size() * sizeof(float), verticesData.data());
+		GL::BufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(float), verticesData.data(), GL_STATIC_DRAW);
 
 		// Specify the layout of the only vertex attribute (position), and enable that attribute.
 
@@ -40,7 +40,7 @@ namespace GraphicsEngine
 		GLuint ebo;
 		glGenBuffers(1, &ebo);
 		GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		GL::ElementArrayBufferDataStaticDraw(sizeof(unsigned int) * indices.size(), indices.data());
+		GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
 		return vao;
 	}
