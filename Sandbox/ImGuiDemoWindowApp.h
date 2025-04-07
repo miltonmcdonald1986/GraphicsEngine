@@ -5,8 +5,8 @@
 class ImGuiDemoWindowApp : public App
 {
 public:
-
-	ImGuiDemoWindowApp(GLFWwindowSharedPtr spWindow);
+	ImGuiDemoWindowApp(GLFWwindow* pWindow);
+	virtual ~ImGuiDemoWindowApp() = default;
 	virtual auto GetUserDataPointer() -> void* override;
 	virtual auto Run() -> void override;
 };

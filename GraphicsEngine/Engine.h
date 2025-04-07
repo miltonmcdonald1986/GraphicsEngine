@@ -38,6 +38,7 @@ public:
 	auto GenerateEntity_Triangle3DBasic() -> unsigned int;
 	auto GenerateEntity_Triangle3DRGB() -> unsigned int;
 	auto GetCurrentShaderProgram() -> GEshader*;
+	auto GetRecentLogMessages(int* numMessages, const char*** messages) -> void;
 	auto Render() const -> void;
 
 private:
@@ -50,8 +51,9 @@ private:
 	auto InitializeOpenGL() -> bool;
 	auto NextAvailableEntityId() const -> unsigned int;
 
+	std::vector<const char*> m_LogMessages;
 	std::map<std::string, GLuint> m_VAOs;
 	std::map<std::string, GEshader*> m_Shaders;
-	LoggerSharedPtr m_spLogger = nullptr;
+	//LoggerSharedPtr m_spLogger = nullptr;
 	std::set<GraphicsEngine::Entity> m_Entities;
 };

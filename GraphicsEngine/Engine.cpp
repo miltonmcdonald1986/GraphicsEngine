@@ -53,6 +53,31 @@ GEshader* geGetCurrentShaderProgram(GEengine* pEngine)
 	return pEngine->GetCurrentShaderProgram();
 }
 
+GElogLevel geGetLogLevel()
+{
+	//spdlog::level::level_enum level = spdlog::get("Engine")->level();
+	//switch (level)
+	//{
+	//case spdlog::level::trace:
+	//	return GE_LOG_LEVEL_TRACE;
+	//case spdlog::level::debug:
+	//	return GE_LOG_LEVEL_DEBUG;
+	//case spdlog::level::info:
+	//	return GE_LOG_LEVEL_INFO;
+	//case spdlog::level::warn:
+	//	return GE_LOG_LEVEL_WARN;
+	//case spdlog::level::err:
+	//	return GE_LOG_LEVEL_ERR;
+	//case spdlog::level::critical:
+	//	return GE_LOG_LEVEL_CRITICAL;
+	//case spdlog::level::off:
+	//	return GE_LOG_LEVEL_OFF;
+	//}
+
+	//DebugBreak(); // we really shouldn't get here.
+	return GE_LOG_LEVEL_ERR;
+}
+
 GEpolygonMode geGetPolygonMode()
 {
 	std::vector<GLint> param(2);
@@ -69,6 +94,11 @@ GEpolygonMode geGetPolygonMode()
 	}
 }
 
+void geGetRecentLogMessages(GEengine* pEngine, int* numMessages, const char*** messages)
+{
+	pEngine->GetRecentLogMessages(numMessages, messages);
+}
+
 void geRender(GEengine* pEngine)
 {
 	pEngine->Render();
@@ -77,6 +107,35 @@ void geRender(GEengine* pEngine)
 void geSetBackgroundColor(float color[4])
 {
 	GL::ClearColor(color[0], color[1], color[2], color[3]);
+}
+
+void geSetLogLevel(GElogLevel /*level*/)
+{
+	//auto logger = spdlog::get("Engine");
+	//switch (level)
+	//{
+	//case GE_LOG_LEVEL_TRACE:
+	//	logger->set_level(spdlog::level::level_enum::trace);
+	//	break;
+	//case GE_LOG_LEVEL_DEBUG:
+	//	logger->set_level(spdlog::level::level_enum::debug);
+	//	break;
+	//case GE_LOG_LEVEL_INFO:
+	//	logger->set_level(spdlog::level::level_enum::info);
+	//	break;
+	//case GE_LOG_LEVEL_WARN:
+	//	logger->set_level(spdlog::level::level_enum::warn);
+	//	break;
+	//case GE_LOG_LEVEL_ERR:
+	//	logger->set_level(spdlog::level::level_enum::err);
+	//	break;
+	//case GE_LOG_LEVEL_CRITICAL:
+	//	logger->set_level(spdlog::level::level_enum::critical);
+	//	break;
+	//case GE_LOG_LEVEL_OFF:
+	//	logger->set_level(spdlog::level::level_enum::off);
+	//	break;
+	//}
 }
 
 void geSetPolygonMode(GEpolygonMode mode)
@@ -119,7 +178,7 @@ namespace
 			{
 				char infoLog[512];
 				GL::GetShaderInfoLog(shader, 512, NULL, infoLog);
-				spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
+				//spdlog::get("Engine")->error(std::format("{}\t{}\t{}\t{}", std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, infoLog));
 				return false;
 			}
 		}
@@ -203,7 +262,7 @@ namespace
 
 GEengine::GEengine()
 {
-	InitializeLogging();
+	//InitializeLogging();
 	InitializeOpenGL();
 	InitializeVAOs();
 	InitializeShaders();
@@ -214,11 +273,12 @@ GEengine::GEengine()
 
 GEengine::~GEengine()
 {
-	spdlog::drop_all();
 	for (auto [_, pShader] : m_Shaders)
 	{
 		geDestroyShader(pShader);
 	}
+
+	//m_spLogger.reset();
 }
 
 void DrawIndexedPoints3DBasic(const Entity& entity)
@@ -314,13 +374,47 @@ auto GEengine::GetCurrentShaderProgram() -> GEshader*
 	GL::GetIntegerv(GL_CURRENT_PROGRAM, &prog);
 	auto it = std::find_if(m_Shaders.begin(), m_Shaders.end(), [&prog](const std::pair<std::string, GEshader*>& nameAndShader) 
 		{
-			return nameAndShader.second->GetId() == prog;
+			return static_cast<int>(nameAndShader.second->GetId()) == prog;
 		});
 
 	if (it == m_Shaders.end())
 		return 0;
 	else
 		return it->second;
+}
+
+auto GEengine::GetRecentLogMessages(int* /*numMessages*/, const char*** /*messages*/) -> void
+{
+	//auto sinks = spdlog::get("Engine")->sinks();
+	//for (auto sink : sinks)
+	//{
+	//	if (auto spRingbuffer = std::dynamic_pointer_cast<spdlog::sinks::ringbuffer_sink_mt>(sink))
+	//	{
+	//		if (!m_LogMessages.empty())
+	//		{
+	//			for (auto& pStr : m_LogMessages)
+	//			{
+	//				delete[] pStr;
+	//			}
+
+	//			m_LogMessages.clear();
+	//		}
+
+	//		auto strings = spRingbuffer->last_formatted();
+	//		*numMessages = strings.size();
+	//		for (int i = 0; i < strings.size(); ++i)
+	//		{
+	//			auto sizeOfString = strings[i].size();
+	//			char* newString = new char[sizeOfString + 1];
+	//			std::fill(newString, newString + sizeOfString + 1, '\0');
+	//			std::copy(strings[i].begin(), strings[i].end(), newString);
+	//			m_LogMessages.push_back(newString);
+	//		}
+	//		
+	//		if (!m_LogMessages.empty())
+	//			*messages = m_LogMessages.data();
+	//	}
+	//}
 }
 
 auto GEengine::Render() const -> void
@@ -452,12 +546,12 @@ auto GEengine::InitializeLogging() -> bool
 
 	// Create a logger with our sinks.
 
-	m_spLogger = std::make_shared<spdlog::logger>("Engine", std::begin(sinks), std::end(sinks));
-	if (!m_spLogger)
+	auto spLogger = std::make_shared<spdlog::logger>("Engine", std::begin(sinks), std::end(sinks));
+	if (!spLogger)
 		return false;
 
-	m_spLogger->set_level(spdlog::level::debug);
-	spdlog::register_logger(m_spLogger);
+	spdlog::register_logger(spLogger);
+	spLogger->set_level(spdlog::level::debug);
 
 	return true;
 }

@@ -9,9 +9,13 @@
 #include <sstream>
 #include <stacktrace>
 
+#pragma warning ( push, 0 )
+
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/ringbuffer_sink.h"
 #include "spdlog/sinks/rotating_file_sink.h"
+
+#pragma warning ( pop )
 
 #include "glad/glad.h"
 

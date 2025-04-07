@@ -1,7 +1,7 @@
 #include "Widget.h"
 
-Widget::Widget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
-	: m_spWindow(spWindow),
+Widget::Widget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+	: m_pWindow(pWindow),
 	  m_spEngine(spEngine)
 {
 }

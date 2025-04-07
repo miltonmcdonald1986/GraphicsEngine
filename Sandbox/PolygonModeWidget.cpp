@@ -4,8 +4,8 @@
 
 #include "GraphicsEngine/IEngine.h"
 
-PolygonModeWidget::PolygonModeWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
-    : Widget(spWindow, spEngine)
+PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+    : Widget(pWindow, spEngine)
 {
     switch (geGetPolygonMode())
     {

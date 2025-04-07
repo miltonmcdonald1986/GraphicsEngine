@@ -4,14 +4,10 @@
 
 #include "imgui.h"
 
-using namespace GraphicsEngine;
-
-EngineLogWidget::EngineLogWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
-    : Widget(spWindow, spEngine)
+EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+    : Widget(pWindow, spEngine)
 {
-    auto optLevel = Log::GetLevel();
-    if (optLevel)
-        m_LogLevel = static_cast<int>(*optLevel);
+    m_LogLevel = geGetLogLevel();
 }
 
 auto EngineLogWidget::Iterate() -> void
@@ -23,39 +19,41 @@ auto EngineLogWidget::Iterate() -> void
     ImGui::SetNextWindowPos(ImVec2(0, 0.75f*windowSize.y), ImGuiCond_Once);
     ImGui::Begin("Graphics Engine Log");
     ImGui::Text("Log Level");
-    if (ImGui::RadioButton("Trace", &m_LogLevel, 0))
+    if (ImGui::RadioButton("Trace", &m_LogLevel, GE_LOG_LEVEL_TRACE))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Debug", &m_LogLevel, 1))
+    if (ImGui::RadioButton("Debug", &m_LogLevel, GE_LOG_LEVEL_DEBUG))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Info", &m_LogLevel, 2))
+    if (ImGui::RadioButton("Info", &m_LogLevel, GE_LOG_LEVEL_INFO))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Warn", &m_LogLevel, 3))
+    if (ImGui::RadioButton("Warn", &m_LogLevel, GE_LOG_LEVEL_WARN))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Error", &m_LogLevel, 4))
+    if (ImGui::RadioButton("Error", &m_LogLevel, GE_LOG_LEVEL_ERR))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Critical", &m_LogLevel, 5))
+    if (ImGui::RadioButton("Critical", &m_LogLevel, GE_LOG_LEVEL_CRITICAL))
         update = true;
     ImGui::SameLine();
-    if (ImGui::RadioButton("Off", &m_LogLevel, 6))
+    if (ImGui::RadioButton("Off", &m_LogLevel, GE_LOG_LEVEL_OFF))
         update = true;
 
     if (update)
-        Log::SetLevel(static_cast<Log::LogLevel>(m_LogLevel));
+        geSetLogLevel(static_cast<GElogLevel>(m_LogLevel));
 
-    auto msgs = Log::GetRecentLogMessages();
-
-    if (msgs.empty())
+    int numMessages = 0;
+    const char** messages = nullptr;
+    geGetRecentLogMessages(m_spEngine.get(), &numMessages, &messages);
+    
+    if (numMessages == 0)
         ImGui::Text("Log is empty.");
     else
-        ImGui::Text(std::format("Showing {} messages.", msgs.size()).c_str());
+        ImGui::Text(std::format("Showing {} messages.", numMessages).c_str());
 
-    std::reverse(msgs.begin(), msgs.end());
-    for (auto msg : msgs)
-        ImGui::Text(msg.c_str());
+    std::reverse(messages, messages + numMessages);
+    for (int i = 0; i < numMessages; ++i)
+        ImGui::Text(messages[i]);
     ImGui::End();
 }

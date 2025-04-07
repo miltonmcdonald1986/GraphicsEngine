@@ -5,7 +5,7 @@
 class PolygonModeWidget : public Widget
 {
 public:
-    PolygonModeWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine);
+    PolygonModeWidget(GLFWwindow* spWindow, GEengineSharedPtr spEngine);
 
     virtual auto Iterate() -> void override;
 

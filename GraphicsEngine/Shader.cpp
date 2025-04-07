@@ -100,7 +100,7 @@ GEshader::GEshader(const char* vertSource, const char* geomSource, const char* f
 				
 				std::string infoLog(infoLogLength, '\0');
 				GL::GetShaderInfoLog(shader, infoLogLength, NULL, infoLog.data());
-				spdlog::get("Engine")->info(infoLog);
+				//spdlog::get("Engine")->info(infoLog);
 				
 				return 0;
 			}

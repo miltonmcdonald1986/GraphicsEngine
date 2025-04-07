@@ -1,6 +1,9 @@
 #include "ShaderWidget.h"
 
+#pragma warning(push)
+#pragma warning(disable : 4244)
 #include <algorithm>
+#pragma warning(pop)
 #include <functional>
 
 #include "imgui.h"
@@ -8,8 +11,8 @@
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/IShader.h"
 
-ShaderWidget::ShaderWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
-	: Widget(spWindow, spEngine)
+ShaderWidget::ShaderWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+	: Widget(pWindow, spEngine)
 {
 }
 

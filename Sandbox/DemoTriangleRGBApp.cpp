@@ -14,9 +14,7 @@
 #include "EngineLogWidget.h"
 #include "ShaderWidget.h"
 
-using namespace GraphicsEngine;
-
-DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindowSharedPtr spWindow)
+DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
     : App(spWindow)
 {
     geGenerateEntity_Triangle3DRGB(m_spEngine.get());
@@ -34,9 +32,9 @@ auto DemoTriangleRGBApp::GetUserDataPointer() -> void*
 
 auto DemoTriangleRGBApp::Run() -> void
 {
-    glfwSetWindowUserPointer(m_spWindow.get(), (void*)&m_Running);
+    glfwSetWindowUserPointer(m_pWindow, (void*)&m_Running);
 
-    auto NewKeyCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
+    auto NewKeyCallback = [](GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/) -> void
         {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             {
@@ -46,7 +44,7 @@ auto DemoTriangleRGBApp::Run() -> void
             }
         };
 
-    glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
+    glfwSetKeyCallback(m_pWindow, NewKeyCallback);
 
     while (m_Running)
     {
@@ -62,14 +60,14 @@ auto DemoTriangleRGBApp::Run() -> void
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(m_spWindow.get());
+        glfwSwapBuffers(m_pWindow);
 
         /* Poll for and process events */
         glfwPollEvents();
 
-        m_Running = m_Running && !glfwWindowShouldClose(m_spWindow.get());
+        m_Running = m_Running && !glfwWindowShouldClose(m_pWindow);
     }
 
-    glfwSetWindowUserPointer(m_spWindow.get(), nullptr);
-    glfwSetKeyCallback(m_spWindow.get(), nullptr);
+    glfwSetWindowUserPointer(m_pWindow, nullptr);
+    glfwSetKeyCallback(m_pWindow, nullptr);
 }

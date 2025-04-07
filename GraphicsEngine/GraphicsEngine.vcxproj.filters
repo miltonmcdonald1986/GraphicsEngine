@@ -33,9 +33,6 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\IndexedPoints.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h">
       <Filter>Interfaces</Filter>
     </ClInclude>

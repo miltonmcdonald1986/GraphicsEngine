@@ -6,7 +6,7 @@ class DemoIndexedPointsApp : public App
 {
 public:
 
-	DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow);
+	DemoIndexedPointsApp(GLFWwindow* spWindow);
 	virtual auto GetUserDataPointer() -> void* override;
 	virtual auto Run() -> void override;
 };

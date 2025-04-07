@@ -2,14 +2,11 @@
 
 #include "App.h"
 
-class Widget;
-
 class DemoTriangleApp : public App
 {
 public:
-
-	DemoTriangleApp(GLFWwindowSharedPtr spWindow);
-	~DemoTriangleApp();
+	DemoTriangleApp(GLFWwindow* pWindow);
+	virtual ~DemoTriangleApp() override = default;
 	virtual auto GetUserDataPointer(void) -> void* override;
 	virtual auto Run() -> void override;
 };

@@ -6,8 +6,8 @@
 
 #include "GraphicsEngine/IEngine.h"
 
-BackgroundColorWidget::BackgroundColorWidget(GLFWwindowSharedPtr spWindow, GEengineSharedPtr spEngine)
-    : Widget(spWindow, spEngine)
+BackgroundColorWidget::BackgroundColorWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+    : Widget(pWindow, spEngine)
 {
     geGetBackgroundColor(m_Color);
 }

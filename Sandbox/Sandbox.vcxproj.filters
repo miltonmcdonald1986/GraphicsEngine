@@ -84,6 +84,15 @@
     <ClCompile Include="DemoTriangleRGBApp.cpp">
       <Filter>Source Files\Apps</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoTriangleApp.h">
@@ -117,6 +126,15 @@
       <Filter>Header Files\Apps</Filter>
     </ClInclude>
     <ClInclude Include="fwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,8 +4,8 @@
 
 #include "Widget.h"
 
-App::App(GLFWwindowSharedPtr spWindow)
-	: m_spWindow(spWindow),
+App::App(GLFWwindow* pWindow)
+	: m_pWindow(pWindow),
 	  m_spEngine(std::shared_ptr<GEengine>(geCreateGraphicsEngine(), [](GEengine* pEngine) { geDestroyGraphicsEngine(pEngine); }))
 {
 }

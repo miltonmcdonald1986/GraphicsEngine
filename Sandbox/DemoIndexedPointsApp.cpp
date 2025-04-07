@@ -17,7 +17,7 @@
 namespace
 {
 
-    auto KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) -> void
+    auto KeyCallback(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/) -> void
     {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
@@ -29,11 +29,11 @@ namespace
 
 }
 
-DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow)
-    : App(spWindow)
+DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
+    : App(pWindow)
 {
-    glfwSetWindowUserPointer(m_spWindow.get(), GetUserDataPointer());
-    glfwSetKeyCallback(m_spWindow.get(), KeyCallback);
+    glfwSetWindowUserPointer(pWindow, GetUserDataPointer());
+    glfwSetKeyCallback(pWindow, KeyCallback);
 
     std::vector<glm::vec3> vertices = {
         glm::vec3(0.5f, 0.5f, 0.0f),
@@ -49,9 +49,9 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindowSharedPtr spWindow)
 
     geGenerateEntity_IndexedPoints3DBasic(m_spEngine.get(), 3*vertices.size()*sizeof(float), &vertices[0][0], indices.size()*sizeof(unsigned int), indices.data());
 
-    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(spWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(pWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(pWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<EngineLogWidget>(new EngineLogWidget(pWindow, m_spEngine)));
 }
 
 auto DemoIndexedPointsApp::GetUserDataPointer() -> void*
@@ -61,9 +61,9 @@ auto DemoIndexedPointsApp::GetUserDataPointer() -> void*
 
 auto DemoIndexedPointsApp::Run() -> void
 {
-    glfwSetWindowUserPointer(m_spWindow.get(), GetUserDataPointer());
+    glfwSetWindowUserPointer(m_pWindow, GetUserDataPointer());
 
-    auto NewKeyCallback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
+    auto NewKeyCallback = [](GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/) -> void
         {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             {
@@ -73,7 +73,7 @@ auto DemoIndexedPointsApp::Run() -> void
             }
         };
 
-    glfwSetKeyCallback(m_spWindow.get(), NewKeyCallback);
+    glfwSetKeyCallback(m_pWindow, NewKeyCallback);
 
     while (m_Running)
     {
@@ -91,14 +91,14 @@ auto DemoIndexedPointsApp::Run() -> void
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(m_spWindow.get());
+        glfwSwapBuffers(m_pWindow);
 
         /* Poll for and process events */
         glfwPollEvents();
 
-        m_Running = m_Running && !glfwWindowShouldClose(m_spWindow.get());
+        m_Running = m_Running && !glfwWindowShouldClose(m_pWindow);
     }
 
-    glfwSetWindowUserPointer(m_spWindow.get(), nullptr);
-    glfwSetKeyCallback(m_spWindow.get(), nullptr);
+    glfwSetWindowUserPointer(m_pWindow, nullptr);
+    glfwSetKeyCallback(m_pWindow, nullptr);
 }
