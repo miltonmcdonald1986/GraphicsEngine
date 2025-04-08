@@ -6,7 +6,6 @@ class BackgroundColorWidget : public Widget
 {
 public:
     BackgroundColorWidget(GLFWwindow* spWindow, GEengineSharedPtr spEngine);
-
     virtual auto Iterate() -> void override;
 
 private:

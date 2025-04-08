@@ -15,6 +15,7 @@
 #include "imgui_impl_glfw.h"
 
 #include "DemoTriangleApp.h"
+#include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
 
 namespace
@@ -118,8 +119,8 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 	}
 	case Apps::DemoTriangleRGB:
 	{
-		//DemoTriangleRGBApp app(pWindow);
-		//app.Run();
+		DemoTriangleRGBApp app(pWindow);
+		app.Run();
 		break;
 	}
 	case Apps::DemoIndexedPoints:

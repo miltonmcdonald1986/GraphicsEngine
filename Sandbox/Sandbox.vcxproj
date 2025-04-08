@@ -103,6 +103,7 @@
     <ClCompile Include="$(IMGUI_DIR)\imgui_widgets.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BackgroundColorWidget.cpp" />
+    <ClCompile Include="DearImGuiDemoWindowWidget.cpp" />
     <ClCompile Include="DemoIndexedPointsApp.cpp" />
     <ClCompile Include="DemoTriangleApp.cpp" />
     <ClCompile Include="DemoTriangleRGBApp.cpp" />
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BackgroundColorWidget.h" />
+    <ClInclude Include="DearImGuiDemoWindowWidget.h" />
     <ClInclude Include="DemoIndexedPointsApp.h" />
     <ClInclude Include="DemoTriangleApp.h" />
     <ClInclude Include="DemoTriangleRGBApp.h" />

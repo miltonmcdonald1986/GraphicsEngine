@@ -1,10 +1,5 @@
 #pragma once
 
-#include <string>
-#include <variant>
-
-#include "glm/fwd.hpp"
-
 enum GEuniformType
 {
 	GE_UNIFORM_TYPE_EMPTY,

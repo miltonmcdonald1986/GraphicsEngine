@@ -1,7 +1,5 @@
 #pragma once
 
-#include <filesystem>
-
 #include "GraphicsEngine/Uniform.h"
 #include "GraphicsEngineImpExp.h"
 

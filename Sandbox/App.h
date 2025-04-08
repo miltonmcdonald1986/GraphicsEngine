@@ -12,15 +12,17 @@ public:
 
 	App(GLFWwindow* pWindow);
 	virtual ~App();
-	virtual auto GetUserDataPointer() -> void* = 0;
-	virtual auto Run() -> void = 0;
+	virtual auto GetUserDataPointer() -> void*;
+	virtual auto Run() -> void;
 
 protected:
 
 	auto IterateWidgets() -> void;
 
 	bool m_Running = true;
+	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
 	GEengineSharedPtr m_spEngine;
 	std::vector<WidgetUniquePointer> m_Widgets;
+	void* m_PrevUserPointer = nullptr;
 };

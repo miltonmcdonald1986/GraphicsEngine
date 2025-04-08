@@ -93,6 +93,9 @@
     <ClCompile Include="MainLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DearImGuiDemoWindowWidget.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoTriangleApp.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="MainLoop.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DearImGuiDemoWindowWidget.h">
+      <Filter>Header Files\Widgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
