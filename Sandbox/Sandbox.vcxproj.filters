@@ -96,6 +96,12 @@
     <ClCompile Include="DearImGuiDemoWindowWidget.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuApp.cpp">
+      <Filter>Source Files\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuWidget.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoTriangleApp.h">
@@ -142,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="DearImGuiDemoWindowWidget.h">
       <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuApp.h">
+      <Filter>Header Files\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuWidget.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Apps.h">
+      <Filter>Header Files\Apps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

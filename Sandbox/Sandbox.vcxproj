@@ -110,6 +110,8 @@
     <ClCompile Include="EngineLogWidget.cpp" />
     <ClCompile Include="ImGuiDemoWindowApp.cpp" />
     <ClCompile Include="MainLoop.cpp" />
+    <ClCompile Include="MainMenuApp.cpp" />
+    <ClCompile Include="MainMenuWidget.cpp" />
     <ClCompile Include="PolygonModeWidget.cpp" />
     <ClCompile Include="Sandbox.cpp" />
     <ClCompile Include="ShaderWidget.cpp" />
@@ -119,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Apps.h" />
     <ClInclude Include="BackgroundColorWidget.h" />
     <ClInclude Include="DearImGuiDemoWindowWidget.h" />
     <ClInclude Include="DemoIndexedPointsApp.h" />
@@ -128,6 +131,8 @@
     <ClInclude Include="fwd.h" />
     <ClInclude Include="ImGuiDemoWindowApp.h" />
     <ClInclude Include="MainLoop.h" />
+    <ClInclude Include="MainMenuApp.h" />
+    <ClInclude Include="MainMenuWidget.h" />
     <ClInclude Include="PolygonModeWidget.h" />
     <ClInclude Include="ShaderWidget.h" />
     <ClInclude Include="UI.h" />
