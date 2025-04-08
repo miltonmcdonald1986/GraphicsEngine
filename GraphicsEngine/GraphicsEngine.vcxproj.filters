@@ -33,9 +33,6 @@
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Interfaces\GraphicsEngine\Texture.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -62,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Interfaces\GraphicsEngine\ILog.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

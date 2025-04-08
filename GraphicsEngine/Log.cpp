@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "GraphicsEngine/Log.h"
+#include "GraphicsEngine/ILog.h"
 
 namespace GraphicsEngine::Log
 {

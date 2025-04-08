@@ -88,8 +88,8 @@
   <ItemGroup>
     <ClInclude Include="..\Interfaces\GraphicsEngine\GraphicsEngineImpExp.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IEngine.h" />
+    <ClInclude Include="..\Interfaces\GraphicsEngine\ILog.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\IShader.h" />
-    <ClInclude Include="..\Interfaces\GraphicsEngine\Log.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Texture.h" />
     <ClInclude Include="..\Interfaces\GraphicsEngine\Uniform.h" />
     <ClInclude Include="Engine.h" />
