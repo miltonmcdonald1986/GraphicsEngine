@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/milton/source/repos/GraphicsEngine/build/cmake_install.cmake",
+		"/home/milton/source/repos/GraphicsEngine/build/GraphicsEngine/cmake_install.cmake",
+		"/home/milton/source/repos/GraphicsEngine/build/Sandbox/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
