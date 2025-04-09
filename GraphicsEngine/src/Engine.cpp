@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "Error.h"
 #include "SafeGL.h"
+#include "Debug.h"
 
 using namespace GraphicsEngine;
 
@@ -435,7 +436,7 @@ auto GEengine::Render() const -> void
 			DrawTriangle3DRGB(entity);
 			break;
 		default:
-			DebugBreak(); // We apparently need to support a new type.
+			BREAKPOINT; // We apparently need to support a new type.
 			break;
 		}
 	}

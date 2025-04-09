@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Error.h"
 
+#include "Debug.h"
+
 namespace GraphicsEngine
 {
 
@@ -18,7 +20,7 @@ namespace GraphicsEngine
 #ifdef _DEBUG
 
 				loggerOutputStream << "\nStack trace:\n============\n" << std::stacktrace::current();
-				DebugBreak();
+				BREAKPOINT;
 
 #endif
 
@@ -50,7 +52,7 @@ namespace GraphicsEngine
 #ifdef _DEBUG
 
 			//logger->warn("Unknown error flag.");
-			DebugBreak();
+			BREAKPOINT;
 
 #endif
 			break;

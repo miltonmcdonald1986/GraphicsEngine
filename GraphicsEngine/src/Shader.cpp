@@ -2,6 +2,7 @@
 #include "Shader.h"
 
 #include "SafeGL.h"
+#include "Debug.h"
 
 using namespace GraphicsEngine;
 
@@ -71,7 +72,7 @@ bool geSetUniform(GEshader* pShader, const GEuniform* uniform)
 		break;
 	}
 	default:
-		DebugBreak(); // We need to handle whatever type was provided.
+		BREAKPOINT; // We need to handle whatever type was provided.
 		Cleanup();
 		return false;
 	}
@@ -188,7 +189,7 @@ auto GEshader::GetActiveUniforms(int* numUniforms, GEuniform* uniforms) -> void
 		}
 
 		// Apparently we're not handling a type that we need to be.
-		DebugBreak();
+		BREAKPOINT;
 		m_Uniforms.push_back(GEuniform{ .m_Type = GE_UNIFORM_TYPE_EMPTY });
 	}
 
