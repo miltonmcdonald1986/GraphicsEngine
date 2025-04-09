@@ -44,6 +44,9 @@ target_compile_definitions(GraphicsEngine
 
 add_library(glad ../lib/glad/src/glad.c)
 target_include_directories(glad PUBLIC ../lib/glad/include)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(glad PRIVATE -fPIC)
+endif()
 target_link_libraries(GraphicsEngine PRIVATE glad)
 
 # stb
