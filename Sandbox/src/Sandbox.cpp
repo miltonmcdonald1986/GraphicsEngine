@@ -1,4 +1,6 @@
+#ifdef _WIN32
 #include <crtdbg.h>
+#endif
 
 #include "MainLoop.h"
 #include "UI.h"
@@ -6,8 +8,10 @@
 
 int main()
 {
+#ifdef _WIN32
     // Enable Memory Leak Detection
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 
     auto pWindow = InitializeGLFW();
     if (!pWindow)
