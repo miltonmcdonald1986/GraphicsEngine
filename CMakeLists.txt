@@ -30,7 +30,7 @@ if (DOWNLOAD_DEPENDENCIES)
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		execute_process(
-			COMMAND powershell -File fetch_spdlog.sh
+			COMMAND bash fetch_spdlog.sh
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 			RESULT_VARIABLE script_result
 		)
@@ -50,7 +50,7 @@ if (DOWNLOAD_DEPENDENCIES)
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		execute_process(
-			COMMAND powershell -File fetch_glfw.sh
+			COMMAND bash -File fetch_glfw.sh
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 			RESULT_VARIABLE script_result
 		)
@@ -70,7 +70,7 @@ if (DOWNLOAD_DEPENDENCIES)
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		execute_process(
-			COMMAND powershell -File fetch_imgui.sh
+			COMMAND bash -File fetch_imgui.sh
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 			RESULT_VARIABLE script_result
 		)
@@ -90,7 +90,7 @@ if (DOWNLOAD_DEPENDENCIES)
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		execute_process(
-			COMMAND powershell -File fetch_stb.sh
+			COMMAND bash -File fetch_stb.sh
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 			RESULT_VARIABLE script_result
 		)
@@ -110,7 +110,7 @@ if (DOWNLOAD_DEPENDENCIES)
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 		execute_process(
-			COMMAND powershell -File fetch_glm.sh
+			COMMAND bash -File fetch_glm.sh
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 			RESULT_VARIABLE script_result
 		)
