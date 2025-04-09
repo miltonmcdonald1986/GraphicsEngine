@@ -1,9 +1,0 @@
-/home/milton/source/repos/GraphicsEngine/build/CMakeFiles/edit_cache.dir
-/home/milton/source/repos/GraphicsEngine/build/CMakeFiles/rebuild_cache.dir
-/home/milton/source/repos/GraphicsEngine/build/GraphicsEngine/CMakeFiles/GraphicsEngine.dir
-/home/milton/source/repos/GraphicsEngine/build/GraphicsEngine/CMakeFiles/glad.dir
-/home/milton/source/repos/GraphicsEngine/build/GraphicsEngine/CMakeFiles/edit_cache.dir
-/home/milton/source/repos/GraphicsEngine/build/GraphicsEngine/CMakeFiles/rebuild_cache.dir
-/home/milton/source/repos/GraphicsEngine/build/Sandbox/CMakeFiles/Sandbox.dir
-/home/milton/source/repos/GraphicsEngine/build/Sandbox/CMakeFiles/edit_cache.dir
-/home/milton/source/repos/GraphicsEngine/build/Sandbox/CMakeFiles/rebuild_cache.dir
