@@ -13,8 +13,9 @@ target_include_directories(Sandbox PRIVATE
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	target_link_options(Sandbox PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
-	target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 endif()
+
+target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 
 # Loop through files and assign filters dynamically
 foreach(FILE IN LISTS SANDBOX_SRC)
