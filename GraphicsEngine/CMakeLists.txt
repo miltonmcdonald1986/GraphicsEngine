@@ -49,3 +49,7 @@ target_link_libraries(GraphicsEngine PRIVATE glad)
 # stb
 
 target_include_directories(GraphicsEngine PUBLIC ../lib/stb)
+
+# glm
+
+target_include_directories(GraphicsEngine PUBLIC ../lib/glm)

@@ -61,3 +61,7 @@ add_custom_command(TARGET Sandbox POST_BUILD
         "${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3.dll"  # Path to the DLL
         $<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
 )
+
+# glm
+
+target_include_directories(GraphicsEngine PUBLIC ../lib/glm)

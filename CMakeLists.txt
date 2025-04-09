@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(GraphicsEngine)
 
-option(RUN_POWERSHELL_SCRIPTS "Run PowerShell scripts during configuration" OFF)
-option(RUN_BASH_SCRIPTS "Run Bash scripts during configuration" OFF)
+option(DOWNLOAD_DEPENDENCIES "Download and install all dependencies to the lib folder." OFF)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,80 +24,106 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT S
 
 # Get spdlog
 
-if (RUN_POWERSHELL_SCRIPTS)
-	execute_process(
-		COMMAND powershell -File fetch_spdlog.ps1
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		RESULT_VARIABLE script_result
-	)
-
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "PowerShell script failed with result code: ${script_result}")
+if (DOWNLOAD_DEPENDENCIES)
+	
+	# Fetch spdlog
+	
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+		execute_process(
+			COMMAND powershell -File fetch_spdlog.sh
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+		execute_process(
+			COMMAND powershell -File fetch_spdlog.ps1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
 	endif()
 
-	# Get GLFW
-
-	execute_process(
-		COMMAND powershell -File fetch_glfw.ps1
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		RESULT_VARIABLE script_result
-	)
-
 	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "PowerShell script failed with result code: ${script_result}")
+		message(FATAL_ERROR "Failed to fetch spdlog: ${script_result}")
 	endif()
 
-	# Get imgui
-
-	execute_process(
-		COMMAND powershell -File fetch_imgui.ps1
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		RESULT_VARIABLE script_result
-	)
+	# Fetch GLFW
+	
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+		execute_process(
+			COMMAND powershell -File fetch_glfw.sh
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+		execute_process(
+			COMMAND powershell -File fetch_glfw.ps1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	endif()
 
 	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "PowerShell script failed with result code: ${script_result}")
+		message(FATAL_ERROR "Failed to fetch glfw: ${script_result}")
 	endif()
 	
-	# Get stb
-
-	execute_process(
-		COMMAND powershell -File fetch_stb.ps1
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		RESULT_VARIABLE script_result
-	)
-
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "PowerShell script failed with result code: ${script_result}")
-	endif()
-elseif(RUN_BASH_SCRIPTS) 	
-    execute_process(
-	COMMAND bash fetch_spdlog.sh
-	    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-	    RESULT_VARIABLE script_result
-	)
-
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Bash script failed with result code: ${script_result}")
-	endif()
+	# Fetch imgui
 	
-    execute_process(
-	COMMAND bash fetch_glfw.sh
-	    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-	    RESULT_VARIABLE script_result
-	)
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+		execute_process(
+			COMMAND powershell -File fetch_imgui.sh
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+		execute_process(
+			COMMAND powershell -File fetch_imgui.ps1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	endif()
 
 	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Bash script failed with result code: ${script_result}")
+		message(FATAL_ERROR "Failed to fetch imgui: ${script_result}")
 	endif()
+
+	# Fetch stb
 	
-    execute_process(
-	COMMAND bash fetch_imgui.sh
-	    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-	    RESULT_VARIABLE script_result
-	)
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+		execute_process(
+			COMMAND powershell -File fetch_stb.sh
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+		execute_process(
+			COMMAND powershell -File fetch_stb.ps1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	endif()
 
 	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Bash script failed with result code: ${script_result}")
+		message(FATAL_ERROR "Failed to fetch stb: ${script_result}")
+	endif()	
+	
+	# Fetch glm
+	
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+		execute_process(
+			COMMAND powershell -File fetch_glm.sh
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
+	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+		execute_process(
+			COMMAND powershell -File fetch_glm.ps1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			RESULT_VARIABLE script_result
+		)
 	endif()
+
+	if(NOT script_result EQUAL 0)
+		message(FATAL_ERROR "Failed to fetch glm: ${script_result}")
+	endif()	
+
 endif()

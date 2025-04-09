@@ -9,10 +9,7 @@
 #include <filesystem>
 #include <fstream>
 #include <sstream>
-#if __has_include(<stacktrace>)
-    #include <stacktrace>
-    #define STACKTRACE_SUPPORTED
-#endif
+#include <stacktrace>
 
 #pragma warning ( push, 0 )
 
