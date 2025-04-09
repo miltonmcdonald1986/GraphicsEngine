@@ -11,8 +11,10 @@ target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget
 )
 
-target_link_options(Sandbox PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
-target_link_libraries(Sandbox PRIVATE GraphicsEngine)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	target_link_options(Sandbox PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
+	target_link_libraries(Sandbox PRIVATE GraphicsEngine)
+endif()
 
 # Loop through files and assign filters dynamically
 foreach(FILE IN LISTS SANDBOX_SRC)
