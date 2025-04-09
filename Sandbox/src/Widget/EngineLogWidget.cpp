@@ -1,5 +1,6 @@
 #include "EngineLogWidget.h"
 
+#include <algorithm>
 #include <format>
 
 #include "imgui.h"
