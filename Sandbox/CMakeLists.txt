@@ -7,8 +7,8 @@ add_executable(Sandbox ${SANDBOX_SRC})
 
 target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/app
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/widget
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/App
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget
 )
 
 target_link_options(Sandbox PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
