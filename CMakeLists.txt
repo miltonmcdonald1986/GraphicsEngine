@@ -49,11 +49,14 @@ if (DOWNLOAD_DEPENDENCIES)
 	# Fetch GLFW
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		execute_process(
-			COMMAND bash fetch_glfw.sh
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
+		include(FetchContent)
+		FetchContent_Declare(
+			glfw
+			GIT_REPOSITORY https://github.com/glfw/glfw.git
+			GIT_TAG latest
 		)
+
+		FetchContent_MakeAvailable(glfw)
 	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 		execute_process(
 			COMMAND powershell -File fetch_glfw.ps1

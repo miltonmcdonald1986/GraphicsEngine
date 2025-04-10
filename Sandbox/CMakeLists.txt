@@ -25,9 +25,13 @@ foreach(FILE IN LISTS SANDBOX_SRC)
     source_group("${FILTER}" FILES "${FILE}")
 endforeach()
 
-# Specify GLFW's include path and library path manually
-target_include_directories(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/include)
-target_link_libraries(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3dll.lib)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_link_libraries(your_target PRIVATE glfw)
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	# Specify GLFW's include path and library path manually
+	target_include_directories(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/include)
+	target_link_libraries(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3dll.lib)
+endif()
 
 # Add the Dear ImGui source files
 
