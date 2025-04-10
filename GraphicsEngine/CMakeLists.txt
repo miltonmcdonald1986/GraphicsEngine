@@ -1,7 +1,9 @@
 file(GLOB ENGINE_SRC
 	"${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/glad/glad.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/KHR/khrplatform.h"
 )
 
 # Create filters for include, src, etc.
@@ -49,6 +51,5 @@ target_include_directories(GraphicsEngine PRIVATE ${Stb_INCLUDE_DIR})
 ################################################################################
 
 target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog)
-target_link_libraries(GraphicsEngine PRIVATE glad::glad)
 target_link_libraries(GraphicsEngine PRIVATE glm::glm)
 
