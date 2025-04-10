@@ -13,6 +13,14 @@ endif()
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
 
+if(WIN32)
+	if(NOT DEFINED ENV{VCPKG_ROOT})
+		message(FATAL_ERROR "The environment variable VCPKG_ROOT is not set!")
+	else()
+		set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+	endif()
+endif()
+
 find_package(glfw3 CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
