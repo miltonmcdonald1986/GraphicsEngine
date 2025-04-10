@@ -1,7 +1,3 @@
-################################################################################
-# GraphicsEngine source files and filters                                      #
-################################################################################
-
 file(GLOB ENGINE_SRC
 	"${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
@@ -32,6 +28,7 @@ file(GLOB_RECURSE PCH_FILES
     "${CMAKE_BINARY_DIR}/cmake_pch.*"
 	"${CMAKE_CURRENT_SOURCE_DIR}/pch.*"
 )
+message("pch files are ${PCH_FILES}")
 
 # Create filter for precompiled header files.
 source_group("precompiled" FILES ${PCH_FILES})
@@ -43,29 +40,15 @@ source_group("precompiled" FILES ${PCH_FILES})
 target_include_directories(GraphicsEngine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 	${CMAKE_CURRENT_SOURCE_DIR}/src
-	${stb_SOURCE_DIR}
-	${glm_SOURCE_DIR}
 )
 
-################################################################################
-# spdlog library                                                               #
-################################################################################
-
-target_link_libraries(GraphicsEngine PRIVATE spdlog)
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(spdlog PRIVATE -fPIC)
-endif()
-target_compile_definitions(GraphicsEngine
-    PRIVATE SPDLOG_USE_STD_FORMAT
-)
+target_include_directories(GraphicsEngine PRIVATE ${Stb_INCLUDE_DIR})
 
 ################################################################################
-# glad library                                                                 #
+# Libraries                                                                    #
 ################################################################################
 
-add_library(glad ../lib/glad/include/glad/glad.h ../lib/glad/src/glad.c)
-target_include_directories(glad PUBLIC ../lib/glad/include)
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_compile_options(glad PRIVATE -fPIC)
-endif()
-target_link_libraries(GraphicsEngine PRIVATE glad)
+target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog)
+target_link_libraries(GraphicsEngine PRIVATE glad::glad)
+target_link_libraries(GraphicsEngine PRIVATE glm::glm)
+
