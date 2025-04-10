@@ -1,30 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
 project(GraphicsEngine)
-
-option(DOWNLOAD_DEPENDENCIES "Download and install all dependencies to the lib folder." OFF)
+include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-	message("THIS IS LINUX")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23")
-endif()
+# if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	# message("THIS IS LINUX")
+	# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23")
+# endif()
 
-message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER}")
-message(STATUS "C Compiler: ${CMAKE_C_COMPILER}")
-
-# Add subdirectories for the engine and sandbox
-# add_subdirectory(lib/spdlog)
-add_subdirectory(GraphicsEngine)
-add_subdirectory(Sandbox)
+# message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER}")
+# message(STATUS "C Compiler: ${CMAKE_C_COMPILER}")
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
 
 # Fetch GLFW
 	
-include(FetchContent)
 FetchContent_Declare(
 	glfw
 	GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -34,7 +27,6 @@ FetchContent_MakeAvailable(glfw)
 
 # Fetch spdlog
 	
-include(FetchContent)
 FetchContent_Declare(
 	spdlog
 	GIT_REPOSITORY https://github.com/gabime/spdlog.git
@@ -42,68 +34,32 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-# Get spdlog
-
-if (DOWNLOAD_DEPENDENCIES)
-		
-	# Fetch imgui
+# Fetch imgui
 	
-	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		execute_process(
-			COMMAND bash fetch_imgui.sh
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		execute_process(
-			COMMAND powershell -File fetch_imgui.ps1
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	endif()
+FetchContent_Declare(
+	imgui
+	GIT_REPOSITORY https://github.com/ocornut/imgui.git
+	GIT_TAG v1.91.9b-docking
+)
+FetchContent_MakeAvailable(imgui)
 
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Failed to fetch imgui: ${script_result}")
-	endif()
+# Fetch stb
 
-	# Fetch stb
-	
-	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		execute_process(
-			COMMAND bash fetch_stb.sh
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		execute_process(
-			COMMAND powershell -File fetch_stb.ps1
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	endif()
+FetchContent_Declare(
+	stb
+	GIT_REPOSITORY https://github.com/nothings/stb.git
+	GIT_TAG master
+)
+FetchContent_MakeAvailable(stb)
 
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Failed to fetch stb: ${script_result}")
-	endif()	
-	
-	# Fetch glm
-	
-	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		execute_process(
-			COMMAND bash fetch_glm.sh
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		execute_process(
-			COMMAND powershell -File fetch_glm.ps1
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	endif()
+# Fetch glm
 
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Failed to fetch glm: ${script_result}")
-	endif()	
+FetchContent_Declare(
+	glm
+	GIT_REPOSITORY https://github.com/g-truc/glm.git
+	GIT_TAG 1.0.1
+)
+FetchContent_MakeAvailable(glm)
 
-endif()
+add_subdirectory(GraphicsEngine)
+add_subdirectory(Sandbox)
