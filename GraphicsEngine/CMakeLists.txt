@@ -52,6 +52,9 @@ target_include_directories(GraphicsEngine PUBLIC
 ################################################################################
 
 target_link_libraries(GraphicsEngine PRIVATE spdlog)
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_compile_options(spdlog PRIVATE -fPIC)
+endif()
 target_compile_definitions(GraphicsEngine
     PRIVATE SPDLOG_USE_STD_FORMAT
 )
