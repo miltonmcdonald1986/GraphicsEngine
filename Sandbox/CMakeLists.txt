@@ -26,7 +26,7 @@ foreach(FILE IN LISTS SANDBOX_SRC)
 endforeach()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_link_libraries(your_target PRIVATE glfw)
+	target_link_libraries(Sandbox PRIVATE glfw)
 elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	# Specify GLFW's include path and library path manually
 	target_include_directories(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/include)
