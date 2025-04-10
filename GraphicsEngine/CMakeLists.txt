@@ -33,9 +33,7 @@ file(GLOB_RECURSE PCH_FILES
 # Assign an empty filter for all matched files
 source_group("precompiled" FILES ${PCH_FILES})
 
-# spdlog
-target_include_directories(GraphicsEngine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/spdlog/include)
-#target_link_libraries(GraphicsEngine PUBLIC spdlog::spdlog)
+target_link_libraries(GraphicsEngine PRIVATE spdlog)
 target_compile_definitions(GraphicsEngine
     PRIVATE SPDLOG_USE_STD_FORMAT
 )

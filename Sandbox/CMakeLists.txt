@@ -25,13 +25,7 @@ foreach(FILE IN LISTS SANDBOX_SRC)
     source_group("${FILTER}" FILES "${FILE}")
 endforeach()
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	target_link_libraries(Sandbox PRIVATE glfw)
-elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	# Specify GLFW's include path and library path manually
-	target_include_directories(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/include)
-	target_link_libraries(Sandbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3dll.lib)
-endif()
+target_link_libraries(Sandbox PRIVATE glfw)
 
 # Add the Dear ImGui source files
 
@@ -65,11 +59,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 			$<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
 	)
 
-	add_custom_command(TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3.dll"  # Path to the DLL
-			$<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
-	)
+#	add_custom_command(TARGET Sandbox POST_BUILD
+#		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#			"${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3.dll"  # Path to the DLL
+#			$<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
+#	)
 	
 endif()
 

@@ -22,53 +22,30 @@ add_subdirectory(Sandbox)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
 
+# Fetch GLFW
+	
+include(FetchContent)
+FetchContent_Declare(
+	glfw
+	GIT_REPOSITORY https://github.com/glfw/glfw.git
+	GIT_TAG 3.4
+)
+FetchContent_MakeAvailable(glfw)
+
+# Fetch spdlog
+	
+include(FetchContent)
+FetchContent_Declare(
+	spdlog
+	GIT_REPOSITORY https://github.com/gabime/spdlog.git
+	GIT_TAG v1.15.2
+)
+FetchContent_MakeAvailable(spdlog)
+
 # Get spdlog
 
 if (DOWNLOAD_DEPENDENCIES)
-	
-	# Fetch spdlog
-	
-	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		execute_process(
-			COMMAND bash fetch_spdlog.sh
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		execute_process(
-			COMMAND powershell -File fetch_spdlog.ps1
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	endif()
-
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Failed to fetch spdlog: ${script_result}")
-	endif()
-
-	# Fetch GLFW
-	
-	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-		include(FetchContent)
-		FetchContent_Declare(
-			glfw
-			GIT_REPOSITORY https://github.com/glfw/glfw.git
-			GIT_TAG latest
-		)
-
-		FetchContent_MakeAvailable(glfw)
-	elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-		execute_process(
-			COMMAND powershell -File fetch_glfw.ps1
-			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			RESULT_VARIABLE script_result
-		)
-	endif()
-
-	if(NOT script_result EQUAL 0)
-		message(FATAL_ERROR "Failed to fetch glfw: ${script_result}")
-	endif()
-	
+		
 	# Fetch imgui
 	
 	if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
