@@ -55,19 +55,23 @@ target_include_directories(Sandbox PRIVATE
 target_sources(Sandbox PRIVATE ${IMGUI_SOURCES})
 source_group("imgui" FILES ${IMGUI_SOURCES})
 
-#post build events to copy dlls
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 
-add_custom_command(TARGET Sandbox POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:GraphicsEngine>  # Path to the DLL
-        $<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
-)
+	#post build events to copy dlls
 
-add_custom_command(TARGET Sandbox POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3.dll"  # Path to the DLL
-        $<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
-)
+	add_custom_command(TARGET Sandbox POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			$<TARGET_FILE:GraphicsEngine>  # Path to the DLL
+			$<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
+	)
+
+	add_custom_command(TARGET Sandbox POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_CURRENT_SOURCE_DIR}/../lib/GLFW/lib-vc2022/glfw3.dll"  # Path to the DLL
+			$<TARGET_FILE_DIR:Sandbox>    # Path to the executable directory
+	)
+	
+endif()
 
 # glm
 
