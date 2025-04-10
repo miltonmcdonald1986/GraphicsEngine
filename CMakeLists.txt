@@ -1,23 +1,41 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(GraphicsEngine)
+
+################################################################################
+# Load CMake modules                                                           #
+################################################################################
+
 include(FetchContent)
+
+################################################################################
+# C++ Standard                                                                 #
+################################################################################
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-	# message("THIS IS LINUX")
-	# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23")
-# endif()
+################################################################################
+# Set warning levels                                                           #
+################################################################################
 
-# message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER}")
-# message(STATUS "C Compiler: ${CMAKE_C_COMPILER}")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    add_compile_options(-Wall -Wextra -Wpedantic)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(/W4)
+endif()
+
+################################################################################
+# Visual Studio Properties                                                     #
+################################################################################
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
 
-# Fetch GLFW
-	
+################################################################################
+# Dependencies                                                                 #
+################################################################################
+
+# GLFW
 FetchContent_Declare(
 	glfw
 	GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -25,8 +43,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glfw)
 
-# Fetch spdlog
-	
+# spdlog
 FetchContent_Declare(
 	spdlog
 	GIT_REPOSITORY https://github.com/gabime/spdlog.git
@@ -34,8 +51,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-# Fetch imgui
-	
+# imgui
 FetchContent_Declare(
 	imgui
 	GIT_REPOSITORY https://github.com/ocornut/imgui.git
@@ -43,8 +59,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(imgui)
 
-# Fetch stb
-
+# stb
 FetchContent_Declare(
 	stb
 	GIT_REPOSITORY https://github.com/nothings/stb.git
@@ -52,14 +67,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(stb)
 
-# Fetch glm
-
+# glm
 FetchContent_Declare(
 	glm
 	GIT_REPOSITORY https://github.com/g-truc/glm.git
 	GIT_TAG 1.0.1
 )
 FetchContent_MakeAvailable(glm)
+
+################################################################################
+# Add a subdirectory for each project in this repository.                      #
+################################################################################
 
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
