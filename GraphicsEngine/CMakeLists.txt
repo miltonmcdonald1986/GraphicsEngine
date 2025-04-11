@@ -1,3 +1,7 @@
+################################################################################
+# Specify the locations of all source files for this project                   #
+################################################################################
+
 file(GLOB ENGINE_SRC
 	"${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
@@ -6,7 +10,10 @@ file(GLOB ENGINE_SRC
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/KHR/khrplatform.h"
 )
 
-# Create filters for include, src, etc.
+################################################################################
+# Create filters for each directory                                            #
+################################################################################
+
 foreach(FILE IN LISTS ENGINE_SRC)
     get_filename_component(PATH "${FILE}" PATH)
     file(RELATIVE_PATH REL_PATH "${CMAKE_CURRENT_SOURCE_DIR}" "${PATH}")
@@ -15,7 +22,7 @@ foreach(FILE IN LISTS ENGINE_SRC)
 endforeach()
 
 ################################################################################
-# GraphicsEngine library settings                                              #
+# Define GRAPHICSENGINE_EXPORTS for Windows dll creation.                      #
 ################################################################################
 
 add_library(GraphicsEngine SHARED ${ENGINE_SRC})
@@ -30,9 +37,6 @@ file(GLOB_RECURSE PCH_FILES
     "${CMAKE_BINARY_DIR}/cmake_pch.*"
 	"${CMAKE_CURRENT_SOURCE_DIR}/pch.*"
 )
-message("pch files are ${PCH_FILES}")
-
-# Create filter for precompiled header files.
 source_group("precompiled" FILES ${PCH_FILES})
 
 ################################################################################
@@ -52,4 +56,3 @@ target_include_directories(GraphicsEngine PRIVATE ${Stb_INCLUDE_DIR})
 
 target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog)
 target_link_libraries(GraphicsEngine PRIVATE glm::glm)
-
