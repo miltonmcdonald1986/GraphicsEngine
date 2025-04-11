@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.11)
 project(GraphicsEngine)
 
 ################################################################################
+# CMAKE options       										                   #
+################################################################################
+
+option(BUILD_SANDBOX "Build Sandbox" ON)
+
+################################################################################
 # Set the C++ standard										                   #
 ################################################################################
 
@@ -23,7 +29,9 @@ endif()
 # For Visual Studio, Sandbox is our startup project                            #
 ################################################################################
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
+if (BUILD_SANDBOX)
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
+endif()
 
 ################################################################################
 # Set the vcpkg toolchain file location                                        #
@@ -39,15 +47,19 @@ endif()
 # Specify our dependencies                                                     #
 ################################################################################
 
-find_package(glfw3 CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(Stb REQUIRED)
-find_package(imgui CONFIG REQUIRED)
+if (BUILD_SANDBOX)
+	find_package(imgui CONFIG REQUIRED)
+	find_package(glfw3 CONFIG REQUIRED)
+endif()
 
 ################################################################################
 # Create the projects                                                          #
 ################################################################################
 
 add_subdirectory(GraphicsEngine)
-add_subdirectory(Sandbox)
+if(BUILD_SANDBOX)
+    add_subdirectory(Sandbox)
+endif()
