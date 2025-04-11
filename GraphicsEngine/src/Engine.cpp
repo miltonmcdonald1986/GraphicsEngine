@@ -12,13 +12,53 @@
 
 using namespace GraphicsEngine;
 
-//// Shared VAO names
-const std::string NamedVAOTriangleBasic = "Triangle Basic";
-const std::string NamedVAOTriangleRGB = "Triangle RGB";
-
 //// Shared Shader names
 const std::string NamedShaderTriangleBasic = "Triangle Basic";
 const std::string NamedShaderTriangleRGB = "Triangle RGB";
+
+namespace
+{
+
+	auto CreateVAO_Pos3f(unsigned long long numBytes, float* data) -> GLuint
+	{
+		GLuint vao;
+		GL::GenVertexArrays(1, &vao);
+		GL::BindVertexArray(vao);
+
+		GLuint buffer;
+		GL::GenBuffers(1, &buffer);
+		GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
+		GL::BufferData(GL_ARRAY_BUFFER, numBytes, data, GL_STATIC_DRAW);
+
+		GL::VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+		GL::EnableVertexAttribArray(0);
+
+		return vao;
+	}
+
+	auto CreateVAO_Pos3fCol3f(unsigned long long numBytes, float* data) -> GLuint
+	{
+		GLuint vao;
+		GL::GenVertexArrays(1, &vao);
+		GL::BindVertexArray(vao);
+
+		GLuint buffers[2];
+		GL::GenBuffers(2, buffers);
+
+		GL::BindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		GL::BufferData(GL_ARRAY_BUFFER, numBytes, data, GL_STATIC_DRAW);
+		GL::VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
+		GL::EnableVertexAttribArray(0);
+
+		GL::BindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+		GL::BufferData(GL_ARRAY_BUFFER, numBytes, data, GL_STATIC_DRAW);
+		GL::VertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+		GL::EnableVertexAttribArray(1);
+
+		return vao;
+	}
+
+}
 
 GEengine* geCreateGraphicsEngine()
 {
@@ -35,14 +75,26 @@ unsigned int geGenerateEntity_IndexedPoints3DBasic(GEengine* pEngine, unsigned l
 	return pEngine->GenerateEntity_IndexedPoints3DBasic(numVertexBytes, vertices, numIndexBytes, indices);
 }
 
-unsigned int geGenerateEntity_Triangle3DBasic(GEengine* pEngine)
+unsigned int geGenerateEntity_Pos3f(GEengine* pEngine, unsigned long long numBytes, float* data)
 {
-	return pEngine->GenerateEntity_Triangle3DBasic();
+	auto spEntity = pEngine->AddEntity();
+	spEntity->m_Type = GE_ENTITY_TYPE_POS3F;
+	spEntity->m_pShader = pEngine->GetShader(NamedShaderTriangleBasic);
+	spEntity->m_VAO = CreateVAO_Pos3f(numBytes, data);
+	spEntity->m_NumIndices = 0;
+	spEntity->m_NumVertices = numBytes / (3*sizeof(float));
+	return spEntity->m_Id;
 }
 
-unsigned int geGenerateEntity_Triangle3DRGB(GEengine* pEngine)
+unsigned int geGenerateEntity_Pos3fCol3f(GEengine* pEngine, unsigned long long numBytes, float* data)
 {
-	return pEngine->GenerateEntity_Triangle3DRGB();
+	auto spEntity = pEngine->AddEntity();
+	spEntity->m_Type = GE_ENTITY_TYPE_POS3F_COL3F;
+	spEntity->m_pShader = pEngine->GetShader(NamedShaderTriangleRGB);
+	spEntity->m_VAO = CreateVAO_Pos3fCol3f(numBytes, data);
+	spEntity->m_NumIndices = 0;
+	spEntity->m_NumVertices = numBytes / (6 * sizeof(float));
+	return spEntity->m_Id;
 }
 
 void geGetBackgroundColor(float color[4])
@@ -208,65 +260,12 @@ namespace
 		return true;
 	}
 
-	auto InitializeVAOTriangleBasic(GLuint vao) -> bool
-	{
-		GL::BindVertexArray(vao);
-
-		GLuint buffer;
-		GL::GenBuffers(1, &buffer);
-		GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
-
-		float vertices[] =
-		{
-			-0.5f, -0.5f, 0.f,
-			 0.5f, -0.5f, 0.f,
-			 0.f,   0.5f, 0.f
-		};
-
-		GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-		glEnableVertexAttribArray(0);
-
-		return true;
-	}
-
-	auto InitializeVAOTriangleRGB(GLuint vao) -> bool
-	{
-		float vertices[] =
-		{
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-			-0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-		};
-
-		GL::BindVertexArray(vao);
-
-		GLuint buffer;
-		glGenBuffers(1, &buffer);
-		GL::BindBuffer(GL_ARRAY_BUFFER, buffer);
-		GL::BufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		// Set up the positions
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
-		glEnableVertexAttribArray(0);
-
-		// Set up the colors
-
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-
-		return true;
-	}
-
 }
 
 GEengine::GEengine()
 {
 	//InitializeLogging();
 	InitializeOpenGL();
-	InitializeVAOs();
 	InitializeShaders();
 
 	GL::ClearColor(0.f, 0.f, 0.f, 1.f);
@@ -296,19 +295,19 @@ void DrawIndexedPoints3DBasic(const Entity& entity)
 	HandleError(__FUNCTION__);
 }
 
-void DrawTriangle3DBasic(const Entity& entity)
+void DrawPos3f(EntityPtr spEntity)
 {
-	if (entity.m_Type != GE_ENTITY_TYPE_TRIANGLE_BASIC)
+	if (spEntity->m_Type != GE_ENTITY_TYPE_POS3F)
 		return;
 
-	GL::UseProgram(entity.m_pShader->GetId());
-	GL::BindVertexArray(entity.m_VAO);
-	GL::DrawArrays(GL_TRIANGLES, 0, 3);
+	GL::UseProgram(spEntity->m_pShader->GetId());
+	GL::BindVertexArray(spEntity->m_VAO);
+	GL::DrawArrays(GL_TRIANGLES, 0, spEntity->m_NumVertices);
 }
 
 void DrawTriangle3DRGB(const Entity& entity)
 {
-	if (entity.m_Type != GE_ENTITY_TYPE_TRIANGLE_RGB)
+	if (entity.m_Type != GE_ENTITY_TYPE_POS3F_COL3F)
 		return;
 
 	GL::UseProgram(entity.m_pShader->GetId());
@@ -336,6 +335,14 @@ auto CreateVAO_IndexedPoints3DBasic(unsigned long long vertexBytes, float* verti
 	return vao;
 }
 
+auto GEengine::AddEntity() -> EntityPtr
+{
+	EntityPtr spEntity = std::make_shared<Entity>();
+	spEntity->m_Id = NextAvailableEntityId();
+	m_Entities.insert(spEntity);
+	return spEntity;
+}
+
 auto GEengine::GenerateEntity_IndexedPoints3DBasic(unsigned long long numVertexBytes, float* vertices, unsigned long long numIndexBytes, unsigned int* indices) -> unsigned int
 {
 	Entity entity;
@@ -344,29 +351,7 @@ auto GEengine::GenerateEntity_IndexedPoints3DBasic(unsigned long long numVertexB
 	entity.m_pShader = m_Shaders[NamedShaderTriangleBasic];
 	entity.m_VAO = CreateVAO_IndexedPoints3DBasic(numVertexBytes, vertices, numIndexBytes, indices);
 	entity.m_NumIndices = static_cast<int>(numIndexBytes / sizeof(unsigned int));
-	m_Entities.insert(entity);
-	return entity.m_Id;
-}
-
-auto GEengine::GenerateEntity_Triangle3DBasic() -> unsigned int
-{
-	Entity entity;
-	entity.m_Type = GE_ENTITY_TYPE_TRIANGLE_BASIC;
-	entity.m_Id = NextAvailableEntityId();
-	entity.m_pShader = m_Shaders[NamedShaderTriangleBasic];
-	entity.m_VAO = m_VAOs[NamedVAOTriangleBasic];
-	m_Entities.insert(entity);
-	return entity.m_Id;
-}
-
-auto GEengine::GenerateEntity_Triangle3DRGB() -> unsigned int
-{
-	Entity entity;
-	entity.m_Type = GE_ENTITY_TYPE_TRIANGLE_RGB;
-	entity.m_Id = NextAvailableEntityId();
-	entity.m_pShader = m_Shaders[NamedShaderTriangleRGB];
-	entity.m_VAO = m_VAOs[NamedVAOTriangleRGB];
-	m_Entities.insert(entity);
+	//m_Entities.insert(entity);
 	return entity.m_Id;
 }
 
@@ -419,44 +404,43 @@ auto GEengine::GetRecentLogMessages(int* /*numMessages*/, const char*** /*messag
 	//}
 }
 
+auto GEengine::GetShader(const std::string& name) -> GEshader*
+{
+	if (!m_Shaders.contains(name))
+		return nullptr;
+
+	return m_Shaders.at(name);
+}
+
+auto GEengine::GetVAO(const std::string& name) -> GLuint
+{
+	if (!m_VAOs.contains(name))
+		return 0;
+	
+	return m_VAOs.at(name);
+}
+
 auto GEengine::Render() const -> void
 {
 	GL::Clear(GL_COLOR_BUFFER_BIT);
-	for (const auto& entity : m_Entities)
+	for (auto spEntity : m_Entities)
 	{
-		switch (entity.m_Type)
+		switch (spEntity->m_Type)
 		{
 		case GE_ENTITY_TYPE_INDEXED_POINTS_BASIC:
-			DrawIndexedPoints3DBasic(entity);
+			DrawIndexedPoints3DBasic(*spEntity);
 			break;
-		case GE_ENTITY_TYPE_TRIANGLE_BASIC:
-			DrawTriangle3DBasic(entity);
-			break;
-		case GE_ENTITY_TYPE_TRIANGLE_RGB:
-			DrawTriangle3DRGB(entity);
+		case GE_ENTITY_TYPE_POS3F:
+		case GE_ENTITY_TYPE_POS3F_COL3F:
+			GL::UseProgram(spEntity->m_pShader->GetId());
+			GL::BindVertexArray(spEntity->m_VAO);
+			GL::DrawArrays(GL_TRIANGLES, 0, spEntity->m_NumVertices);
 			break;
 		default:
 			BREAKPOINT; // We apparently need to support a new type.
 			break;
 		}
 	}
-}
-
-auto GEengine::InitializeVAOs() -> bool
-{
-	std::vector<GLuint> vaos(2);
-	GL::GenVertexArrays(2, vaos.data());
-
-	m_VAOs[NamedVAOTriangleBasic] = vaos[0];
-	m_VAOs[NamedVAOTriangleRGB] = vaos[1];
-
-	if (!InitializeVAOTriangleBasic(m_VAOs[NamedVAOTriangleBasic]))
-		return false;
-
-	if (!InitializeVAOTriangleRGB(m_VAOs[NamedVAOTriangleRGB]))
-		return false;
-
-	return true;
 }
 
 auto GEengine::InitializeShaderTriangleBasic() -> bool
@@ -567,9 +551,9 @@ auto GEengine::NextAvailableEntityId() const -> unsigned int
 {
 	unsigned int id = 1;
 
-	auto EntityHasId = [&id](const Entity entity)
+	auto EntityHasId = [&id](const EntityPtr entity)
 		{
-			return entity.m_Id == id;
+			return entity->m_Id == id;
 		};
 
 	while (std::find_if(m_Entities.begin(), m_Entities.end(), EntityHasId) != m_Entities.end())

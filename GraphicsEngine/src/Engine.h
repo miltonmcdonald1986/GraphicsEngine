@@ -5,16 +5,10 @@
 #include <map>
 #include <set>
 
+#include "Fwd.h"
 #include "Shader.h"
 
 #pragma region Forward declarations
-
-namespace GraphicsEngine
-{
-
-	struct Entity;
-
-}
 
 namespace spdlog
 {
@@ -35,16 +29,16 @@ public:
 
 	~GEengine();
 
+	auto AddEntity() -> GraphicsEngine::EntityPtr;
 	auto GenerateEntity_IndexedPoints3DBasic(unsigned long long numVertexBytes, float* vertices, unsigned long long numIndexBytes, unsigned int* indices) -> unsigned int;
-	auto GenerateEntity_Triangle3DBasic() -> unsigned int;
-	auto GenerateEntity_Triangle3DRGB() -> unsigned int;
 	auto GetCurrentShaderProgram() -> GEshader*;
 	auto GetRecentLogMessages(int* numMessages, const char*** messages) -> void;
+	auto GetShader(const std::string& name) -> GEshader*;
+	auto GetVAO(const std::string& name) -> GLuint;
 	auto Render() const -> void;
 
 private:
 
-	auto InitializeVAOs() -> bool;
 	auto InitializeShaderTriangleBasic() -> bool;
 	auto InitializeShaderTriangleRGB() -> bool;
 	auto InitializeShaders() -> bool;
@@ -56,5 +50,5 @@ private:
 	std::map<std::string, GLuint> m_VAOs;
 	std::map<std::string, GEshader*> m_Shaders;
 	//LoggerSharedPtr m_spLogger = nullptr;
-	std::set<GraphicsEngine::Entity> m_Entities;
+	std::set<GraphicsEngine::EntityPtr> m_Entities;
 };

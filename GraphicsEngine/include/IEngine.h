@@ -11,8 +11,8 @@ extern "C" {
 	enum GEentityType
 	{
 		GE_ENTITY_TYPE_INDEXED_POINTS_BASIC,
-		GE_ENTITY_TYPE_TRIANGLE_BASIC,
-		GE_ENTITY_TYPE_TRIANGLE_RGB
+		GE_ENTITY_TYPE_POS3F,
+		GE_ENTITY_TYPE_POS3F_COL3F
 	};
 
 	enum GElogLevel
@@ -38,8 +38,8 @@ extern "C" {
 	GRAPHICSENGINE_API GEengine*		geCreateGraphicsEngine();
 	GRAPHICSENGINE_API void				geDestroyGraphicsEngine(GEengine* pEngine);
 	GRAPHICSENGINE_API unsigned int		geGenerateEntity_IndexedPoints3DBasic(GEengine* pEngine, unsigned long long vertexBytes, float* vertices, unsigned long long indexBytes, unsigned int* indices);
-	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Triangle3DBasic(GEengine* pEngine);
-	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Triangle3DRGB(GEengine* pEngine);
+	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Pos3f(GEengine* pEngine, unsigned long long numBytes, float* data);
+	GRAPHICSENGINE_API unsigned int		geGenerateEntity_Pos3fCol3f(GEengine* pEngine, unsigned long long numBytes, float* data);
 	GRAPHICSENGINE_API void				geGetBackgroundColor(float color[4]);
 	GRAPHICSENGINE_API GEshader*		geGetCurrentShaderProgram(GEengine* pEngine);
 	GRAPHICSENGINE_API GElogLevel		geGetLogLevel();
