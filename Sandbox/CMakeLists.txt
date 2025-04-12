@@ -52,17 +52,20 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 endif()
 
 ################################################################################
+# Use shared output directory for this project                                 #
+################################################################################
+
+set_target_properties(Sandbox PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+    LIBRARY_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+    ARCHIVE_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+)
+
+################################################################################
 # In Windows, copy the dlls into the target dir as a post build event          #
 ################################################################################
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	
-	# Copy the GraphicsEngine dll to the Sandbox output directory.
-	add_custom_command(TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			$<TARGET_FILE:GraphicsEngine> 	# Path to the DLL
-			$<TARGET_FILE_DIR:Sandbox>   	# Path to the executable directory
-	)
 	
 	set(DLL_DIR_DEBUG "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/bin")
 	set(DLL_DIR_RELEASE "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin")
@@ -78,4 +81,17 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	set(SPDLOG_DLL_PATH "$<IF:$<CONFIG:Debug>,${DLL_DIR_DEBUG}/spdlogd.dll,${DLL_DIR_RELEASE}/spdlog.dll>")
 	add_custom_command(TARGET Sandbox POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SPDLOG_DLL_PATH} $<TARGET_FILE_DIR:Sandbox>)
 
+endif()
+
+################################################################################
+# Set the debugger's working directory to the out dir                          #
+################################################################################
+
+set(VS_SHARED_OUTPUT_DIR "${SHARED_OUTPUT_DIR}/$<CONFIG>")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+
+	set_target_properties(Sandbox PROPERTIES
+		VS_DEBUGGER_WORKING_DIRECTORY "${VS_SHARED_OUTPUT_DIR}"
+	)
+	
 endif()

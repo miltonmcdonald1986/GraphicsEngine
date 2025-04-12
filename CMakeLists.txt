@@ -8,6 +8,16 @@ project(GraphicsEngine)
 option(BUILD_SANDBOX "Build Sandbox" ON)
 
 ################################################################################
+# Set shared output directories for all projects                               #
+################################################################################
+
+set(SHARED_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR})
+
+################################################################################
 # Set the C++ standard										                   #
 ################################################################################
 

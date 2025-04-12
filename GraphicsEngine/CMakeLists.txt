@@ -8,6 +8,9 @@ file(GLOB ENGINE_SRC
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/glad/glad.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/KHR/khrplatform.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.vert"
+	"${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.frag"
+	"${CMAKE_CURRENT_SOURCE_DIR}/shaders/*.geom"
 )
 
 ################################################################################
@@ -56,3 +59,43 @@ target_include_directories(GraphicsEngine PRIVATE ${Stb_INCLUDE_DIR})
 
 target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog)
 target_link_libraries(GraphicsEngine PRIVATE glm::glm)
+
+################################################################################
+# Use shared output directory for this project                                 #
+################################################################################
+
+set_target_properties(GraphicsEngine PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+    LIBRARY_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+    ARCHIVE_OUTPUT_DIRECTORY ${SHARED_OUTPUT_DIR}
+)
+
+################################################################################
+# Copy the shaders to the output directory so they can be found                #
+################################################################################
+
+set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	add_custom_command(
+		TARGET GraphicsEngine
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+				${SHADER_SOURCE_DIR}
+				${SHARED_OUTPUT_DIR}/Debug/shaders
+	)	
+	add_custom_command(
+		TARGET GraphicsEngine
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+				${SHADER_SOURCE_DIR}
+				${SHARED_OUTPUT_DIR}/Release/shaders
+	)
+else()
+	add_custom_command(
+		TARGET GraphicsEngine
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+				${SHADER_SOURCE_DIR}
+				${SHARED_OUTPUT_DIR}/shaders
+	)
+endif()

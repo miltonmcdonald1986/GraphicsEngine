@@ -11,6 +11,13 @@ namespace
 
 	std::string ReadFile(const std::filesystem::path& path)
 	{
+		if (!std::filesystem::exists(path))
+		{
+			auto cwd = std::filesystem::current_path();
+			BREAKPOINT; // Trying to open a file that doesn't exist.
+			return "";
+		}
+
 		std::ifstream ifs(path);
 		std::stringstream buffer;
 		buffer << ifs.rdbuf();
@@ -24,9 +31,9 @@ namespace
 GEshader* geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag)
 {
 	auto vertSource = ReadFile(vert);
-	auto geomSource = ReadFile(geom);
+	auto geomSource = geom ? ReadFile(geom) : "";
 	auto fragSource = ReadFile(frag);
-	return geCreateShaderFromStrings(vertSource.c_str(), geomSource.c_str(), fragSource.c_str());
+	return geCreateShaderFromStrings(vertSource.c_str(), geomSource.empty() ? nullptr : geomSource.c_str(), fragSource.c_str());
 }
 
 GEshader* geCreateShaderFromStrings(const char* vert, const char* geom, const char* frag)

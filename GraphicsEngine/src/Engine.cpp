@@ -469,29 +469,7 @@ auto GEengine::InitializeShaderTriangleBasic() -> bool
 
 auto GEengine::InitializeShaderTriangleRGB() -> bool
 {
-	const std::string vertexShader = "#version 330 core\n"
-		"layout (location = 0) in vec3 aPos;\n"
-		"layout(location = 1) in vec3 aColor;\n"
-
-		"out vec3 ourColor;\n"
-
-		"void main()\n"
-		"{\n"
-		"   gl_Position = vec4(aPos, 1.0);\n"
-		"   ourColor = aColor;\n"
-		"}";
-
-	const std::string fragmentShader = "#version 330 core\n"
-		"out vec4 FragColor;\n"
-
-		"in vec3 ourColor;\n"
-
-		"void main()\n"
-		"{\n"
-		"FragColor = vec4(ourColor.x, ourColor.y, ourColor.z, 1.0);\n"
-		"}";
-
-	auto pShader = geCreateShaderFromStrings(vertexShader.c_str(), nullptr, fragmentShader.c_str());
+	auto pShader = geCreateShaderFromFiles("shaders/A0Pos3fA1Dummy3f.vert", nullptr, "shaders/A1RGB.frag");
 	if (!pShader)
 		return false;
 
