@@ -76,26 +76,15 @@ set_target_properties(GraphicsEngine PROPERTIES
 
 set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-	add_custom_command(
-		TARGET GraphicsEngine
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-				${SHADER_SOURCE_DIR}
-				${SHARED_OUTPUT_DIR}/Debug/shaders
-	)	
-	add_custom_command(
-		TARGET GraphicsEngine
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-				${SHADER_SOURCE_DIR}
-				${SHARED_OUTPUT_DIR}/Release/shaders
-	)
+	set(SHADER_OUT_DIR "${SHARED_OUTPUT_DIR}/$<CONFIG>/shaders")
 else()
-	add_custom_command(
-		TARGET GraphicsEngine
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-				${SHADER_SOURCE_DIR}
-				${SHARED_OUTPUT_DIR}/shaders
-	)
+	set(SHADER_OUT_DIR "${SHARED_OUTPUT_DIR}/shaders")
 endif()
+
+add_custom_command(
+	TARGET GraphicsEngine
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+		${SHADER_SOURCE_DIR}
+		${SHADER_OUT_DIR}
+)
