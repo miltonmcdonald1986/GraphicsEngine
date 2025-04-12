@@ -10,14 +10,14 @@ auto InitializeGLFW() -> GLFWwindow*
 
     // Set hints for the next call to glfwCreateWindow.
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     if (glfwGetError(nullptr) != GLFW_NO_ERROR)
     {
         glfwTerminate();
         return nullptr;
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     if (glfwGetError(nullptr) != GLFW_NO_ERROR)
     {
         glfwTerminate();
