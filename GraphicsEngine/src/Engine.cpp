@@ -82,7 +82,7 @@ unsigned int geGenerateEntity_Pos3f(GEengine* pEngine, unsigned long long numByt
 	spEntity->m_pShader = pEngine->GetShader(NamedShaderTriangleBasic);
 	spEntity->m_VAO = CreateVAO_Pos3f(numBytes, data);
 	spEntity->m_NumIndices = 0;
-	spEntity->m_NumVertices = numBytes / (3*sizeof(float));
+	spEntity->m_NumVertices = static_cast<unsigned int>(numBytes / (3*sizeof(float)));
 	return spEntity->m_Id;
 }
 
@@ -93,7 +93,7 @@ unsigned int geGenerateEntity_Pos3fCol3f(GEengine* pEngine, unsigned long long n
 	spEntity->m_pShader = pEngine->GetShader(NamedShaderTriangleRGB);
 	spEntity->m_VAO = CreateVAO_Pos3fCol3f(numBytes, data);
 	spEntity->m_NumIndices = 0;
-	spEntity->m_NumVertices = numBytes / (6 * sizeof(float));
+	spEntity->m_NumVertices = static_cast<unsigned int>(numBytes / (6 * sizeof(float)));
 	return spEntity->m_Id;
 }
 

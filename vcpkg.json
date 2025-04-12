@@ -1,16 +1,16 @@
 {
   "dependencies": [
-    "glfw3",
-	"spdlog",
-	"glm",
-	"stb",
-	{
-      "name": "imgui",
-      "features": [
-        "glfw-binding",
-        "opengl3-binding",
-		"docking-experimental"
-      ]
+    {
+      "name": "glm",
+      "version>=": "1.0.1#3"
+    },
+    {
+      "name": "spdlog",
+      "version>=": "1.15.2"
+    },
+    {
+      "name": "stb",
+      "version>=": "2024-07-29#1"
     }
   ]
 }

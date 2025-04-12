@@ -2,12 +2,38 @@
   "version": 2,
   "configurePresets": [
     {
-      "name": "vcpkg",
-      "generator": "Ninja",
+      "name": "Debug Linux",
       "binaryDir": "${sourceDir}/build",
+      "generator": "Unix Makefiles",
       "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++-13",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc-13",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
+    },
+    {
+      "name": "Debug Windows",
+      "binaryDir": "${sourceDir}/build",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Debug Linux",
+      "displayName": "Debug Linux",
+      "configurePreset": "Debug Linux",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Debug Windows",
+      "displayName": "Debug Windows",
+      "configurePreset": "Debug Windows",
+      "configuration": "Debug"
     }
   ]
 }
