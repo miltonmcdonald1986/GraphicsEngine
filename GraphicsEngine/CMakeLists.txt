@@ -24,3 +24,5 @@ target_include_directories(GraphicsEngine
 
 target_link_libraries(GraphicsEngine PRIVATE glm::glm)
 target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog)
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
