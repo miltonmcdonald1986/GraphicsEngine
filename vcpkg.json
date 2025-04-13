@@ -5,6 +5,15 @@
       "version>=": "1.0.1#3"
     },
     {
+      "name": "imgui",
+      "version>=": "1.91.9",
+      "features": [
+        "docking-experimental",
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    {
       "name": "spdlog",
       "version>=": "1.15.2"
     },
