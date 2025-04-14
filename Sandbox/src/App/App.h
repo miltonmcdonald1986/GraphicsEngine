@@ -6,6 +6,8 @@
 
 #include "fwd.h"
 
+#include "GraphicsEngineFwd.h"
+
 class App
 {
 public:
@@ -23,7 +25,7 @@ protected:
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
-	GEengineSharedPtr m_spEngine;
+	GraphicsEngine::IEnginePtr m_spEngine;
 	std::vector<WidgetUniquePointer> m_Widgets;
 	void* m_PrevUserPointer = nullptr;
 };

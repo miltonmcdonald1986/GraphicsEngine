@@ -4,20 +4,20 @@
 
 #include "IEngine.h"
 
-PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
-    switch (geGetPolygonMode())
+    switch (m_spEngine->GetPolygonMode())
     {
-    case GE_POLYGON_MODE_POINT:
-        m_Mode = 0;
+    case GraphicsEngine::PolygonMode::Fill:
+        m_Mode = 2;
         break;
-    case GE_POLYGON_MODE_LINE:
+    case GraphicsEngine::PolygonMode::Line:
         m_Mode = 1;
         break;
-    case GE_POLYGON_MODE_FILL:
+    case GraphicsEngine::PolygonMode::Point:
     default:
-        m_Mode = 2;
+        m_Mode = 0;
         break;
     }
 }
@@ -26,12 +26,12 @@ void PolygonModeWidget::Iterate()
 {
     ImGui::Begin("Polygon Mode", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     if (ImGui::RadioButton("Point", &m_Mode, 0))
-        geSetPolygonMode(GE_POLYGON_MODE_POINT);
+        m_spEngine->SetPolygonMode(GraphicsEngine::PolygonMode::Point);
     ImGui::SameLine();
     if (ImGui::RadioButton("Line", &m_Mode, 1))
-        geSetPolygonMode(GE_POLYGON_MODE_LINE);
+        m_spEngine->SetPolygonMode(GraphicsEngine::PolygonMode::Line);
     ImGui::SameLine();
     if (ImGui::RadioButton("Fill", &m_Mode, 2))
-        geSetPolygonMode(GE_POLYGON_MODE_FILL);
+        m_spEngine->SetPolygonMode(GraphicsEngine::PolygonMode::Fill);
     ImGui::End();
 }

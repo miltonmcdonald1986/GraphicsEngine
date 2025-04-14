@@ -14,8 +14,9 @@ using AppMap_t = std::map<Apps, const char*>;
 const AppMap_t AppMap =
 {
 	std::make_pair(Apps::DemoTriangleBasic, "Demo triangle"),
-	std::make_pair(Apps::DemoTriangleRGB, "Demo triangle rgb"),
 	std::make_pair(Apps::DemoIndexedPoints, "Demo indexed points"),
+	std::make_pair(Apps::DemoTriangleRGB, "Demo triangle rgb"),
+	std::make_pair(Apps::DemoFlashingGreenTriangle, "Demo flashing green triangle"),
 	std::make_pair(Apps::ImGuiDemoWindow, "Demo \"Dear ImGui\" window"),
 };
 
@@ -31,7 +32,7 @@ const AppNames_t AppNames = ([](const AppMap_t& appMap) -> AppNames_t
 		return appNames;
 	})(AppMap);
 
-MainMenuWidget::MainMenuWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine, bool& appSelected, int& selectedItem)
+MainMenuWidget::MainMenuWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine, bool& appSelected, int& selectedItem)
 	: Widget(pWindow, spEngine)
 	, m_AppSelected(appSelected)
 	, m_SelectedItem(selectedItem)

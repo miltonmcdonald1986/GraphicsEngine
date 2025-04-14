@@ -168,6 +168,12 @@ namespace GraphicsEngine::GL
 		HandleError(__FUNCTION__);
 	}
 
+	auto Uniform1f(GLint location, GLfloat v) -> void
+	{
+		glUniform1f(location, v);
+		HandleError(__FUNCTION__);
+	}
+
 	auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void
 	{
 		glUniform4f(location, v0, v1, v2, v3);

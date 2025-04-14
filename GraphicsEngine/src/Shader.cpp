@@ -28,13 +28,13 @@ namespace
 
 }
 
-GEshader* geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag)
-{
-	auto vertSource = ReadFile(vert);
-	auto geomSource = geom ? ReadFile(geom) : "";
-	auto fragSource = ReadFile(frag);
-	return geCreateShaderFromStrings(vertSource.c_str(), geomSource.empty() ? nullptr : geomSource.c_str(), fragSource.c_str());
-}
+//GEshader* geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag)
+//{
+//	auto vertSource = ReadFile(vert);
+//	auto geomSource = geom ? ReadFile(geom) : "";
+//	auto fragSource = ReadFile(frag);
+//	return geCreateShaderFromStrings(vertSource.c_str(), geomSource.empty() ? nullptr : geomSource.c_str(), fragSource.c_str());
+//}
 
 GEshader* geCreateShaderFromStrings(const char* vert, const char* geom, const char* frag)
 {
@@ -54,9 +54,13 @@ unsigned int geGetActiveProgram()
 	return prog;
 }
 
-void geGetActiveUniforms(GEshader* pShader, int* numUniforms, GEuniform* uniforms)
+void geGetActiveUniforms(GEshader* pShader, GEuniform* uniforms)
 {
-	pShader->GetActiveUniforms(numUniforms, uniforms);
+}
+
+int geGetNumActiveUniforms(GEshader* pShader)
+{
+	return pShader->GetNumActiveUniforms();
 }
 
 bool geSetUniform(GEshader* pShader, const GEuniform* uniform)
@@ -72,10 +76,15 @@ bool geSetUniform(GEshader* pShader, const GEuniform* uniform)
 
 	switch (uniform->m_Type)
 	{
+	case GE_UNIFORM_TYPE_FLOAT:
+	{
+		float v = uniform->m_Data.u_float;
+		GL::Uniform1f(uniform->m_Location, v);
+	}
 	case GE_UNIFORM_TYPE_VEC4:
 	{
-		const float* v = uniform->m_Data.vec4;
-		GL::Uniform4f(GL::GetUniformLocation(givenProgram, uniform->m_Name), v[0], v[1], v[2], v[3]);
+		const float* v = uniform->m_Data.u_vec4;
+		GL::Uniform4f(uniform->m_Location, v[0], v[1], v[2], v[3]);
 		break;
 	}
 	default:
@@ -152,18 +161,11 @@ GEshader::GEshader(const char* vertSource, const char* geomSource, const char* f
 	auto geomShaderId = CompileShader(GL_GEOMETRY_SHADER, geomSource);
 	auto fragShaderId = CompileShader(GL_FRAGMENT_SHADER, fragSource);
 	m_ProgramId = LinkProgram({ vertShaderId, geomShaderId, fragShaderId });
-}
 
-auto GEshader::GetId() const -> GLuint
-{
-	return m_ProgramId;
-}
-
-auto GEshader::GetActiveUniforms(int* numUniforms, GEuniform* uniforms) -> void
-{
+	// Grab the list of uniforms from the shader.
 	GLint count;
 	GL::GetProgramiv(m_ProgramId, GL_ACTIVE_UNIFORMS, &count);
-	
+
 	GLint maxLength;
 	GL::GetProgramiv(m_ProgramId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLength);
 
@@ -175,31 +177,59 @@ auto GEshader::GetActiveUniforms(int* numUniforms, GEuniform* uniforms) -> void
 		std::string name(maxLength, '\0');
 		GLsizei length; // name length
 		GL::GetActiveUniform(m_ProgramId, i, maxLength, &length, &size, &type, name.data());
+		GLint location = GL::GetUniformLocation(m_ProgramId, name.data());
 
 		GEuniform uniform;
+		uniform.m_Name = name.c_str();
+		uniform.m_Location = location;
 		switch (type)
 		{
+		case GL_FLOAT:
+		{
+			float data;
+			GL::GetUniformfv(m_ProgramId, location, &data);
+
+			uniform.m_Type = GE_UNIFORM_TYPE_FLOAT;
+			uniform.m_Data.u_float = data;
+
+			m_Uniforms.push_back(uniform);
+			break;
+		}
 		case GL_FLOAT_VEC4:
 		{
-			GLint location = GL::GetUniformLocation(m_ProgramId, name.data());
-
 			float v[4];
 			GL::GetUniformfv(m_ProgramId, location, v);
 
 			uniform.m_Type = GE_UNIFORM_TYPE_VEC4;
 			uniform.m_Name = name.c_str();
 			uniform.m_Location = location;
-			std::copy(uniform.m_Data.vec4, uniform.m_Data.vec4 + 4, v);
+			std::copy(uniform.m_Data.u_vec4, uniform.m_Data.u_vec4 + 4, v);
 
 			m_Uniforms.push_back(uniform);
+			break;
+		}
+		default:
+		{
+			// Apparently we're not handling a type that we need to be.
+			BREAKPOINT;
+			m_Uniforms.push_back(GEuniform{ .m_Type = GE_UNIFORM_TYPE_EMPTY });
+			break;
 		}
 		}
-
-		// Apparently we're not handling a type that we need to be.
-		BREAKPOINT;
-		m_Uniforms.push_back(GEuniform{ .m_Type = GE_UNIFORM_TYPE_EMPTY });
 	}
+}
 
-	*numUniforms = static_cast<int>(m_Uniforms.size());
-	uniforms = m_Uniforms.data();
+auto GEshader::GetId() const -> GLuint
+{
+	return m_ProgramId;
+}
+
+auto GEshader::GetActiveUniforms() const -> std::vector<GEuniform>
+{
+	return m_Uniforms;
+}
+
+auto GEshader::GetNumActiveUniforms() const -> int
+{
+	return static_cast<int>(m_Uniforms.size());
 }

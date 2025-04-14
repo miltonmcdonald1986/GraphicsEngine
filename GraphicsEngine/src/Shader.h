@@ -9,7 +9,8 @@ public:
 	GEshader(const char* vertSource, const char* geomSource, const char* fragSource);
 
 	auto GetId() const -> GLuint;
-	auto GetActiveUniforms(int* numUniforms, GEuniform* uniforms) -> void;
+	auto GetActiveUniforms() const -> std::vector<GEuniform>;
+	auto GetNumActiveUniforms() const -> int;
 
 private:
 	GLuint m_ProgramId;

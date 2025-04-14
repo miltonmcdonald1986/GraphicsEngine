@@ -22,7 +22,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
         1, 2, 3
     };
 
-    geGenerateEntity_IndexedPoints3DBasic(m_spEngine.get(), 3*vertices.size()*sizeof(float), &vertices[0][0], indices.size()*sizeof(unsigned int), indices.data());
+    // geGenerateEntity_IndexedPoints3DBasic(m_spEngine.get(), 3*vertices.size()*sizeof(float), &vertices[0][0], indices.size()*sizeof(unsigned int), indices.data());
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(pWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(pWindow, m_spEngine)));

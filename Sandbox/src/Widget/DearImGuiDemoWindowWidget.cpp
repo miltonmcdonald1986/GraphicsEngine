@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 
-DearImGuiDemoWindowWidget::DearImGuiDemoWindowWidget(GLFWwindow* pWindow, GEengineSharedPtr spEngine)
+DearImGuiDemoWindowWidget::DearImGuiDemoWindowWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
 }

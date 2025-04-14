@@ -3,8 +3,9 @@
 enum class Apps : int
 {
 	DemoTriangleBasic = 0,
-	DemoTriangleRGB,
 	DemoIndexedPoints,
+	DemoTriangleRGB,
+	DemoFlashingGreenTriangle,
 	ImGuiDemoWindow,
 	NumApps
 };

@@ -1,3 +1,4 @@
+find_package(glm CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 file(GLOB_RECURSE SANDBOX_SRC
@@ -14,4 +15,5 @@ target_include_directories(Sandbox PRIVATE
 )
 
 target_link_libraries(Sandbox PRIVATE GraphicsEngine)
+target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)

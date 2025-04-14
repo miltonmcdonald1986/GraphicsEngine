@@ -1,11 +1,13 @@
 #pragma once
 
+#include "GraphicsEngineFwd.h"
+
 #include "Widget.h"
 
 class BackgroundColorWidget : public Widget
 {
 public:
-    BackgroundColorWidget(GLFWwindow* spWindow, GEengineSharedPtr spEngine);
+    BackgroundColorWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
     virtual auto Iterate() -> void override;
 
 private:

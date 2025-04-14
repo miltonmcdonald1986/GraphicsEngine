@@ -49,7 +49,7 @@ auto MainMenuApp::Run() -> void
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        geRender(m_spEngine.get());
+        m_spEngine->Render();
 
         IterateWidgets();
         if (m_AppSelected)

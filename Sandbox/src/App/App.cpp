@@ -24,7 +24,7 @@ namespace
 
 App::App(GLFWwindow* pWindow)
 	: m_pWindow(pWindow),
-	  m_spEngine(std::shared_ptr<GEengine>(geCreateGraphicsEngine(), [](GEengine* pEngine) { geDestroyGraphicsEngine(pEngine); }))
+	  m_spEngine(GraphicsEngine::CreateEngine())
 {
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
     glfwSetWindowUserPointer(m_pWindow, GetUserDataPointer());
@@ -78,7 +78,7 @@ auto App::Run() -> void
 
         RenderDockSpace();
 
-        geRender(m_spEngine.get());
+        m_spEngine->Render();
 
         IterateWidgets();
 

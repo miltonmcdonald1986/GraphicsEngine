@@ -1,21 +1,38 @@
 #pragma once
 
-#include "Uniform.h"
+#include <filesystem>
+#include <vector>
+
+#include "GraphicsEngineFwd.h"
 #include "GraphicsEngineImpExp.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+namespace GraphicsEngine
+{
 
-	typedef struct GEshader GEshader;
+	class IShader
+	{
+	public:
+		virtual ~IShader() = default;
 
-	GRAPHICSENGINE_API GEshader*	geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag);
-	GRAPHICSENGINE_API GEshader*	geCreateShaderFromStrings(const char* vert, const char* geom, const char* frag);
-	GRAPHICSENGINE_API void			geDestroyShader(GEshader* pShader);
-	GRAPHICSENGINE_API unsigned int	geGetActiveProgram();
-	GRAPHICSENGINE_API void			geGetActiveUniforms(GEshader* pShader, int* numUniforms, GEuniform* uniforms);
-	GRAPHICSENGINE_API bool			geSetUniform(GEshader* pShader, const GEuniform* uniform);
+		virtual auto GetId() const -> unsigned int = 0;
+		virtual auto GetActiveUniforms() const -> IUniforms = 0;
+	};
 
-#ifdef __cplusplus
+	GRAPHICSENGINE_API IShaderPtr CreateShaderFromFiles(const std::filesystem::path& vert,  const std::filesystem::path& geom, const std::filesystem::path& frag);
+	GRAPHICSENGINE_API IShaderPtr CreateShaderFromSourceCode();
+
 }
-#endif
+
+//struct GEshader
+//{
+//public:
+//	GEshader(const char* vertSource, const char* geomSource, const char* fragSource);
+//
+//	auto GetId() const->GLuint;
+//	auto GetActiveUniforms() const->std::vector<GEuniform>;
+//	auto GetNumActiveUniforms() const -> int;
+//
+//private:
+//	GLuint m_ProgramId;
+//	std::vector<GEuniform> m_Uniforms;
+//};

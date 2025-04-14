@@ -3,6 +3,7 @@
 enum GEuniformType
 {
 	GE_UNIFORM_TYPE_EMPTY,
+	GE_UNIFORM_TYPE_FLOAT,
 	GE_UNIFORM_TYPE_VEC4,
 };
 
@@ -13,6 +14,7 @@ struct GEuniform
 	int m_Location;
 	union
 	{
-		float vec4[4];
+		float u_float;
+		float u_vec4[4];
 	} m_Data;
 };

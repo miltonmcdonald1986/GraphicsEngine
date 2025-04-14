@@ -31,6 +31,7 @@ namespace GraphicsEngine::GL
 	auto LinkProgram(GLuint program) -> void;
 	auto PolygonMode(GLenum face, GLenum mode) -> void;
 	auto ShaderSource(GLuint shader, GLsizei count, const GLchar** string, const GLint* length) -> void;
+	auto Uniform1f(GLint location, GLfloat v) -> void;
 	auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void;
 	auto UseProgram(GLuint program) -> void;
 	auto VertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer) -> void;

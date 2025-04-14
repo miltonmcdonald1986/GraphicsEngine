@@ -17,7 +17,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 		 1.f,  -0.5f, 0.f,
 		 0.5f,  0.5f, 0.f
 	};
-    geGenerateEntity_Pos3f(m_spEngine.get(), sizeof(vertices), vertices);
+    // geGenerateEntity_Pos3f(m_spEngine.get(), sizeof(vertices), vertices);
 
     m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<Widget>(new PolygonModeWidget(m_pWindow, m_spEngine)));

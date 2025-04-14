@@ -4,6 +4,7 @@
 
 #include "Apps.h"
 #include "DemoIndexedPointsApp.h"
+#include "DemoFlashingGreenTriangleApp.h"
 #include "DemoTriangleApp.h"
 #include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
@@ -30,15 +31,21 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 		app.Run();
 		break;
 	}
+	case Apps::DemoIndexedPoints:
+	{
+		DemoIndexedPointsApp app(pWindow);
+		app.Run();
+		break;
+	}
 	case Apps::DemoTriangleRGB:
 	{
 		DemoTriangleRGBApp app(pWindow);
 		app.Run();
 		break;
 	}
-	case Apps::DemoIndexedPoints:
+	case Apps::DemoFlashingGreenTriangle:
 	{
-		DemoIndexedPointsApp app(pWindow);
+		DemoFlashingGreenTriangleApp app(pWindow);
 		app.Run();
 		break;
 	}
