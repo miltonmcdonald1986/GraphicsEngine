@@ -10,12 +10,6 @@
 namespace GraphicsEngine
 {
 
-	enum class DataType
-	{
-		Float,
-		Vec4
-	};
-
 	using Data = std::variant<float, glm::vec4>;
 
 	class IUniform
@@ -26,7 +20,6 @@ namespace GraphicsEngine
 		virtual auto GetData() const -> Data = 0;
 		virtual auto GetLocation() const -> int = 0;
 		virtual auto GetName() const -> std::string = 0;
-		virtual auto GetType() const -> DataType = 0;
 		virtual auto SetData(const Data& data) -> void = 0;
 	};
 

@@ -17,6 +17,8 @@ namespace GraphicsEngine
 		Engine();
 		virtual ~Engine() override = default;
 
+		virtual auto CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr override;
+		virtual auto CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr override;
 		virtual auto GetBackgroundColor() const -> Color override;
 		virtual auto GetCurrentShader() const -> IShaderPtr override;
 		virtual auto GetPolygonMode() const -> PolygonMode override;

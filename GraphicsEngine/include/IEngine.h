@@ -20,6 +20,8 @@ namespace GraphicsEngine
 	public:
 		virtual ~IEngine() = default;
 
+		virtual auto CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr = 0;
+		virtual auto CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCurrentShader() const -> IShaderPtr = 0;
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;

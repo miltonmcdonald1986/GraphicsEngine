@@ -18,9 +18,6 @@ namespace GraphicsEngine
 		virtual auto GetActiveUniforms() const -> IUniforms = 0;
 	};
 
-	GRAPHICSENGINE_API IShaderPtr CreateShaderFromFiles(const std::filesystem::path& vert,  const std::filesystem::path& geom, const std::filesystem::path& frag);
-	GRAPHICSENGINE_API IShaderPtr CreateShaderFromSourceCode();
-
 }
 
 //struct GEshader

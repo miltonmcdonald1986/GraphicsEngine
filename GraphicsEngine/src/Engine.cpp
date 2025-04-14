@@ -3,6 +3,7 @@
 
 #include "Debug.h"
 #include "SafeGL.h"
+#include "IShader.h"
 
 namespace GraphicsEngine
 {
@@ -15,6 +16,39 @@ namespace GraphicsEngine
 
 		GL::ClearColor(0.f, 0.f, 0.f, 1.f);
 		GL::Clear(GL_COLOR_BUFFER_BIT);
+	}
+
+	auto Engine::CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr
+	{
+		auto GetSourceFromFile = [](const std::filesystem::path& path) -> std::string
+		{
+			if (path.empty())
+				return "";
+
+			if (!std::filesystem::exists(path))
+			{
+				auto cwd = std::filesystem::current_path();
+				BREAKPOINT; // Trying to open a file that doesn't exist.
+				return "";
+			}
+
+			std::ifstream ifs(path);
+			std::stringstream buffer;
+			buffer << ifs.rdbuf();
+
+			std::string str(buffer.str());
+			return str;
+		};
+
+		auto vertSource = GetSourceFromFile(vert);
+		auto geomSource = GetSourceFromFile(geom);
+		auto fragSource = GetSourceFromFile(frag);
+		return CreateNewShaderFromSource(vertSource, geomSource, fragSource);
+	}
+
+	auto Engine::CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr
+	{
+		return CreateShaderFromSourceCode(vert, geom, frag);
 	}
 
 	auto Engine::GetBackgroundColor() const -> Color
