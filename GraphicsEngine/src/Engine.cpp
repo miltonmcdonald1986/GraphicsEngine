@@ -55,7 +55,7 @@ namespace GraphicsEngine
 		EntityPtr spEntity = CreateEntity();
 		spEntity->SetVAO(vao);
 		spEntity->SetNumVertices(std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices());
-		spEntity->SetNumIndices(oIndices ? oIndices->size() : 0);
+		spEntity->SetNumIndices(oIndices ? static_cast<Count>(oIndices->size()) : 0);
 
 		m_Entities.push_back(spEntity);
 
@@ -90,7 +90,7 @@ namespace GraphicsEngine
 		return CreateNewShaderFromSource(vertSource, geomSource, fragSource);
 	}
 
-	auto Engine::CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr
+	auto Engine::CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr
 	{
 		return CreateShaderFromSourceCode(vert, geom, frag);
 	}

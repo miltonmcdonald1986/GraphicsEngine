@@ -3,19 +3,11 @@
 #include <optional>
 
 #include "GraphicsEngineFwd.h"
-#include "Color.h"
-#include "IShader.h"
 #include "GraphicsEngineImpExp.h"
+#include "Types.h"
 
 namespace GraphicsEngine
 {
-
-	enum class PolygonMode
-	{
-		Fill,
-		Line,
-		Point
-	};
 
 	class IEngine
 	{
@@ -24,7 +16,7 @@ namespace GraphicsEngine
 
 		virtual auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices = std::nullopt) -> IEntityPtr = 0;
 		virtual auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr = 0;
-		virtual auto CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr = 0;
+		virtual auto CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCurrentShader() const -> IShaderPtr = 0;
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;
@@ -34,4 +26,5 @@ namespace GraphicsEngine
 	};
 
 	GRAPHICSENGINE_API auto CreateEngine() -> IEnginePtr;
+
 }

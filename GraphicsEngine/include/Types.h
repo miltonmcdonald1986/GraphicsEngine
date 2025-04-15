@@ -11,4 +11,11 @@ namespace GraphicsEngine
 		float a = 1.f;
 	};
 
+	enum class PolygonMode
+	{
+		Fill,
+		Line,
+		Point
+	};
+
 }

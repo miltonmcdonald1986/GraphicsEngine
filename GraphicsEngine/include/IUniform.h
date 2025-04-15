@@ -18,8 +18,8 @@ namespace GraphicsEngine
 		virtual ~IUniform() = default;
 
 		virtual auto GetData() const -> Data = 0;
-		virtual auto GetLocation() const -> int = 0;
-		virtual auto GetName() const -> std::string = 0;
+		virtual auto GetLocation() const -> UniformLocation = 0;
+		virtual auto GetName() const -> String = 0;
 		virtual auto SetData(const Data& data) -> void = 0;
 	};
 

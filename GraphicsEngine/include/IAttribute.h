@@ -1,9 +1,9 @@
 #pragma once
 
+#include "glm/fwd.hpp"
+
 #include "GraphicsEngineFwd.h"
 #include "GraphicsEngineImpExp.h"
-
-#include "glm/fwd.hpp"
 
 namespace GraphicsEngine
 {

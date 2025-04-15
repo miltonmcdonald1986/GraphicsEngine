@@ -2,8 +2,6 @@
 
 #include "Widget.h"
 
-#include "Uniform.h"
-
 #include <string>
 #include <vector>
 
@@ -15,5 +13,5 @@ public:
     virtual auto Iterate() -> void override;
 
 private:
-	std::vector<GEuniform> m_Uniforms;
+	std::vector<GraphicsEngine::IUniformPtr> m_Uniforms;
 };
