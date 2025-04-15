@@ -216,12 +216,12 @@
 namespace GraphicsEngine
 {
 
-	IShaderPtr GraphicsEngine::CreateShaderFromSourceCode(const std::string& vert, const std::string& geom, const std::string& frag)
+	IShaderPtr CreateShaderFromSourceCode(const std::string& vert, const std::string& geom, const std::string& frag)
 	{
 		return IShaderPtr(new Shader(vert, geom, frag));
 	}
 
-	GraphicsEngine::Shader::Shader(const std::string& vertSource, const std::string& geomSource, const std::string& fragSource)
+	Shader::Shader(const std::string& vertSource, const std::string& geomSource, const std::string& fragSource)
 	{
 		auto CompileShader = [](GLenum shaderType, const char* source) -> GLuint
 			{

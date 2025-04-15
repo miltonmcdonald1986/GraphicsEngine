@@ -7,6 +7,8 @@
     #ifdef _DEBUG
         #include <signal.h>
         #define BREAKPOINT raise(SIGTRAP)
+    #else
+        #define BREAKPOINT
     #endif
 #else
     #define BREAKPOINT

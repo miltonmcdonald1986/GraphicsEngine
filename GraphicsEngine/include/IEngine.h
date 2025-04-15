@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 #include "GraphicsEngineFwd.h"
 #include "Color.h"
 #include "IShader.h"

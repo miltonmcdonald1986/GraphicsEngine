@@ -1,5 +1,6 @@
 #include "DemoFlashingGreenTriangleApp.h"
 
+#include <cmath>
 #include <numbers>
 
 #include "IEngine.h"
