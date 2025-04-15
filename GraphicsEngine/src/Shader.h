@@ -13,6 +13,7 @@ namespace GraphicsEngine
 
 		virtual auto GetId() const -> unsigned int override;
 		virtual auto GetActiveUniforms() const -> IUniforms override;
+		virtual auto Use() const -> void override;
 
 	private:
 		unsigned int m_Id = 0;

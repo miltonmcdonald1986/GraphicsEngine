@@ -16,6 +16,7 @@ namespace GraphicsEngine
 
 		virtual auto GetId() const -> unsigned int = 0;
 		virtual auto GetActiveUniforms() const -> IUniforms = 0;
+		virtual auto Use() const -> void = 0;
 	};
 
 }

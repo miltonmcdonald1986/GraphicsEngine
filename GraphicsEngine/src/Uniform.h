@@ -10,6 +10,7 @@ namespace GraphicsEngine
 	class Uniform : public IUniform
 	{
 	public:
+		Uniform(GLuint programId);
 		virtual ~Uniform() override = default;
 
 		virtual auto GetData() const->Data override;
@@ -23,8 +24,9 @@ namespace GraphicsEngine
 		Data m_Data = 0.f;
 		GLint m_Location = 0;
 		std::string m_Name = "";
+		GLuint m_ProgramId = 0;
 	};
 
-	auto CreateUniform() -> UniformPtr;
+	auto CreateUniform(GLuint programId) -> UniformPtr;
 
 }

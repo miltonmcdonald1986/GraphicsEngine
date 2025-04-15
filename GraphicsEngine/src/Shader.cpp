@@ -301,9 +301,11 @@ namespace GraphicsEngine
 			std::string name(maxLength, '\0');
 			GLsizei length; // name length
 			GL::GetActiveUniform(m_Id, i, maxLength, &length, &size, &type, name.data());
+			name.pop_back();
+
 			GLint location = GL::GetUniformLocation(m_Id, name.data());
 
-			UniformPtr spUniform = CreateUniform();
+			UniformPtr spUniform = CreateUniform(m_Id);
 			spUniform->SetName(name);
 			spUniform->SetLocation(location);
 			switch (type)
@@ -343,6 +345,11 @@ namespace GraphicsEngine
 	auto Shader::GetActiveUniforms() const -> IUniforms
 	{
 		return m_Uniforms;
+	}
+
+	auto Shader::Use() const -> void
+	{
+		GL::UseProgram(m_Id);
 	}
 
 }

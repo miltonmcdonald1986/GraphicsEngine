@@ -15,6 +15,7 @@ public:
 	App(GLFWwindow* pWindow);
 	virtual ~App();
 	virtual auto GetUserDataPointer() -> void*;
+	virtual auto Iterate() -> void;
 	virtual auto RenderDockSpace() -> void;
 	virtual auto Run() -> void;
 

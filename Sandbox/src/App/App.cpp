@@ -43,6 +43,27 @@ auto App::GetUserDataPointer() -> void*
     return static_cast<void*>(&m_Running);
 }
 
+auto App::Iterate() -> void
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    RenderDockSpace();
+
+    m_spEngine->Render();
+
+    IterateWidgets();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    glfwSwapBuffers(m_pWindow);
+    glfwPollEvents();
+
+    m_Running = (m_Running && !glfwWindowShouldClose(m_pWindow));
+}
+
 auto App::RenderDockSpace() -> void
 {
     // Get the size of the full GLFW window
@@ -72,23 +93,7 @@ auto App::Run() -> void
 {
     while (m_Running)
     {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        RenderDockSpace();
-
-        m_spEngine->Render();
-
-        IterateWidgets();
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glfwSwapBuffers(m_pWindow);
-        glfwPollEvents();
-
-        m_Running = (m_Running && !glfwWindowShouldClose(m_pWindow));
+        Iterate();
     }
 }
 

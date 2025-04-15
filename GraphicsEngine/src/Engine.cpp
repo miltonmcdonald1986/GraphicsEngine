@@ -1,12 +1,19 @@
 #include "pch.h"
 #include "Engine.h"
 
+#include "Attribute.h"
 #include "Debug.h"
 #include "SafeGL.h"
 #include "IShader.h"
+#include "Entity.h"
 
 namespace GraphicsEngine
 {
+
+	auto CreateEngine() -> IEnginePtr
+	{
+		return IEnginePtr(new Engine());
+	}
 
 	Engine::Engine()
 	{
@@ -18,7 +25,44 @@ namespace GraphicsEngine
 		GL::Clear(GL_COLOR_BUFFER_BIT);
 	}
 
-	auto Engine::CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr
+	auto Engine::CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr
+	{
+		size_t numAttributes = attributes.size();
+
+		GLuint vao;
+		GL::GenVertexArrays(1, &vao);
+		GL::BindVertexArray(vao);
+
+		std::vector<GLuint> buffers(numAttributes);
+		GL::GenBuffers(static_cast<GLsizei>(numAttributes), buffers.data());
+
+		for (size_t i = 0; i < numAttributes; ++i)
+		{
+			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
+			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
+			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), spAttribute->GetData(), GL_STATIC_DRAW);
+			
+			GLuint index = static_cast<GLuint>(i);
+			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), 0);
+			GL::EnableVertexAttribArray(index);
+		}
+
+		if (oIndices)
+		{
+			// Init the EBO.
+		}
+
+		EntityPtr spEntity = CreateEntity();
+		spEntity->SetVAO(vao);
+		spEntity->SetNumVertices(std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices());
+		spEntity->SetNumIndices(oIndices ? oIndices->size() : 0);
+
+		m_Entities.push_back(spEntity);
+
+		return std::dynamic_pointer_cast<IEntity>(spEntity);
+	}
+
+	auto Engine::CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr
 	{
 		auto GetSourceFromFile = [](const std::filesystem::path& path) -> std::string
 		{
@@ -79,24 +123,18 @@ namespace GraphicsEngine
 	auto Engine::Render() const -> void
 	{
 		GL::Clear(GL_COLOR_BUFFER_BIT);
-//	for (auto spEntity : m_Entities)
-//	{
-//		switch (spEntity->m_Type)
-//		{
-//		case GE_ENTITY_TYPE_INDEXED_POINTS_BASIC:
-//			DrawIndexedPoints3DBasic(*spEntity);
-//			break;
-//		case GE_ENTITY_TYPE_POS3F:
-//		case GE_ENTITY_TYPE_POS3F_COL3F:
-//			GL::UseProgram(spEntity->m_pShader->GetId());
-//			GL::BindVertexArray(spEntity->m_VAO);
-//			GL::DrawArrays(GL_TRIANGLES, 0, spEntity->m_NumVertices);
-//			break;
-//		default:
-//			BREAKPOINT; // We apparently need to support a new type.
-//			break;
-//		}
-//	}
+		for (auto spEntity : m_Entities)
+		{
+			spEntity->GetShader()->Use();
+			if (spEntity->GetNumIndices() > 0)
+			{
+			}
+			else
+			{
+				GL::BindVertexArray(spEntity->GetVAO());
+				GL::DrawArrays(GL_TRIANGLES, 0, spEntity->GetNumVertices());
+			}
+		}
 	}
 
 	auto Engine::SetBackgroundColor(const Color& color) -> void
