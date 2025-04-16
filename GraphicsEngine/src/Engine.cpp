@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Engine.h"
 
+#include <algorithm>
+
 #include "Attribute.h"
 #include "Debug.h"
 #include "SafeGL.h"
@@ -12,7 +14,7 @@ namespace GraphicsEngine
 
 	auto CreateEngine() -> IEnginePtr
 	{
-		return IEnginePtr(new Engine());
+		return std::make_shared<Engine>();
 	}
 
 	Engine::Engine()
@@ -42,8 +44,8 @@ namespace GraphicsEngine
 			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
 			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), spAttribute->GetData(), GL_STATIC_DRAW);
 			
-			GLuint index = static_cast<GLuint>(i);
-			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), 0);
+			auto index = static_cast<GLuint>(i);
+			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
 			GL::EnableVertexAttribArray(index);
 		}
 
@@ -104,10 +106,10 @@ namespace GraphicsEngine
 	{
 		GLint id;
 		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
-		auto it = std::find_if(m_Shaders.begin(), m_Shaders.end(), [&id](IShaderPtr spShader) 
-			{
-				return spShader->GetId() == id;
-			});
+		auto it = std::ranges::find_if(m_Shaders, [&id](IShaderPtr spShader) 
+		{
+			return spShader->GetId() == id;
+		});
 
 		if (it == m_Shaders.end())
 			return nullptr;
@@ -128,6 +130,7 @@ namespace GraphicsEngine
 			spEntity->GetShader()->Use();
 			if (spEntity->GetNumIndices() > 0)
 			{
+				// TODO: Render element buffer objects.
 			}
 			else
 			{
@@ -145,21 +148,39 @@ namespace GraphicsEngine
 
 	auto Engine::SetPolygonMode(PolygonMode polygonMode) -> void
 	{
+		using enum GraphicsEngine::PolygonMode;
+		
 		m_PolygonMode = polygonMode;
 		switch (m_PolygonMode)
 		{
-		case GraphicsEngine::PolygonMode::Fill:
+		case Fill:
 			GL::PolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			break;
-		case GraphicsEngine::PolygonMode::Line:
+		case Line:
 			GL::PolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			break;
-		case GraphicsEngine::PolygonMode::Point:
+		case Point:
 			GL::PolygonMode(GL_FRONT_AND_BACK, GL_POINT);
 			break;
 		}
 	}
 
+    auto Engine::GetNextAvailableEntityId() const -> unsigned int
+    {
+		unsigned int id = 1;
+
+		auto IdIsTaken = [&id](IEntityPtr spEntity) 
+		{ 
+			return spEntity->GetId() == id; 
+		};
+
+		while (std::ranges::find_if(m_Entities, IdIsTaken) != m_Entities.end())
+		{
+		 	id++;
+		}
+
+		return id;
+	}
 }
 
 //

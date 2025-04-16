@@ -9,13 +9,14 @@ namespace GraphicsEngine
 	class Entity : public IEntity
 	{
 	public:
-		virtual ~Entity() = default;
+		virtual ~Entity() override = default;
 
 		virtual auto GetId() const -> unsigned int override;
 		virtual auto GetNumIndices() const -> GLsizei override;
 		virtual auto GetNumVertices() const -> GLsizei override;
 		virtual auto GetShader() const -> IShaderPtr override;
 		virtual auto GetVAO() const -> unsigned int override;
+		auto SetId(unsigned int id) -> void;
 		auto SetNumIndices(GLsizei numIndices) -> void;
 		auto SetNumVertices(GLsizei numVertices) -> void;
 		virtual auto SetShader(IShaderPtr spShader) -> void override;

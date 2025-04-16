@@ -8,7 +8,7 @@ namespace GraphicsEngine
 
 	auto CreateAttribute(const std::vector<glm::vec3>& data) -> IAttributePtr
 	{
-		return IAttributePtr(new Attribute(data));
+		return std::make_shared<Attribute>(data);
 	}
 
 	Attribute::Attribute(const std::vector<glm::vec3>& data)
@@ -16,7 +16,7 @@ namespace GraphicsEngine
 		m_NumBytes = 3 * sizeof(float) * data.size();
 		m_Data = glm::value_ptr(*data.data());
 		m_NumComponents = 3;
-		m_NumVertices = data.size();
+		m_NumVertices = static_cast<GLuint>(data.size());
 		m_Stride = 3 * sizeof(float);
 		m_Type = GL_FLOAT;
 	}

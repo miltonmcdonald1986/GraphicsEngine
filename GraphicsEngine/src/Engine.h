@@ -15,19 +15,21 @@ namespace GraphicsEngine
 	{
 	public:
 		Engine();
-		virtual ~Engine() override = default;
+		~Engine() override = default;
 
-		virtual auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices = std::nullopt) -> IEntityPtr override;
-		virtual auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr override;
-		virtual auto CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr override;
-		virtual auto GetBackgroundColor() const -> Color override;
-		virtual auto GetCurrentShader() const -> IShaderPtr override;
-		virtual auto GetPolygonMode() const -> PolygonMode override;
-		virtual auto Render() const -> void override;
-		virtual auto SetBackgroundColor(const Color& color) -> void override;
-		virtual auto SetPolygonMode(PolygonMode polygonMode) -> void override;
+		auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr override;
+		auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr override;
+		auto CreateNewShaderFromSource(const std::string& vert, const std::string& geom, const std::string& frag) -> IShaderPtr override;
+		auto GetBackgroundColor() const -> Color override;
+		auto GetCurrentShader() const -> IShaderPtr override;
+		auto GetPolygonMode() const -> PolygonMode override;
+		auto Render() const -> void override;
+		auto SetBackgroundColor(const Color& color) -> void override;
+		auto SetPolygonMode(PolygonMode polygonMode) -> void override;
 
 	private:
+		auto GetNextAvailableEntityId() const -> unsigned int;
+
 		Color m_BackgroundColor{};
 		PolygonMode m_PolygonMode = PolygonMode::Fill;
 		IShaders m_Shaders;

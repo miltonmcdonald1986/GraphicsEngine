@@ -48,7 +48,12 @@ namespace GraphicsEngine
 		m_NumIndices = numIndices;
 	}
 
-	auto Entity::SetNumVertices(GLsizei numVertices) -> void
+    auto Entity::SetId(unsigned int id) -> void
+    {
+		m_Id = id;
+    }
+
+    auto Entity::SetNumVertices(GLsizei numVertices) -> void
 	{
 		m_NumVertices = numVertices;
 	}
