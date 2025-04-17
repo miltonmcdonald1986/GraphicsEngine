@@ -8,6 +8,7 @@
 #include "SafeGL.h"
 #include "IShader.h"
 #include "Entity.h"
+#include "Log.h"
 
 namespace GraphicsEngine
 {
@@ -18,10 +19,19 @@ namespace GraphicsEngine
 	}
 
 	Engine::Engine()
+		: m_spLog(CreateLog())
 	{
-
 		if (gladLoadGL() == 0)
 			BREAKPOINT;
+
+		LOG_INFO("Initialized OpenGL.");
+		std::stringstream ss;
+		ss << '\n';
+		ss << "OpenGL Version: " << glGetString(GL_VERSION) << '\n';
+		ss << "OpenGL Vendor: " << glGetString(GL_VENDOR) << '\n';
+		ss << "OpenGL Renderer: " << glGetString(GL_RENDERER) << '\n';
+		ss << "GSLS Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION);
+		LOG_INFO(ss.str());
 
 		GL::ClearColor(0.f, 0.f, 0.f, 1.f);
 		GL::Clear(GL_COLOR_BUFFER_BIT);
@@ -118,6 +128,11 @@ namespace GraphicsEngine
 			return nullptr;
 
 		return *it;
+	}
+
+	auto Engine::GetLog() const -> ILogPtr
+	{
+		return m_spLog;
 	}
 
 	auto Engine::GetPolygonMode() const -> PolygonMode

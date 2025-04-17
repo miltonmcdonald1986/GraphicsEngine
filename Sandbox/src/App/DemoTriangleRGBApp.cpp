@@ -7,6 +7,7 @@
 #include "glm/vec3.hpp"
 
 #include "BackgroundColorWidget.h"
+#include "EngineLogWidget.h"
 #include "PolygonModeWidget.h"
 #include "ShaderWidget.h"
 
@@ -32,5 +33,6 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3fA1Dummy3f.vert", "", "shaders/A1RGB.frag"));
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
+	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
+	m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(spWindow, m_spEngine)));
 }

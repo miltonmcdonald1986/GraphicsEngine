@@ -15,6 +15,9 @@ namespace GraphicsEngine
 	class IEntity;
 	using IEntityPtr = std::shared_ptr<IEntity>;
 	using IEntities = std::vector<IEntityPtr>;
+
+	class ILog;
+	using ILogPtr = std::shared_ptr<ILog>;
 	
 	class IShader;
 	class IUniform;
@@ -35,6 +38,7 @@ namespace GraphicsEngine
 	using Path = std::filesystem::path;
 	using ShaderId = unsigned int;
 	using String = std::string;
+	using Strings = std::vector<String>;
 	using UniformLocation = int;
 	using VAO = unsigned int;
 

@@ -13,6 +13,7 @@
 
 #include "BackgroundColorWidget.h"
 #include "PolygonModeWidget.h"
+#include "EngineLogWidget.h"
 
 DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)
@@ -46,6 +47,7 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 
 	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new PolygonModeWidget(m_pWindow, m_spEngine)));
+	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
 }
 
 auto DemoFlashingGreenTriangleApp::Iterate() -> void

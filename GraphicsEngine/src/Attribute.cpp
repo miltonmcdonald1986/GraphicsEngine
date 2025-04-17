@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Attribute.h"
+#include "Log.h"
 
 #include "glm/gtc/type_ptr.hpp"
 
@@ -19,6 +20,15 @@ namespace GraphicsEngine
 		m_NumVertices = static_cast<GLuint>(data.size());
 		m_Stride = 3 * sizeof(float);
 		m_Type = GL_FLOAT;
+
+		LOG_DEBUG(std::format("Created new attribute:\n"
+			"NumBytes: {}\n"
+			"Data: {}\n"
+			"NumComponents: {}\n"
+			"NumVertices: {}\n"
+			"Stride (bytes): {}\n"
+			"Type: {}\n",
+			m_NumBytes, m_Data, m_NumComponents, m_NumVertices, m_Stride, m_Type));
 	}
 
 	auto Attribute::GetNumBytes() const -> GLsizeiptr

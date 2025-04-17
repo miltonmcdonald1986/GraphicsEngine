@@ -6,6 +6,7 @@
 #include "SafeGL.h"
 #include "Debug.h"
 #include "Uniform.h"
+#include "Log.h"
 
 //GEshader* geCreateShaderFromFiles(const char* vert, const char* geom, const char* frag)
 //{
@@ -236,12 +237,14 @@ namespace GraphicsEngine
 				GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
 				if (!success)
 				{
+					LOG_ERROR("Error when compiling shader.");
+
 					GLint infoLogLength;
 					GL::GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
 
 					std::string infoLog(infoLogLength, '\0');
 					GL::GetShaderInfoLog(shader, infoLogLength, NULL, infoLog.data());
-					//spdlog::get("Engine")->info(infoLog);
+					LOG_INFO(infoLog);
 
 					return 0;
 				}

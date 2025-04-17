@@ -8,6 +8,11 @@ file(GLOB_RECURSE SANDBOX_SRC
 
 add_executable(Sandbox ${SANDBOX_SRC})
 
+if(WIN32)
+    set_target_properties(Sandbox PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+endif()
+
+
 target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/src/App

@@ -19,6 +19,7 @@ namespace GraphicsEngine
 		virtual auto CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCurrentShader() const -> IShaderPtr = 0;
+		virtual auto GetLog() const -> ILogPtr = 0;
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;
 		virtual auto Render() const -> void = 0;
 		virtual auto SetBackgroundColor(const Color& color) -> void = 0;

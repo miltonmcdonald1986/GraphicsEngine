@@ -7,6 +7,7 @@
 #include "IEntity.h"
 
 #include "BackgroundColorWidget.h"
+#include "EngineLogWidget.h"
 #include "PolygonModeWidget.h"
 
 DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
@@ -30,4 +31,5 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(pWindow, m_spEngine)));
     m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(pWindow, m_spEngine)));
+    m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
 }

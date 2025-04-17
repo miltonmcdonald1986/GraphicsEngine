@@ -2,61 +2,52 @@
 #include "Error.h"
 
 #include "Debug.h"
+#include "Log.h"
 
 namespace GraphicsEngine
 {
 
 	auto HandleError(const char* funcName) -> void
 	{
-		auto LogError = [&funcName](const std::string& msg) -> void
+		auto GLErrorMessage = [&funcName](const std::string& msg) -> std::string
 			{
-				auto logger = spdlog::get("Engine");
-				if (!logger)
-					return;
-
 				std::stringstream loggerOutputStream;
 				loggerOutputStream << funcName << ": " << msg;
 
 #ifdef _DEBUG
-
 				loggerOutputStream << "\nStack trace:\n============\n" << std::stacktrace::current();
 				BREAKPOINT;
-
 #endif
-
-				logger->error(loggerOutputStream.str());
+				std::string str = loggerOutputStream.str();
+				return str;
 			};
 
-		//auto logger = spdlog::get("Engine");
 		switch (glGetError())
 		{
 		case GL_NO_ERROR:
-			//logger->trace("No error has been recorded.");
+			LOG_TRACE("No error has been recorded.");
 			break;
 		case GL_INVALID_ENUM:
-			//LogError("An unacceptable value is specified for an enumerated argument.");
+			LOG_ERROR(GLErrorMessage("An unacceptable value is specified for an enumerated argument."));
 			break;
 		case GL_INVALID_VALUE:
-			//LogError("A numeric argument is out of range.");
+			LOG_ERROR(GLErrorMessage("A numeric argument is out of range."));
 			break;
 		case GL_INVALID_OPERATION:
-			//LogError("The specified operation is not allowed in the current state.");
+			LOG_ERROR(GLErrorMessage("The specified operation is not allowed in the current state."));
 			break;
 		case GL_INVALID_FRAMEBUFFER_OPERATION:
-			//LogError("The framebuffer object is not complete.");
+			LOG_ERROR(GLErrorMessage("The framebuffer object is not complete."));
 			break;
 		case GL_OUT_OF_MEMORY:
-			//LogError("There is not enough memory left to execute the command.");
+			LOG_ERROR(GLErrorMessage("There is not enough memory left to execute the command."));
 			break;
 		default:
 #ifdef _DEBUG
-
-			//logger->warn("Unknown error flag.");
+			LOG_WARN("Unknown error flag.");
 			BREAKPOINT;
-
 #endif
 			break;
 		};
 	}
-
 }
