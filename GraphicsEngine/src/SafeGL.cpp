@@ -76,6 +76,12 @@ namespace GraphicsEngine::GL
 		HandleError(__FUNCTION__);
 	}
 
+	auto DrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices) -> void
+	{
+		glDrawElements(mode, count, type, indices);
+		HandleError(__FUNCTION__);
+	}
+
 	auto EnableVertexAttribArray(GLuint index) -> void
 	{
 		glEnableVertexAttribArray(index);

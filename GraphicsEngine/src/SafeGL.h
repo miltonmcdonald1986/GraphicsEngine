@@ -16,6 +16,7 @@ namespace GraphicsEngine::GL
 	auto CreateShader(GLenum shaderType) -> GLuint;
 	auto DeleteShader(GLuint shader) -> void;
 	auto DrawArrays(GLenum mode, GLint first, GLsizei count) -> void;
+	auto DrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices) -> void;
 	auto EnableVertexAttribArray(GLuint index) -> void;
 	auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void;
 	auto GenBuffers(GLsizei n, GLuint* buffers) -> void;

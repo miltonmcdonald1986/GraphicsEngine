@@ -51,7 +51,10 @@ namespace GraphicsEngine
 
 		if (oIndices)
 		{
-			// Init the EBO.
+			GLuint eboBuffer;
+			GL::GenBuffers(1, &eboBuffer);
+			GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboBuffer);
+			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, oIndices->size() * sizeof(Index), oIndices->data(), GL_STATIC_DRAW);
 		}
 
 		EntityPtr spEntity = CreateEntity();
@@ -128,15 +131,11 @@ namespace GraphicsEngine
 		for (auto spEntity : m_Entities)
 		{
 			spEntity->GetShader()->Use();
+			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)
-			{
-				// TODO: Render element buffer objects.
-			}
+				GL::DrawElements(GL_TRIANGLES, spEntity->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 			else
-			{
-				GL::BindVertexArray(spEntity->GetVAO());
 				GL::DrawArrays(GL_TRIANGLES, 0, spEntity->GetNumVertices());
-			}
 		}
 	}
 
