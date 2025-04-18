@@ -33,7 +33,7 @@ namespace GraphicsEngine
 
 	public:
 
-		queue_sink(int maxNumMessages)
+		explicit queue_sink(int maxNumMessages)
 			: spdlog::sinks::base_sink<std::mutex>(),
 			  m_MaxNumMessages(maxNumMessages)
 		{
@@ -62,11 +62,11 @@ namespace GraphicsEngine
 	{
 	public:
 		Log();
-		Log(loggerPtr spLogger);
-		~Log() override;
+		explicit Log(loggerPtr spLogger);
+		~Log() override = default;
 		
 		auto ClearMessages() -> void override;
-		auto GetLatestMessages() const->Strings override;
+		auto GetLatestMessages() const -> Strings override;
 		auto GetLevel() const->LogLevel override;
 		auto Trace(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
 		auto Debug(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
@@ -77,7 +77,7 @@ namespace GraphicsEngine
 		auto SetLevel(LogLevel level) -> void override;
 
 	private:
-		auto LogMessage(LogLevel level, const std::source_location& loc, const String& message) -> void;
+		auto LogMessage(LogLevel level, const std::source_location& loc, const String& message) const -> void;
 
 		loggerPtr m_spLogger = nullptr;
 		std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> m_spRotatingFileSink = nullptr;
@@ -86,8 +86,6 @@ namespace GraphicsEngine
 	};
 
 	auto GetLog() -> LogPtr;
-
 	auto CreateLog() -> LogPtr;
-	auto CreateLog(loggerPtr spLogger) -> LogPtr;
 
 }
