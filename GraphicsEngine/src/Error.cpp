@@ -1,6 +1,10 @@
 #include "pch.h"
-#include "Error.h"
 
+#ifdef _WIN32
+#include <stacktrace>
+#endif
+
+#include "Error.h"
 #include "Debug.h"
 #include "Log.h"
 
@@ -13,7 +17,9 @@ namespace GraphicsEngine
 			{
 				std::stringstream loggerOutputStream;
 				loggerOutputStream << funcName << ": " << msg;
+#ifdef _WIN32 // g++ doesn't easily support stacktrace at this time.
 				loggerOutputStream << "\nStack trace:\n============\n" << std::stacktrace::current();
+#endif
 				std::string str = loggerOutputStream.str();
 				return str;
 			};

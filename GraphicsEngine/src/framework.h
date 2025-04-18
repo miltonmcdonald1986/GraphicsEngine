@@ -9,7 +9,6 @@
 #include <filesystem>
 #include <fstream>
 #include <sstream>
-#include <stacktrace>
 
 #pragma warning ( push, 0 )
 
