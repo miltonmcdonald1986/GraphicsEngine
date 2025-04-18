@@ -28,7 +28,7 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 		glm::vec3(0.0f, 0.0f, 1.0f)
 	};
 
-	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(colors) };
+	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(colors)};
 	auto spEntity = m_spEngine->CreateNewEntity(attributes);
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3fA1Dummy3f.vert", "", "shaders/A1RGB.frag"));
 

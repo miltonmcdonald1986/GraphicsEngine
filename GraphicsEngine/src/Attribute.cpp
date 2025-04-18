@@ -15,7 +15,7 @@ namespace GraphicsEngine
 	Attribute::Attribute(const std::vector<glm::vec3>& data)
 	{
 		m_NumBytes = 3 * sizeof(float) * data.size();
-		m_Data = glm::value_ptr(*data.data());
+		m_Data = static_cast<const void*>(glm::value_ptr(*data.data()));
 		m_NumComponents = 3;
 		m_NumVertices = static_cast<GLuint>(data.size());
 		m_Stride = 3 * sizeof(float);
