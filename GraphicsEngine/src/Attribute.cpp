@@ -21,7 +21,7 @@ namespace GraphicsEngine
 		m_Stride = 3 * sizeof(float);
 		m_Type = GL_FLOAT;
 
-		LOG_DEBUG(std::format("Created new attribute:\n"
+		GetLog()->Debug(std::format("Created new attribute:\n"
 			"NumBytes: {}\n"
 			"Data: {}\n"
 			"NumComponents: {}\n"

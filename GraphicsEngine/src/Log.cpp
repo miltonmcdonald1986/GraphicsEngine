@@ -227,8 +227,41 @@ auto Log::GetLevel() const -> LogLevel
 	}
 }
 
-auto Log::LogMessage(LogLevel level, const String& file, const String& func, int line, const String& message) -> void
+auto Log::Trace(const String& message, const std::source_location& loc) -> void
 {
+	LogMessage(GraphicsEngine::LogLevel::Trace, loc, message);
+}
+
+auto Log::Debug(const String& message, const std::source_location& loc) -> void
+{
+	LogMessage(GraphicsEngine::LogLevel::Debug, loc, message);
+}
+
+auto Log::Info(const String& message, const std::source_location& loc) -> void
+{
+	LogMessage(GraphicsEngine::LogLevel::Info, loc, message);
+}
+
+auto Log::Warn(const String& message, const std::source_location& loc) -> void
+{
+	LogMessage(GraphicsEngine::LogLevel::Warn, loc, message);
+}
+
+auto Log::Error(const String& message, const std::source_location& loc) -> void
+{
+	LogMessage(GraphicsEngine::LogLevel::Error, loc, message);
+}
+
+auto Log::Critical(const String& message, const std::source_location& loc) -> void
+{
+	LogMessage(GraphicsEngine::LogLevel::Critical, loc, message);
+}
+
+auto Log::LogMessage(LogLevel level, const std::source_location& loc, const String& message) -> void
+{
+	auto file = loc.file_name();
+	auto func = loc.function_name();
+	auto line = loc.line();
 	switch (level)
 	{
 	case GraphicsEngine::LogLevel::Trace:

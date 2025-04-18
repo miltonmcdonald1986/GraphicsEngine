@@ -23,7 +23,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	GraphicsEngine::IAttributes attributes;
 	attributes.push_back(GraphicsEngine::CreateAttribute(vertices));
 	auto spEntity = m_spEngine->CreateNewEntity(attributes);
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3f.vert", "", "shaders/ColorIs008033.frag"));
+	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos32f.vert", "", "shaders/ColorIs0080233.frag"));
 
     m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

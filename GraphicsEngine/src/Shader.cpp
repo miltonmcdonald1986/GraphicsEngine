@@ -233,18 +233,22 @@ namespace GraphicsEngine
 				GL::ShaderSource(shader, 1, &source, nullptr);
 				GL::CompileShader(shader);
 
+				auto spLog = GetLog();
+
 				GLint success;
 				GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
 				if (!success)
 				{
-					LOG_ERROR("Error when compiling shader.");
+					if (spLog)
+						spLog->Error("Error when compiling shader.");
 
 					GLint infoLogLength;
 					GL::GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
 
 					std::string infoLog(infoLogLength, '\0');
 					GL::GetShaderInfoLog(shader, infoLogLength, NULL, infoLog.data());
-					LOG_INFO(infoLog);
+					if (spLog)
+						spLog->Info(infoLog);
 
 					return 0;
 				}

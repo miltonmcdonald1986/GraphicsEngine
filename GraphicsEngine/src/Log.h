@@ -1,6 +1,7 @@
 #pragma once
 
 #include <queue>
+#include <source_location>
 
 #include "GraphicsEngineFwd.h"
 #include "ILog.h"
@@ -67,10 +68,17 @@ namespace GraphicsEngine
 		auto ClearMessages() -> void override;
 		auto GetLatestMessages() const->Strings override;
 		auto GetLevel() const->LogLevel override;
-		auto LogMessage(LogLevel level, const String& file, const String& func, int line, const String& message) -> void;
+		auto Trace(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Debug(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Info(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Warn(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Error(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Critical(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
 		auto SetLevel(LogLevel level) -> void override;
 
 	private:
+		auto LogMessage(LogLevel level, const std::source_location& loc, const String& message) -> void;
+
 		loggerPtr m_spLogger = nullptr;
 		std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> m_spRotatingFileSink = nullptr;
 		std::shared_ptr<queue_sink> m_spQueueSink = nullptr;
@@ -83,10 +91,3 @@ namespace GraphicsEngine
 	auto CreateLog(loggerPtr spLogger) -> LogPtr;
 
 }
-
-#define LOG_TRACE(msg)		GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Trace,		std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)
-#define LOG_DEBUG(msg)		GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Debug,		std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)
-#define LOG_INFO(msg)		GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Info,		std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)
-#define LOG_WARN(msg)		GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Warn,		std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)
-#define LOG_ERROR(msg)		GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Error,		std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)
-#define LOG_CRITICAL(msg)	GraphicsEngine::GetLog()->LogMessage(GraphicsEngine::LogLevel::Critical,	std::filesystem::path(__FILE__).filename().string(), __func__, __LINE__, msg)

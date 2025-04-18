@@ -22,16 +22,16 @@ namespace GraphicsEngine
 		: m_spLog(CreateLog())
 	{
 		if (gladLoadGL() == 0)
-			BREAKPOINT;
+			m_spLog->Critical("Failed to load OpenGL.");
 
-		LOG_INFO("Initialized OpenGL.");
+		m_spLog->Info("Initialized OpenGL.");
 		std::stringstream ss;
 		ss << '\n';
 		ss << "OpenGL Version: " << glGetString(GL_VERSION) << '\n';
 		ss << "OpenGL Vendor: " << glGetString(GL_VENDOR) << '\n';
 		ss << "OpenGL Renderer: " << glGetString(GL_RENDERER) << '\n';
 		ss << "GSLS Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION);
-		LOG_INFO(ss.str());
+		m_spLog->Info(ss.str());
 
 		GL::ClearColor(0.f, 0.f, 0.f, 1.f);
 		GL::Clear(GL_COLOR_BUFFER_BIT);
@@ -79,15 +79,14 @@ namespace GraphicsEngine
 
 	auto Engine::CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr
 	{
-		auto GetSourceFromFile = [](const std::filesystem::path& path) -> std::string
+		auto GetSourceFromFile = [this](const std::filesystem::path& path) -> std::string
 		{
 			if (path.empty())
 				return "";
 
 			if (!std::filesystem::exists(path))
 			{
-				auto cwd = std::filesystem::current_path();
-				BREAKPOINT; // Trying to open a file that doesn't exist.
+				m_spLog->Error(std::format("Could not open '{}' because it does not exist.", path.string()));
 				return "";
 			}
 

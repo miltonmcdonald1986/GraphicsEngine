@@ -35,7 +35,7 @@ namespace GraphicsEngine
 		PolygonMode m_PolygonMode = PolygonMode::Fill;
 		IShaders m_Shaders;
 		IEntities m_Entities;
-		ILogPtr m_spLog = nullptr;
+		LogPtr m_spLog = nullptr;
 	};
 
 }
