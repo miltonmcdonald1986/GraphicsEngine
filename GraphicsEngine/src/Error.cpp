@@ -9,7 +9,7 @@ namespace GraphicsEngine
 
 	auto HandleError(const char* funcName) -> void
 	{
-		auto GLErrorMessage = [&funcName](const std::string& msg) -> std::string
+		auto GLErrorMessage = [&funcName](const std::string& msg)
 			{
 				std::stringstream loggerOutputStream;
 				loggerOutputStream << funcName << ": " << msg;

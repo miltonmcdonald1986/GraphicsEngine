@@ -103,32 +103,32 @@ auto Log::GetLevel() const -> LogLevel
 	}
 }
 
-auto Log::Trace(const String& message, const std::source_location& loc) -> void
+auto Log::Trace(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Trace, loc, message);
 }
 
-auto Log::Debug(const String& message, const std::source_location& loc) -> void
+auto Log::Debug(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Debug, loc, message);
 }
 
-auto Log::Info(const String& message, const std::source_location& loc) -> void
+auto Log::Info(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Info, loc, message);
 }
 
-auto Log::Warn(const String& message, const std::source_location& loc) -> void
+auto Log::Warn(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Warn, loc, message);
 }
 
-auto Log::Error(const String& message, const std::source_location& loc) -> void
+auto Log::Error(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Error, loc, message);
 }
 
-auto Log::Critical(const String& message, const std::source_location& loc) -> void
+auto Log::Critical(const String& message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Critical, loc, message);
 }

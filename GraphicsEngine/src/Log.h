@@ -68,12 +68,12 @@ namespace GraphicsEngine
 		auto ClearMessages() -> void override;
 		auto GetLatestMessages() const -> Strings override;
 		auto GetLevel() const->LogLevel override;
-		auto Trace(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
-		auto Debug(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
-		auto Info(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
-		auto Warn(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
-		auto Error(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
-		auto Critical(const String& message, const std::source_location& loc = std::source_location::current()) -> void;
+		auto Trace(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Debug(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Info(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Warn(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Error(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Critical(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
 		auto SetLevel(LogLevel level) -> void override;
 
 	private:
