@@ -82,7 +82,7 @@ namespace GraphicsEngine
 		loggerPtr m_spLogger = nullptr;
 		std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> m_spRotatingFileSink = nullptr;
 		std::shared_ptr<queue_sink> m_spQueueSink = nullptr;
-		static const int m_QueueSize = 128;
+		static constexpr int m_QueueSize = 128;
 	};
 
 	auto GetLog() -> LogPtr;
