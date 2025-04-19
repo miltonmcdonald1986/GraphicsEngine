@@ -13,11 +13,12 @@ using AppInfo_t = std::pair<Apps, const char*>;
 using AppMap_t = std::map<Apps, const char*>;
 const AppMap_t AppMap =
 {
-	std::make_pair(Apps::DemoTriangleBasic, "Demo triangle"),
-	std::make_pair(Apps::DemoIndexedPoints, "Demo indexed points"),
-	std::make_pair(Apps::DemoTriangleRGB, "Demo triangle rgb"),
 	std::make_pair(Apps::DemoFlashingGreenTriangle, "Demo flashing green triangle"),
-	std::make_pair(Apps::ImGuiDemoWindow, "Demo \"Dear ImGui\" window"),
+	std::make_pair(Apps::DemoIndexedPoints, "Demo indexed points"),
+	std::make_pair(Apps::DemoTexturedTriangle, "Demo textured triangle"),
+	std::make_pair(Apps::DemoTriangle, "Demo triangle"),
+	std::make_pair(Apps::DemoTriangleRGB, "Demo triangle rgb"),
+	std::make_pair(Apps::ImGuiDemoWindow, "Demo \"Dear ImGui\" window")
 };
 
 using AppNames_t = std::vector<const char*>;

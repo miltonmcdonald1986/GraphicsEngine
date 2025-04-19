@@ -20,6 +20,10 @@ namespace GraphicsEngine
 	using ILogPtr = std::shared_ptr<ILog>;
 	
 	class IShader;
+
+	class ITexture;
+	using ITexturePtr = std::shared_ptr<ITexture>;
+
 	class IUniform;
 	
 	// Aliases
