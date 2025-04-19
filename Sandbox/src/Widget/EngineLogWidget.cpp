@@ -63,7 +63,7 @@ auto EngineLogWidget::Iterate() -> void
             ImGui::TextColored(ImVec4(0.f, 1.f, 1.f, 1.f), "%s", message.c_str());
         else if (message.contains("[info]"))
             ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), "%s", message.c_str());
-        else if (message.contains("[warn]"))
+        else if (message.contains("[warning]"))
             ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", message.c_str());
         else if (message.contains("[error]"))
             ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "%s", message.c_str());

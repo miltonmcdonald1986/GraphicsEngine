@@ -137,8 +137,7 @@ namespace GraphicsEngine
 			}
 			default:
 			{
-				// Apparently we're not handling a type that we need to be.
-				BREAKPOINT;
+				GetLog()->Warn(std::format("Shader uniform type not handled: {}", type));
 				m_Uniforms.push_back(nullptr);
 				break;
 			}

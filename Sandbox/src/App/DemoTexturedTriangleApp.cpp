@@ -21,7 +21,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 	};
 
 	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) });
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3fA1Dummy2f.vert", "", "shaders/Texture2d.frag"));
+	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/TexturedTriangle.vert", "", "shaders/TexturedTriangle.frag"));
 
 	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

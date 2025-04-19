@@ -24,9 +24,8 @@ namespace GraphicsEngine
 		if (gladLoadGL() == 0)
 			m_spLog->Critical("Failed to load OpenGL.");
 
-		m_spLog->Info("Initialized OpenGL.");
 		std::stringstream ss;
-		ss << '\n';
+		ss << "Initialized OpenGL.\n";
 		ss << "OpenGL Version: " << glGetString(GL_VERSION) << '\n';
 		ss << "OpenGL Vendor: " << glGetString(GL_VENDOR) << '\n';
 		ss << "OpenGL Renderer: " << glGetString(GL_RENDERER) << '\n';
