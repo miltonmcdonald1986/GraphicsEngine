@@ -2,7 +2,7 @@
 // vertex will have its own individual color, which can lead to a rainbow type
 // effect, or be used for gradient color, etc.
 
-#version 420 core
+#version 330 core
 
 layout (location = 1) in vec3 inRGB;
 
