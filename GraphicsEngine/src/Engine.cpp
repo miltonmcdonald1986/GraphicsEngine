@@ -120,7 +120,7 @@ namespace GraphicsEngine
 		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
 		auto it = std::ranges::find_if(m_Shaders, [&id](IShaderPtr spShader) 
 		{
-			return spShader->GetId() == id;
+			return static_cast<int>(spShader->GetId()) == id;
 		});
 
 		if (it == m_Shaders.end())

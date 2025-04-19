@@ -32,8 +32,6 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	auto uniforms = spShader->GetActiveUniforms();
 	for (auto spUniform : uniforms)
 	{
-		auto t1 = typeid(spUniform->GetName()).name();
-		auto t2 = typeid("uGreenScalar").name();
 		std::string name = spUniform->GetName();
 		std::string uniformName = "uGreenScalar";
 		if (name == uniformName)

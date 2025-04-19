@@ -11,5 +11,12 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if (MSVC)
+	string(REPLACE "/W3" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+	add_compile_options(/W4 /WX)
+else()
+	add_compile_options(-Wall -Wextra -Werror)
+endif()
+
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
