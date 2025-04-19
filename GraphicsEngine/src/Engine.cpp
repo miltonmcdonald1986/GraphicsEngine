@@ -37,6 +37,11 @@ namespace GraphicsEngine
 		GL::Clear(GL_COLOR_BUFFER_BIT);
 	}
 
+	Engine::~Engine()
+	{
+		spdlog::shutdown();
+	}
+
 	auto Engine::CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr
 	{
 		size_t numAttributes = attributes.size();

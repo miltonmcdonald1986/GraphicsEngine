@@ -23,7 +23,7 @@ namespace GraphicsEngine
 
 			// Add the formatted message to the vector
 			messages_.push(fmt::to_string(formatted));
-			if (messages_.size() > m_MaxNumMessages)
+			if (static_cast<int>(messages_.size()) > m_MaxNumMessages)
 				messages_.pop();
 		}
 

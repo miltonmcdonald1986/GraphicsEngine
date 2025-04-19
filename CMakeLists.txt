@@ -15,7 +15,7 @@ if (MSVC)
 	string(REPLACE "/W3" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 	add_compile_options(/W4 /WX)
 else()
-	add_compile_options(-Wall -Wextra -Werror)
+	add_compile_options(-Wall -Wextra -Werror -Wno-unknown-pragmas)
 endif()
 
 add_subdirectory(GraphicsEngine)

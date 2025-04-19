@@ -15,7 +15,7 @@ namespace GraphicsEngine
 	{
 	public:
 		Engine();
-		~Engine() override = default;
+		~Engine() override;
 
 		auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr override;
 		auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr override;

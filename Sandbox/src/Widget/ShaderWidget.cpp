@@ -21,7 +21,7 @@ auto ShaderWidget::Iterate() -> void
 {
 	auto spShader = m_spEngine->GetCurrentShader();
 	auto uniforms = spShader->GetActiveUniforms();
-	for (int i = 0; i < uniforms.size(); ++i)
+	for (size_t i = 0; i < uniforms.size(); ++i)
 	{
 		GraphicsEngine::IUniformPtr spUniform = uniforms[i];
 		auto data = spUniform->GetData();

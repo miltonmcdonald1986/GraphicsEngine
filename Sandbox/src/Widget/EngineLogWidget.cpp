@@ -51,26 +51,26 @@ auto EngineLogWidget::Iterate() -> void
     if (messages.empty())
         ImGui::Text("Log is empty.");
     else
-        ImGui::Text(std::format("Showing {} messages.", messages.size()).c_str());
+        ImGui::Text("%s", std::format("Showing {} messages.", messages.size()).c_str());
 
     ImGui::BeginChild("Messages", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
     std::reverse(messages.begin(), messages.end());
     for (const auto& message : messages)
     {
         if (message.contains("[trace]"))
-            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.f), "%s", message.c_str());
         else if (message.contains("[debug]"))
-            ImGui::TextColored(ImVec4(0.f, 1.f, 1.f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(0.f, 1.f, 1.f, 1.f), "%s", message.c_str());
         else if (message.contains("[info]"))
-            ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), "%s", message.c_str());
         else if (message.contains("[warn]"))
-            ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", message.c_str());
         else if (message.contains("[error]"))
-            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "%s", message.c_str());
         else if (message.contains("[critical]"))
-            ImGui::TextColored(ImVec4(1.f, 0.f, 1.f, 1.f), message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 0.f, 1.f, 1.f), "%s", message.c_str());
         else
-            ImGui::Text(message.c_str());
+            ImGui::Text("%s", message.c_str());
     }
     ImGui::EndChild();
     ImGui::End();

@@ -55,6 +55,8 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 		app.Run();
 		break;
 	}
+	default:
+		break;
 	}
 }
 
