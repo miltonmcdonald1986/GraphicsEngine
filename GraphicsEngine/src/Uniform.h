@@ -10,15 +10,15 @@ namespace GraphicsEngine
 	class Uniform : public IUniform
 	{
 	public:
-		Uniform(GLuint programId);
-		virtual ~Uniform() override = default;
+		explicit Uniform(GLuint programId);
+		~Uniform() override = default;
 
-		virtual auto GetData() const->Data override;
-		virtual auto GetLocation() const -> int override;
-		virtual auto GetName() const->std::string override;
-		virtual auto SetData(const Data& data) -> void override;
+		auto GetData() const->Data override;
+		auto GetLocation() const -> int override;
+		auto GetName() const->std::string override;
+		auto SetData(const Data& data) -> void override;
 		auto SetLocation(GLint location) -> void;
-		auto SetName(const std::string& name) -> void;
+		auto SetName(std::string_view name) -> void;
 
 	private:
 		Data m_Data = 0.f;

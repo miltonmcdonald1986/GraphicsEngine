@@ -8,11 +8,11 @@ namespace GraphicsEngine
 	class Attribute : public IAttribute
 	{
 	public:
-		Attribute(const std::vector<glm::vec3>& data);
-		virtual ~Attribute() override = default;
+		explicit Attribute(const std::vector<glm::vec3>& data);
+		~Attribute() override = default;
 
 		auto GetNumBytes() const -> GLsizeiptr;
-		auto GetData() const -> const void*;
+		auto GetData() const -> std::vector<std::byte>;
 		auto GetNumComponents() const -> GLint;
 		auto GetNumVertices() const -> GLuint;
 		auto GetStride() const -> GLsizei;
@@ -20,7 +20,7 @@ namespace GraphicsEngine
 
 	private:
 		GLsizeiptr m_NumBytes = 0;
-		const void* m_Data = nullptr;
+		std::vector<std::byte> m_Data;
 		GLint m_NumComponents = 0;
 		GLuint m_NumVertices = 0;
 		GLsizei m_Stride = 0;

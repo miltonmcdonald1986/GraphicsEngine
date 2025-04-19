@@ -58,6 +58,8 @@ auto DemoFlashingGreenTriangleApp::Iterate() -> void
 	float period = 2.f;
 	float value = 0.5f * (1.f + std::cos(2.f * std::numbers::pi_v<float> *elapsedTime / period));
 
-	m_spUniform->SetData(value);
+	if (m_spUniform)
+		m_spUniform->SetData(value);
+		
 	App::Iterate();
 }

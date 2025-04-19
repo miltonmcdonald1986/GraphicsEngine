@@ -15,7 +15,11 @@ namespace GraphicsEngine
 	Attribute::Attribute(const std::vector<glm::vec3>& data)
 	{
 		m_NumBytes = 3 * sizeof(float) * data.size();
-		m_Data = static_cast<const void*>(glm::value_ptr(*data.data()));
+		
+		m_Data.resize(m_NumBytes);
+		auto pBegin = glm::value_ptr(*data.data());
+		memcpy(m_Data.data(), reinterpret_cast<const std::byte*>(pBegin), m_NumBytes);
+		
 		m_NumComponents = 3;
 		m_NumVertices = static_cast<GLuint>(data.size());
 		m_Stride = 3 * sizeof(float);
@@ -28,7 +32,7 @@ namespace GraphicsEngine
 			"NumVertices: {}\n"
 			"Stride (bytes): {}\n"
 			"Type: {}\n",
-			m_NumBytes, m_Data, m_NumComponents, m_NumVertices, m_Stride, m_Type));
+			m_NumBytes, static_cast<const void*>(m_Data.data()), m_NumComponents, m_NumVertices, m_Stride, m_Type));
 	}
 
 	auto Attribute::GetNumBytes() const -> GLsizeiptr
@@ -36,7 +40,7 @@ namespace GraphicsEngine
 		return m_NumBytes;
 	}
 
-	auto Attribute::GetData() const -> const void*
+	auto Attribute::GetData() const -> std::vector<std::byte>
 	{
 		return m_Data;
 	}

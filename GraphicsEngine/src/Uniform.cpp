@@ -9,7 +9,7 @@ namespace GraphicsEngine
 
 	auto CreateUniform(GLuint programId) -> UniformPtr
 	{
-		return UniformPtr(new Uniform(programId));
+		return std::make_shared<Uniform>(programId);
 	}
 
 	Uniform::Uniform(GLuint programId)
@@ -41,7 +41,7 @@ namespace GraphicsEngine
 			GL::Uniform1f(m_Location, std::get<float>(data));
 		else if (std::holds_alternative<glm::vec4>(data))
 		{
-			const float* v = glm::value_ptr(std::get<glm::vec4>(data));
+			auto v = std::get<glm::vec4>(data);
 			GL::Uniform4f(m_Location, v[0], v[1], v[2], v[3]);
 		}
 	}
@@ -51,7 +51,7 @@ namespace GraphicsEngine
 		m_Location = location;
 	}
 
-	auto Uniform::SetName(const std::string& name) -> void
+	auto Uniform::SetName(std::string_view name) -> void
 	{
 		m_Name = name;
 	}

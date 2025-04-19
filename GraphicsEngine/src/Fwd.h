@@ -27,3 +27,5 @@ namespace GraphicsEngine
 	using UniformPtr = std::shared_ptr<Uniform>;
 
 }
+
+using Bytes = std::vector<std::byte>;

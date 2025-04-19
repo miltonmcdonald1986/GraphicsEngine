@@ -5,17 +5,12 @@ namespace GraphicsEngine
 {
 	auto CreateEntity() -> EntityPtr
 	{
-		return EntityPtr(new Entity());
+		return std::make_shared<Entity>();
 	}
 
-	bool operator<(const GraphicsEngine::IEntityPtr& e1, const GraphicsEngine::IEntityPtr& e2)
+	auto operator<=>(const GraphicsEngine::IEntityPtr& e1, const GraphicsEngine::IEntityPtr& e2)
 	{
-		if (!e1)
-			return true;
-		else if (!e2)
-			return false;
-
-		return e1->GetId() < e2->GetId();
+		return e1->GetId() <=> e2->GetId();
 	}
 
 	auto Entity::GetId() const -> EntityId

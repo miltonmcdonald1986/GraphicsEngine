@@ -55,7 +55,7 @@ Log::Log()
 	spdlog::register_logger(m_spLogger);
 	m_spLogger->set_pattern("[%Y-%m-%d %H:%M:%S] [%n] [%l] %v");
 
-#ifdef _DEBUG
+#ifndef NDEBUG
 	m_spLogger->set_level(spdlog::level::debug);
 #else
 	m_spLogger->set_level(spdlog::level::info);
@@ -135,28 +135,32 @@ auto Log::Critical(const String& message, const std::source_location& loc) const
 
 auto Log::LogMessage(LogLevel level, const std::source_location& loc, const String& message) const -> void
 {
-	auto file = loc.file_name();
-	auto func = loc.function_name();
-	auto line = loc.line();
+	std::stringstream loggerOutputStream;
+	loggerOutputStream << "\nFile: " << loc.file_name() << '\n';
+	loggerOutputStream << "Function: " << loc.function_name() << '\n';
+	loggerOutputStream << "Line: " << loc.line() << '\n';
+	loggerOutputStream << "Column: " << loc.column() << '\n';
+	loggerOutputStream << message;
+	String output = loggerOutputStream.str();
 	switch (level)
 	{
 	case GraphicsEngine::LogLevel::Trace:
-		m_spLogger->trace(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->trace(output);
 		break;
 	case GraphicsEngine::LogLevel::Debug:
-		m_spLogger->debug(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->debug(output);
 		break;
 	case GraphicsEngine::LogLevel::Info:
-		m_spLogger->info(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->info(output);
 		break;
 	case GraphicsEngine::LogLevel::Warn:
-		m_spLogger->warn(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->warn(output);
 		break;
 	case GraphicsEngine::LogLevel::Error:
-		m_spLogger->error(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->error(output);
 		break;
 	case GraphicsEngine::LogLevel::Critical:
-		m_spLogger->critical(std::format("{}\t{}\t{}\t{}", file, func, line, message));
+		m_spLogger->critical(output);
 		break;
 	default:
 		break;

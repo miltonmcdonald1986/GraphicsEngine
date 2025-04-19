@@ -52,7 +52,7 @@ namespace GraphicsEngine
 		{
 			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
 			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
-			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), spAttribute->GetData(), GL_STATIC_DRAW);
+			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), static_cast<const void*>(spAttribute->GetData().data()), GL_STATIC_DRAW);
 			
 			auto index = static_cast<GLuint>(i);
 			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);

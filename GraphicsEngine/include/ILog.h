@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GraphicsEngineFwd.h"
+
 namespace GraphicsEngine
 {
 

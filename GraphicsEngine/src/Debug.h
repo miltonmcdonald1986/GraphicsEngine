@@ -4,7 +4,7 @@
     #include <windows.h>
     #define BREAKPOINT DebugBreak()
 #elif defined(__linux__)
-    #ifdef _DEBUG
+    #ifndef NDEBUG
         #include <signal.h>
         #define BREAKPOINT raise(SIGTRAP)
     #else

@@ -11,12 +11,16 @@
 namespace GraphicsEngine
 {
 
-	auto HandleError(const char* funcName) -> void
+	auto HandleError(const std::source_location& loc) -> void
 	{
-		auto GLErrorMessage = [&funcName](const std::string& msg)
+		auto GLErrorMessage = [&loc](const std::string& msg)
 			{
 				std::stringstream loggerOutputStream;
-				loggerOutputStream << funcName << ": " << msg;
+				loggerOutputStream << "File: " << loc.file_name() << '\n';
+				loggerOutputStream << "Function: " << loc.function_name() << '\n';
+				loggerOutputStream << "Line: " << loc.line() << '\n';
+				loggerOutputStream << "Column: " << loc.column() << '\n';
+				loggerOutputStream << "Message: " << msg;
 #ifdef _WIN32 // g++ doesn't easily support stacktrace at this time.
 				loggerOutputStream << "\nStack trace:\n============\n" << std::stacktrace::current();
 #endif
@@ -51,6 +55,6 @@ namespace GraphicsEngine
 		default:
 			spLog->Warn("Unknown error flag.");
 			break;
-		};
+		}
 	}
 }
