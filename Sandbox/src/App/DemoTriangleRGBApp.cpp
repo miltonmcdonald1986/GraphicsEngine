@@ -1,8 +1,8 @@
 #include "DemoTriangleRGBApp.h"
 
-#include "IEngine.h"
-#include "IAttribute.h"
-#include "IEntity.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IAttribute.h"
+#include "GraphicsEngine/IEntity.h"
 
 #include "glm/vec3.hpp"
 
@@ -30,7 +30,7 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(colors)};
 	auto spEntity = m_spEngine->CreateNewEntity(attributes);
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3fA1Dummy3f.vert", "", "shaders/A1RGB.frag"));
+	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTriangleRGB.vert", "", "shaders/DemoTriangleRGB.frag"));
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(spWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

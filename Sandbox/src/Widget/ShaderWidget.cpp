@@ -8,9 +8,9 @@
 
 #include "imgui.h"
 
-#include "IEngine.h"
-#include "IShader.h"
-#include "IUniform.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IShader.h"
+#include "GraphicsEngine/IUniform.h"
 
 ShaderWidget::ShaderWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
 	: Widget(pWindow, spEngine)

@@ -2,7 +2,7 @@
 
 #include "glm/fwd.hpp"
 
-#include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineFwd.h"
 #include "GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine
@@ -14,6 +14,7 @@ namespace GraphicsEngine
 		virtual ~IAttribute() = default;
 	};
 
+	GRAPHICSENGINE_API auto CreateAttribute(const std::vector<glm::vec2>& data) -> IAttributePtr;
 	GRAPHICSENGINE_API auto CreateAttribute(const std::vector<glm::vec3>& data) -> IAttributePtr;
 
 }

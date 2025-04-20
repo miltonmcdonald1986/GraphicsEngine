@@ -2,9 +2,9 @@
 
 #include "glm/glm.hpp"
 
-#include "IEngine.h"
-#include "IAttribute.h"
-#include "IEntity.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IAttribute.h"
+#include "GraphicsEngine/IEntity.h"
 
 #include "BackgroundColorWidget.h"
 #include "EngineLogWidget.h"
@@ -26,7 +26,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
     };
 
     auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) }, indices);
-    auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3f.vert", "", "shaders/ColorIs008033.frag");
+    auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/DemoIndexedPoints.vert", "", "shaders/DemoIndexedPoints.frag");
     spEntity->SetShader(spShader);
 
     m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(pWindow, m_spEngine)));

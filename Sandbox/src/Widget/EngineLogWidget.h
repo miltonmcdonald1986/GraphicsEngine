@@ -2,8 +2,8 @@
 
 #include "Widget.h"
 
-#include "IEngine.h"
-#include "ILog.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/ILog.h"
 
 class EngineLogWidget : public Widget
 {

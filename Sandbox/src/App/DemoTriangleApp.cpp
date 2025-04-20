@@ -2,9 +2,9 @@
 
 #include "glm/vec3.hpp"
 
-#include "IAttribute.h"
-#include "IEngine.h"
-#include "IEntity.h"
+#include "GraphicsEngine/IAttribute.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IEntity.h"
 
 #include "BackgroundColorWidget.h"
 #include "EngineLogWidget.h"
@@ -21,7 +21,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	};
 
 	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) });
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3f.vert", "", "shaders/ColorIs008033.frag"));
+	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTriangle.vert", "", "shaders/DemoTriangle.frag"));
 
     m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

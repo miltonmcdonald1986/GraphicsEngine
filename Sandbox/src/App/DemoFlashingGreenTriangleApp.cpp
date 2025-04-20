@@ -3,11 +3,11 @@
 #include <cmath>
 #include <numbers>
 
-#include "IEngine.h"
-#include "IShader.h"
-#include "IAttribute.h"
-#include "IEntity.h"
-#include "IUniform.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IShader.h"
+#include "GraphicsEngine/IAttribute.h"
+#include "GraphicsEngine/IEntity.h"
+#include "GraphicsEngine/IUniform.h"
 
 #include "glm/vec3.hpp"
 
@@ -28,7 +28,7 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices) };
 	auto spEntity = m_spEngine->CreateNewEntity(attributes);
 
-	auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/A0Pos3f.vert", "", "shaders/GreenScalar.frag");
+	auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/DemoFlashingGreenTriangle.vert", "", "shaders/DemoFlashingGreenTriangle.frag");
 	auto uniforms = spShader->GetActiveUniforms();
 	for (auto spUniform : uniforms)
 	{

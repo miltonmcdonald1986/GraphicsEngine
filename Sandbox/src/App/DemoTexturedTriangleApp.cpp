@@ -1,10 +1,11 @@
 #include "DemoTexturedTriangleApp.h"
 
+#include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 
-#include "IAttribute.h"
-#include "IEngine.h"
-#include "IEntity.h"
+#include "GraphicsEngine/IAttribute.h"
+#include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/IEntity.h"
 
 #include "BackgroundColorWidget.h"
 #include "EngineLogWidget.h"
@@ -20,8 +21,16 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 		glm::vec3(0.f,   0.5f, 0.f)
 	};
 
-	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) });
+	std::vector<glm::vec2> texCoords =
+	{
+		glm::vec2(0.f, 0.f),
+		glm::vec2(1.f, 0.f),
+		glm::vec2(0.5f, 1.f)
+	};
+
+	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) });
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/TexturedTriangle.vert", "", "shaders/TexturedTriangle.frag"));
+	//spEntity->SetTexture(m_spEngine->CreateNewTextureFromFile("textures/wall.jpg"));
 
 	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

@@ -6,7 +6,7 @@
 
 #include "fwd.h"
 
-#include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineFwd.h"
 
 class App
 {

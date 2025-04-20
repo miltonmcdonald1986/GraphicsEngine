@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineFwd.h"
 
 #include "Widget.h"
 

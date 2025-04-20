@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 
-#include "IEngine.h"
+#include "GraphicsEngine/IEngine.h"
 
 PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineFwd.h"
 
 #include "GLFW/glfw3.h"
 

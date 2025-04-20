@@ -2,7 +2,7 @@
 
 #include <optional>
 
-#include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineFwd.h"
 #include "GraphicsEngineImpExp.h"
 #include "Types.h"
 

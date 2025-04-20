@@ -22,3 +22,5 @@ target_include_directories(Sandbox PRIVATE
 target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
