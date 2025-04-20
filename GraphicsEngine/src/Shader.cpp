@@ -133,6 +133,14 @@ namespace GraphicsEngine
 				std::array<float, 4> v;
 				GL::GetUniformfv(m_Id, location, v.data());
 				glm::vec4 data(v[0], v[1], v[2], v[3]);
+				spUniform->SetData(data);
+				break;
+			}
+			case GL_SAMPLER_2D:
+			{
+				int data;
+				GL::GetUniformiv(m_Id, location, &data);
+				spUniform->SetData(data);
 				break;
 			}
 			default:

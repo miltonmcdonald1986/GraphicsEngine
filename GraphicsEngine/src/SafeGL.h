@@ -31,6 +31,7 @@ namespace GraphicsEngine::GL
 	auto GetShaderInfoLog(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog) -> void;
 	auto GetShaderiv(GLuint shader, GLenum pname, GLint* params) -> void;
 	auto GetUniformfv(GLuint program, GLint location, GLfloat* params) -> void;
+	auto GetUniformiv(GLuint program, GLint location, GLint* params) -> void;
 	auto GetUniformLocation(GLuint program, const GLchar* name) -> GLint;
 	auto LinkProgram(GLuint program) -> void;
 	auto PolygonMode(GLenum face, GLenum mode) -> void;

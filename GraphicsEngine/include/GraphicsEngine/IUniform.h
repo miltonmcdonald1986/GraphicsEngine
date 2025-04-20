@@ -10,7 +10,11 @@
 namespace GraphicsEngine
 {
 
-	using Data = std::variant<float, glm::vec4>;
+	using Data = std::variant<
+		float, 
+		glm::vec4,
+		int
+		>;
 
 	class IUniform
 	{

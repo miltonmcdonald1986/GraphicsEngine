@@ -18,6 +18,8 @@
 DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
+	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+
 	std::vector<glm::vec3> vertices =
 	{
 		glm::vec3(-0.5f, -0.5f, 0.f),

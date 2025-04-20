@@ -166,6 +166,12 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
+	auto GetUniformiv(GLuint program, GLint location, GLint* params) -> void
+	{
+		glGetUniformiv(program, location, params);
+		HandleError();
+	}
+
 	auto GetUniformLocation(GLuint program, const GLchar* name) -> GLint
 	{
 		GLint result = glGetUniformLocation(program, name);

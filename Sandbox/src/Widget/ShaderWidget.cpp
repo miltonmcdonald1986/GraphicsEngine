@@ -52,4 +52,3 @@ auto ShaderWidget::Iterate() -> void
 		//	break;
 	}
 }
-

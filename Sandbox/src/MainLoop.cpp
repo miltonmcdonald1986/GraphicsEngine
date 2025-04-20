@@ -3,6 +3,8 @@
 #include "GLFW/glfw3.h"
 
 #include "Apps.h"
+#include "DemoContainerApp.h"
+#include "DemoContainerRGBApp.h"
 #include "DemoFlashingGreenTriangleApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "DemoTexturedTriangleApp.h"
@@ -10,7 +12,6 @@
 #include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
 #include "MainMenuApp.h"
-#include "DemoContainerApp.h"
 
 namespace
 {
@@ -27,6 +28,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 {
 	switch (whichApp)
 	{
+	case Apps::DemoContainerRGB:
+	{
+		DemoContainerRGBApp app(pWindow);
+		app.Run();
+		break;
+	}
 	case Apps::DemoContainer:
 	{
 		DemoContainerApp app(pWindow);
