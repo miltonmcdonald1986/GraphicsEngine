@@ -9,6 +9,7 @@
 #include "IShader.h"
 #include "Entity.h"
 #include "Log.h"
+#include "Texture.h"
 
 namespace GraphicsEngine
 {
@@ -113,6 +114,13 @@ namespace GraphicsEngine
 		return CreateShaderFromSourceCode(vert, geom, frag);
 	}
 
+	auto Engine::CreateNewTextureFromFile(const Path& path) -> ITexturePtr
+	{
+		ITexturePtr spTexture = CreateTextureFromFile(path);
+		m_Textures.push_back(spTexture);
+		return spTexture;
+	}
+
 	auto Engine::GetBackgroundColor() const -> Color
 	{
 		return m_BackgroundColor;
@@ -149,6 +157,8 @@ namespace GraphicsEngine
 		for (auto spEntity : m_Entities)
 		{
 			spEntity->GetShader()->Use();
+			if (auto spTexture = std::dynamic_pointer_cast<Texture>(spEntity->GetTexture()))
+				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
 			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)
 				GL::DrawElements(GL_TRIANGLES, spEntity->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

@@ -18,6 +18,12 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
+	auto BindTexture(GLenum target, GLuint texture) -> void
+	{
+		glBindTexture(target, texture);
+		HandleError();
+	}
+
 	auto BindVertexArray(GLuint array) -> void
 	{
 		glBindVertexArray(array);
@@ -88,6 +94,12 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
+	auto GenTextures(GLsizei n, GLuint* textures) -> void
+	{
+		glGenTextures(n, textures);
+		HandleError();
+	}
+
 	auto GetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLint* size, GLenum* type, GLchar* name) -> void
 	{
 		glGetActiveUniform(program, index, bufSize, length, size, type, name);
@@ -97,6 +109,12 @@ namespace GraphicsEngine::GL
 	auto GenBuffers(GLsizei n, GLuint* buffers) -> void
 	{
 		glGenBuffers(n, buffers);
+		HandleError();
+	}
+
+	auto GenerateMipmap(GLenum target) -> void
+	{
+		glGenerateMipmap(target);
 		HandleError();
 	}
 
@@ -171,6 +189,18 @@ namespace GraphicsEngine::GL
 	auto ShaderSource(GLuint shader, GLsizei count, const GLchar** string, const GLint* length) -> void
 	{
 		glShaderSource(shader, count, string, length);
+		HandleError();
+	}
+
+	auto TexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* data) -> void
+	{
+		glTexImage2D(target, level, internalformat, width, height, border, format, type, data);
+		HandleError();
+	}
+
+	auto TexParameteri(GLenum target, GLenum pname, GLint param) -> void
+	{
+		glTexParameteri(target, pname, param);
 		HandleError();
 	}
 

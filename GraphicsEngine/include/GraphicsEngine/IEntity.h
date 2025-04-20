@@ -14,8 +14,10 @@ namespace GraphicsEngine
 		virtual auto GetNumIndices() const -> Count = 0;
 		virtual auto GetNumVertices() const -> Count = 0;
 		virtual auto GetShader() const -> IShaderPtr = 0;
+		virtual auto GetTexture() const->ITexturePtr = 0;
 		virtual auto GetVAO() const -> VAO = 0;
 		virtual auto SetShader(IShaderPtr spShader) -> void = 0;
+		virtual auto SetTexture(ITexturePtr spTexture) -> void = 0;
 	};
 
 }

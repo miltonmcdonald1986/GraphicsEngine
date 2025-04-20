@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsEngineFwd.h"
+#include "GraphicsEngine/GraphicsEngineImpExp.h"
 
 namespace GraphicsEngine
 {

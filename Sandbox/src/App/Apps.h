@@ -2,7 +2,8 @@
 
 enum class Apps : int
 {
-	DemoTexturedTriangle = 0,
+	DemoContainer = 0,
+	DemoTexturedTriangle,
 	DemoTriangle,
 	DemoIndexedPoints,
 	DemoTriangleRGB,
