@@ -58,8 +58,9 @@ namespace GraphicsEngine
 			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
 			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
 			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), static_cast<const void*>(spAttribute->GetData().data()), GL_STATIC_DRAW);
-			GL::VertexAttribPointer(i, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
-			GL::EnableVertexAttribArray(i);
+			auto index = static_cast<GLuint>(i);
+			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
+			GL::EnableVertexAttribArray(index);
 		}
 
 		if (oIndices)
@@ -168,7 +169,7 @@ namespace GraphicsEngine
 				if (!spTexture)
 					continue;
 				
-				GL::ActiveTexture(GL_TEXTURE0 + i);
+				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
 				if (auto spUniform = spShader->GetActiveUniform(spTexture->GetName()))
 					spUniform->SetData(static_cast<int>(i));
