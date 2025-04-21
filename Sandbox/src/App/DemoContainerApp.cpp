@@ -39,9 +39,10 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 
 	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoContainer.vert", "", "shaders/DemoContainer.frag"));
-	spEntity->SetTexture(m_spEngine->CreateNewTextureFromFile("textures/container.jpg"));
+	spEntity->SetTextures({ m_spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
 
-	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new PolygonModeWidget(m_pWindow, m_spEngine)));
+	m_Widgets.push_back(std::make_unique<BackgroundColorWidget>(m_pWindow, m_spEngine));
+	m_Widgets.push_back(std::make_unique<BackgroundColorWidget>(m_pWindow, m_spEngine));
+	m_Widgets.push_back(std::make_unique<EngineLogWidget>(m_pWindow, m_spEngine));
+	m_Widgets.push_back(std::make_unique<PolygonModeWidget>(m_pWindow, m_spEngine));
 }

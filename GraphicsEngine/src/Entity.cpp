@@ -33,9 +33,9 @@ namespace GraphicsEngine
 		return m_spShader;
 	}
 
-	auto Entity::GetTexture() const -> ITexturePtr
+	auto Entity::GetTextures() const -> ITextures
 	{
-		return m_spTexture;
+		return m_spTextures;
 	}
 
 	auto Entity::GetVAO() const -> VAO
@@ -63,9 +63,9 @@ namespace GraphicsEngine
 		m_spShader = spShader;
 	}
 
-	auto Entity::SetTexture(ITexturePtr spTexture) -> void
+	auto Entity::SetTextures(const ITextures& textures) -> void
 	{
-		m_spTexture = spTexture;
+		m_spTextures = textures;
 	}
 
 	auto Entity::SetVAO(GLuint vao) -> void

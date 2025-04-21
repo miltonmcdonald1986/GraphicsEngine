@@ -32,7 +32,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 
 	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) });
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTexturedTriangle.vert", "", "shaders/DemoTexturedTriangle.frag"));
-	spEntity->SetTexture(m_spEngine->CreateNewTextureFromFile("textures/wall.jpg"));
+	spEntity->SetTextures({ m_spEngine->CreateNewTextureFromFile("uTexture", "textures/wall.jpg") });
 
 	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
 	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));

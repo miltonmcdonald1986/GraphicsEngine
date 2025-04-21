@@ -5,6 +5,7 @@
 namespace GraphicsEngine::GL
 {
 
+	auto ActiveTexture(GLenum texture) -> void;
 	auto AttachShader(GLuint program, GLuint shader) -> void;
 	auto BindBuffer(GLenum target, GLuint buffer) -> void;
 	auto BindTexture(GLenum target, GLuint texture) -> void;
@@ -39,6 +40,7 @@ namespace GraphicsEngine::GL
 	auto TexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* data) -> void;
 	auto TexParameteri(GLenum target, GLenum pname, GLint param) -> void;
 	auto Uniform1f(GLint location, GLfloat v) -> void;
+	auto Uniform1i(GLint location, GLint v0) -> void;
 	auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void;
 	auto UseProgram(GLuint program) -> void;
 	auto VertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer) -> void;

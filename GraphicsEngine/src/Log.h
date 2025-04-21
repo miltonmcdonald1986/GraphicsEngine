@@ -68,12 +68,12 @@ namespace GraphicsEngine
 		auto ClearMessages() -> void override;
 		auto GetLatestMessages() const -> Strings override;
 		auto GetLevel() const->LogLevel override;
-		auto Trace(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
-		auto Debug(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
-		auto Info(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
-		auto Warn(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
-		auto Error(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
-		auto Critical(const String& message, const std::source_location& loc = std::source_location::current()) const -> void;
+		auto Trace(const String& message, const std::source_location& loc) const -> void override;
+		auto Debug(const String& message, const std::source_location& loc) const -> void override;
+		auto Info(const String& message, const std::source_location& loc) const -> void override;
+		auto Warn(const String& message, const std::source_location& loc) const -> void override;
+		auto Error(const String& message, const std::source_location& loc) const -> void override;
+		auto Critical(const String& message, const std::source_location& loc) const -> void override;
 		auto SetLevel(LogLevel level) -> void override;
 
 	private:
@@ -85,7 +85,7 @@ namespace GraphicsEngine
 		static constexpr int m_QueueSize = 128;
 	};
 
-	auto GetLog() -> LogPtr;
-	auto CreateLog() -> LogPtr;
+	auto GetLog() -> ILogPtr;
+	auto CreateLog() -> ILogPtr;
 
 }

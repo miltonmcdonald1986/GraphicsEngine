@@ -58,10 +58,8 @@ namespace GraphicsEngine
 			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
 			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
 			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), static_cast<const void*>(spAttribute->GetData().data()), GL_STATIC_DRAW);
-			
-			auto index = static_cast<GLuint>(i);
-			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
-			GL::EnableVertexAttribArray(index);
+			GL::VertexAttribPointer(i, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
+			GL::EnableVertexAttribArray(i);
 		}
 
 		if (oIndices)
@@ -111,12 +109,14 @@ namespace GraphicsEngine
 
 	auto Engine::CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr
 	{
-		return CreateShaderFromSourceCode(vert, geom, frag);
+		IShaderPtr spShader = CreateShaderFromSourceCode(vert, geom, frag);
+		m_Shaders.push_back(spShader);
+		return spShader;
 	}
 
-	auto Engine::CreateNewTextureFromFile(const Path& path) -> ITexturePtr
+	auto Engine::CreateNewTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr
 	{
-		ITexturePtr spTexture = CreateTextureFromFile(path);
+		ITexturePtr spTexture = CreateTextureFromFile(textureName, path);
 		m_Textures.push_back(spTexture);
 		return spTexture;
 	}
@@ -156,9 +156,23 @@ namespace GraphicsEngine
 		GL::Clear(GL_COLOR_BUFFER_BIT);
 		for (auto spEntity : m_Entities)
 		{
-			spEntity->GetShader()->Use();
-			if (auto spTexture = std::dynamic_pointer_cast<Texture>(spEntity->GetTexture()))
+			auto spShader = spEntity->GetShader();
+			if (!spShader)
+				continue;	
+			
+			spShader->Use();
+			auto textures = spEntity->GetTextures();
+			for (size_t i = 0; i < textures.size(); ++i)
+			{
+				auto spTexture = std::dynamic_pointer_cast<Texture>(textures[i]);
+				if (!spTexture)
+					continue;
+				
+				GL::ActiveTexture(GL_TEXTURE0 + i);
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
+				if (auto spUniform = spShader->GetActiveUniform(spTexture->GetName()))
+					spUniform->SetData(static_cast<int>(i));
+			}
 			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)
 				GL::DrawElements(GL_TRIANGLES, spEntity->GetNumIndices(), GL_UNSIGNED_INT, nullptr);

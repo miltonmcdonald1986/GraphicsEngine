@@ -112,7 +112,7 @@ namespace GraphicsEngine
 			std::string name(maxLength, '\0');
 			GLsizei length; // name length
 			GL::GetActiveUniform(m_Id, i, maxLength, &length, &size, &type, name.data());
-			name.pop_back();
+			name.resize(strlen(name.c_str()));
 
 			GLint location = GL::GetUniformLocation(m_Id, name.data());
 
@@ -160,7 +160,20 @@ namespace GraphicsEngine
 		return m_Id;
 	}
 
-	auto Shader::GetActiveUniforms() const -> IUniforms
+    auto Shader::GetActiveUniform(const String &name) const -> IUniformPtr
+    {
+        auto it = std::find_if(m_Uniforms.begin(), m_Uniforms.end(), [&name](IUniformPtr spUniform)
+		{ 
+			return spUniform->GetName() == name; 
+		});
+
+		if (it != m_Uniforms.end())
+			return *it;
+		else
+			return nullptr;
+    }
+
+    auto Shader::GetActiveUniforms() const -> IUniforms
 	{
 		return m_Uniforms;
 	}

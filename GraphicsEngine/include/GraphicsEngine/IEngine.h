@@ -17,7 +17,7 @@ namespace GraphicsEngine
 		virtual auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices = std::nullopt) -> IEntityPtr = 0;
 		virtual auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr = 0;
 		virtual auto CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr = 0;
-		virtual auto CreateNewTextureFromFile(const Path& path) -> ITexturePtr = 0;
+		virtual auto CreateNewTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCurrentShader() const -> IShaderPtr = 0;
 		virtual auto GetLog() const -> ILogPtr = 0;

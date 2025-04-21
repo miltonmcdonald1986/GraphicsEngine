@@ -28,7 +28,7 @@ namespace GraphicsEngine
 				return str;
 			};
 
-		LogPtr spLog = GetLog();
+		auto spLog = GetLog();
 		if (!spLog)
 			return;
 

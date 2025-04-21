@@ -12,6 +12,7 @@ namespace GraphicsEngine
 		Shader(const std::string& vertSource, const std::string& geomSource, const std::string& fragSource);
 
 		auto GetId() const -> unsigned int override;
+		auto GetActiveUniform(const String& name) const -> IUniformPtr override;
 		auto GetActiveUniforms() const -> IUniforms override;
 		auto Use() const -> void override;
 

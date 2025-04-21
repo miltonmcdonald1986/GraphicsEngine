@@ -20,7 +20,7 @@ namespace GraphicsEngine
 		auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr override;
 		auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr override;
 		auto CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr override;
-		auto CreateNewTextureFromFile(const Path& path) -> ITexturePtr override;
+		auto CreateNewTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr override;
 		auto GetBackgroundColor() const -> Color override;
 		auto GetCurrentShader() const -> IShaderPtr override;
 		auto GetLog() const -> ILogPtr override;
@@ -37,7 +37,7 @@ namespace GraphicsEngine
 		IShaders m_Shaders;
 		IEntities m_Entities;
 		ITextures m_Textures;
-		LogPtr m_spLog = nullptr;
+		ILogPtr m_spLog = nullptr;
 	};
 
 }

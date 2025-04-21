@@ -6,7 +6,13 @@
 namespace GraphicsEngine::GL
 {
 
-	auto AttachShader(GLuint program, GLuint shader) -> void
+    auto ActiveTexture(GLenum texture) -> void
+    {
+		glActiveTexture(texture);
+		HandleError();
+    }
+
+    auto AttachShader(GLuint program, GLuint shader) -> void
 	{
 		glAttachShader(program, shader);
 		HandleError();
@@ -198,7 +204,7 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
-	auto TexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* data) -> void
+	auto TexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* data) -> void //NOSONAR
 	{
 		glTexImage2D(target, level, internalformat, width, height, border, format, type, data);
 		HandleError();
@@ -216,7 +222,13 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
-	auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void
+    auto Uniform1i(GLint location, GLint v0) -> void
+    {
+		glUniform1i(location, v0);
+		HandleError();
+    }
+
+    auto Uniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) -> void
 	{
 		glUniform4f(location, v0, v1, v2, v3);
 		HandleError();

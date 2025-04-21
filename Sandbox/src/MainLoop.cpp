@@ -8,6 +8,7 @@
 #include "DemoFlashingGreenTriangleApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "DemoTexturedTriangleApp.h"
+#include "DemoTexturesCombinedApp.h"
 #include "DemoTriangleApp.h"
 #include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
@@ -28,6 +29,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 {
 	switch (whichApp)
 	{
+	case Apps::DemoTexturesCombined:
+	{
+		DemoTexturesCombinedApp app(pWindow);
+		app.Run();
+		break;
+	}
 	case Apps::DemoContainerRGB:
 	{
 		DemoContainerRGBApp app(pWindow);

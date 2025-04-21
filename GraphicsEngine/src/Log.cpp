@@ -18,12 +18,12 @@ namespace Helpers
 namespace GraphicsEngine
 {
 
-	auto GetLog() -> LogPtr
+	auto GetLog() -> ILogPtr
 	{
 		return Helpers::CreateLog(spdlog::get("Engine"));
 	}
 
-	auto CreateLog() -> LogPtr
+	auto CreateLog() -> ILogPtr
 	{
 		return std::make_shared<Log>();
 	}

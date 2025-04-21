@@ -5,5 +5,5 @@
 class DemoContainerApp : public App
 {
 public:
-	DemoContainerApp(GLFWwindow* pWindow);
+	explicit DemoContainerApp(GLFWwindow* pWindow);
 };

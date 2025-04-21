@@ -26,7 +26,7 @@ namespace GraphicsEngine
 		memcpy(m_Data.data(), reinterpret_cast<const std::byte*>(pBegin), m_NumBytes);
 
 		m_NumComponents = 2;
-		m_NumVertices = static_cast<GLuint>(data.size());
+		m_NumVertices = data.size();
 		m_Stride = 2 * sizeof(float);
 		m_Type = GL_FLOAT;
 
@@ -42,7 +42,7 @@ namespace GraphicsEngine
 		memcpy(m_Data.data(), reinterpret_cast<const std::byte*>(pBegin), m_NumBytes);
 		
 		m_NumComponents = 3;
-		m_NumVertices = static_cast<GLuint>(data.size());
+		m_NumVertices = data.size();
 		m_Stride = 3 * sizeof(float);
 		m_Type = GL_FLOAT;
 

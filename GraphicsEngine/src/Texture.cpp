@@ -9,12 +9,13 @@
 namespace GraphicsEngine
 {
 
-	auto CreateTextureFromFile(const Path& path) -> ITexturePtr
+	auto CreateTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr
 	{
-		return std::make_shared<Texture>(path);
+		return std::make_shared<Texture>(textureName, path);
 	}
 
-	Texture::Texture(const Path& path)
+	Texture::Texture(const String& textureName, const Path& path)
+		: m_Name(textureName)
 	{
 		GL::GenTextures(1, &m_Texture);
 		GL::BindTexture(GL_TEXTURE_2D, m_Texture);
@@ -27,6 +28,8 @@ namespace GraphicsEngine
 		GL::TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		GL::TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+		stbi_set_flip_vertically_on_load(true);
+
 		int x;
 		int y;
 		int channels;
@@ -37,15 +40,25 @@ namespace GraphicsEngine
 			return;
 		}
 
-		GLint internalFormat = (channels == 1) ? GL_R8 :
-			(channels == 2) ? GL_RG8 :
-			(channels == 3) ? GL_RGB8 :
-			GL_RGBA8;
-
-		GLint format = (channels == 1) ? GL_RED :
-			(channels == 2) ? GL_RG :
-			(channels == 3) ? GL_RGB :
-			GL_RGBA;
+		GLint internalFormat = GL_R8;
+		GLint format = GL_RED;
+		switch (channels)
+		{
+			case 2:
+				internalFormat = GL_RG8;
+				format = GL_RG;
+				break;			
+			case 3:
+				internalFormat = GL_RGB8;
+				format = GL_RGB;
+				break;
+			case 4:
+				internalFormat = GL_RGBA8;
+				format = GL_RGBA;
+				break;
+			default:
+				break;
+		}
 
 		GL::TexImage2D(GL_TEXTURE_2D, 0, internalFormat, x, y, 0, format, GL_UNSIGNED_BYTE, pImage);
 		GL::GenerateMipmap(GL_TEXTURE_2D);
@@ -57,5 +70,10 @@ namespace GraphicsEngine
 	{
 		return m_Texture;
 	}
+
+    auto Texture::GetName() const -> String
+    {
+        return m_Name;
+    }
 
 }

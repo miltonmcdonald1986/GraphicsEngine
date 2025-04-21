@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Uniform.h"
 #include "SafeGL.h"
+#include "Log.h"
 
 #include "glm/gtc/type_ptr.hpp"
 
@@ -44,6 +45,10 @@ namespace GraphicsEngine
 			auto v = std::get<glm::vec4>(data);
 			GL::Uniform4f(m_Location, v[0], v[1], v[2], v[3]);
 		}
+		else if (std::holds_alternative<int>(data))
+			GL::Uniform1i(m_Location, std::get<int>(data));
+		else
+			GetLog()->Warn("Data type not handled by Uniform::SetData.");
 	}
 
 	auto Uniform::SetLocation(GLint location) -> void
