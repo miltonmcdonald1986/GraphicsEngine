@@ -13,6 +13,7 @@ using AppInfo_t = std::pair<Apps, const char*>;
 using AppMap_t = std::map<Apps, const char*>;
 const AppMap_t AppMap =
 {
+	std::make_pair(Apps::Test, "Test app"),
 	std::make_pair(Apps::DemoTexturesCombined, "Demo textures combined"),
 	std::make_pair(Apps::DemoContainerRGB, "Demo container rgb"),
 	std::make_pair(Apps::DemoContainer, "Demo container"),

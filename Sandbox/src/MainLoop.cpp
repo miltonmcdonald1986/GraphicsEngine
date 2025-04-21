@@ -13,6 +13,7 @@
 #include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
 #include "MainMenuApp.h"
+#include "TestApp.h"
 
 namespace
 {
@@ -29,6 +30,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 {
 	switch (whichApp)
 	{
+	case Apps::Test:
+	{
+		TestApp app(pWindow);
+		app.Run();
+		break;
+	}
 	case Apps::DemoTexturesCombined:
 	{
 		DemoTexturesCombinedApp app(pWindow);
