@@ -404,3 +404,4 @@ FodyWeavers.xsd
 *.sln.iml
 /Sandbox/imgui.ini
 .vscode/launch.json
+/.vscode/*.json
