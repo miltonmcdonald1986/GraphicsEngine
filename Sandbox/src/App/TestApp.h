@@ -5,5 +5,5 @@
 class TestApp : public App
 {
 public:
-	TestApp(GLFWwindow* pWindow);
+	explicit TestApp(GLFWwindow* pWindow);
 };

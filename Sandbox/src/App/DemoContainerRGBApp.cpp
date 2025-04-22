@@ -53,8 +53,4 @@ DemoContainerRGBApp::DemoContainerRGBApp(GLFWwindow* pWindow)
 
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoContainerRGB.vert", "", "shaders/DemoContainerRGB.frag"));
 	spEntity->SetTextures({ m_spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
-
-	m_Widgets.push_back(std::make_unique<BackgroundColorWidget>(m_pWindow, m_spEngine));
-	m_Widgets.push_back(std::make_unique<EngineLogWidget>(m_pWindow, m_spEngine));
-	m_Widgets.push_back(std::make_unique<PolygonModeWidget>(m_pWindow, m_spEngine));
 }

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Shader.h"
 
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/mat4x4.hpp"
 #include "glm/vec4.hpp"
 
 #include "SafeGL.h"
@@ -134,6 +136,13 @@ namespace GraphicsEngine
 				GL::GetUniformfv(m_Id, location, v.data());
 				glm::vec4 data(v[0], v[1], v[2], v[3]);
 				spUniform->SetData(data);
+				break;
+			}
+			case GL_FLOAT_MAT4:
+			{
+				glm::mat4 m;
+				GL::GetUniformfv(m_Id, location, glm::value_ptr(m));
+				spUniform->SetData(m);
 				break;
 			}
 			case GL_SAMPLER_2D:

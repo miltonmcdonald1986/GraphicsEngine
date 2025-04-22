@@ -3,14 +3,15 @@
 enum class Apps : int
 {
 	Test = 0,
+	DemoTransformations,
 	DemoTexturesCombined,
 	DemoContainerRGB,
 	DemoContainer,
 	DemoTexturedTriangle,
-	DemoTriangle,
-	DemoIndexedPoints,
-	DemoTriangleRGB,
 	DemoFlashingGreenTriangle,
+	DemoTriangleRGB,
+	DemoIndexedPoints,
+	DemoTriangle,
 	ImGuiDemoWindow,
 	NumApps
 };

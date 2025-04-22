@@ -12,7 +12,7 @@ class App
 {
 public:
 
-	App(GLFWwindow* pWindow);
+	explicit App(GLFWwindow* pWindow);
 	virtual ~App();
 	virtual auto GetUserDataPointer() -> void*;
 	virtual auto Iterate() -> void;

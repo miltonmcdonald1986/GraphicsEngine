@@ -9,6 +9,7 @@
 #include "DemoIndexedPointsApp.h"
 #include "DemoTexturedTriangleApp.h"
 #include "DemoTexturesCombinedApp.h"
+#include "DemoTransformationsApp.h"
 #include "DemoTriangleApp.h"
 #include "DemoTriangleRGBApp.h"
 #include "ImGuiDemoWindowApp.h"
@@ -36,6 +37,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 		app.Run();
 		break;
 	}
+	case Apps::DemoTransformations:
+	{
+		DemoTransformationsApp app(pWindow);
+		app.Run();
+		break;
+	}
 	case Apps::DemoTexturesCombined:
 	{
 		DemoTexturesCombinedApp app(pWindow);
@@ -60,15 +67,9 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 		app.Run();
 		break;
 	}
-	case Apps::DemoTriangle:
+	case Apps::DemoFlashingGreenTriangle:
 	{
-		DemoTriangleApp app(pWindow);
-		app.Run();
-		break;
-	}
-	case Apps::DemoIndexedPoints:
-	{
-		DemoIndexedPointsApp app(pWindow);
+		DemoFlashingGreenTriangleApp app(pWindow);
 		app.Run();
 		break;
 	}
@@ -78,9 +79,15 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 		app.Run();
 		break;
 	}
-	case Apps::DemoFlashingGreenTriangle:
+	case Apps::DemoIndexedPoints:
 	{
-		DemoFlashingGreenTriangleApp app(pWindow);
+		DemoIndexedPointsApp app(pWindow);
+		app.Run();
+		break;
+	}
+	case Apps::DemoTriangle:
+	{
+		DemoTriangleApp app(pWindow);
 		app.Run();
 		break;
 	}

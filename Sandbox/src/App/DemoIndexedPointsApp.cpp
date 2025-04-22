@@ -30,8 +30,4 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
     auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) }, indices);
     auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/DemoIndexedPoints.vert", "", "shaders/DemoIndexedPoints.frag");
     spEntity->SetShader(spShader);
-
-    m_Widgets.push_back(std::unique_ptr<BackgroundColorWidget>(new BackgroundColorWidget(pWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<PolygonModeWidget>(new PolygonModeWidget(pWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
 }

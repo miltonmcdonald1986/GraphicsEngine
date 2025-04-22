@@ -54,9 +54,4 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
             if (spUniform)
                 spUniform->SetData(0.2f);
         }
-
-	m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new PolygonModeWidget(m_pWindow, m_spEngine)));
-    m_Widgets.push_back(std::unique_ptr<Widget>(new ShaderWidget(m_pWindow, m_spEngine)));
 }

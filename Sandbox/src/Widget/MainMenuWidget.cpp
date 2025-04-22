@@ -14,19 +14,20 @@ using AppMap_t = std::map<Apps, const char*>;
 const AppMap_t AppMap =
 {
 	std::make_pair(Apps::Test, "Test app"),
+	std::make_pair(Apps::DemoTransformations, "Demo transformations"),
 	std::make_pair(Apps::DemoTexturesCombined, "Demo textures combined"),
 	std::make_pair(Apps::DemoContainerRGB, "Demo container rgb"),
 	std::make_pair(Apps::DemoContainer, "Demo container"),
-	std::make_pair(Apps::DemoFlashingGreenTriangle, "Demo flashing green triangle"),
-	std::make_pair(Apps::DemoIndexedPoints, "Demo indexed points"),
 	std::make_pair(Apps::DemoTexturedTriangle, "Demo textured triangle"),
-	std::make_pair(Apps::DemoTriangle, "Demo triangle"),
+	std::make_pair(Apps::DemoFlashingGreenTriangle, "Demo flashing green triangle"),
 	std::make_pair(Apps::DemoTriangleRGB, "Demo triangle rgb"),
+	std::make_pair(Apps::DemoIndexedPoints, "Demo indexed points"),
+	std::make_pair(Apps::DemoTriangle, "Demo triangle"),
 	std::make_pair(Apps::ImGuiDemoWindow, "Demo \"Dear ImGui\" window")
 };
 
 using AppNames_t = std::vector<const char*>;
-const AppNames_t AppNames = ([](const AppMap_t& appMap) -> AppNames_t
+const AppNames_t AppNames = ([](const AppMap_t& appMap)
 	{
 		AppNames_t appNames;
 		std::transform(appMap.begin(), appMap.end(), std::back_inserter(appNames), [](const AppInfo_t& appInfo)

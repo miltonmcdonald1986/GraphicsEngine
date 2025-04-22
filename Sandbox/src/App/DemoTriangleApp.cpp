@@ -24,8 +24,4 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 
 	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) });
 	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTriangle.vert", "", "shaders/DemoTriangle.frag"));
-
-    m_Widgets.push_back(std::unique_ptr<Widget>(new BackgroundColorWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new EngineLogWidget(m_pWindow, m_spEngine)));
-	m_Widgets.push_back(std::unique_ptr<Widget>(new PolygonModeWidget(m_pWindow, m_spEngine)));
 }

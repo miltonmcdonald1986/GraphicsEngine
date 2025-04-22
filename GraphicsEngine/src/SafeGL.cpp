@@ -234,7 +234,19 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
-	auto UseProgram(GLuint program) -> void
+    auto Uniform4fv(GLint location, GLsizei count, const GLfloat *value) -> void
+    {
+		glUniform4fv(location, count, value);
+		HandleError();
+    }
+
+    auto UniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) -> void
+    {
+		glUniformMatrix4fv(location, count, transpose, value);
+		HandleError();
+    }
+
+    auto UseProgram(GLuint program) -> void
 	{
 		glUseProgram(program);
 		HandleError();

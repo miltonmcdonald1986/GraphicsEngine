@@ -15,7 +15,7 @@ namespace
     {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
-            bool* pRunning = (bool*)glfwGetWindowUserPointer(window);
+            auto pRunning = (bool*)glfwGetWindowUserPointer(window);
             *pRunning = false;
         }
     }
@@ -27,7 +27,7 @@ App::App(GLFWwindow* pWindow)
 	  m_spEngine(GraphicsEngine::CreateEngine())
 {
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
-    glfwSetWindowUserPointer(m_pWindow, GetUserDataPointer());
+    glfwSetWindowUserPointer(m_pWindow, static_cast<void*>(&m_Running));
 
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
 }

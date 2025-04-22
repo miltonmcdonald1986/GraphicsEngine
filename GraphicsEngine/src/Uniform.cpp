@@ -40,6 +40,8 @@ namespace GraphicsEngine
 		GL::UseProgram(m_ProgramId);
 		if (std::holds_alternative<float>(data))
 			GL::Uniform1f(m_Location, std::get<float>(data));
+		else if (std::holds_alternative<glm::mat4x4>(data))
+			GL::UniformMatrix4fv(m_Location, 1, GL_FALSE, glm::value_ptr(std::get<glm::mat4>(data)));			
 		else if (std::holds_alternative<glm::vec4>(data))
 		{
 			auto v = std::get<glm::vec4>(data);

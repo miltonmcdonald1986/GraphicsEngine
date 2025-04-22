@@ -3,6 +3,7 @@
 #include <string>
 #include <variant>
 
+#include "glm/mat4x4.hpp"
 #include "glm/vec4.hpp"
 
 #include "GraphicsEngineFwd.h"
@@ -12,6 +13,7 @@ namespace GraphicsEngine
 
 	using Data = std::variant<
 		float, 
+		glm::mat4x4,
 		glm::vec4,
 		int
 		>;
