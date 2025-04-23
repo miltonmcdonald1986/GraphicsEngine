@@ -27,7 +27,7 @@ private:
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
-	GraphicsEngine::IEnginePtr m_spEngine;
+	GraphicsEngine::IEnginePtr m_spEngine = nullptr;
 	Widgets m_Widgets;
-	std::byte* m_PrevUserPointer = nullptr;
+	void* m_PrevUserPointer = nullptr;
 };

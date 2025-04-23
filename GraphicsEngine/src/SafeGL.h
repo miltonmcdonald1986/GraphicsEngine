@@ -1,17 +1,17 @@
 #pragma once
 
-typedef unsigned char			GLboolean;
-typedef char					GLchar;
-typedef unsigned int			GLenum;
-typedef float					GLfloat;
-typedef unsigned int			GLbitfield;
-typedef int						GLint;
-typedef unsigned int			GLuint;
-typedef int						GLsizei;
+using GLboolean		= unsigned char;
+using GLchar		= char;
+using GLenum		= unsigned int;
+using GLfloat		= float;
+using GLbitfield	= unsigned int;
+using GLint			= int;
+using GLuint		= unsigned int;
+using GLsizei		= int					;
 #if defined(_WIN64)
-typedef signed long long int	GLsizeiptr;
+using GLsizeiptr = signed long long int;
 #else
-typedef signed long  int		GLsizeiptr;
+using GLsizeiptr = signed long int;
 #endif
 
 namespace GraphicsEngine::GL

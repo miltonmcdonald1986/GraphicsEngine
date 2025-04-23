@@ -14,7 +14,7 @@ auto EngineLogWidget::Iterate() -> void
 
     bool update = false;
 
-    m_LogLevel = static_cast<int>(m_spLog->GetLevel());
+    m_LogLevel = std::to_underlying(m_spLog->GetLevel());
 
     ImGui::Begin("Graphics Engine Log");
     if (ImGui::Button("Clear Log"))
@@ -51,7 +51,7 @@ auto EngineLogWidget::Iterate() -> void
         ImGui::Text("%s", std::format("Showing {} messages.", messages.size()).c_str());
 
     ImGui::BeginChild("Messages", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
-    std::reverse(messages.begin(), messages.end());
+    std::ranges::reverse(messages);
     for (const auto& message : messages)
     {
         std::string messageStr(message);

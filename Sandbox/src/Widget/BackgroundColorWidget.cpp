@@ -16,7 +16,7 @@ void BackgroundColorWidget::Iterate()
 {
     ImGui::Begin("Background Color", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
-    if (ImGui::ColorEdit4("##2f", m_Color, ImGuiColorEditFlags_Float))
+    if (ImGui::ColorEdit4("##2f", m_Color.data(), ImGuiColorEditFlags_Float))
     {
         GraphicsEngine::Color color;
         color.r = m_Color[0];

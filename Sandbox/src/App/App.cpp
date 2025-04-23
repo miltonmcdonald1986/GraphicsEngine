@@ -22,7 +22,7 @@ App::App(GLFWwindow* pWindow)
 	: m_pWindow(pWindow),
 	  m_spEngine(GraphicsEngine::CreateEngine())
 {
-    m_PrevUserPointer = reinterpret_cast<std::byte*>(glfwGetWindowUserPointer(m_pWindow));
+    m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
     glfwSetWindowUserPointer(m_pWindow, static_cast<void*>(&m_Running));
 
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);

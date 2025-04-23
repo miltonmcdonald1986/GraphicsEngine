@@ -1,13 +1,15 @@
 #pragma once
 
+#include <array>
+
 #include "Widget.h"
 
 class BackgroundColorWidget : public Widget
 {
 public:
     BackgroundColorWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
-    virtual auto Iterate() -> void override;
+    auto Iterate() -> void override;
 
 private:
-    float m_Color[4] = { 0.f, 0.f, 0.f, 1.f };
+    std::array<float, 4> m_Color = { 0.f, 0.f, 0.f, 1.f };
 };

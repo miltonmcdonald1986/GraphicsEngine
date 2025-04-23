@@ -23,7 +23,7 @@ using AppNames_t = std::vector<const char*>;
 const AppNames_t AppNames = ([](const AppMap_t& appMap)
 	{
 		AppNames_t appNames;
-		std::transform(appMap.begin(), appMap.end(), std::back_inserter(appNames), [](const AppInfo_t& appInfo)
+		std::ranges::transform(appMap, std::back_inserter(appNames), [](const AppInfo_t& appInfo)
 			{
 				return appInfo.second;
 			});

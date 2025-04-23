@@ -165,7 +165,7 @@ namespace GraphicsEngine
 
     auto Shader::GetActiveUniform(std::string_view name) const -> IUniformPtr
     {
-        auto it = std::find_if(m_Uniforms.begin(), m_Uniforms.end(), [&name](IUniformPtr spUniform)
+        auto it = std::ranges::find_if(m_Uniforms, [&name](IUniformPtr spUniform)
 		{ 
 			return spUniform->GetName() == name; 
 		});

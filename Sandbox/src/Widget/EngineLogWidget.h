@@ -10,7 +10,7 @@ public:
 
     EngineLogWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
 
-    virtual auto Iterate() -> void override;
+    auto Iterate() -> void override;
 
 private:
 

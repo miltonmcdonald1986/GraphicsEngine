@@ -6,7 +6,7 @@ class MainMenuWidget : public Widget
 {
 public:
     MainMenuWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine, bool& appSelected, int& selectedItem);
-    virtual auto Iterate() -> void override;
+    auto Iterate() -> void override;
 
 private:
     bool& m_AppSelected;
