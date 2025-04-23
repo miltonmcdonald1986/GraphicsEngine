@@ -36,7 +36,7 @@ cmake --preset "Debug Linux"
 ```
 cmake --build --preset "Debug Linux"
 ```
-5. Navigate to the executable location and run.
+5. Navigate to the executable location and run the executablw.
 ```
 cd build/bin
 ./Sandbox
