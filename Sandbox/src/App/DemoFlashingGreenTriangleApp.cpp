@@ -5,7 +5,9 @@
 DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	auto spEngine = GetEngine();
+
+	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -15,9 +17,9 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	};
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices) };
-	auto spEntity = m_spEngine->CreateNewEntity(attributes);
+	auto spEntity = spEngine->CreateNewEntity(attributes);
 
-	auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/DemoFlashingGreenTriangle.vert", "", "shaders/DemoFlashingGreenTriangle.frag");
+	auto spShader = spEngine->CreateNewShaderFromFiles("shaders/DemoFlashingGreenTriangle.vert", "", "shaders/DemoFlashingGreenTriangle.frag");
 	auto uniforms = spShader->GetActiveUniforms();
 	for (auto spUniform : uniforms)
 	{

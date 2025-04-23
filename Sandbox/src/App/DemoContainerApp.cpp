@@ -5,7 +5,9 @@
 DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	auto spEngine = GetEngine();
+
+	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -28,7 +30,7 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 
-	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoContainer.vert", "", "shaders/DemoContainer.frag"));
-	spEntity->SetTextures({ m_spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
+	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoContainer.vert", "", "shaders/DemoContainer.frag"));
+	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
 }

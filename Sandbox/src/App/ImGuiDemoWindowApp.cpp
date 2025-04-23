@@ -5,5 +5,5 @@
 ImGuiDemoWindowApp::ImGuiDemoWindowApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_Widgets.push_back(WidgetPtr(new DearImGuiDemoWindowWidget(m_pWindow, m_spEngine)));
+	GetWidgets().push_back(std::make_unique<DearImGuiDemoWindowWidget>(pWindow, GetEngine()));
 }

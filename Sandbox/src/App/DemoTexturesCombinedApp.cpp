@@ -5,7 +5,11 @@
 DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	auto spEngine = GetEngine();
+	if (!spEngine)
+		return;
+
+	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -28,12 +32,12 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 
-	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
-	auto spShader = m_spEngine->CreateNewShaderFromFiles("shaders/DemoTexturesCombined.vert", "", "shaders/DemoTexturesCombined.frag");
+	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
+	auto spShader = spEngine->CreateNewShaderFromFiles("shaders/DemoTexturesCombined.vert", "", "shaders/DemoTexturesCombined.frag");
     spEntity->SetShader(spShader);
 	spEntity->SetTextures({ 
-        m_spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg"),
-        m_spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png")
+        spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg"),
+        spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png")
         });
 
     if (spShader)

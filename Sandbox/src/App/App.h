@@ -8,19 +8,26 @@ public:
 
 	explicit App(GLFWwindow* pWindow);
 	virtual ~App();
-	virtual auto GetUserDataPointer() -> void*;
+	virtual auto GetUserDataPointer() -> std::byte*;
 	virtual auto Iterate() -> void;
 	virtual auto RenderDockSpace() -> void;
 	virtual auto Run() -> void;
 
 protected:
 
-	auto IterateWidgets() -> void;
+	auto GetEngine() const -> GraphicsEngine::IEnginePtr;
+	auto GetIsRunning() const -> bool;
+	auto GetWidgets() -> Widgets&;
+	auto GetWindow() const -> GLFWwindow*;
+	auto IterateWidgets() const -> void;
+	auto SetIsRunning(bool isRunning) -> void;
+
+private:
 
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
 	GraphicsEngine::IEnginePtr m_spEngine;
 	Widgets m_Widgets;
-	void* m_PrevUserPointer = nullptr;
+	std::byte* m_PrevUserPointer = nullptr;
 };

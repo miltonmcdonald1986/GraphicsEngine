@@ -5,7 +5,11 @@
 DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	auto spEngine = GetEngine();
+	if (!spEngine)
+		return;
+	
+	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -21,7 +25,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 		glm::vec2(0.5f, 1.f)
 	};
 
-	auto spEntity = m_spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) });
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTexturedTriangle.vert", "", "shaders/DemoTexturedTriangle.frag"));
-	spEntity->SetTextures({ m_spEngine->CreateNewTextureFromFile("uTexture", "textures/wall.jpg") });
+	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) });
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoTexturedTriangle.vert", "", "shaders/DemoTexturedTriangle.frag"));
+	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", "textures/wall.jpg") });
 }

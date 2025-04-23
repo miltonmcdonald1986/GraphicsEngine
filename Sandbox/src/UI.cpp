@@ -23,9 +23,14 @@ auto InitializeDearImGui(GLFWwindow* pWindow) -> bool
 	if (!ImGui_ImplOpenGL3_Init())
 		return false;
 
-	std::filesystem::path fontFilePath("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF");
-	if (std::filesystem::exists(fontFilePath))
+#ifdef WIN32
+	if (std::filesystem::path fontFilePath("C:\\WINDOWS\\FONTS\\CASCADIAMONO.TTF"); std::filesystem::exists(fontFilePath))
+#else
+	if (std::filesystem::path fontFilePath("/usr/share/fonts/truetype/cascadia-code/CascadiaMono.ttf"); std::filesystem::exists(fontFilePath))
+#endif
+	{
 		io.Fonts->AddFontFromFileTTF(fontFilePath.string().c_str(), 18);
+	}
 
 	return true;
 }

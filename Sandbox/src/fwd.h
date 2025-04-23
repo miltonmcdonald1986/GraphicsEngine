@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 namespace GraphicsEngine
 {
@@ -18,8 +19,8 @@ namespace GraphicsEngine
 
 }
 
-typedef struct GLFWwindow GLFWwindow;
-typedef void (*GLFWkeyfun)(GLFWwindow* window, int key, int scancode, int action, int mods);
+typedef struct GLFWwindow GLFWwindow;	//NOSONAR
+typedef void (*GLFWkeyfun)(GLFWwindow* window, int key, int scancode, int action, int mods);	//NOSONAR
 
 class Widget;
 using WidgetPtr = std::unique_ptr<Widget>;

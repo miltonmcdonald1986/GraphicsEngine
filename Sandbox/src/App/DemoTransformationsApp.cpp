@@ -5,7 +5,8 @@
 DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    auto spEngine = GetEngine();
+    spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
     
     const std::string_view sourceVert = R"(#version 330 core
 layout (location = 0) in vec3 aPos;
@@ -55,18 +56,18 @@ void main()
         2, 3, 0
     };
 
-    auto spEntity = m_spEngine->CreateNewEntity({
+    auto spEntity = spEngine->CreateNewEntity({
         GraphicsEngine::CreateAttribute(vertices),
         GraphicsEngine::CreateAttribute(texCoords)
     }, indices);
 
-    m_spShader = m_spEngine->CreateNewShaderFromSource(sourceVert, "", sourceFrag);
+    m_spShader = spEngine->CreateNewShaderFromSource(sourceVert, "", sourceFrag);
     m_spShader->GetActiveUniform("uMix")->SetData(0.2f);
 
     spEntity->SetShader(m_spShader);
 
-    auto spTextureContainer = m_spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg");
-    auto spTextureAwesomeFace = m_spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png");
+    auto spTextureContainer = spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg");
+    auto spTextureAwesomeFace = spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png");
     spEntity->SetTextures({ spTextureContainer, spTextureAwesomeFace });
 }
 

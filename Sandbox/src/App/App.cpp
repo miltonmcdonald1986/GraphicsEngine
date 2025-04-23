@@ -22,7 +22,7 @@ App::App(GLFWwindow* pWindow)
 	: m_pWindow(pWindow),
 	  m_spEngine(GraphicsEngine::CreateEngine())
 {
-    m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
+    m_PrevUserPointer = reinterpret_cast<std::byte*>(glfwGetWindowUserPointer(m_pWindow));
     glfwSetWindowUserPointer(m_pWindow, static_cast<void*>(&m_Running));
 
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
@@ -34,9 +34,9 @@ App::~App()
     glfwSetKeyCallback(m_pWindow, m_PrevKeyCallback);
 }
 
-auto App::GetUserDataPointer() -> void*
+auto App::GetUserDataPointer() -> std::byte*
 {
-    return static_cast<void*>(&m_Running);
+    return reinterpret_cast<std::byte*>(&m_Running);
 }
 
 auto App::Iterate() -> void
@@ -63,7 +63,8 @@ auto App::Iterate() -> void
 auto App::RenderDockSpace() -> void
 {
     // Get the size of the full GLFW window
-    int window_width, window_height;
+    int window_width;
+    int window_height;
     glfwGetWindowSize(m_pWindow, &window_width, &window_height);
 
     // Create a fullscreen, borderless docking space
@@ -93,10 +94,35 @@ auto App::Run() -> void
     }
 }
 
-auto App::IterateWidgets() -> void
+auto App::IterateWidgets() const -> void
 {
-	for (auto& upWidget : m_Widgets)
+	for (const auto& upWidget : m_Widgets)
 	{
 		upWidget->Iterate();
 	}
+}
+
+auto App::SetIsRunning(bool isRunning) -> void
+{
+    m_Running = isRunning;
+}
+
+auto App::GetEngine() const -> GraphicsEngine::IEnginePtr
+{
+    return m_spEngine;
+}
+
+auto App::GetIsRunning() const -> bool
+{
+    return m_Running;
+}
+
+auto App::GetWidgets() -> Widgets&
+{
+    return m_Widgets;
+}
+
+auto App::GetWindow() const -> GLFWwindow *
+{
+    return m_pWindow;
 }

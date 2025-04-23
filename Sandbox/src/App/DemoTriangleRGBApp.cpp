@@ -5,7 +5,8 @@
 DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
     : App(spWindow)
 {
-	m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	auto spEngine = GetEngine();
+	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -22,6 +23,6 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 	};
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(colors)};
-	auto spEntity = m_spEngine->CreateNewEntity(attributes);
-	spEntity->SetShader(m_spEngine->CreateNewShaderFromFiles("shaders/DemoTriangleRGB.vert", "", "shaders/DemoTriangleRGB.frag"));
+	auto spEntity = spEngine->CreateNewEntity(attributes);
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoTriangleRGB.vert", "", "shaders/DemoTriangleRGB.frag"));
 }

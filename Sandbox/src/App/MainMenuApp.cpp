@@ -18,18 +18,19 @@ namespace
 MainMenuApp::MainMenuApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-    m_MainMenuPrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
-    glfwSetWindowUserPointer(m_pWindow, GetUserDataPointer());
+    m_MainMenuPrevUserPointer = glfwGetWindowUserPointer(pWindow);
+    glfwSetWindowUserPointer(pWindow, App::GetUserDataPointer());
 
-    m_MainMenuPrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
+    m_MainMenuPrevKeyCallback = glfwSetKeyCallback(pWindow, OnKey);
 
-	m_Widgets.push_back(WidgetPtr(new MainMenuWidget(pWindow, m_spEngine, m_AppSelected, m_SelectedItem)));
+	GetWidgets().push_back(std::make_unique<MainMenuWidget>(pWindow, GetEngine(), m_AppSelected, m_SelectedItem));
 }
 
 MainMenuApp::~MainMenuApp()
 {
-    glfwSetWindowUserPointer(m_pWindow, m_MainMenuPrevUserPointer);
-    glfwSetKeyCallback(m_pWindow, m_MainMenuPrevKeyCallback);
+    auto pWindow = GetWindow();
+    glfwSetWindowUserPointer(pWindow, m_MainMenuPrevUserPointer);
+    glfwSetKeyCallback(pWindow, m_MainMenuPrevKeyCallback);
 }
 
 auto MainMenuApp::GetResults() -> std::pair<Result_AppWasSelected, Result_SelectedItem>
@@ -39,24 +40,26 @@ auto MainMenuApp::GetResults() -> std::pair<Result_AppWasSelected, Result_Select
 
 auto MainMenuApp::Run() -> void
 {
-    while (m_Running)
+    while (GetIsRunning())
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        m_spEngine->Render();
+        GetEngine()->Render();
 
         IterateWidgets();
         if (m_AppSelected)
-            m_Running = false;
+            SetIsRunning(false);
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(m_pWindow);
+        auto pWindow = GetWindow();
+
+        glfwSwapBuffers(pWindow);
         glfwPollEvents();
 
-        m_Running = (m_Running && !glfwWindowShouldClose(m_pWindow));
+        SetIsRunning(GetIsRunning() && !glfwWindowShouldClose(pWindow));
     }
 }

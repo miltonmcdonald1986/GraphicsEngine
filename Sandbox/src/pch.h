@@ -1,6 +1,8 @@
 #pragma once
 
+#include <algorithm>
 #include <filesystem>
+#include <format>
 #include <map>
 #include <numbers>
 
