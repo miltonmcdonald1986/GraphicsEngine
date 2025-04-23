@@ -5,7 +5,7 @@
 PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
-    switch (m_spEngine->GetPolygonMode())
+    switch (GetEngine()->GetPolygonMode())
     {
 	using enum GraphicsEngine::PolygonMode;
     case Fill:
@@ -25,14 +25,15 @@ void PolygonModeWidget::Iterate()
 {
 	using enum GraphicsEngine::PolygonMode;
 
+    auto spEngine = GetEngine();
     ImGui::Begin("Polygon Mode", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     if (ImGui::RadioButton("Point", &m_Mode, 0))
-        m_spEngine->SetPolygonMode(Point);
+        spEngine->SetPolygonMode(Point);
     ImGui::SameLine();
     if (ImGui::RadioButton("Line", &m_Mode, 1))
-        m_spEngine->SetPolygonMode(Line);
+        spEngine->SetPolygonMode(Line);
     ImGui::SameLine();
     if (ImGui::RadioButton("Fill", &m_Mode, 2))
-        m_spEngine->SetPolygonMode(Fill);
+        spEngine->SetPolygonMode(Fill);
     ImGui::End();
 }

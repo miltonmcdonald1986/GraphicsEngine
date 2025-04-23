@@ -7,8 +7,7 @@ class ShaderWidget : public Widget
 {
 public:
     ShaderWidget(GLFWwindow*, GraphicsEngine::IEnginePtr spEngine);
-
-    virtual auto Iterate() -> void override;
+	auto Iterate() -> void override;
 
 private:
 	std::vector<GraphicsEngine::IUniformPtr> m_Uniforms;

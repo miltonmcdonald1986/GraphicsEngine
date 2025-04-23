@@ -29,5 +29,5 @@ private:
 	GLFWwindow* m_pWindow;
 	GraphicsEngine::IEnginePtr m_spEngine = nullptr;
 	Widgets m_Widgets;
-	void* m_PrevUserPointer = nullptr;
+	void* m_PrevUserPointer = nullptr;	//NOSONAR: GLFW does not have a proper type for this
 };

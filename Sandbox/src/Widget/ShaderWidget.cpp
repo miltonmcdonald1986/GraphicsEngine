@@ -9,7 +9,7 @@ ShaderWidget::ShaderWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEng
 
 auto ShaderWidget::Iterate() -> void
 {
-	auto spShader = m_spEngine->GetCurrentShader();
+	auto spShader = GetEngine()->GetCurrentShader();
 	if (!spShader)
 		return;
 
@@ -36,7 +36,7 @@ auto ShaderWidget::Iterate() -> void
 				spUniform->SetData(v);
 		}
 		else
-			m_spEngine->GetLog()->Warn("Type is not handled by shader widget.");
+			GetEngine()->GetLog()->Warn("Type is not handled by shader widget.");
 	}
 	ImGui::End();
 }

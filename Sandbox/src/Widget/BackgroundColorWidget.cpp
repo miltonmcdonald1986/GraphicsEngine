@@ -24,7 +24,7 @@ void BackgroundColorWidget::Iterate()
         color.b = m_Color[2];
         color.a = 1.f;
         
-        m_spEngine->SetBackgroundColor(color);
+        GetEngine()->SetBackgroundColor(color);
     }
 
     ImGui::End();

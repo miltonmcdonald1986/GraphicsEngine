@@ -4,7 +4,7 @@
 
 EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine),
-      m_spLog(m_spEngine->GetLog())
+      m_spLog(spEngine->GetLog())
 {
 }
 

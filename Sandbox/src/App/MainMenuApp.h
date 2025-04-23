@@ -18,5 +18,5 @@ private:
 	int m_SelectedItem = 0;
 
 	GLFWkeyfun m_MainMenuPrevKeyCallback = nullptr;
-	void* m_MainMenuPrevUserPointer = nullptr;
+	void* m_MainMenuPrevUserPointer = nullptr;	//NOSONAR: GLFW does not have a proper type for this
 };
