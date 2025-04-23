@@ -21,3 +21,23 @@ git clone --recurse-submodules https://github.com/miltonmcdonald1986/GraphicsEng
 7. Press the green arrow button to launch `Sandbox.exe` and you should see the program open.
 
 ![Graphics engine sandbox](https://github.com/user-attachments/assets/7f58b1f7-fcca-4b5e-9430-e22118a49a42)
+
+## Linux
+1. Clone the *GraphicsEngine* repository.
+```
+git clone --recurse-submodules https://github.com/miltonmcdonald1986/GraphicsEngine.git
+```
+2. Navigate to the root of the newly-cloned *GraphicsEngine* repository.
+3. Configure for either "Debug Linux" or "Release Linux". For example:
+```
+cmake --preset "Debug Linux"
+```
+4. Build the code. For example:
+```
+cmake --build --preset "Debug Linux"
+```
+5. Navigate to the executable location and run.
+```
+cd build/bin
+./Sandbox
+```
