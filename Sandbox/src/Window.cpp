@@ -1,5 +1,9 @@
 #include "Window.h"
 
+#include "GraphicsEngine/IEngine.h"
+
+#include "App.h"
+
 auto InitializeGLFW() -> GLFWwindow*
 {
     // Initialize the GLFW library.
@@ -58,10 +62,13 @@ auto InitializeGLFW() -> GLFWwindow*
     return pWindow;
 }
 
-auto OnFramebufferSize(GLFWwindow* /*window*/, int /*width*/, int /*height*/) -> void
+auto OnFramebufferSize(GLFWwindow* pWindow, int width, int height) -> void   //NOSONAR: GLFW callback cannot handle a pointer-to-const.
 {
-    // TODO: make the graphics engine do this!
-    // glViewport(0, 0, width, height);
+    auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));
+    if (pApp)
+    {
+        pApp->OnFramebufferSize(width, height);
+    }
 }
 
 auto TerminateGLFW(GLFWwindow* pWindow) -> void

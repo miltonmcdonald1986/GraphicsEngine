@@ -20,6 +20,7 @@ namespace GraphicsEngine
 		auto GetLog() const -> ILogPtr override;
 		auto GetPolygonMode() const -> PolygonMode override;
 		auto Render() const -> void override;
+		auto ResizeViewport(int width, int height) -> void override;
 		auto SetBackgroundColor(const Color& color) -> void override;
 		auto SetPolygonMode(PolygonMode polygonMode) -> void override;
 

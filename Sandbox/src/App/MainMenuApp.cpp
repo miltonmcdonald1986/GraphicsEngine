@@ -17,10 +17,10 @@ namespace
 
 MainMenuApp::MainMenuApp(GLFWwindow* pWindow)
 	: App(pWindow),
-      m_MainMenuPrevUserPointer(glfwGetWindowUserPointer(pWindow)),
-      m_MainMenuPrevKeyCallback(glfwSetKeyCallback(pWindow, OnKey))
+      m_MainMenuPrevKeyCallback(glfwSetKeyCallback(pWindow, OnKey)),
+      m_MainMenuPrevUserPointer(glfwGetWindowUserPointer(pWindow))
+
 {
-    glfwSetWindowUserPointer(pWindow, App::GetUserDataPointer());
 	GetWidgets().push_back(std::make_unique<MainMenuWidget>(pWindow, GetEngine(), m_AppSelected, m_SelectedItem));
 }
 

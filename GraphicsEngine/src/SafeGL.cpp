@@ -257,4 +257,10 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
+	auto Viewport(GLint x, GLint y, GLsizei width, GLsizei height) -> void
+	{
+		glViewport(x, y, width, height);
+		HandleError();
+	}
+
 }

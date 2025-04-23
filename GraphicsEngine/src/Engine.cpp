@@ -178,6 +178,11 @@ namespace GraphicsEngine
 		}
 	}
 
+	auto Engine::ResizeViewport(int width, int height) -> void
+	{
+		GL::Viewport(0, 0, width, height);
+	}
+
 	auto Engine::SetBackgroundColor(const Color& color) -> void
 	{
 		m_BackgroundColor = color;

@@ -58,5 +58,7 @@ namespace GraphicsEngine::GL
 	auto UniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) -> void;
 	auto UseProgram(GLuint program) -> void;
 	auto VertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer) -> void;
+	auto Viewport(GLint x, GLint y, GLsizei width, GLsizei height) -> void;
+
 
 }

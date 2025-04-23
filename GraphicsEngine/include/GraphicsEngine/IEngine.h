@@ -25,6 +25,7 @@ namespace GraphicsEngine
 		virtual auto GetLog() const -> ILogPtr = 0;
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;
 		virtual auto Render() const -> void = 0;
+		virtual auto ResizeViewport(int width, int height) -> void = 0;
 		virtual auto SetBackgroundColor(const Color& color) -> void = 0;
 		virtual auto SetPolygonMode(PolygonMode mode) -> void = 0;
 	};

@@ -7,12 +7,13 @@
 namespace
 {
 
-    auto OnKey(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/) -> void
+    auto OnKey(GLFWwindow* pWindow, int key, int /*scancode*/, int action, int /*mods*/) -> void
     {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
-            auto pRunning = (bool*)glfwGetWindowUserPointer(window);
-            *pRunning = false;
+            auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));
+            if (pApp)
+                pApp->SetIsRunning(false);
         }
     }
 
@@ -23,7 +24,7 @@ App::App(GLFWwindow* pWindow)
 	  m_spEngine(GraphicsEngine::CreateEngine())
 {
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
-    glfwSetWindowUserPointer(m_pWindow, static_cast<void*>(&m_Running));
+    glfwSetWindowUserPointer(m_pWindow, this);
 
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
 }
@@ -32,11 +33,6 @@ App::~App()
 {
     glfwSetWindowUserPointer(m_pWindow, m_PrevUserPointer);
     glfwSetKeyCallback(m_pWindow, m_PrevKeyCallback);
-}
-
-auto App::GetUserDataPointer() -> std::byte*
-{
-    return reinterpret_cast<std::byte*>(&m_Running);
 }
 
 auto App::Iterate() -> void
@@ -58,6 +54,11 @@ auto App::Iterate() -> void
     glfwPollEvents();
 
     m_Running = (m_Running && !glfwWindowShouldClose(m_pWindow));
+}
+
+auto App::OnFramebufferSize(int width, int height) -> void
+{
+    m_spEngine->ResizeViewport(width, height);
 }
 
 auto App::RenderDockSpace() -> void

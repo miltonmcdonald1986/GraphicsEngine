@@ -8,10 +8,11 @@ public:
 
 	explicit App(GLFWwindow* pWindow);
 	virtual ~App();
-	virtual auto GetUserDataPointer() -> std::byte*;
 	virtual auto Iterate() -> void;
+	virtual auto OnFramebufferSize(int width, int height) -> void;
 	virtual auto RenderDockSpace() -> void;
 	virtual auto Run() -> void;
+	virtual auto SetIsRunning(bool isRunning) -> void;
 
 protected:
 
@@ -20,7 +21,6 @@ protected:
 	auto GetWidgets() -> Widgets&;
 	auto GetWindow() const -> GLFWwindow*;
 	auto IterateWidgets() const -> void;
-	auto SetIsRunning(bool isRunning) -> void;
 
 private:
 
