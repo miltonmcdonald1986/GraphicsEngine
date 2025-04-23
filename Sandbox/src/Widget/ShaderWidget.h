@@ -1,9 +1,7 @@
 #pragma once
 
 #include "Widget.h"
-
-#include <string>
-#include <vector>
+#include "fwd.h"
 
 class ShaderWidget : public Widget
 {

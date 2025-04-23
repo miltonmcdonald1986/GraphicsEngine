@@ -1,6 +1,7 @@
 #pragma once
 
 #include "App.h"
+#include "fwd.h"
 
 class DemoFlashingGreenTriangleApp : public App
 {

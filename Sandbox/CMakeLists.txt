@@ -19,6 +19,8 @@ target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget
 )
 
+target_precompile_headers(Sandbox PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h")
+
 target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)

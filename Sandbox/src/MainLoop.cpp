@@ -1,7 +1,5 @@
 #include "MainLoop.h"
 
-#include "GLFW/glfw3.h"
-
 #include "Apps.h"
 #include "DemoContainerApp.h"
 #include "DemoContainerRGBApp.h"

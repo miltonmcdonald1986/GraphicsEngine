@@ -1,17 +1,6 @@
 #include "ShaderWidget.h"
 
-#pragma warning(push)
-#pragma warning(disable : 4244)
-#include <algorithm>
-#pragma warning(pop)
-#include <functional>
-
-#include "imgui.h"
-
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IShader.h"
-#include "GraphicsEngine/IUniform.h"
-#include "GraphicsEngine/ILog.h"
 
 ShaderWidget::ShaderWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
 	: Widget(pWindow, spEngine)

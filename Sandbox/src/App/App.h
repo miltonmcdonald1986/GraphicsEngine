@@ -1,12 +1,6 @@
 #pragma once
 
-#include <vector>
-
-#include "GLFW/glfw3.h"
-
 #include "fwd.h"
-
-#include "GraphicsEngine/GraphicsEngineFwd.h"
 
 class App
 {
@@ -27,6 +21,6 @@ protected:
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
 	GraphicsEngine::IEnginePtr m_spEngine;
-	std::vector<WidgetUniquePointer> m_Widgets;
+	Widgets m_Widgets;
 	void* m_PrevUserPointer = nullptr;
 };

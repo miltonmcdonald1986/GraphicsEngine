@@ -1,15 +1,6 @@
 #include "DemoTriangleRGBApp.h"
 
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IAttribute.h"
-#include "GraphicsEngine/IEntity.h"
-
-#include "glm/vec3.hpp"
-
-#include "BackgroundColorWidget.h"
-#include "EngineLogWidget.h"
-#include "PolygonModeWidget.h"
-#include "ShaderWidget.h"
 
 DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
     : App(spWindow)

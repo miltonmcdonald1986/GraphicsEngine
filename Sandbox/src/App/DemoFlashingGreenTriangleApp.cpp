@@ -1,19 +1,6 @@
 #include "DemoFlashingGreenTriangleApp.h"
 
-#include <cmath>
-#include <numbers>
-
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IShader.h"
-#include "GraphicsEngine/IAttribute.h"
-#include "GraphicsEngine/IEntity.h"
-#include "GraphicsEngine/IUniform.h"
-
-#include "glm/vec3.hpp"
-
-#include "BackgroundColorWidget.h"
-#include "PolygonModeWidget.h"
-#include "EngineLogWidget.h"
 
 DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)

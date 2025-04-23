@@ -1,7 +1,5 @@
 #pragma once
 
-#include "GraphicsEngine/GraphicsEngineFwd.h"
-
 #include "Widget.h"
 
 class DearImGuiDemoWindowWidget : public Widget

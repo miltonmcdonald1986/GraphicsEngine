@@ -1,14 +1,6 @@
 #include "DemoIndexedPointsApp.h"
 
-#include "glm/glm.hpp"
-
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IAttribute.h"
-#include "GraphicsEngine/IEntity.h"
-
-#include "BackgroundColorWidget.h"
-#include "EngineLogWidget.h"
-#include "PolygonModeWidget.h"
 
 DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
     : App(pWindow)

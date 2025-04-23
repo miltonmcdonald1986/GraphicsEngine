@@ -2,6 +2,8 @@
 
 #include "App.h"
 
+#include "fwd.h"
+
 class DemoTransformationsApp : public App
 {
 public:

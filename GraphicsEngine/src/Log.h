@@ -1,11 +1,21 @@
 #pragma once
 
 #include <queue>
-#include <source_location>
 
-#include "GraphicsEngineFwd.h"
 #include "ILog.h"
-#include "Fwd.h"
+
+#include "spdlog/sinks/base_sink.h"
+
+namespace spdlog
+{
+	class logger; 
+
+	namespace sinks
+	{
+		template <typename Mutex> class rotating_file_sink;
+		using rotating_file_sink_mt = rotating_file_sink<std::mutex>;
+	}
+}
 
 namespace GraphicsEngine
 {
@@ -46,8 +56,8 @@ namespace GraphicsEngine
 			}
 		}
 
-		Strings get_messages() const {
-			Strings output;
+		std::vector<std::string_view> get_messages() const {
+			std::vector<std::string_view> output;
 			std::queue<std::string> q_copy = messages_;
 			while (!q_copy.empty())
 			{
@@ -62,24 +72,24 @@ namespace GraphicsEngine
 	{
 	public:
 		Log();
-		explicit Log(loggerPtr spLogger);
+		explicit Log(std::shared_ptr<spdlog::logger> spLogger);
 		~Log() override = default;
 		
 		auto ClearMessages() -> void override;
-		auto GetLatestMessages() const -> Strings override;
+		auto GetLatestMessages() const -> std::vector<std::string_view> override;
 		auto GetLevel() const->LogLevel override;
-		auto Trace(const String& message, const std::source_location& loc) const -> void override;
-		auto Debug(const String& message, const std::source_location& loc) const -> void override;
-		auto Info(const String& message, const std::source_location& loc) const -> void override;
-		auto Warn(const String& message, const std::source_location& loc) const -> void override;
-		auto Error(const String& message, const std::source_location& loc) const -> void override;
-		auto Critical(const String& message, const std::source_location& loc) const -> void override;
+		auto Trace(std::string_view message, const std::source_location& loc) const -> void override;
+		auto Debug(std::string_view message, const std::source_location& loc) const -> void override;
+		auto Info(std::string_view message, const std::source_location& loc) const -> void override;
+		auto Warn(std::string_view message, const std::source_location& loc) const -> void override;
+		auto Error(std::string_view message, const std::source_location& loc) const -> void override;
+		auto Critical(std::string_view message, const std::source_location& loc) const -> void override;
 		auto SetLevel(LogLevel level) -> void override;
 
 	private:
-		auto LogMessage(LogLevel level, const std::source_location& loc, const String& message) const -> void;
+		auto LogMessage(LogLevel level, const std::source_location& loc, std::string_view message) const -> void;
 
-		loggerPtr m_spLogger = nullptr;
+		std::shared_ptr<spdlog::logger> m_spLogger = nullptr;
 		std::shared_ptr<spdlog::sinks::rotating_file_sink_mt> m_spRotatingFileSink = nullptr;
 		std::shared_ptr<queue_sink> m_spQueueSink = nullptr;
 		static constexpr int m_QueueSize = 128;

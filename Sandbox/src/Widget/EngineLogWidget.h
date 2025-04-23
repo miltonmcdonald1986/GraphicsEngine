@@ -2,8 +2,7 @@
 
 #include "Widget.h"
 
-#include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/ILog.h"
+#include "fwd.h"
 
 class EngineLogWidget : public Widget
 {
@@ -16,5 +15,5 @@ public:
 private:
 
     GraphicsEngine::ILogPtr m_spLog = nullptr;
-    int m_LogLevel = static_cast<int>(GraphicsEngine::LogLevel::Info);
+    int m_LogLevel = 0;
 };

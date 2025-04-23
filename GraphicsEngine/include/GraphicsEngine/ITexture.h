@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GraphicsEngineFwd.h"
-#include "GraphicsEngine/GraphicsEngineImpExp.h"
+#include <memory>
 
 namespace GraphicsEngine
 {
@@ -11,5 +10,8 @@ namespace GraphicsEngine
 	public:
 		virtual ~ITexture() = default;
 	};
+
+	using ITexturePtr = std::shared_ptr<ITexture>;
+	using ITextures = std::vector<ITexturePtr>;
 
 }

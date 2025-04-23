@@ -1,18 +1,6 @@
 #include "DemoTexturesCombinedApp.h"
 
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
-
-#include "GraphicsEngine/IAttribute.h"
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IEntity.h"
-#include "GraphicsEngine/IShader.h"
-#include "GraphicsEngine/IUniform.h"
-
-#include "BackgroundColorWidget.h"
-#include "EngineLogWidget.h"
-#include "PolygonModeWidget.h"
-#include "ShaderWidget.h"
 
 DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 	: App(pWindow)

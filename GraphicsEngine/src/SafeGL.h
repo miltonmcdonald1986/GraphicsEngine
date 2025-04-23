@@ -1,6 +1,18 @@
 #pragma once
 
-#include "glad/glad.h"
+typedef unsigned char			GLboolean;
+typedef char					GLchar;
+typedef unsigned int			GLenum;
+typedef float					GLfloat;
+typedef unsigned int			GLbitfield;
+typedef int						GLint;
+typedef unsigned int			GLuint;
+typedef int						GLsizei;
+#if defined(_WIN64)
+typedef signed long long int	GLsizeiptr;
+#else
+typedef signed long  int		GLsizeiptr;
+#endif
 
 namespace GraphicsEngine::GL
 {

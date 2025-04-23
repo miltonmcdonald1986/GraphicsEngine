@@ -1,7 +1,3 @@
-#ifdef _WIN32
-#include <crtdbg.h>
-#endif
-
 #include "MainLoop.h"
 #include "UI.h"
 #include "Window.h"

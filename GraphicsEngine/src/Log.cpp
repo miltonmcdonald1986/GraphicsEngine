@@ -1,14 +1,11 @@
-#include "pch.h"
 #include "Log.h"
-
-#include <queue>
 
 #include "Debug.h"
 
 namespace Helpers
 {
 
-	auto CreateLog(loggerPtr spLogger) -> GraphicsEngine::LogPtr
+	auto CreateLog(std::shared_ptr<spdlog::logger> spLogger) -> GraphicsEngine::ILogPtr
 	{
 		return std::make_shared<GraphicsEngine::Log>(spLogger);
 	}
@@ -64,7 +61,7 @@ Log::Log()
 	return;
 }
 
-Log::Log(loggerPtr spLogger)
+Log::Log(std::shared_ptr<spdlog::logger> spLogger)
 	: m_spLogger(spLogger)
 {
 }
@@ -74,7 +71,7 @@ auto Log::ClearMessages() -> void
 	m_spQueueSink->clear();
 }
 
-auto Log::GetLatestMessages() const -> Strings
+auto Log::GetLatestMessages() const -> std::vector<std::string_view>
 {
 	return m_spQueueSink->get_messages();
 }
@@ -103,37 +100,37 @@ auto Log::GetLevel() const -> LogLevel
 	}
 }
 
-auto Log::Trace(const String& message, const std::source_location& loc) const -> void
+auto Log::Trace(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Trace, loc, message);
 }
 
-auto Log::Debug(const String& message, const std::source_location& loc) const -> void
+auto Log::Debug(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Debug, loc, message);
 }
 
-auto Log::Info(const String& message, const std::source_location& loc) const -> void
+auto Log::Info(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Info, loc, message);
 }
 
-auto Log::Warn(const String& message, const std::source_location& loc) const -> void
+auto Log::Warn(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Warn, loc, message);
 }
 
-auto Log::Error(const String& message, const std::source_location& loc) const -> void
+auto Log::Error(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Error, loc, message);
 }
 
-auto Log::Critical(const String& message, const std::source_location& loc) const -> void
+auto Log::Critical(std::string_view message, const std::source_location& loc) const -> void
 {
 	LogMessage(GraphicsEngine::LogLevel::Critical, loc, message);
 }
 
-auto Log::LogMessage(LogLevel level, const std::source_location& loc, const String& message) const -> void
+auto Log::LogMessage(LogLevel level, const std::source_location& loc, std::string_view message) const -> void
 {
 	std::stringstream loggerOutputStream;
 	loggerOutputStream << "\nFile: " << loc.file_name() << '\n';
@@ -141,7 +138,7 @@ auto Log::LogMessage(LogLevel level, const std::source_location& loc, const Stri
 	loggerOutputStream << "Line: " << loc.line() << '\n';
 	loggerOutputStream << "Column: " << loc.column() << '\n';
 	loggerOutputStream << message;
-	String output = loggerOutputStream.str();
+	std::string output = loggerOutputStream.str();
 	switch (level)
 	{
 	case GraphicsEngine::LogLevel::Trace:

@@ -1,8 +1,6 @@
-#include "pch.h"
 #include "Attribute.h"
-#include "Log.h"
 
-#include "glm/gtc/type_ptr.hpp"
+#include "Log.h"
 
 namespace GraphicsEngine
 {

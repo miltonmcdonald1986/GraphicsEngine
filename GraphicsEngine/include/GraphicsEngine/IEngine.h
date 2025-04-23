@@ -1,9 +1,11 @@
 #pragma once
 
+#include <filesystem>
 #include <optional>
 
-#include "GraphicsEngine/GraphicsEngineFwd.h"
-#include "GraphicsEngineImpExp.h"
+#include "IAttribute.h"
+#include "IEntity.h"
+#include "ILog.h"
 #include "Types.h"
 
 namespace GraphicsEngine
@@ -14,10 +16,10 @@ namespace GraphicsEngine
 	public:
 		virtual ~IEngine() = default;
 
-		virtual auto CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices = std::nullopt) -> IEntityPtr = 0;
-		virtual auto CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr = 0;
-		virtual auto CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr = 0;
-		virtual auto CreateNewTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr = 0;
+		virtual auto CreateNewEntity(const IAttributes& attributes, const std::vector<unsigned int>& indices = {}) -> IEntityPtr = 0;
+		virtual auto CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr = 0;
+		virtual auto CreateNewShaderFromSource(std::string_view vert, std::string_view geom, std::string_view frag) -> IShaderPtr = 0;
+		virtual auto CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCurrentShader() const -> IShaderPtr = 0;
 		virtual auto GetLog() const -> ILogPtr = 0;
@@ -26,6 +28,8 @@ namespace GraphicsEngine
 		virtual auto SetBackgroundColor(const Color& color) -> void = 0;
 		virtual auto SetPolygonMode(PolygonMode mode) -> void = 0;
 	};
+
+	using IEnginePtr = std::shared_ptr<IEngine>;
 
 	GRAPHICSENGINE_API auto CreateEngine() -> IEnginePtr;
 

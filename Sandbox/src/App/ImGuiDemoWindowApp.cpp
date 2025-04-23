@@ -5,5 +5,5 @@
 ImGuiDemoWindowApp::ImGuiDemoWindowApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
-	m_Widgets.push_back(WidgetUniquePointer(new DearImGuiDemoWindowWidget(m_pWindow, m_spEngine)));
+	m_Widgets.push_back(WidgetPtr(new DearImGuiDemoWindowWidget(m_pWindow, m_spEngine)));
 }

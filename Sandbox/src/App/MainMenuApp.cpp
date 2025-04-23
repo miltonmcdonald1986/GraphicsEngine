@@ -1,9 +1,5 @@
 #include "MainMenuApp.h"
 
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-
 #include "GraphicsEngine/IEngine.h"
 
 #include "MainMenuWidget.h"
@@ -27,7 +23,7 @@ MainMenuApp::MainMenuApp(GLFWwindow* pWindow)
 
     m_MainMenuPrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
 
-	m_Widgets.push_back(WidgetUniquePointer(new MainMenuWidget(pWindow, m_spEngine, m_AppSelected, m_SelectedItem)));
+	m_Widgets.push_back(WidgetPtr(new MainMenuWidget(pWindow, m_spEngine, m_AppSelected, m_SelectedItem)));
 }
 
 MainMenuApp::~MainMenuApp()

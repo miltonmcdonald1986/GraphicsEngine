@@ -1,12 +1,5 @@
 #include "MainMenuWidget.h"
 
-#include <algorithm>
-#include <iterator>
-#include <map>
-#include <vector>
-
-#include "imgui.h"
-
 #include "Apps.h"
 
 using AppInfo_t = std::pair<Apps, const char*>;

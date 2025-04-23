@@ -1,11 +1,5 @@
 #include "UI.h"
 
-#include <filesystem>
-
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-
 auto InitializeDearImGui(GLFWwindow* pWindow) -> bool
 {
 	if (!pWindow)

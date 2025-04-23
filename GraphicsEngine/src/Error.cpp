@@ -1,11 +1,5 @@
-#include "pch.h"
-
-#ifdef _WIN32
-#include <stacktrace>
-#endif
-
 #include "Error.h"
-#include "Debug.h"
+
 #include "Log.h"
 
 namespace GraphicsEngine

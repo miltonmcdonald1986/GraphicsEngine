@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Entity.h"
 
 namespace GraphicsEngine
@@ -13,17 +12,17 @@ namespace GraphicsEngine
 		return e1->GetId() <=> e2->GetId();
 	}
 
-	auto Entity::GetId() const -> EntityId
+	auto Entity::GetId() const -> unsigned int
 	{
 		return m_Id;
 	}
 
-	auto Entity::GetNumIndices() const -> Count
+	auto Entity::GetNumIndices() const -> int
 	{
 		return m_NumIndices;
 	}
 
-	auto Entity::GetNumVertices() const -> Count
+	auto Entity::GetNumVertices() const -> int
 	{
 		return m_NumVertices;
 	}
@@ -38,7 +37,7 @@ namespace GraphicsEngine
 		return m_spTextures;
 	}
 
-	auto Entity::GetVAO() const -> VAO
+	auto Entity::GetVAO() const -> unsigned int
 	{
 		return m_VAO;
 	}

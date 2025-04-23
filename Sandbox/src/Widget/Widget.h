@@ -1,11 +1,5 @@
 #pragma once
 
-#include <memory>
-
-#include "GraphicsEngine/GraphicsEngineFwd.h"
-
-#include "GLFW/glfw3.h"
-
 #include "fwd.h"
 
 class Widget
@@ -22,5 +16,3 @@ protected:
 	GraphicsEngine::IEnginePtr m_spEngine;
 
 };
-
-using WidgetUniquePointer = std::unique_ptr<Widget>;

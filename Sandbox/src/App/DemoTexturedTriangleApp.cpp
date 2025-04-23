@@ -1,15 +1,6 @@
 #include "DemoTexturedTriangleApp.h"
 
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
-
-#include "GraphicsEngine/IAttribute.h"
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IEntity.h"
-
-#include "BackgroundColorWidget.h"
-#include "EngineLogWidget.h"
-#include "PolygonModeWidget.h"
 
 DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 	: App(pWindow)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IEntity.h"
-#include "Fwd.h"
 
 namespace GraphicsEngine
 {
@@ -32,6 +31,8 @@ namespace GraphicsEngine
 		ITextures m_spTextures;
 		GLuint m_VAO = 0;
 	};
+
+	using EntityPtr = std::shared_ptr<Entity>;
 
 	auto CreateEntity() -> EntityPtr;
 

@@ -1,8 +1,7 @@
 #include "BackgroundColorWidget.h"
 
 #include "GraphicsEngine/IEngine.h"
-
-#include "imgui.h"
+#include "GraphicsEngine/Types.h"
 
 BackgroundColorWidget::BackgroundColorWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)

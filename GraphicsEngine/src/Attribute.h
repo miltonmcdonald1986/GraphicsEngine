@@ -30,4 +30,6 @@ namespace GraphicsEngine
 		GLenum m_Type = GL_FLOAT;
 	};
 
+	using AttributePtr = std::shared_ptr<Attribute>;
+
 }

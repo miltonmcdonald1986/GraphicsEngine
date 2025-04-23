@@ -2,8 +2,6 @@
 
 #include "IUniform.h"
 
-#include "Fwd.h"
-
 namespace GraphicsEngine
 {
 
@@ -26,6 +24,8 @@ namespace GraphicsEngine
 		std::string m_Name = "";
 		GLuint m_ProgramId = 0;
 	};
+
+	using UniformPtr = std::shared_ptr<Uniform>;
 
 	auto CreateUniform(GLuint programId) -> UniformPtr;
 

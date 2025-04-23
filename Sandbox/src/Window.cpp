@@ -1,7 +1,5 @@
 #include "Window.h"
 
-#include "GLFW/glfw3.h"
-
 auto InitializeGLFW() -> GLFWwindow*
 {
     // Initialize the GLFW library.

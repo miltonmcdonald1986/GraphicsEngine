@@ -14,5 +14,7 @@ target_include_directories(GraphicsEngine
 	PRIVATE ${Stb_INCLUDE_DIR}
 )
 
+target_precompile_headers(GraphicsEngine PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h")
+
 target_link_libraries(GraphicsEngine PRIVATE glm::glm)
 target_link_libraries(GraphicsEngine PRIVATE spdlog::spdlog_header_only)

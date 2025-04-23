@@ -1,9 +1,7 @@
-#include "pch.h"
 #include "Uniform.h"
-#include "SafeGL.h"
-#include "Log.h"
 
-#include "glm/gtc/type_ptr.hpp"
+#include "Log.h"
+#include "SafeGL.h"
 
 namespace GraphicsEngine
 {

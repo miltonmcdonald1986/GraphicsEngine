@@ -1,22 +1,13 @@
 #include "DemoTransformationsApp.h"
 
-#include "glm/mat4x4.hpp"
-#include "glm/ext/matrix_transform.hpp"
-#include "glm/vec4.hpp"
-
-#include "GraphicsEngine/IAttribute.h"
 #include "GraphicsEngine/IEngine.h"
-#include "GraphicsEngine/IEntity.h"
-#include "GraphicsEngine/ILog.h"
-#include "GraphicsEngine/IShader.h"
-#include "GraphicsEngine/IUniform.h"
 
 DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
     m_spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
     
-    GraphicsEngine::String sourceVert = R"(#version 330 core
+    const std::string_view sourceVert = R"(#version 330 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTexCoord;
 
@@ -30,7 +21,7 @@ void main()
     texCoordsFRAG = vec2(aTexCoord.x, aTexCoord.y);
 } )";
 
-GraphicsEngine::String sourceFrag = R"(#version 330 core
+std::string_view sourceFrag = R"(#version 330 core
 
 out vec4 fragColor;
 

@@ -1,7 +1,5 @@
 #include "PolygonModeWidget.h"
 
-#include "imgui.h"
-
 #include "GraphicsEngine/IEngine.h"
 
 PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)

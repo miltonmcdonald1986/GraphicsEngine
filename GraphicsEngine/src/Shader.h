@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IShader.h"
-#include "Uniform.h"
 
 namespace GraphicsEngine
 {
@@ -9,10 +8,10 @@ namespace GraphicsEngine
 	class Shader : public IShader
 	{
 	public:
-		Shader(const std::string& vertSource, const std::string& geomSource, const std::string& fragSource);
+		Shader(std::string_view vertSource, std::string_view geomSource, std::string_view fragSource);
 
 		auto GetId() const -> unsigned int override;
-		auto GetActiveUniform(const String& name) const -> IUniformPtr override;
+		auto GetActiveUniform(std::string_view name) const -> IUniformPtr override;
 		auto GetActiveUniforms() const -> IUniforms override;
 		auto Use() const -> void override;
 
@@ -21,6 +20,6 @@ namespace GraphicsEngine
 		IUniforms m_Uniforms;
 	};
 
-	IShaderPtr CreateShaderFromSourceCode(const std::string& vert, const std::string& geom, const std::string& frag);
+	IShaderPtr CreateShaderFromSourceCode(std::string_view vert, std::string_view geom, std::string_view frag);
 
 }

@@ -1,20 +1,19 @@
-#include "pch.h"
+#include "Texture.h"
 
 #include "stb_image.h"
 
 #include "Log.h"
-#include "Texture.h"
 #include "SafeGL.h"
 
 namespace GraphicsEngine
 {
 
-	auto CreateTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr
+	auto CreateTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr
 	{
 		return std::make_shared<Texture>(textureName, path);
 	}
 
-	Texture::Texture(const String& textureName, const Path& path)
+	Texture::Texture(std::string_view textureName, const std::filesystem::path& path)
 		: m_Name(textureName)
 	{
 		GL::GenTextures(1, &m_Texture);
@@ -71,7 +70,7 @@ namespace GraphicsEngine
 		return m_Texture;
 	}
 
-    auto Texture::GetName() const -> String
+    auto Texture::GetName() const -> std::string_view
     {
         return m_Name;
     }

@@ -1,14 +1,10 @@
-#include "pch.h"
 #include "Engine.h"
 
-#include <algorithm>
-
 #include "Attribute.h"
-#include "Debug.h"
-#include "SafeGL.h"
-#include "IShader.h"
 #include "Entity.h"
 #include "Log.h"
+#include "SafeGL.h"
+#include "Shader.h"
 #include "Texture.h"
 
 namespace GraphicsEngine
@@ -42,7 +38,7 @@ namespace GraphicsEngine
 		spdlog::shutdown();
 	}
 
-	auto Engine::CreateNewEntity(const IAttributes& attributes, const std::optional<Indices>& oIndices) -> IEntityPtr
+	auto Engine::CreateNewEntity(const IAttributes& attributes, const std::vector<unsigned int>& indices) -> IEntityPtr
 	{
 		size_t numAttributes = attributes.size();
 
@@ -63,25 +59,25 @@ namespace GraphicsEngine
 			GL::EnableVertexAttribArray(index);
 		}
 
-		if (oIndices)
+		if (!indices.empty())
 		{
 			GLuint eboBuffer;
 			GL::GenBuffers(1, &eboBuffer);
 			GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboBuffer);
-			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, oIndices->size() * sizeof(Index), oIndices->data(), GL_STATIC_DRAW);
+			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 		}
 
 		EntityPtr spEntity = CreateEntity();
 		spEntity->SetVAO(vao);
 		spEntity->SetNumVertices(std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices());
-		spEntity->SetNumIndices(oIndices ? static_cast<Count>(oIndices->size()) : 0);
+		spEntity->SetNumIndices(indices.empty() ? 0 : static_cast<int>(indices.size()));
 
 		m_Entities.push_back(spEntity);
 
 		return std::dynamic_pointer_cast<IEntity>(spEntity);
 	}
 
-	auto Engine::CreateNewShaderFromFiles(const Path& vert, const Path& geom, const Path& frag) -> IShaderPtr
+	auto Engine::CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr
 	{
 		auto GetSourceFromFile = [this](const std::filesystem::path& path) -> std::string
 		{
@@ -108,14 +104,14 @@ namespace GraphicsEngine
 		return CreateNewShaderFromSource(vertSource, geomSource, fragSource);
 	}
 
-	auto Engine::CreateNewShaderFromSource(const String& vert, const String& geom, const String& frag) -> IShaderPtr
+	auto Engine::CreateNewShaderFromSource(std::string_view vert, std::string_view geom, std::string_view frag) -> IShaderPtr
 	{
 		IShaderPtr spShader = CreateShaderFromSourceCode(vert, geom, frag);
 		m_Shaders.push_back(spShader);
 		return spShader;
 	}
 
-	auto Engine::CreateNewTextureFromFile(const String& textureName, const Path& path) -> ITexturePtr
+	auto Engine::CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr
 	{
 		ITexturePtr spTexture = CreateTextureFromFile(textureName, path);
 		m_Textures.push_back(spTexture);

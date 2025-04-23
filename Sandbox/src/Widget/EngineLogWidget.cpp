@@ -1,9 +1,6 @@
 #include "EngineLogWidget.h"
 
-#include <algorithm>
-#include <format>
-
-#include "imgui.h"
+#include "GraphicsEngine/IEngine.h"
 
 EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine),
@@ -57,20 +54,21 @@ auto EngineLogWidget::Iterate() -> void
     std::reverse(messages.begin(), messages.end());
     for (const auto& message : messages)
     {
+        std::string messageStr(message);
         if (message.contains("[trace]"))
-            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.f), "%s", messageStr.c_str());
         else if (message.contains("[debug]"))
-            ImGui::TextColored(ImVec4(0.f, 1.f, 1.f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(0.f, 1.f, 1.f, 1.f), "%s", messageStr.c_str());
         else if (message.contains("[info]"))
-            ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), "%s", messageStr.c_str());
         else if (message.contains("[warning]"))
-            ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", messageStr.c_str());
         else if (message.contains("[error]"))
-            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "%s", messageStr.c_str());
         else if (message.contains("[critical]"))
-            ImGui::TextColored(ImVec4(1.f, 0.f, 1.f, 1.f), "%s", message.c_str());
+            ImGui::TextColored(ImVec4(1.f, 0.f, 1.f, 1.f), "%s", messageStr.c_str());
         else
-            ImGui::Text("%s", message.c_str());
+            ImGui::Text("%s", messageStr.c_str());
     }
     ImGui::EndChild();
     ImGui::End();

@@ -1,14 +1,8 @@
-#include "pch.h"
 #include "Shader.h"
 
-#include "glm/gtc/type_ptr.hpp"
-#include "glm/mat4x4.hpp"
-#include "glm/vec4.hpp"
-
-#include "SafeGL.h"
-#include "Debug.h"
-#include "Uniform.h"
 #include "Log.h"
+#include "SafeGL.h"
+#include "Uniform.h"
 
 namespace Helpers
 {
@@ -86,17 +80,17 @@ namespace Helpers
 namespace GraphicsEngine
 {
 
-	IShaderPtr CreateShaderFromSourceCode(const std::string &vert, const std::string &geom, const std::string &frag)
+	IShaderPtr CreateShaderFromSourceCode(std::string_view vert, std::string_view geom, std::string_view frag)
 	{
 		return std::make_shared<Shader>(vert, geom, frag);
 	}
 
-	Shader::Shader(const std::string &vertSource, const std::string &geomSource, const std::string &fragSource)
+	Shader::Shader(std::string_view vertSource, std::string_view geomSource, std::string_view fragSource)
 	{
 
-		auto vertShaderId = Helpers::CompileShader(GL_VERTEX_SHADER, vertSource.empty() ? nullptr : vertSource.c_str());
-		auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, geomSource.empty() ? nullptr : geomSource.c_str());
-		auto fragShaderId = Helpers::CompileShader(GL_FRAGMENT_SHADER, fragSource.empty() ? nullptr : fragSource.c_str());
+		auto vertShaderId = Helpers::CompileShader(GL_VERTEX_SHADER, vertSource.empty() ? nullptr : std::string(vertSource).c_str());
+		auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, geomSource.empty() ? nullptr : std::string(geomSource).c_str());
+		auto fragShaderId = Helpers::CompileShader(GL_FRAGMENT_SHADER, fragSource.empty() ? nullptr : std::string(fragSource).c_str());
 		m_Id = Helpers::LinkProgram({vertShaderId, geomShaderId, fragShaderId});
 
 		// Grab the list of uniforms from the shader.
@@ -169,7 +163,7 @@ namespace GraphicsEngine
 		return m_Id;
 	}
 
-    auto Shader::GetActiveUniform(const String &name) const -> IUniformPtr
+    auto Shader::GetActiveUniform(std::string_view name) const -> IUniformPtr
     {
         auto it = std::find_if(m_Uniforms.begin(), m_Uniforms.end(), [&name](IUniformPtr spUniform)
 		{ 
