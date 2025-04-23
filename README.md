@@ -1,5 +1,5 @@
 # GraphicsEngine
-GraphicsEngine is a simple graphics engine written in C++ using OpenGL.
+GraphicsEngine is a simple, cross-platform graphics engine written in C++ using OpenGL.
 
 # Installation and Setup
 ## Visual Studio 2022
