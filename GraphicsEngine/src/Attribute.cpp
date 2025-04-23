@@ -21,7 +21,7 @@ namespace GraphicsEngine
 
 		m_Data.resize(m_NumBytes);
 		auto pBegin = glm::value_ptr(*data.data());
-		memcpy(m_Data.data(), reinterpret_cast<const std::byte*>(pBegin), m_NumBytes);
+		memcpy(m_Data.data(), pBegin, m_NumBytes);
 
 		m_NumComponents = 2;
 		m_NumVertices = static_cast<GLuint>(data.size());
@@ -37,7 +37,7 @@ namespace GraphicsEngine
 		
 		m_Data.resize(m_NumBytes);
 		auto pBegin = glm::value_ptr(*data.data());
-		memcpy(m_Data.data(), reinterpret_cast<const std::byte*>(pBegin), m_NumBytes);
+		memcpy(m_Data.data(), pBegin, m_NumBytes);
 		
 		m_NumComponents = 3;
 		m_NumVertices = static_cast<GLuint>(data.size());
