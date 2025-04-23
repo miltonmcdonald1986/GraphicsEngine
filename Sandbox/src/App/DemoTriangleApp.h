@@ -5,5 +5,5 @@
 class DemoTriangleApp : public App
 {
 public:
-	DemoTriangleApp(GLFWwindow* pWindow);
+	explicit DemoTriangleApp(GLFWwindow* pWindow);
 };

@@ -5,5 +5,5 @@
 class DemoIndexedPointsApp : public App
 {
 public:
-	DemoIndexedPointsApp(GLFWwindow* spWindow);
+	explicit DemoIndexedPointsApp(GLFWwindow* spWindow);
 };

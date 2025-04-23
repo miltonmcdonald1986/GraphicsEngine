@@ -5,5 +5,5 @@
 class ImGuiDemoWindowApp : public App
 {
 public:
-	ImGuiDemoWindowApp(GLFWwindow* pWindow);
+	explicit ImGuiDemoWindowApp(GLFWwindow* pWindow);
 };

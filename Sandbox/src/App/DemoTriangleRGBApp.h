@@ -5,5 +5,5 @@
 class DemoTriangleRGBApp : public App
 {
 public:
-	DemoTriangleRGBApp(GLFWwindow* spWindow);
+	explicit DemoTriangleRGBApp(GLFWwindow* spWindow);
 };

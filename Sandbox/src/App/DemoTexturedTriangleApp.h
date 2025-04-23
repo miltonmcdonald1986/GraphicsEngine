@@ -5,5 +5,5 @@
 class DemoTexturedTriangleApp : public App
 {
 public:
-	DemoTexturedTriangleApp(GLFWwindow* pWindow);
+	explicit DemoTexturedTriangleApp(GLFWwindow* pWindow);
 };

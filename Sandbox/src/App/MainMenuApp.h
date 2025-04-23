@@ -8,7 +8,7 @@ using Result_SelectedItem = int;
 class MainMenuApp : public App
 {
 public:
-	MainMenuApp(GLFWwindow* pWindow);
+	explicit MainMenuApp(GLFWwindow* pWindow);
 	virtual ~MainMenuApp() override;
 	auto GetResults() -> std::pair<Result_AppWasSelected, Result_SelectedItem>;
 	virtual auto Run() -> void override;

@@ -6,7 +6,7 @@
 class DemoFlashingGreenTriangleApp : public App
 {
 public:
-	DemoFlashingGreenTriangleApp(GLFWwindow* pWindow);
+	explicit DemoFlashingGreenTriangleApp(GLFWwindow* pWindow);
 
 	virtual auto Iterate() -> void override;
 
