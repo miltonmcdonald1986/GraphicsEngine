@@ -16,6 +16,7 @@ endif()
 target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/src/App
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Utilities
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget
 )
 

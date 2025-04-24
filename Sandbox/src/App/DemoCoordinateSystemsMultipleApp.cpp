@@ -1,4 +1,5 @@
 #include "DemoCoordinateSystemsMultipleApp.h"
+#include "DemoCoordinateSystemsUtilities.h"
 #include "EngineLogWidget.h"
 
 #include "GraphicsEngine/IEntityFactory.h"
@@ -10,16 +11,7 @@ DemoCoordinateSystemsMultipleApp::DemoCoordinateSystemsMultipleApp(GLFWwindow* p
 {
     GetEngine()->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
-    auto spShader = GetEngine()->CreateNewShaderFromFiles("shaders/DemoCoordinateSystems.vert", "", "shaders/DemoCoordinateSystems.frag");
-    if (!spShader)
-    {
-        GetEngine()->GetLog()->Error("Failed to create shader.");
-        return;
-    }
-
-    GraphicsEngine::ITextures textures;
-    textures.push_back(GetEngine()->CreateNewTextureFromFile("texture1", "textures/container.jpg"));
-    textures.push_back(GetEngine()->CreateNewTextureFromFile("texture2", "textures/awesomeface.png"));
+    auto [spShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
 
     auto spEntityFactory = GraphicsEngine::CreateEntityFactory(GetEngine());
 
@@ -40,7 +32,7 @@ DemoCoordinateSystemsMultipleApp::DemoCoordinateSystemsMultipleApp(GLFWwindow* p
     for (size_t i = 0; i < positions.size(); ++i)
     {
         cubes.push_back(spEntityFactory->CreateCubeTextured(spShader, textures));
-        glm::mat4 model = glm::mat4(1.0f);
+        auto model = glm::mat4(1.0f);
         model = glm::translate(model, positions[i]);
         model = glm::rotate(model, glm::radians(20.f * i), glm::vec3(1.0f, 0.3f, 0.5f));
         cubes.back()->SetModelMatrix(model);
