@@ -54,6 +54,18 @@
       "displayName": "Debug Windows",
       "configurePreset": "Debug Windows",
       "configuration": "Debug"
+    },
+    {
+      "name": "Release Linux",
+      "displayName": "Release Linux",
+      "configurePreset": "Release Linux",
+      "configuration": "Release"
+    },
+    {
+      "name": "Release Windows",
+      "displayName": "Release Windows",
+      "configurePreset": "Release Windows",
+      "configuration": "Release"
     }
   ]
 }
