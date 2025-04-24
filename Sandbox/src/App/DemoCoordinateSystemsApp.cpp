@@ -1,4 +1,5 @@
 #include "DemoCoordinateSystemsApp.h"
+#include "DemoCoordinateSystemsUtilities.h"
 
 #include "glm/ext/matrix_clip_space.hpp"
 
@@ -33,21 +34,13 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
         return;
     }
 
-    auto spShader = GetEngine()->CreateNewShaderFromFiles("shaders/DemoCoordinateSystems.vert", "", "shaders/DemoCoordinateSystems.frag");
-    if (!spShader)
-    {
-        GetEngine()->GetLog()->Error("Failed to create shader.");
-        return;
-    }
+    spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
 
-    spShader->GetActiveUniform("model")->SetData(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
+	auto [spShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+
     spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
     spShader->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
     spEntity->SetShader(spShader);
-
-    auto spTexture1 = GetEngine()->CreateNewTextureFromFile("texture1", "textures/container.jpg");
-    auto spTexture2 = GetEngine()->CreateNewTextureFromFile("texture2", "textures/awesomeface.png");
-
-    spEntity->SetTextures({ spTexture1, spTexture2 });
+    spEntity->SetTextures(textures);
 }
