@@ -3,6 +3,7 @@
 #include "Apps.h"
 #include "DemoContainerApp.h"
 #include "DemoContainerRGBApp.h"
+#include "DemoCoordinateSystemsApp.h"
 #include "DemoFlashingGreenTriangleApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "DemoTexturedTriangleApp.h"
@@ -32,6 +33,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 	case Apps::Test:
 	{
 		TestApp app(pWindow);
+		app.Run();
+		break;
+	}
+	case Apps::DemoCoordinateSystems:
+	{
+		DemoCoordinateSystemsApp app(pWindow);
 		app.Run();
 		break;
 	}

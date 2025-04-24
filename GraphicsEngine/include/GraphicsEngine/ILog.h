@@ -22,7 +22,7 @@ namespace GraphicsEngine
 		virtual ~ILog() = default;
 
 		virtual auto ClearMessages() -> void = 0;
-		virtual auto GetLatestMessages() const -> std::vector<std::string_view> = 0;
+		virtual auto GetLatestMessages() const -> std::vector<std::string> = 0;
 		virtual auto GetLevel() const -> LogLevel = 0;
 		virtual auto SetLevel(LogLevel level) -> void = 0;
 

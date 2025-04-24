@@ -56,8 +56,9 @@ namespace GraphicsEngine
 			}
 		}
 
-		std::vector<std::string_view> get_messages() const {
-			std::vector<std::string_view> output;
+		std::vector<std::string> get_messages() const 
+		{
+			std::vector<std::string> output;
 			std::queue<std::string> q_copy = messages_;
 			while (!q_copy.empty())
 			{
@@ -76,7 +77,7 @@ namespace GraphicsEngine
 		~Log() override = default;
 		
 		auto ClearMessages() -> void override;
-		auto GetLatestMessages() const -> std::vector<std::string_view> override;
+		auto GetLatestMessages() const -> std::vector<std::string> override;
 		auto GetLevel() const->LogLevel override;
 		auto Trace(std::string_view message, const std::source_location& loc) const -> void override;
 		auto Debug(std::string_view message, const std::source_location& loc) const -> void override;

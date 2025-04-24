@@ -1,23 +1,24 @@
-#include "TestApp.h"
-#include "EngineLogWidget.h"
+#include "DemoCoordinateSystemsApp.h"
 
 #include "glm/ext/matrix_clip_space.hpp"
 
-TestApp::TestApp(GLFWwindow* pWindow)
+DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
+    GetEngine()->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+
     GraphicsEngine::IAttributePtr spAttrVertices = GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{
         glm::vec3(-0.5f, -0.5f, 0.f),
-        glm::vec3(0.5f, -0.5f, 0.f),
-        glm::vec3(0.5f, 0.5f, 0.f),
-        glm::vec3(-0.5f, 0.5f, 0.f)
+            glm::vec3(0.5f, -0.5f, 0.f),
+            glm::vec3(0.5f, 0.5f, 0.f),
+            glm::vec3(-0.5f, 0.5f, 0.f)
     });
 
     GraphicsEngine::IAttributePtr spAttrTexCoords = GraphicsEngine::CreateAttribute(std::vector<glm::vec2>{
         glm::vec2(0.f, 0.f),
-        glm::vec2(1.f, 0.f),
-        glm::vec2(1.f, 1.f),
-        glm::vec2(0.f, 1.f)
+            glm::vec2(1.f, 0.f),
+            glm::vec2(1.f, 1.f),
+            glm::vec2(0.f, 1.f)
     });
 
     std::vector<unsigned int> indices = {
@@ -25,13 +26,13 @@ TestApp::TestApp(GLFWwindow* pWindow)
         2, 3, 0
     };
 
-    m_spEntity = GetEngine()->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
-    if (!m_spEntity)
+    auto spEntity = GetEngine()->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
+    if (!spEntity)
     {
         GetEngine()->GetLog()->Error("Failed to create entity.");
         return;
     }
-    
+
     const std::string vertexShader = R"(#version 330 core
 
 layout (location = 0) in vec3 position;
@@ -70,15 +71,13 @@ void main()
     }
 
     spShader->GetActiveUniform("model")->SetData(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
-	spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    spShader->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), 800.f/600.f, 0.1f, 100.f));
+    spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    spShader->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
-	m_spEntity->SetShader(spShader);
+    spEntity->SetShader(spShader);
 
     auto spTexture1 = GetEngine()->CreateNewTextureFromFile("texture1", "textures/container.jpg");
-	auto spTexture2 = GetEngine()->CreateNewTextureFromFile("texture2", "textures/awesomeface.png");
+    auto spTexture2 = GetEngine()->CreateNewTextureFromFile("texture2", "textures/awesomeface.png");
 
-    m_spEntity->SetTextures({ spTexture1, spTexture2 });
-
-    GetWidgets().push_back(std::make_unique<EngineLogWidget>(pWindow, GetEngine()));    
+    spEntity->SetTextures({ spTexture1, spTexture2 });
 }

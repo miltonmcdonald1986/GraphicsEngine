@@ -71,7 +71,7 @@ auto Log::ClearMessages() -> void
 	m_spQueueSink->clear();
 }
 
-auto Log::GetLatestMessages() const -> std::vector<std::string_view>
+auto Log::GetLatestMessages() const -> std::vector<std::string>
 {
 	return m_spQueueSink->get_messages();
 }

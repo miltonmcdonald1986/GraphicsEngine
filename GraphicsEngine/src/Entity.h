@@ -30,6 +30,7 @@ namespace GraphicsEngine
 		IShaderPtr m_spShader = nullptr;
 		ITextures m_spTextures;
 		GLuint m_VAO = 0;
+		glm::mat4 m_ModelMatrix = glm::mat4(1.f);
 	};
 
 	using EntityPtr = std::shared_ptr<Entity>;

@@ -2,6 +2,8 @@
 
 #include "fwd.h"
 
+#include "GraphicsEngine/IEngine.h"
+
 class App
 {
 public:
