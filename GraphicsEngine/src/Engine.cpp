@@ -128,6 +128,11 @@ namespace GraphicsEngine
 		return m_BackgroundColor;
 	}
 
+	auto Engine::GetCamera() const -> ICameraPtr
+	{
+		return m_spCamera;
+	}
+
 	auto Engine::GetCurrentShader() const -> IShaderPtr
 	{
 		GLint id;
@@ -163,9 +168,14 @@ namespace GraphicsEngine
 				continue;	
 			
 			spShader->Use();
+			
 			auto spUniformModel = spShader->GetActiveUniform("model");
 			if (spUniformModel)
 				spUniformModel->SetData(spEntity->GetModelMatrix());
+
+			auto spUniformView = spShader->GetActiveUniform("view");
+			if (spUniformView)
+				spUniformView->SetData(m_spCamera->GetViewMatrix());
 
 			auto textures = spEntity->GetTextures();
 			for (size_t i = 0; i < textures.size(); ++i)
@@ -196,6 +206,11 @@ namespace GraphicsEngine
 	{
 		m_BackgroundColor = color;
 		GL::ClearColor(m_BackgroundColor.r, m_BackgroundColor.g, m_BackgroundColor.b, m_BackgroundColor.a);
+	}
+
+	auto Engine::SetCamera(ICameraPtr spCamera) -> void
+	{
+		m_spCamera = spCamera;
 	}
 
 	auto Engine::SetPolygonMode(PolygonMode polygonMode) -> void

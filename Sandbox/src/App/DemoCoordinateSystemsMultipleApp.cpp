@@ -2,6 +2,7 @@
 #include "DemoCoordinateSystemsUtilities.h"
 #include "EngineLogWidget.h"
 
+#include "GraphicsEngine/ICameraFly.h"
 #include "GraphicsEngine/IEntityFactory.h"
 
 #include "glm/ext/matrix_clip_space.hpp"
@@ -38,6 +39,8 @@ DemoCoordinateSystemsMultipleApp::DemoCoordinateSystemsMultipleApp(GLFWwindow* p
         cubes.back()->SetModelMatrix(model);
     }
 
-    spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    GetEngine()->SetCamera(GraphicsEngine::CreateCameraFly());
+
+    //spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
     spShader->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 }

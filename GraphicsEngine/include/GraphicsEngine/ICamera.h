@@ -10,7 +10,9 @@ namespace GraphicsEngine
 	public:
 		virtual ~ICamera() = default;
 
-		auto GetViewMatrix() const -> glm::mat4 = 0;
+		virtual auto GetViewMatrix() const -> glm::mat4 = 0;
 	};
+
+	using ICameraPtr = std::shared_ptr<ICamera>;
 
 }
