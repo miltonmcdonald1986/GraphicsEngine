@@ -7,6 +7,7 @@ using AppMap_t = std::map<Apps, const char*>;
 const AppMap_t AppMap =
 {
 	std::make_pair(Apps::Test, "Test app"),
+	std::make_pair(Apps::DemoCoordianteSystemsMultiple, "Demo coordinate systems multiple"),
 	std::make_pair(Apps::DemoCoordinateSystemsDepth, "Demo coordinate systems depth"),
 	std::make_pair(Apps::DemoCoordinateSystems, "Demo coordinate systems"),
 	std::make_pair(Apps::DemoTransformations, "Demo transformations"),

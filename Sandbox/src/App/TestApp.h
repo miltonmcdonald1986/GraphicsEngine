@@ -6,8 +6,4 @@ class TestApp : public App
 {
 public:
 	explicit TestApp(GLFWwindow* pWindow);
-	auto Iterate() -> void override;
-
-private:
-	GraphicsEngine::IEntityPtr m_spEntity = nullptr;
 };
