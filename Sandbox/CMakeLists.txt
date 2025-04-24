@@ -12,7 +12,6 @@ if(WIN32)
     set_target_properties(Sandbox PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
-
 target_include_directories(Sandbox PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/src/App
@@ -25,6 +24,3 @@ target_precompile_headers(Sandbox PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h
 target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textures DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
