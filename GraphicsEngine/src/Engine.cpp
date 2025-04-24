@@ -163,7 +163,10 @@ namespace GraphicsEngine
 				continue;	
 			
 			spShader->Use();
-			spShader->GetActiveUniform("model")->SetData(spEntity->GetModelMatrix());
+			auto spUniformModel = spShader->GetActiveUniform("model");
+			if (spUniformModel)
+				spUniformModel->SetData(spEntity->GetModelMatrix());
+
 			auto textures = spEntity->GetTextures();
 			for (size_t i = 0; i < textures.size(); ++i)
 			{
