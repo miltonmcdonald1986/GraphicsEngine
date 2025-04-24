@@ -87,7 +87,7 @@ namespace GraphicsEngine
         };
 
         auto spEntity = m_spEngine->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
-        if (!m_spEngine)
+        if (!spEntity)
         {
             m_spEngine->GetLog()->Error("Failed to create entity.");
             return nullptr;

@@ -1,5 +1,7 @@
 #include "EngineLogWidget.h"
 
+#include <utility>
+
 #include "GraphicsEngine/IEngine.h"
 
 EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
