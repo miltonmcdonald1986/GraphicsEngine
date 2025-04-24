@@ -17,6 +17,11 @@ namespace GraphicsEngine
 		return m_Id;
 	}
 
+	auto Entity::GetModelMatrix() const -> glm::mat4
+	{
+		return m_ModelMatrix;
+	}
+
 	auto Entity::GetNumIndices() const -> int
 	{
 		return m_NumIndices;
@@ -51,6 +56,11 @@ namespace GraphicsEngine
     {
 		m_Id = id;
     }
+
+	auto Entity::SetModelMatrix(const glm::mat4& model) -> void
+	{
+		m_ModelMatrix = model;
+	}
 
     auto Entity::SetNumVertices(GLsizei numVertices) -> void
 	{

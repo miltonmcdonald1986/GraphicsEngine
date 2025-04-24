@@ -29,8 +29,10 @@ namespace GraphicsEngine
 		ss << "GSLS Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION);
 		m_spLog->Info(ss.str());
 
+		GL::Enable(GL_DEPTH_TEST);
+
 		GL::ClearColor(0.f, 0.f, 0.f, 1.f);
-		GL::Clear(GL_COLOR_BUFFER_BIT);
+		GL::Clear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	}
 
 	Engine::~Engine()
@@ -107,6 +109,9 @@ namespace GraphicsEngine
 	auto Engine::CreateNewShaderFromSource(std::string_view vert, std::string_view geom, std::string_view frag) -> IShaderPtr
 	{
 		IShaderPtr spShader = CreateShaderFromSourceCode(vert, geom, frag);
+		if (spShader->GetId() == 0)
+			return nullptr;
+
 		m_Shaders.push_back(spShader);
 		return spShader;
 	}
@@ -150,7 +155,7 @@ namespace GraphicsEngine
 
 	auto Engine::Render() const -> void
 	{
-		GL::Clear(GL_COLOR_BUFFER_BIT);
+		GL::Clear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		for (auto spEntity : m_Entities)
 		{
 			auto spShader = spEntity->GetShader();

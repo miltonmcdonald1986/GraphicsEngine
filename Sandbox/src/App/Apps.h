@@ -3,6 +3,7 @@
 enum class Apps : int
 {
 	Test = 0,
+	DemoCoordinateSystemsDepth,
 	DemoCoordinateSystems,
 	DemoTransformations,
 	DemoTexturesCombined,

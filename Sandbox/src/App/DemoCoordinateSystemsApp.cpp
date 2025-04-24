@@ -33,37 +33,7 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
         return;
     }
 
-    const std::string vertexShader = R"(#version 330 core
-
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 textureCoordinates;
-
-out vec2 oTextureCoordinates;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-
-void main()
-{
-    gl_Position = projection*view*model*vec4(position, 1.);
-    oTextureCoordinates = textureCoordinates;
-})";
-
-    const std::string fragmentShader = R"(#version 330 core
-out vec4 FragColor;
-
-in vec2 oTextureCoordinates;
-
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-
-void main()
-{
-    FragColor = mix(texture(texture1, oTextureCoordinates), texture(texture2, oTextureCoordinates), 0.2);
-})";
-
-    auto spShader = GetEngine()->CreateNewShaderFromSource(vertexShader, "", fragmentShader);
+    auto spShader = GetEngine()->CreateNewShaderFromFiles("shaders/DemoCoordinateSystems.vert", "", "shaders/DemoCoordinateSystems.frag");
     if (!spShader)
     {
         GetEngine()->GetLog()->Error("Failed to create shader.");

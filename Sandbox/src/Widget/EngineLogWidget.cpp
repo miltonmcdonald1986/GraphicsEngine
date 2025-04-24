@@ -73,3 +73,8 @@ auto EngineLogWidget::Iterate() -> void
     ImGui::EndChild();
     ImGui::End();
 }
+
+auto CreateEngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> EngineLogWidgetPtr
+{
+    return std::make_unique<EngineLogWidget>(pWindow, spEngine);
+}

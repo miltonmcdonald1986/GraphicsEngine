@@ -33,6 +33,13 @@ auto InitializeGLFW() -> GLFWwindow*
         return nullptr;
     }
 
+    glfwWindowHint(GLFW_DEPTH_BITS, 24);
+    if (glfwGetError(nullptr) != GLFW_NO_ERROR)
+    {
+        glfwTerminate();
+        return nullptr;
+    }
+
     // Create a window and its associated OpenGL context.
     auto pWindow = glfwCreateWindow(800, 600, "Graphics Engine Sandbox", NULL, NULL);
     if (!pWindow)

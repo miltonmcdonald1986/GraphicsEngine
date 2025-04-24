@@ -92,6 +92,11 @@ namespace GraphicsEngine
 		auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, geomSource.empty() ? nullptr : std::string(geomSource).c_str());
 		auto fragShaderId = Helpers::CompileShader(GL_FRAGMENT_SHADER, fragSource.empty() ? nullptr : std::string(fragSource).c_str());
 		m_Id = Helpers::LinkProgram({vertShaderId, geomShaderId, fragShaderId});
+		if (m_Id == 0)
+		{
+			GetLog()->Error("Failed to create shader program.");
+			return;
+		}
 
 		// Grab the list of uniforms from the shader.
 		GLint count;

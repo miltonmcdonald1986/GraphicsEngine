@@ -2,10 +2,10 @@
 
 #include "App.h"
 
-class TestApp : public App
+class DemoCoordinateSystemsDepthApp : public App
 {
 public:
-	explicit TestApp(GLFWwindow* pWindow);
+	explicit DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow);
 	auto Iterate() -> void override;
 
 private:

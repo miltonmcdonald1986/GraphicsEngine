@@ -93,6 +93,12 @@ namespace GraphicsEngine::GL
 		HandleError();
 	}
 
+	auto Enable(GLenum cap) -> void
+	{
+		glEnable(cap);
+		HandleError();
+	}
+
 	auto EnableVertexAttribArray(GLuint index) -> void
 	{
 		glEnableVertexAttribArray(index);

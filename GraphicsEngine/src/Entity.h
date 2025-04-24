@@ -11,12 +11,14 @@ namespace GraphicsEngine
 		~Entity() override = default;
 
 		auto GetId() const -> unsigned int override;
+		auto GetModelMatrix() const -> glm::mat4 override;
 		auto GetNumIndices() const -> GLsizei override;
 		auto GetNumVertices() const -> GLsizei override;
 		auto GetShader() const -> IShaderPtr override;
 		auto GetTextures() const -> ITextures override;
 		auto GetVAO() const -> unsigned int override;
 		auto SetId(unsigned int id) -> void;
+		auto SetModelMatrix(const glm::mat4& model) -> void override;
 		auto SetNumIndices(GLsizei numIndices) -> void;
 		auto SetNumVertices(GLsizei numVertices) -> void;
 		auto SetShader(IShaderPtr spShader) -> void override;

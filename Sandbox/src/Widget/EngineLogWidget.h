@@ -17,3 +17,6 @@ private:
     GraphicsEngine::ILogPtr m_spLog = nullptr;
     int m_LogLevel = 0;
 };
+
+using EngineLogWidgetPtr = std::unique_ptr<EngineLogWidget>;
+auto CreateEngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> EngineLogWidgetPtr;
