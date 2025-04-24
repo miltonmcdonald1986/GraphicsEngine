@@ -8,10 +8,10 @@ namespace GraphicsEngine
 	class EntityFactory : public IEntityFactory
 	{
 	public:
-		EntityFactory(IEnginePtr spEngine);
+		explicit EntityFactory(IEnginePtr spEngine);
 		~EntityFactory() override = default;
 
-		auto CreateCubeTextured(IShaderPtr spShader, ITextures textures) -> IEntityPtr override;
+		auto CreateCubeTextured(IShaderPtr spShader, const ITextures& textures) -> IEntityPtr override;
 
 	private:
 		IEnginePtr m_spEngine = nullptr;

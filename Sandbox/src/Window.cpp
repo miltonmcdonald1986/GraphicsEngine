@@ -71,7 +71,7 @@ auto InitializeGLFW() -> GLFWwindow*
 
 auto OnFramebufferSize(GLFWwindow* pWindow, int width, int height) -> void   //NOSONAR: GLFW callback cannot handle a pointer-to-const.
 {
-    auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));
+	auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));  //NOSONAR: GLFW provides a void*, there's nothing I can do about that.
     if (pApp)
     {
         pApp->OnFramebufferSize(width, height);

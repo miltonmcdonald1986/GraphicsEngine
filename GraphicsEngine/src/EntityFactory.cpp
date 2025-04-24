@@ -15,7 +15,7 @@ namespace GraphicsEngine
     {
     }
 
-    auto EntityFactory::CreateCubeTextured(IShaderPtr spShader, ITextures textures) -> IEntityPtr
+    auto EntityFactory::CreateCubeTextured(IShaderPtr spShader, const ITextures& textures) -> IEntityPtr
 	{
         GraphicsEngine::IAttributePtr spAttrVertices = GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{
             glm::vec3(-0.5f, -0.5f, 0.5f),

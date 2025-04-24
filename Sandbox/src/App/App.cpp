@@ -11,7 +11,7 @@ namespace
     {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
-            auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));
+            auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));  //NOSONAR: GLFW provides a void*, there's nothing I can do about that.
             if (pApp)
                 pApp->SetIsRunning(false);
         }
