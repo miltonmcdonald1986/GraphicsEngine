@@ -174,7 +174,7 @@ namespace GraphicsEngine
 				spUniformModel->SetData(spEntity->GetModelMatrix());
 
 			auto spUniformView = spShader->GetActiveUniform("view");
-			if (spUniformView)
+			if (spUniformView && m_spCamera)
 				spUniformView->SetData(m_spCamera->GetViewMatrix());
 
 			auto textures = spEntity->GetTextures();
