@@ -26,10 +26,14 @@ if(CMAKE_CONFIGURATION_TYPES)  # Multi-config generators
 		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION "$<CONFIG>")
 		install(FILES $<TARGET_RUNTIME_DLLS:Sandbox> DESTINATION "$<CONFIG>")
 	endif()
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/shaders" DESTINATION "$<CONFIG>")
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/textures" DESTINATION "$<CONFIG>")
 else()  # Single-config generators
     install(TARGETS GraphicsEngine Sandbox DESTINATION ".")
 	if(WIN32)  # Check if the platform is Windows
 		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION ".")
 		install(FILES $<TARGET_RUNTIME_DLLS:Sandbox> DESTINATION ".")
 	endif()
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/shaders" DESTINATION ".")
+	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/textures" DESTINATION ".")
 endif()
