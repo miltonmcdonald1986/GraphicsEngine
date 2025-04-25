@@ -18,3 +18,10 @@ endif()
 
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
+
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install")
+if(CMAKE_CONFIGURATION_TYPES)  # Multi-config generators
+    install(TARGETS GraphicsEngine Sandbox DESTINATION "$<CONFIG>")
+else()  # Single-config generators
+    install(TARGETS GraphicsEngine Sandbox DESTINATION ".")
+endif()
