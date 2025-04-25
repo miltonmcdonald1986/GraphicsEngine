@@ -12,7 +12,7 @@ namespace Utilities
         if (!spEngine)
             return result;
 
-        auto spShader = spEngine->CreateNewShaderFromFiles("shaders/DemoCoordinateSystems.vert", "", "shaders/DemoCoordinateSystems.frag");
+        auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
         if (!spShader)
         {
             spEngine->GetLog()->Error("Failed to create shader.");
@@ -21,14 +21,14 @@ namespace Utilities
 
         GraphicsEngine::ITextures textures;
 
-        auto spTexture1 = spEngine->CreateNewTextureFromFile("texture1", "textures/container.jpg");
+        auto spTexture1 = spEngine->CreateNewTextureFromFile("texture1", std::filesystem::path(TEXTURES_DIR)/"container.jpg");
         if (!spTexture1)
         {
             spEngine->GetLog()->Error("Failed to load texture.");
             return result;
         }
 
-        auto spTexture2 = spEngine->CreateNewTextureFromFile("texture2", "textures/awesomeface.png");
+        auto spTexture2 = spEngine->CreateNewTextureFromFile("texture2", std::filesystem::path(TEXTURES_DIR)/"awesomeface.png");
         if (!spTexture2)
         {
             spEngine->GetLog()->Error("Failed to load texture.");

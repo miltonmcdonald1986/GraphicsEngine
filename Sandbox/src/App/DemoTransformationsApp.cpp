@@ -66,8 +66,8 @@ void main()
 
     spEntity->SetShader(m_spShader);
 
-    auto spTextureContainer = spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg");
-    auto spTextureAwesomeFace = spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png");
+    auto spTextureContainer = spEngine->CreateNewTextureFromFile("uTextureContainer", std::filesystem::path(TEXTURES_DIR)/"container.jpg");
+    auto spTextureAwesomeFace = spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", std::filesystem::path(TEXTURES_DIR)/"awesomeface.png");
     spEntity->SetTextures({ spTextureContainer, spTextureAwesomeFace });
 }
 

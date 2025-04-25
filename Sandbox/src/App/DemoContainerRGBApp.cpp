@@ -43,6 +43,6 @@ DemoContainerRGBApp::DemoContainerRGBApp(GLFWwindow* pWindow)
 		GraphicsEngine::CreateAttribute(texCoords) 
 		}, indices);
 
-	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoContainerRGB.vert", "", "shaders/DemoContainerRGB.frag"));
-	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoContainerRGB.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoContainerRGB.frag"));
+	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") });
 }

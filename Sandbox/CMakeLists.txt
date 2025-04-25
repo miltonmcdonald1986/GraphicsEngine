@@ -55,18 +55,16 @@ target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)
 
 if (CMAKE_CONFIGURATION_TYPES)
-	add_custom_command(
-		TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-			"${CMAKE_SOURCE_DIR}/Sandbox/shaders"
-			"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/shaders"
-	)
-	add_custom_command(
-		TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-			"${CMAKE_SOURCE_DIR}/Sandbox/textures"
-			"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/textures"
-	)
+	if (WIN32)
+		if (CMAKE_GENERATOR MATCHES "Visual Studio")
+			set_property(TARGET Sandbox PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>")
+			set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
+		endif()
+	endif()
 endif()
 
+set(SHADERS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
+target_compile_definitions(Sandbox PRIVATE SHADERS_DIR="${SHADERS_DIR}")
 
+set(TEXTURES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/textures")
+target_compile_definitions(Sandbox PRIVATE TEXTURES_DIR="${TEXTURES_DIR}")

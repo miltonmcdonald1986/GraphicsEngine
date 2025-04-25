@@ -22,12 +22,3 @@ endif()
 
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
-
-if (CMAKE_CONFIGURATION_TYPES)
-	if (WIN32)
-		if (CMAKE_GENERATOR MATCHES "Visual Studio")
-			set_property(TARGET Sandbox PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>")
-			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
-		endif()
-	endif()
-endif()

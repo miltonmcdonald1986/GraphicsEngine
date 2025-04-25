@@ -17,5 +17,5 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	};
 
 	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) });
-	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoTriangle.vert", "", "shaders/DemoTriangle.frag"));
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTriangle.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoTriangle.frag"));
 }

@@ -24,5 +24,5 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(colors)};
 	auto spEntity = spEngine->CreateNewEntity(attributes);
-	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoTriangleRGB.vert", "", "shaders/DemoTriangleRGB.frag"));
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.frag"));
 }

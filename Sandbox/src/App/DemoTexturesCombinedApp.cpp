@@ -33,11 +33,11 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 	};
 
 	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
-	auto spShader = spEngine->CreateNewShaderFromFiles("shaders/DemoTexturesCombined.vert", "", "shaders/DemoTexturesCombined.frag");
+	auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTexturesCombined.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoTexturesCombined.frag");
     spEntity->SetShader(spShader);
 	spEntity->SetTextures({ 
-        spEngine->CreateNewTextureFromFile("uTextureContainer", "textures/container.jpg"),
-        spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", "textures/awesomeface.png")
+        spEngine->CreateNewTextureFromFile("uTextureContainer", std::filesystem::path(TEXTURES_DIR)/"container.jpg"),
+        spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", std::filesystem::path(TEXTURES_DIR)/"awesomeface.png")
         });
 
     if (spShader)

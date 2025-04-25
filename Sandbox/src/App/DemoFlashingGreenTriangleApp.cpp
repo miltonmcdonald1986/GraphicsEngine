@@ -19,7 +19,7 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices) };
 	auto spEntity = spEngine->CreateNewEntity(attributes);
 
-	auto spShader = spEngine->CreateNewShaderFromFiles("shaders/DemoFlashingGreenTriangle.vert", "", "shaders/DemoFlashingGreenTriangle.frag");
+	auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.frag");
 	auto uniforms = spShader->GetActiveUniforms();
 	for (auto spUniform : uniforms)
 	{

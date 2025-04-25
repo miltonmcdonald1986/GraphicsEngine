@@ -31,6 +31,6 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 	};
 
 	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
-	spEntity->SetShader(spEngine->CreateNewShaderFromFiles("shaders/DemoContainer.vert", "", "shaders/DemoContainer.frag"));
-	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", "textures/container.jpg") });
+	spEntity->SetShader(spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoContainer.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoContainer.frag"));
+	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") });
 }
