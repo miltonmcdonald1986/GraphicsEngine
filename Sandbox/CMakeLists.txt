@@ -54,14 +54,19 @@ target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)
 
-if(CMAKE_CONFIGURATION_TYPES)
+if (CMAKE_CONFIGURATION_TYPES)
 	add_custom_command(
 		TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --config "$<CONFIG>"
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_SOURCE_DIR}/Sandbox/shaders"
+			"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/shaders"
 	)
-else()
 	add_custom_command(
 		TARGET Sandbox POST_BUILD
-		COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --config "."
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_SOURCE_DIR}/Sandbox/textures"
+			"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/textures"
 	)
 endif()
+
+

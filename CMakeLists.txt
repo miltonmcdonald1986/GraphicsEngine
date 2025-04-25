@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(GraphicsEngine)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 include("${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -19,23 +23,11 @@ endif()
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
 
-set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/Sandbox")
-if(CMAKE_CONFIGURATION_TYPES)  # Multi-config generators
-	if(WIN32)
-		install(TARGETS GraphicsEngine DESTINATION "$<CONFIG>")
-		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION "$<CONFIG>")
+if (CMAKE_CONFIGURATION_TYPES)
+	if (WIN32)
 		if (CMAKE_GENERATOR MATCHES "Visual Studio")
-			set_property(TARGET Sandbox PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)\$(Configuration)")
+			set_property(TARGET Sandbox PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>")
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
 		endif()
 	endif()
-	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/shaders" DESTINATION "$<CONFIG>")
-	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/textures" DESTINATION "$<CONFIG>")
-else()  # Single-config generators
-	if(WIN32)
-	    install(TARGETS GraphicsEngine Sandbox DESTINATION ".")
-		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION ".")
-	endif()
-	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/shaders" DESTINATION ".")
-	install(DIRECTORY "${CMAKE_SOURCE_DIR}/Sandbox/textures" DESTINATION ".")
 endif()
