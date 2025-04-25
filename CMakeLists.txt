@@ -24,10 +24,12 @@ if(CMAKE_CONFIGURATION_TYPES)  # Multi-config generators
     install(TARGETS GraphicsEngine Sandbox DESTINATION "$<CONFIG>")
 	if(WIN32)  # Check if the platform is Windows
 		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION "$<CONFIG>")
+		install(FILES $<TARGET_RUNTIME_DLLS:Sandbox> DESTINATION "$<CONFIG>")
 	endif()
 else()  # Single-config generators
     install(TARGETS GraphicsEngine Sandbox DESTINATION ".")
 	if(WIN32)  # Check if the platform is Windows
-		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION "$<CONFIG>")
+		install(FILES $<TARGET_RUNTIME_DLLS:GraphicsEngine> DESTINATION ".")
+		install(FILES $<TARGET_RUNTIME_DLLS:Sandbox> DESTINATION ".")
 	endif()
 endif()
