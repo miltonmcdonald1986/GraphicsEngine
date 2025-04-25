@@ -6,7 +6,15 @@ GraphicsEngine is a simple, cross-platform graphics engine written in C++ using 
 Clone the repository and generate the project files.
 ```
 git clone --recurse-submodules https://github.com/miltonmcdonald1986/GraphicsEngine.git
+```
+
+Navigate to the newly cloned directory.
+```
 cd GraphicsEngine
+```
+
+Generate the project files with cmake.
+```
 cmake -S . -B build
 ```
 
