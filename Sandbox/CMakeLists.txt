@@ -24,3 +24,15 @@ target_precompile_headers(Sandbox PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h
 target_link_libraries(Sandbox PRIVATE GraphicsEngine)
 target_link_libraries(Sandbox PRIVATE glm::glm)
 target_link_libraries(Sandbox PRIVATE imgui::imgui)
+
+if(CMAKE_CONFIGURATION_TYPES)
+	add_custom_command(
+		TARGET Sandbox POST_BUILD
+		COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --config "$<CONFIG>"
+	)
+else()
+	add_custom_command(
+		TARGET Sandbox POST_BUILD
+		COMMAND ${CMAKE_COMMAND} --install ${CMAKE_BINARY_DIR} --config "."
+	)
+endif()
