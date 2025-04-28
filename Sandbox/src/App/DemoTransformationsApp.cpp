@@ -1,4 +1,5 @@
 #include "DemoTransformationsApp.h"
+#include "DemoCoordinateSystemsUtilities.h"
 
 #include "GraphicsEngine/IEngine.h"
 
@@ -7,35 +8,6 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
 {
     auto spEngine = GetEngine();
     spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
-    
-    const std::string_view sourceVert = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aTexCoord;
-
-out vec2 texCoordsFRAG;
-  
-uniform mat4 transform;
-
-void main()
-{
-    gl_Position = transform * vec4(aPos, 1.0f);
-    texCoordsFRAG = vec2(aTexCoord.x, aTexCoord.y);
-} )";
-
-std::string_view sourceFrag = R"(#version 330 core
-
-out vec4 fragColor;
-
-in vec2 texCoordsFRAG;
-
-uniform sampler2D uTextureContainer;
-uniform sampler2D uTextureAwesomeFace;
-uniform float uMix;
-
-void main()
-{
-   fragColor = mix(texture(uTextureContainer, texCoordsFRAG), texture(uTextureAwesomeFace, texCoordsFRAG), uMix);
-})";
 
     std::vector<glm::vec3> vertices = {
         glm::vec3(-0.5f, -0.5f, 0.f),
@@ -56,19 +28,16 @@ void main()
         2, 3, 0
     };
 
-    auto spEntity = spEngine->CreateNewEntity({
+    m_spEntity = spEngine->CreateNewEntity({
         GraphicsEngine::CreateAttribute(vertices),
         GraphicsEngine::CreateAttribute(texCoords)
     }, indices);
 
-    m_spShader = spEngine->CreateNewShaderFromSource(sourceVert, "", sourceFrag);
-    m_spShader->GetActiveUniform("uMix")->SetData(0.2f);
+    auto [spShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    m_spShader = spShader;
 
-    spEntity->SetShader(m_spShader);
-
-    auto spTextureContainer = spEngine->CreateNewTextureFromFile("uTextureContainer", std::filesystem::path(TEXTURES_DIR)/"container.jpg");
-    auto spTextureAwesomeFace = spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", std::filesystem::path(TEXTURES_DIR)/"awesomeface.png");
-    spEntity->SetTextures({ spTextureContainer, spTextureAwesomeFace });
+    m_spEntity->SetShader(m_spShader);
+    m_spEntity->SetTextures(textures);
 }
 
 auto DemoTransformationsApp::Iterate() -> void
@@ -81,7 +50,17 @@ auto DemoTransformationsApp::Iterate() -> void
     auto trans = glm::mat4(1.f);
     trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.f));
     trans = glm::rotate(trans, seconds, glm::vec3(0.f, 0.f, 1.f));
-    m_spShader->GetActiveUniform("transform")->SetData(trans);
+	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
+    m_spEntity->SetModelMatrix(trans);
+    m_spShader->GetActiveUniform("view")->SetData(glm::mat4(1.f));
+
+    int width;
+    int height;
+    glfwGetWindowSize(GetWindow(), &width, &height);
+    auto fWidth = static_cast<float>(width);
+    auto fHeight = static_cast<float>(height);
+    
+    m_spShader->GetActiveUniform("projection")->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
 
     App::Iterate();
 }

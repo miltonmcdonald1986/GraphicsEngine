@@ -1,4 +1,5 @@
 #include "DemoTexturesCombinedApp.h"
+#include "DemoCoordinateSystemsUtilities.h"
 
 #include "GraphicsEngine/IEngine.h"
 
@@ -32,18 +33,24 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 
-	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
-	auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTexturesCombined.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoTexturesCombined.frag");
-    spEntity->SetShader(spShader);
-	spEntity->SetTextures({ 
-        spEngine->CreateNewTextureFromFile("uTextureContainer", std::filesystem::path(TEXTURES_DIR)/"container.jpg"),
-        spEngine->CreateNewTextureFromFile("uTextureAwesomeFace", std::filesystem::path(TEXTURES_DIR)/"awesomeface.png")
-        });
+	m_spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
 
-    if (spShader)
-        {
-            auto spUniform = spShader->GetActiveUniform("uMix");
-            if (spUniform)
-                spUniform->SetData(0.2f);
-        }
+	auto [spShader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
+	m_spEntity->SetShader(spShader);
+	m_spEntity->SetTextures(textures);
+	
+	m_spEntity->SetModelMatrix(glm::mat4(1.f));	
+	m_spEntity->GetShader()->GetActiveUniform("view")->SetData(glm::mat4(1.f));
+}
+
+auto DemoTexturesCombinedApp::Iterate() -> void
+{
+	int width;
+	int height;
+	glfwGetWindowSize(GetWindow(), &width, &height);
+	auto fWidth = static_cast<float>(width);
+	auto fHeight = static_cast<float>(height);
+	m_spEntity->GetShader()->GetActiveUniform("projection")->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+
+	App::Iterate();
 }

@@ -11,5 +11,6 @@ public:
 	auto Iterate() -> void override;
 
 private:
+	GraphicsEngine::IEntityPtr m_spEntity = nullptr;
 	GraphicsEngine::IShaderPtr m_spShader = nullptr;
 };

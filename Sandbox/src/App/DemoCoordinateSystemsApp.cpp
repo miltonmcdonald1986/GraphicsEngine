@@ -44,3 +44,13 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     spEntity->SetShader(spShader);
     spEntity->SetTextures(textures);
 }
+
+auto DemoCoordinateSystemsApp::Iterate() -> void
+{
+    int width;
+    int height;
+    glfwGetWindowSize(GetWindow(), &width, &height);
+    GetEngine()->GetCurrentShader()->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+
+    App::Iterate();
+}
