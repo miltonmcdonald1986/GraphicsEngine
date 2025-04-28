@@ -46,16 +46,20 @@ auto MainMenuWidget::Iterate() -> void
 	ImGui::OpenPopup("Main Menu");
 
 	// Ensure the popup fills the entire screen
-	ImGuiIO& io = ImGui::GetIO();
+	const ImGuiIO& io = ImGui::GetIO();
 	ImVec2 displaySize = io.DisplaySize;
+	float sx = io.DisplaySize.x;
+	float sy = io.DisplaySize.y;
+	float baseX = 800.f;
+	float baseY = 600.f;
 	ImGui::SetNextWindowSize(displaySize);
 	ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 	if (ImGui::BeginPopupModal("Main Menu", nullptr, ImGuiWindowFlags_NoTitleBar))
 	{
 		// Calculate position to center the contents
-		ImVec2 contentSize = ImVec2(300, 200); // Define the size of your content
-		ImVec2 windowSize = ImGui::GetWindowSize();
-		ImVec2 centerPos = ImVec2((windowSize.x - contentSize.x) * 0.5f, (windowSize.y - contentSize.y) * 0.5f);
+		auto contentSize = ImVec2(300*sx/baseX, 200*sy/baseY); // Define the size of your content
+		auto windowSize = ImGui::GetWindowSize();
+		auto centerPos = ImVec2((windowSize.x - contentSize.x) * 0.5f, (windowSize.y - contentSize.y) * 0.5f);
 
 		// Move the cursor to the calculated center position
 		ImGui::SetCursorPos(centerPos);
@@ -64,13 +68,13 @@ auto MainMenuWidget::Iterate() -> void
 		ImGui::Text("Graphics Engine Sandbox");
 		ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Please make a selection").x) * 0.5f);
 		ImGui::Text("Please make a selection");
-		ImGui::SetNextWindowSize(ImVec2(400, static_cast<float>(Apps::NumApps) * ImGui::GetTextLineHeight() + 2 * ImGui::GetStyle().ItemSpacing.y + 4 * ImGui::GetStyle().FramePadding.y));
-		ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 400) * 0.5f);
+		ImGui::SetNextWindowSize(ImVec2(400*sx/baseX, static_cast<float>(Apps::NumApps) * ImGui::GetTextLineHeight() + 2 * ImGui::GetStyle().ItemSpacing.y + 4 * ImGui::GetStyle().FramePadding.y));
+		ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 400*sx/baseX) * 0.5f);
 		ImGui::ListBox("##Items", &m_SelectedItem, AppNames.data(), static_cast<int>(AppNames.size()));
 		float windowWidth = ImGui::GetWindowSize().x;
-		float buttonWidth = 100.0f; // Set your button width
+		float buttonWidth = 100.0f*sx/baseX; // Set your button width
 		ImGui::SetCursorPosX((windowWidth - buttonWidth) * 0.5f);
-		if (ImGui::Button("Run", ImVec2(buttonWidth, 30.f)))
+		if (ImGui::Button("Run", ImVec2(buttonWidth, 30.f*sy/baseY)))
 		{
 			ImGui::CloseCurrentPopup();
 			m_AppSelected = true;
