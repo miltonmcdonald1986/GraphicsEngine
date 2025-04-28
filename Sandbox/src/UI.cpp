@@ -29,7 +29,17 @@ auto InitializeDearImGui(GLFWwindow* pWindow) -> bool
 	if (std::filesystem::path fontFilePath("/usr/share/fonts/truetype/cascadia-code/CascadiaMono.ttf"); std::filesystem::exists(fontFilePath))
 #endif
 	{
-		io.Fonts->AddFontFromFileTTF(fontFilePath.string().c_str(), 18);
+		float monScaleX;
+		float monScaleY;
+		glfwGetMonitorContentScale(glfwGetPrimaryMonitor(), &monScaleX, &monScaleY);
+		int dpiScale = std::max((int)monScaleX, (int)monScaleY);
+		ImGui::GetStyle().ScaleAllSizes((float)dpiScale);
+		ImGui::GetIO().FontGlobalScale = (float)dpiScale;
+		ImFontConfig fontConfig;
+		fontConfig.OversampleH = 2;
+		fontConfig.OversampleV = 2;
+		fontConfig.SizePixels = 18.0f * static_cast<float>(dpiScale);
+		ImGui::GetIO().Fonts->AddFontFromFileTTF(fontFilePath.string().c_str(), 18.0f, &fontConfig);
 	}
 
 	return true;
