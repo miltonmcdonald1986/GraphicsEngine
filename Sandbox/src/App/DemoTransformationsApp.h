@@ -2,15 +2,15 @@
 
 #include "App.h"
 
-#include "fwd.h"
-
-class DemoTransformationsApp : public App
+class DemoTransformationsApp final : public App
 {
 public:
 	explicit DemoTransformationsApp(GLFWwindow* pWindow);
+	~DemoTransformationsApp() override;
 	auto Iterate() -> void override;
 
 private:
-	GraphicsEngine::IEntityPtr m_spEntity = nullptr;
+	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
+	GraphicsEngine::IEntityPtr m_spEntity = nullptr; 
 	GraphicsEngine::IShaderPtr m_spShader = nullptr;
 };

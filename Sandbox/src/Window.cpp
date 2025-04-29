@@ -73,9 +73,7 @@ auto OnFramebufferSize(GLFWwindow* pWindow, int width, int height) -> void   //N
 {
 	auto pApp = reinterpret_cast<App*>(glfwGetWindowUserPointer(pWindow));  //NOSONAR: GLFW provides a void*, there's nothing I can do about that.
     if (pApp)
-    {
-        pApp->OnFramebufferSize(width, height);
-    }
+        pApp->GetEngine()->ResizeViewport(width, height);
 }
 
 auto TerminateGLFW(GLFWwindow* pWindow) -> void

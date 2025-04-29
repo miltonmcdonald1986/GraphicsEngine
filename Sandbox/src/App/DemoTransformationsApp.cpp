@@ -3,9 +3,50 @@
 
 #include "GraphicsEngine/IEngine.h"
 
+namespace 
+{
+
+    void OnFramebufferSize(GLFWwindow* pWindow, int newWidth, int newHeight)
+    {
+        if (!pWindow)
+            return;
+
+		// Do not divide by zero
+        if (newHeight == 0)
+            return;
+
+        auto pApp = static_cast<DemoTransformationsApp*>(glfwGetWindowUserPointer(pWindow));
+        if (!pApp)
+            return;
+
+        auto spEngine = pApp->GetEngine();
+        if (!spEngine)
+            return;
+
+        // Make the call to glViewport
+        spEngine->ResizeViewport(newWidth, newHeight);
+
+        // Update the projection matrix
+        auto spShader = spEngine->GetCurrentShader();
+        if (!spShader)
+            return;
+
+        auto spUniform = spShader->GetActiveUniform("projection");
+		if (!spUniform)
+			return;
+
+        auto fWidth = std::bit_cast<float>(newWidth);
+        auto fHeight = std::bit_cast<float>(newHeight);
+        spUniform->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+    }
+
+}
+
 DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
+    m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, OnFramebufferSize);
+
     auto spEngine = GetEngine();
     spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
@@ -38,6 +79,16 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
 
     m_spEntity->SetShader(m_spShader);
     m_spEntity->SetTextures(textures);
+
+    int width;
+    int height;
+    glfwGetWindowSize(GetWindow(), &width, &height);
+    m_spShader->GetActiveUniform("projection")->SetData(glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
+}
+
+DemoTransformationsApp::~DemoTransformationsApp()
+{
+    glfwSetFramebufferSizeCallback(GetWindow(), m_pPrevFramebufferSizeCallback);
 }
 
 auto DemoTransformationsApp::Iterate() -> void
@@ -53,14 +104,6 @@ auto DemoTransformationsApp::Iterate() -> void
 	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
     m_spEntity->SetModelMatrix(trans);
     m_spShader->GetActiveUniform("view")->SetData(glm::mat4(1.f));
-
-    int width;
-    int height;
-    glfwGetWindowSize(GetWindow(), &width, &height);
-    auto fWidth = static_cast<float>(width);
-    auto fHeight = static_cast<float>(height);
-    
-    m_spShader->GetActiveUniform("projection")->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
 
     App::Iterate();
 }

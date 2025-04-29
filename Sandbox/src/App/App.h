@@ -10,15 +10,16 @@ public:
 
 	explicit App(GLFWwindow* pWindow);
 	virtual ~App();
+	
 	virtual auto Iterate() -> void;
-	virtual auto OnFramebufferSize(int width, int height) -> void;
 	virtual auto RenderDockSpace() -> void;
 	virtual auto Run() -> void;
 	virtual auto SetIsRunning(bool isRunning) -> void;
 
+	auto GetEngine() const->GraphicsEngine::IEnginePtr;
+
 protected:
 
-	auto GetEngine() const -> GraphicsEngine::IEnginePtr;
 	auto GetIsRunning() const -> bool;
 	auto GetWidgets() -> Widgets&;
 	auto GetWindow() const -> GLFWwindow*;

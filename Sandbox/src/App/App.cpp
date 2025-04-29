@@ -56,11 +56,6 @@ auto App::Iterate() -> void
     m_Running = (m_Running && !glfwWindowShouldClose(m_pWindow));
 }
 
-auto App::OnFramebufferSize(int width, int height) -> void
-{
-    m_spEngine->ResizeViewport(width, height);
-}
-
 auto App::RenderDockSpace() -> void
 {
     // Get the size of the full GLFW window
