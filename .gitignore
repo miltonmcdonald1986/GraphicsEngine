@@ -1,3 +1,6 @@
+# Documentation directory
+docs/
+
 # Build directories
 /build/
 build/
