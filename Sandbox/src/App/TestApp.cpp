@@ -11,7 +11,7 @@
 namespace
 {
 
-    void OnFramebufferSize(GLFWwindow* pWindow, int newWidth, int newHeight)
+    void OnScroll(GLFWwindow* pWindow, double /*xOffset*/, double yOffset)
     {
         if (!pWindow)
             return;
@@ -20,25 +20,15 @@ namespace
         if (!pApp)
             return;
 
-        auto spEngine = pApp->GetEngine();
+		auto spEngine = pApp->GetEngine();
         if (!spEngine)
             return;
 
-        // Make the call to glViewport
-        spEngine->ResizeViewport(newWidth, newHeight);
+        auto spCamera = std::dynamic_pointer_cast<GraphicsEngine::ICameraFly>(spEngine->GetCamera());
+		if (!spCamera)
+			return;
 
-        // Update the projection matrix
-        auto spShader = spEngine->GetCurrentShader();
-        if (!spShader)
-            return;
-
-        auto spUniform = spShader->GetActiveUniform("projection");
-        if (!spUniform)
-            return;
-
-        auto fWidth = std::bit_cast<float>(newWidth);
-        auto fHeight = std::bit_cast<float>(newHeight);
-        spUniform->SetData(glm::perspective(glm::radians(45.f), fWidth / fHeight, 0.1f, 100.f));
+        spCamera->Zoom(yOffset);
     }
 
 }
@@ -46,18 +36,25 @@ namespace
 TestApp::TestApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, OnFramebufferSize);
+    m_pPrevScrollCallback = glfwSetScrollCallback(pWindow, OnScroll);
 
+    // Call this before updating framebuffer stuff since this creates shaders.
     Utilities::CreateTenTexturedCubes(GetEngine());
 
     auto spCamera = GraphicsEngine::CreateCameraFly();
 	spCamera->SetEye(glm::vec3(0.f, 0.f, 3.f));
     GetEngine()->SetCamera(spCamera);
 
-    int width;
-    int height;
-    glfwGetWindowSize(GetWindow(), &width, &height);
-    GetEngine()->GetCurrentShader()->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), std::bit_cast<float>(width) / std::bit_cast<float>(height), 0.1f, 100.f));
+    int fbWidth;
+    int fbHeight;
+    glfwGetFramebufferSize(pWindow, &fbWidth, &fbHeight);
+    AppCallbacks::OnFramebufferSize(pWindow, fbWidth, fbHeight);
+}
+
+TestApp::~TestApp()
+{
+    // Restore previous callback functions.
+    glfwSetScrollCallback(GetWindow(), m_pPrevScrollCallback);
 }
 
 auto TestApp::Iterate() -> void

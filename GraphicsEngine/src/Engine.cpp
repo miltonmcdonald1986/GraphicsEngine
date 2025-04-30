@@ -169,13 +169,14 @@ namespace GraphicsEngine
 			
 			spShader->Use();
 			
-			auto spUniformModel = spShader->GetActiveUniform("model");
-			if (spUniformModel)
+			if (auto spUniformModel = spShader->GetActiveUniform("model"))
 				spUniformModel->SetData(spEntity->GetModelMatrix());
 
-			auto spUniformView = spShader->GetActiveUniform("view");
-			if (spUniformView && m_spCamera)
+			if (auto spUniformView = spShader->GetActiveUniform("view"); spUniformView && m_spCamera)
 				spUniformView->SetData(m_spCamera->GetViewMatrix());
+;
+			if (auto spUniformProjection = spShader->GetActiveUniform("projection"); spUniformProjection && m_spCamera)
+				spUniformProjection->SetData(m_spCamera->GetProjectionMatrix());
 
 			auto textures = spEntity->GetTextures();
 			for (size_t i = 0; i < textures.size(); ++i)
@@ -200,6 +201,12 @@ namespace GraphicsEngine
 	auto Engine::ResizeViewport(int width, int height) -> void
 	{
 		GL::Viewport(0, 0, width, height);
+
+		if (auto spCamera = GetCamera())
+		{
+			float aspect = static_cast<float>(width) / static_cast<float>(height);
+			GetCamera()->SetAspectRatio(aspect);
+		}
 	}
 
 	auto Engine::SetBackgroundColor(const Color& color) -> void

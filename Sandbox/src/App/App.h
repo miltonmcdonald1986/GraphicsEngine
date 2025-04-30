@@ -26,7 +26,7 @@ protected:
 	auto IterateWidgets() const -> void;
 
 private:
-
+	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
@@ -34,3 +34,10 @@ private:
 	Widgets m_Widgets;
 	void* m_PrevUserPointer = nullptr;	//NOSONAR: GLFW does not have a proper type for this
 };
+
+namespace AppCallbacks
+{
+
+	void OnFramebufferSize(GLFWwindow* pWindow, int newWidth, int newHeight);
+
+}

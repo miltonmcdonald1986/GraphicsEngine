@@ -66,6 +66,9 @@ auto InitializeGLFW() -> GLFWwindow*
 
     glfwSetFramebufferSizeCallback(pWindow, OnFramebufferSize);
 
+	// Call OnFramebufferSize to set the viewport size.
+	OnFramebufferSize(pWindow, 800, 800);
+
     return pWindow;
 }
 

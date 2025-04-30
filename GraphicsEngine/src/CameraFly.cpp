@@ -5,49 +5,38 @@ namespace GraphicsEngine
 
 	auto CreateCameraFly() -> ICameraFlyPtr
 	{
-		return std::make_shared<CameraFly>();
+		return std::make_shared<CameraFly>(CreateCamera());
 	}
 
-	CameraFly::CameraFly()
+	CameraFly::CameraFly(CameraPtr spCamera)
+		: m_spCamera(spCamera)
 	{
-		UpdateViewMatrix();
-	}
-
-	auto CameraFly::GetEye() const -> glm::vec3
-	{
-		return m_Eye;
-	}
-
-	auto CameraFly::SetEye(const glm::vec3& eye) -> void
-	{
-		m_Eye = eye;
-		UpdateViewMatrix();
+		UpdateProjectionMatrix();
 	}
 
 	auto CameraFly::GetFront() const -> glm::vec3
 	{
-		return glm::normalize(m_Center - m_Eye);
+		return m_spCamera->GetFront();
+	}
+
+	auto CameraFly::GetProjectionMatrix() const -> glm::mat4
+	{
+		return m_spCamera->GetProjectionMatrix();
 	}
 
 	auto CameraFly::GetRight() const -> glm::vec3
 	{
-		return glm::normalize(glm::cross(glm::normalize(m_Center - m_Eye), glm::normalize(m_Up)));
+		return m_spCamera->GetRight();
 	}
 
 	auto CameraFly::GetUp() const -> glm::vec3
 	{
-		return m_Up;
-	}
-
-	auto CameraFly::SetUp(const glm::vec3& up) -> void
-	{
-		m_Up = up;
-		UpdateViewMatrix();
+		return m_spCamera->GetUp();
 	}
 
 	auto CameraFly::GetViewMatrix() const -> glm::mat4
 	{
-		return m_ViewMatrix;
+		return m_spCamera->GetViewMatrix();
 	}
 
 	auto CameraFly::SetPitchIncremental(float degrees) -> void
@@ -61,34 +50,49 @@ namespace GraphicsEngine
 		glm::vec3 front = GetFront();
 		auto rotMat = glm::rotate(glm::mat4(1.f), glm::radians(degrees), GetRight());
 		front = glm::normalize(glm::vec3(rotMat * glm::vec4(GetFront(), 1.f)));
-		m_Up = glm::normalize(glm::vec3(rotMat * glm::vec4(m_Up, 1.f)));
+		m_spCamera->SetUp(glm::normalize(glm::vec3(rotMat * glm::vec4(m_spCamera->GetUp(), 1.f))));
 
-		auto dist = glm::length(m_Center - m_Eye);
-		m_Center = m_Eye + dist * front;
-		UpdateViewMatrix();
+		auto dist = glm::length(m_spCamera->GetViewDir());
+		m_spCamera->SetCenter(m_spCamera->GetEye() + dist*front);
 	}
 
 	auto CameraFly::SetYawIncremental(float degrees) -> void
 	{
-		auto rotMat = glm::rotate(glm::mat4(1.f), glm::radians(degrees), m_Up);
+		auto rotMat = glm::rotate(glm::mat4(1.f), glm::radians(degrees), m_spCamera->GetUp());
 		
 		auto front = glm::normalize(glm::vec3(rotMat * glm::vec4(GetFront(), 1.f)));
-		m_Up = glm::normalize(glm::vec3(rotMat * glm::vec4(m_Up, 1.f)));
-		auto dist = glm::length(m_Center - m_Eye);
-		m_Center = m_Eye + dist*front;
-		UpdateViewMatrix();
+		m_spCamera->SetUp(glm::normalize(glm::vec3(rotMat * glm::vec4(m_spCamera->GetUp(), 1.f))));
+		auto dist = glm::length(m_spCamera->GetViewDir());
+		m_spCamera->SetCenter(m_spCamera->GetEye() + dist*front);
 	}
 
 	auto CameraFly::Strafe(const glm::vec3& direction) -> void
 	{
-		m_Center += direction;
-		m_Eye += direction;
-		UpdateViewMatrix();
+		m_spCamera->SetCenter(m_spCamera->GetCenter() + direction);
+		m_spCamera->SetEye(m_spCamera->GetEye() + direction);
 	}
 
-	auto CameraFly::UpdateViewMatrix() -> void
+	auto CameraFly::SetAspectRatio(float aspectRatio) -> void
 	{
-		m_ViewMatrix = glm::lookAt(m_Eye, m_Center, m_Up);
+		m_spCamera->SetAspectRatio(aspectRatio);
+		UpdateProjectionMatrix();
+	}
+
+	auto CameraFly::SetEye(const glm::vec3& eye) -> void
+	{
+		return m_spCamera->SetEye(eye);
+	}
+
+	auto CameraFly::Zoom(double offset) -> void
+	{
+		m_Fov -= static_cast<float>(offset);
+		m_Fov = glm::clamp(m_Fov, 1.f, 45.f);
+		UpdateProjectionMatrix();
+	}
+
+	auto CameraFly::UpdateProjectionMatrix() -> void
+	{
+		m_spCamera->SetProjectionMatrix(glm::perspective(glm::radians(m_Fov), m_spCamera->GetAspectRatio(), 0.1f, 100.f));
 	}
 
 }

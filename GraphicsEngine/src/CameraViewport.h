@@ -1,16 +1,16 @@
 #pragma once
 
-#include "ICameraFly.h"
+#include "ICameraViewport.h"
 #include "Camera.h"
 
 namespace GraphicsEngine
 {
 
-	class CameraFly : public ICameraFly
+	class CameraViewport : public ICameraViewport
 	{
 	public:
-		explicit CameraFly(CameraPtr spCamera);
-		~CameraFly() override = default;
+		explicit CameraViewport(CameraPtr spCamera);
+		~CameraViewport() override = default;
 
 		auto GetFront()							const	-> glm::vec3	override;
 		auto GetProjectionMatrix()				const	-> glm::mat4	override;
@@ -19,17 +19,11 @@ namespace GraphicsEngine
 		auto GetViewMatrix()					const	-> glm::mat4	override;
 		auto SetAspectRatio(float aspectRatio)			-> void			override;
 		auto SetEye(const glm::vec3& eye)				-> void			override;
-		auto SetPitchIncremental(float degrees)			-> void			override;
-		auto SetYawIncremental(float degrees)			-> void			override;
-		auto Strafe(const glm::vec3& direction)			-> void			override;
-		auto Zoom(double offset)						-> void			override;
 
 	private:
 		auto UpdateProjectionMatrix() -> void;
 
-		CameraPtr m_spCamera;
-
-		float m_Fov = 45.f;
+		CameraPtr m_spCamera = nullptr;
 	};
 
 }

@@ -6,8 +6,9 @@ class TestApp : public App
 {
 public:
 	explicit TestApp(GLFWwindow* pWindow);
+	~TestApp() override;
 	auto Iterate() -> void override;
 
 private:
-	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
+	GLFWscrollfun m_pPrevScrollCallback = nullptr;
 };

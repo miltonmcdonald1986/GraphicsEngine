@@ -4,8 +4,28 @@
 
 #include "Widget.h"
 
-namespace
+namespace AppCallbacks
 {
+
+    void OnFramebufferSize(GLFWwindow* pWindow, int newWidth, int newHeight)
+    {
+        if (!pWindow)
+            return;
+
+        auto pApp = static_cast<App*>(glfwGetWindowUserPointer(pWindow));
+        if (!pApp)
+            return;
+
+        auto spEngine = pApp->GetEngine();
+        if (!spEngine)
+            return;
+
+        // Tell the engine that the viewport was resized
+        spEngine->ResizeViewport(newWidth, newHeight);
+
+        spEngine->Render();
+        glfwSwapBuffers(pWindow);
+    }
 
     auto OnKey(GLFWwindow* pWindow, int key, int /*scancode*/, int action, int /*mods*/) -> void
     {
@@ -23,16 +43,19 @@ App::App(GLFWwindow* pWindow)
 	: m_pWindow(pWindow),
 	  m_spEngine(GraphicsEngine::CreateEngine())
 {
+    m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, AppCallbacks::OnFramebufferSize);
+
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
     glfwSetWindowUserPointer(m_pWindow, this);
 
-    m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, OnKey);
+    m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, AppCallbacks::OnKey);
 }
 
 App::~App()
 {
-    glfwSetWindowUserPointer(m_pWindow, m_PrevUserPointer);
+    glfwSetFramebufferSizeCallback(GetWindow(), m_pPrevFramebufferSizeCallback);
     glfwSetKeyCallback(m_pWindow, m_PrevKeyCallback);
+    glfwSetWindowUserPointer(m_pWindow, m_PrevUserPointer);
 }
 
 auto App::Iterate() -> void
