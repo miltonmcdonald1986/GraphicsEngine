@@ -2,7 +2,6 @@
 
 #include "Log.h"
 #include "SafeGL.h"
-#include "IUniform.h"
 
 namespace Helpers
 {

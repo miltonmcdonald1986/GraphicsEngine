@@ -2,7 +2,7 @@
 
 #include <string_view>
 
-#include "IUniform.h"
+#include "Types.h"
 #include "DllImpExp.h"
 
 namespace GraphicsEngine
