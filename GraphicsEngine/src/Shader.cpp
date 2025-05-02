@@ -2,7 +2,7 @@
 
 #include "Log.h"
 #include "SafeGL.h"
-#include "Uniform.h"
+#include "IUniform.h"
 
 namespace Helpers
 {
@@ -117,16 +117,16 @@ namespace GraphicsEngine
 
 			GLint location = GL::GetUniformLocation(m_Id, name.data());
 
-			UniformPtr spUniform = CreateUniform(m_Id);
-			spUniform->SetName(name);
-			spUniform->SetLocation(location);
+			Uniform uniform(name, location);
+			m_Uniforms.push_back(uniform);
+
 			switch (type)
 			{
 			case GL_FLOAT:
 			{
 				float data;
 				GL::GetUniformfv(m_Id, location, &data);
-				spUniform->SetData(data);
+				SetUniformData(name, data);
 				break;
 			}
 			case GL_FLOAT_VEC4:
@@ -134,32 +134,29 @@ namespace GraphicsEngine
 				std::array<float, 4> v;
 				GL::GetUniformfv(m_Id, location, v.data());
 				glm::vec4 data(v[0], v[1], v[2], v[3]);
-				spUniform->SetData(data);
+				SetUniformData(name, data);
 				break;
 			}
 			case GL_FLOAT_MAT4:
 			{
 				glm::mat4 m;
 				GL::GetUniformfv(m_Id, location, glm::value_ptr(m));
-				spUniform->SetData(m);
+				SetUniformData(name, m);
 				break;
 			}
 			case GL_SAMPLER_2D:
 			{
 				int data;
 				GL::GetUniformiv(m_Id, location, &data);
-				spUniform->SetData(data);
+				SetUniformData(name, data);
 				break;
 			}
 			default:
 			{
 				GetLog()->Warn(std::format("Shader uniform type not handled: {}", type));
-				m_Uniforms.push_back(nullptr);
 				break;
 			}
 			}
-
-			m_Uniforms.push_back(std::dynamic_pointer_cast<IUniform>(spUniform));
 		}
 	}
 
@@ -168,22 +165,49 @@ namespace GraphicsEngine
 		return m_Id;
 	}
 
-    auto Shader::GetActiveUniform(std::string_view name) const -> IUniformPtr
+    auto Shader::GetActiveUniform(std::string_view name) -> Uniform*
     {
-        auto it = std::ranges::find_if(m_Uniforms, [&name](IUniformPtr spUniform)
+        auto it = std::ranges::find_if(m_Uniforms, [&name](const Uniform& uniform)
 		{ 
-			return spUniform->GetName() == name; 
+			return uniform.Name == name; 
 		});
 
 		if (it != m_Uniforms.end())
-			return *it;
+			return &(*it);
 		else
 			return nullptr;
     }
 
-    auto Shader::GetActiveUniforms() const -> IUniforms
+    auto Shader::GetActiveUniformNames () const -> StringViews
 	{
-		return m_Uniforms;
+		StringViews names(m_Uniforms.size());
+		std::ranges::transform(m_Uniforms, names.begin(), [](const Uniform& uniform) -> StringView { return uniform.Name; });
+		return names;
+	}
+
+	auto Shader::SetUniformData(StringView name, const UniformData& data) -> void
+	{
+		auto pUniform = GetActiveUniform(name);
+		if (!pUniform)
+			return;
+
+		pUniform->Data = data;
+		
+		const auto location = pUniform->Location;
+		GL::UseProgram(m_Id);
+		if (std::holds_alternative<float>(data))
+			GL::Uniform1f(location, std::get<float>(data));
+		else if (std::holds_alternative<glm::mat4x4>(data))
+			GL::UniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(std::get<glm::mat4>(data)));
+		else if (std::holds_alternative<glm::vec4>(data))
+		{
+			auto v = std::get<glm::vec4>(data);
+			GL::Uniform4f(location, v[0], v[1], v[2], v[3]);
+		}
+		else if (std::holds_alternative<int>(data))
+			GL::Uniform1i(location, std::get<int>(data));
+		else
+			GetLog()->Warn("Data type not handled by Uniform::SetData.");
 	}
 
 	auto Shader::Use() const -> void

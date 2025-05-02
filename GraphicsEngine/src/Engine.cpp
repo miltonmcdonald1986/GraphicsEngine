@@ -108,7 +108,7 @@ namespace GraphicsEngine
 
 	auto Engine::CreateNewShaderFromSource(std::string_view vert, std::string_view geom, std::string_view frag) -> IShaderPtr
 	{
-		IShaderPtr spShader = CreateShaderFromSourceCode(vert, geom, frag);
+		auto spShader = std::dynamic_pointer_cast<Shader>(CreateShaderFromSourceCode(vert, geom, frag));
 		if (spShader->GetId() == 0)
 			return nullptr;
 
@@ -139,7 +139,7 @@ namespace GraphicsEngine
 		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
 		auto it = std::ranges::find_if(m_Shaders, [&id](IShaderPtr spShader) 
 		{
-			return static_cast<int>(spShader->GetId()) == id;
+			return static_cast<int>(std::dynamic_pointer_cast<Shader>(spShader)->GetId()) == id;
 		});
 
 		if (it == m_Shaders.end())
@@ -163,20 +163,25 @@ namespace GraphicsEngine
 		GL::Clear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		for (auto spEntity : m_Entities)
 		{
-			auto spShader = spEntity->GetShader();
+			auto spShader = std::dynamic_pointer_cast<Shader>(spEntity->GetShader());
 			if (!spShader)
 				continue;	
 			
 			spShader->Use();
 			
-			if (auto spUniformModel = spShader->GetActiveUniform("model"))
-				spUniformModel->SetData(spEntity->GetModelMatrix());
+			spShader->SetUniformData("model", spEntity->GetModelMatrix());
+			//if (auto spUniformModel = spShader->GetActiveUniform("model"))
+			//	spUniformModel->SetData(spEntity->GetModelMatrix());
 
-			if (auto spUniformView = spShader->GetActiveUniform("view"); spUniformView && m_spCamera)
-				spUniformView->SetData(m_spCamera->GetViewMatrix());
+			if (m_spCamera)
+				spShader->SetUniformData("view", m_spCamera->GetViewMatrix());
+			//if (auto spUniformView = spShader->GetActiveUniform("view"); spUniformView && m_spCamera)
+			//	spUniformView->SetData(m_spCamera->GetViewMatrix());
 ;
-			if (auto spUniformProjection = spShader->GetActiveUniform("projection"); spUniformProjection && m_spCamera)
-				spUniformProjection->SetData(m_spCamera->GetProjectionMatrix());
+			if (m_spCamera)
+				spShader->SetUniformData("projection", m_spCamera->GetProjectionMatrix());
+			//if (auto spUniformProjection = spShader->GetActiveUniform("projection"); spUniformProjection && m_spCamera)
+			//	spUniformProjection->SetData(m_spCamera->GetProjectionMatrix());
 
 			auto textures = spEntity->GetTextures();
 			for (size_t i = 0; i < textures.size(); ++i)
@@ -187,8 +192,9 @@ namespace GraphicsEngine
 				
 				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
-				if (auto spUniform = spShader->GetActiveUniform(spTexture->GetName()))
-					spUniform->SetData(static_cast<int>(i));
+				spShader->SetUniformData(spTexture->GetName(), static_cast<int>(i));
+				//if (auto spUniform = spShader->GetActiveUniform(spTexture->GetName()))
+				//	spUniform->SetData(static_cast<int>(i));
 			}
 			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)

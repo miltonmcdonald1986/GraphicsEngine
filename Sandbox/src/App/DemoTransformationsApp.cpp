@@ -31,13 +31,9 @@ namespace
         if (!spShader)
             return;
 
-        auto spUniform = spShader->GetActiveUniform("projection");
-		if (!spUniform)
-			return;
-
         auto fWidth = std::bit_cast<float>(newWidth);
         auto fHeight = std::bit_cast<float>(newHeight);
-        spUniform->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+        spShader->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
     }
 
 }
@@ -83,7 +79,7 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    m_spShader->GetActiveUniform("projection")->SetData(glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
+    m_spShader->SetUniformData("projection", glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
 }
 
 DemoTransformationsApp::~DemoTransformationsApp()
@@ -103,7 +99,7 @@ auto DemoTransformationsApp::Iterate() -> void
     trans = glm::rotate(trans, seconds, glm::vec3(0.f, 0.f, 1.f));
 	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
     m_spEntity->SetModelMatrix(trans);
-    m_spShader->GetActiveUniform("view")->SetData(glm::mat4(1.f));
+    m_spShader->SetUniformData("view", glm::mat4(1.f));
 
     App::Iterate();
 }

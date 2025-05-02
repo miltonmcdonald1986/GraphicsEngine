@@ -1,6 +1,8 @@
 #pragma once
 
+#include "Fwd.h"
 #include "IShader.h"
+#include "Uniform.h"
 
 namespace GraphicsEngine
 {
@@ -10,14 +12,15 @@ namespace GraphicsEngine
 	public:
 		Shader(std::string_view vertSource, std::string_view geomSource, std::string_view fragSource);
 
-		auto GetId() const -> unsigned int override;
-		auto GetActiveUniform(std::string_view name) const -> IUniformPtr override;
-		auto GetActiveUniforms() const -> IUniforms override;
-		auto Use() const -> void override;
+		auto GetId() const -> unsigned int;
+		auto GetActiveUniform(std::string_view name) -> Uniform*;
+		auto GetActiveUniformNames() const -> StringViews;
+		auto SetUniformData(StringView name, const UniformData& data) -> void override;
+		auto Use() const -> void;
 
 	private:
 		unsigned int m_Id = 0;
-		IUniforms m_Uniforms;
+		Uniforms m_Uniforms;
 	};
 
 	IShaderPtr CreateShaderFromSourceCode(std::string_view vert, std::string_view geom, std::string_view frag);

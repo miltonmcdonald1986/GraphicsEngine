@@ -40,7 +40,7 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 	m_spEntity->SetTextures(textures);
 	
 	m_spEntity->SetModelMatrix(glm::mat4(1.f));	
-	m_spEntity->GetShader()->GetActiveUniform("view")->SetData(glm::mat4(1.f));
+	m_spEntity->GetShader()->SetUniformData("view", glm::mat4(1.f));
 }
 
 auto DemoTexturesCombinedApp::Iterate() -> void
@@ -50,7 +50,7 @@ auto DemoTexturesCombinedApp::Iterate() -> void
 	glfwGetWindowSize(GetWindow(), &width, &height);
 	auto fWidth = static_cast<float>(width);
 	auto fHeight = static_cast<float>(height);
-	m_spEntity->GetShader()->GetActiveUniform("projection")->SetData(glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+	m_spEntity->GetShader()->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
 
 	App::Iterate();
 }

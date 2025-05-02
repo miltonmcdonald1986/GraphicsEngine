@@ -2,6 +2,7 @@
 
 #include "App.h"
 #include "fwd.h"
+#include "GraphicsEngine/Types.h"
 
 class DemoFlashingGreenTriangleApp : public App
 {
@@ -11,5 +12,6 @@ public:
 	auto Iterate() -> void override;
 
 private:
-	GraphicsEngine::IUniformPtr m_spUniform;
+
+	GraphicsEngine::StringView m_UniformName = "uGreenScalar";
 };

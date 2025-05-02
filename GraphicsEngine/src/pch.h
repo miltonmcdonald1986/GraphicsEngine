@@ -2,6 +2,7 @@
 
 #include <format>
 #include <fstream>
+#include <ranges>
 #include <sstream>
 
 #ifdef _WIN32

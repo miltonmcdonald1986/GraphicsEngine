@@ -18,8 +18,8 @@ DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow
 
     m_spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
 
-    spShader->GetActiveUniform("view")->SetData(glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    spShader->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
+    spShader->SetUniformData("view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    spShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 }
 
 auto DemoCoordinateSystemsDepthApp::Iterate() -> void
@@ -30,12 +30,12 @@ auto DemoCoordinateSystemsDepthApp::Iterate() -> void
     auto seconds = std::chrono::duration<float>(diff).count();\
 
     m_spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), seconds * glm::radians(50.f), glm::vec3(0.5f, 1.f, 0.f)));
-    m_spEntity->GetShader()->GetActiveUniform("model")->SetData(m_spEntity->GetModelMatrix());
+    m_spEntity->GetShader()->SetUniformData("model", m_spEntity->GetModelMatrix());
 
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    m_spEntity->GetShader()->GetActiveUniform("projection")->SetData(glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+    m_spEntity->GetShader()->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }
