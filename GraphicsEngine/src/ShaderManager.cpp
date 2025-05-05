@@ -2,7 +2,6 @@
 
 #include "IEngine.h"
 #include "SafeGL.h"
-#include "Shader.h"
 #include "Log.h"
 #include "Uniform.h"
 
