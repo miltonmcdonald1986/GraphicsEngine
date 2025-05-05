@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IShader.h"
 #include "ITexture.h"
+#include "Types.h"
 
 namespace GraphicsEngine
 {

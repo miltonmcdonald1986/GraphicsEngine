@@ -3,15 +3,16 @@
 #include <optional>
 #include <unordered_map>
 
-#include "IShader.h"
 #include "Types.h"
+#include "DllImpExp.h"
 
 namespace GraphicsEngine
 {
 
 	class Engine;
 	class IEngine;
-	class Shader;
+	struct Uniform;
+	using Uniforms = std::vector<Uniform>;
 
 	class ShaderManager
 	{
@@ -30,7 +31,7 @@ namespace GraphicsEngine
 		explicit ShaderManager(IEngine* pEngine);
 
 		IEngine* m_pEngine = nullptr;
-		std::unordered_map<Id, Shader> m_Shaders;
+		std::unordered_map<Id, Uniforms> m_Shaders;
 
 	};
 

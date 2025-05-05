@@ -6,6 +6,7 @@
 #include "SafeGL.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Uniform.h"
 
 namespace GraphicsEngine
 {

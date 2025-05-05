@@ -2,7 +2,6 @@
 
 #include "IEngine.h"
 #include "IEntity.h"
-#include "IShader.h"
 #include "ITexture.h"
 #include "DllImpExp.h"
 
