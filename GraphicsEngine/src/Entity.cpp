@@ -32,9 +32,9 @@ namespace GraphicsEngine
 		return m_NumVertices;
 	}
 
-	auto Entity::GetShader() const -> IShaderPtr
+	auto Entity::GetShaderId() const -> Id
 	{
-		return m_spShader;
+		return m_ShaderId;
 	}
 
 	auto Entity::GetTextures() const -> ITextures
@@ -67,9 +67,9 @@ namespace GraphicsEngine
 		m_NumVertices = numVertices;
 	}
 
-	auto Entity::SetShader(IShaderPtr spShader) -> void
+	auto Entity::SetShaderId(Id id) -> void
 	{
-		m_spShader = spShader;
+		m_ShaderId = id;
 	}
 
 	auto Entity::SetTextures(const ITextures& textures) -> void

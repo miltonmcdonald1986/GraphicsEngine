@@ -38,15 +38,15 @@ namespace Utilities
         return cubes;
     }
 
-    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::IShaderPtr, GraphicsEngine::ITextures>
+    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::ShaderId, GraphicsEngine::ITextures>
     {
-        auto result = std::make_pair(GraphicsEngine::IShaderPtr(nullptr), GraphicsEngine::ITextures{});
+        auto result = std::make_pair(GraphicsEngine::ShaderId(0), GraphicsEngine::ITextures{});
 
         if (!spEngine)
             return result;
 
-        auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
-        if (!spShader)
+        auto shaderId = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
+        if (shaderId == 0)
         {
             spEngine->GetLog()->Error("Failed to create shader.");
             return result;
@@ -68,7 +68,7 @@ namespace Utilities
             return result;
         }
 
-        result.first = spShader;
+        result.first = shaderId;
         result.second = { spTexture1, spTexture2 };
 
         return result;

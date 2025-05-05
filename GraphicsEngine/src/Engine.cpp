@@ -16,7 +16,8 @@ namespace GraphicsEngine
 	}
 
 	Engine::Engine()
-		: m_spLog(CreateLog())
+		:	m_ShaderManager(this),
+			m_spLog(CreateLog())
 	{
 		if (gladLoadGL() == 0)
 			m_spLog->Critical("Failed to load OpenGL.");
@@ -79,43 +80,6 @@ namespace GraphicsEngine
 		return std::dynamic_pointer_cast<IEntity>(spEntity);
 	}
 
-	auto Engine::CreateNewShaderFromFiles(const std::filesystem::path& vert, const std::filesystem::path& geom, const std::filesystem::path& frag) -> IShaderPtr
-	{
-		auto GetSourceFromFile = [this](const std::filesystem::path& path) -> std::string
-		{
-			if (path.empty())
-				return "";
-
-			if (!std::filesystem::exists(path))
-			{
-				m_spLog->Error(std::format("Could not open '{}' because it does not exist.", path.string()));
-				return "";
-			}
-
-			std::ifstream ifs(path);
-			std::stringstream buffer;
-			buffer << ifs.rdbuf();
-
-			std::string str(buffer.str());
-			return str;
-		};
-
-		auto vertSource = GetSourceFromFile(vert);
-		auto geomSource = GetSourceFromFile(geom);
-		auto fragSource = GetSourceFromFile(frag);
-		return CreateNewShaderFromSource(vertSource, geomSource, fragSource);
-	}
-
-	auto Engine::CreateNewShaderFromSource(std::string_view vert, std::string_view geom, std::string_view frag) -> IShaderPtr
-	{
-		auto spShader = std::dynamic_pointer_cast<Shader>(CreateShaderFromSourceCode(vert, geom, frag));
-		if (spShader->GetId() == 0)
-			return nullptr;
-
-		m_Shaders.push_back(spShader);
-		return spShader;
-	}
-
 	auto Engine::CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr
 	{
 		ITexturePtr spTexture = CreateTextureFromFile(textureName, path);
@@ -133,21 +97,6 @@ namespace GraphicsEngine
 		return m_spCamera;
 	}
 
-	auto Engine::GetCurrentShader() const -> IShaderPtr
-	{
-		GLint id;
-		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
-		auto it = std::ranges::find_if(m_Shaders, [&id](IShaderPtr spShader) 
-		{
-			return static_cast<int>(std::dynamic_pointer_cast<Shader>(spShader)->GetId()) == id;
-		});
-
-		if (it == m_Shaders.end())
-			return nullptr;
-
-		return *it;
-	}
-
 	auto Engine::GetLog() const -> ILogPtr
 	{
 		return m_spLog;
@@ -158,30 +107,24 @@ namespace GraphicsEngine
 		return m_PolygonMode;
 	}
 
-	auto Engine::Render() const -> void
+	auto Engine::GetShaderManager() -> ShaderManager*
+	{
+		return &m_ShaderManager;
+	}
+
+	auto Engine::Render() -> void
 	{
 		GL::Clear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		for (auto spEntity : m_Entities)
 		{
-			auto spShader = std::dynamic_pointer_cast<Shader>(spEntity->GetShader());
-			if (!spShader)
-				continue;	
-			
-			spShader->Use();
-			
-			spShader->SetUniformData("model", spEntity->GetModelMatrix());
-			//if (auto spUniformModel = spShader->GetActiveUniform("model"))
-			//	spUniformModel->SetData(spEntity->GetModelMatrix());
-
+			auto shaderId = spEntity->GetShaderId();			
+			m_ShaderManager.UseShader(shaderId);
+			m_ShaderManager.SetUniformData(shaderId, "model", spEntity->GetModelMatrix());
 			if (m_spCamera)
-				spShader->SetUniformData("view", m_spCamera->GetViewMatrix());
-			//if (auto spUniformView = spShader->GetActiveUniform("view"); spUniformView && m_spCamera)
-			//	spUniformView->SetData(m_spCamera->GetViewMatrix());
-;
-			if (m_spCamera)
-				spShader->SetUniformData("projection", m_spCamera->GetProjectionMatrix());
-			//if (auto spUniformProjection = spShader->GetActiveUniform("projection"); spUniformProjection && m_spCamera)
-			//	spUniformProjection->SetData(m_spCamera->GetProjectionMatrix());
+			{
+				m_ShaderManager.SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
+				m_ShaderManager.SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
+			}
 
 			auto textures = spEntity->GetTextures();
 			for (size_t i = 0; i < textures.size(); ++i)
@@ -192,9 +135,7 @@ namespace GraphicsEngine
 				
 				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
-				spShader->SetUniformData(spTexture->GetName(), static_cast<int>(i));
-				//if (auto spUniform = spShader->GetActiveUniform(spTexture->GetName()))
-				//	spUniform->SetData(static_cast<int>(i));
+				m_ShaderManager.SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
 			}
 			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)

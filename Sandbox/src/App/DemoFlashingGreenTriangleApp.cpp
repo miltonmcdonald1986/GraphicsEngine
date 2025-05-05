@@ -18,10 +18,11 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices) };
 	auto spEntity = spEngine->CreateNewEntity(attributes);
+	auto pShaderManager = spEngine->GetShaderManager();
 
-	auto spShader = spEngine->CreateNewShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.vert", "", std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.frag");
-	spShader->SetUniformData(m_UniformName, 1.f);
-	spEntity->SetShader(spShader);
+	auto shaderId = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.frag");
+	pShaderManager->SetUniformData(shaderId, m_UniformName, 1.f);
+	spEntity->SetShaderId(shaderId);
 }
 
 auto DemoFlashingGreenTriangleApp::Iterate() -> void
@@ -32,7 +33,8 @@ auto DemoFlashingGreenTriangleApp::Iterate() -> void
 	float period = 2.f;
 	float value = 0.5f * (1.f + std::cos(2.f * std::numbers::pi_v<float> *elapsedTime / period));
 
-	GetEngine()->GetCurrentShader()->SetUniformData(m_UniformName, value);
+	auto pShaderManager = GetEngine()->GetShaderManager();
+	pShaderManager->SetUniformData(pShaderManager->GetCurrentShader(), m_UniformName, value);
 		
 	App::Iterate();
 }

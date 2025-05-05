@@ -11,7 +11,7 @@ namespace GraphicsEngine
 		explicit EntityFactory(IEnginePtr spEngine);
 		~EntityFactory() override = default;
 
-		auto CreateCubeTextured(IShaderPtr spShader, const ITextures& textures) -> IEntityPtr override;
+		auto CreateCubeTextured(Id shaderId, const ITextures& textures) -> IEntityPtr override;
 
 	private:
 		IEnginePtr m_spEngine = nullptr;

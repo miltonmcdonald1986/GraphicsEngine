@@ -2,21 +2,19 @@
 
 #include <string_view>
 
-#include "Types.h"
 #include "DllImpExp.h"
+#include "Types.h"
 
-namespace GraphicsEngine
-{
+namespace GraphicsEngine {
 
-	class IShader
-	{
-	public:
-		virtual ~IShader() = default;
+	//class IShader {
+	//public:
+	//	virtual ~IShader() = default;
 
-		GRAPHICSENGINE_API virtual auto SetUniformData(StringView name, const UniformData& data) -> void = 0;
-	};
+	//	GRAPHICSENGINE_API virtual auto SetUniformData(StringView name, const UniformData& data) -> void = 0;
+	//};
 
-	using IShaderPtr = std::shared_ptr<IShader>;
-	using IShaders = std::vector<IShaderPtr>;
+	//using IShaderPtr = std::shared_ptr<IShader>;
+	//using IShaders = std::vector<IShaderPtr>;
 
-}
+} // namespace GraphicsEngine

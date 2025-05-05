@@ -15,7 +15,7 @@ namespace GraphicsEngine
     {
     }
 
-    auto EntityFactory::CreateCubeTextured(IShaderPtr spShader, const ITextures& textures) -> IEntityPtr
+    auto EntityFactory::CreateCubeTextured(Id shaderId, const ITextures& textures) -> IEntityPtr
 	{
         // A cube has eight vertices
         auto v0 = glm::vec3(-0.5f, -0.5f,  0.5f);
@@ -76,7 +76,7 @@ namespace GraphicsEngine
             return nullptr;
         }
 
-        spEntity->SetShader(spShader);
+        spEntity->SetShaderId(shaderId);
         spEntity->SetTextures(textures);
 
         return spEntity;

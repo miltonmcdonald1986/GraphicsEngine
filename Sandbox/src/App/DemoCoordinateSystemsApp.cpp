@@ -6,7 +6,11 @@
 DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    GetEngine()->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    auto spEngine = GetEngine();
+    if (!spEngine)
+        return;
+
+    spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     GraphicsEngine::IAttributePtr spAttrVertices = GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{
         glm::vec3(-0.5f, -0.5f, 0.f),
@@ -27,7 +31,7 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
         2, 3, 0
     };
 
-    auto spEntity = GetEngine()->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
+    auto spEntity = spEngine->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
     if (!spEntity)
     {
         GetEngine()->GetLog()->Error("Failed to create entity.");
@@ -36,12 +40,15 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
 
     spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
 
-	auto [spShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    auto pShaderManager = spEngine->GetShaderManager();
+    if (!pShaderManager)
+        return;
 
-    spShader->SetUniformData("view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    spShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
+	auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    pShaderManager->SetUniformData(shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    pShaderManager->SetUniformData(shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
-    spEntity->SetShader(spShader);
+    spEntity->SetShaderId(shaderId);
     spEntity->SetTextures(textures);
 }
 
@@ -50,7 +57,9 @@ auto DemoCoordinateSystemsApp::Iterate() -> void
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    GetEngine()->GetCurrentShader()->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+
+    auto pShaderManager = GetEngine()->GetShaderManager();
+    pShaderManager->SetUniformData(pShaderManager->GetCurrentShader(), "projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }

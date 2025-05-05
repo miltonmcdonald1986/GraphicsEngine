@@ -10,9 +10,9 @@ namespace GraphicsEngine
 		Uniform() = delete;
 		Uniform(StringView name, int location);
 
-		const String Name;
-		const int Location;
-		UniformData Data;
+		const String name;
+		const int location;
+		UniformData data;
 	};
 
 }

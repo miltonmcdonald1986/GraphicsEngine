@@ -12,5 +12,5 @@ public:
 private:
 	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
 	GraphicsEngine::IEntityPtr m_spEntity = nullptr; 
-	GraphicsEngine::IShaderPtr m_spShader = nullptr;
+	GraphicsEngine::ShaderId m_ShaderId = 0;
 };

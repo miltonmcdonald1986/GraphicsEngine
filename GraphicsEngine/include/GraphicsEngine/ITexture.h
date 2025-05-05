@@ -11,7 +11,4 @@ namespace GraphicsEngine
 		virtual ~ITexture() = default;
 	};
 
-	using ITexturePtr = std::shared_ptr<ITexture>;
-	using ITextures = std::vector<ITexturePtr>;
-
 }

@@ -2,6 +2,7 @@
 
 #include <filesystem>
 
+#include "Types.h"
 #include "ITexture.h"
 
 namespace GraphicsEngine

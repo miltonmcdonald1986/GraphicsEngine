@@ -3,106 +3,107 @@
 #include "Log.h"
 #include "SafeGL.h"
 
-namespace Helpers
-{
-
-	auto CompileShader(GLenum shaderType, const char *source) -> GLuint
-	{
-		using namespace GraphicsEngine;
-
-		if (source == nullptr)
-			return 0;
-
-		GLuint shader = GL::CreateShader(shaderType);
-		GL::ShaderSource(shader, 1, &source, nullptr);
-		GL::CompileShader(shader);
-
-		auto spLog = GetLog();
-
-		GLint success;
-		GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			if (spLog)
-				spLog->Error("Error when compiling shader.");
-
-			GLint infoLogLength;
-			GL::GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-			std::string infoLog(infoLogLength, '\0');
-			GL::GetShaderInfoLog(shader, infoLogLength, nullptr, infoLog.data());
-			if (spLog)
-				spLog->Info(infoLog);
-
-			return 0;
-		}
-
-		return shader;
-	}
-
-	auto LinkProgram(const std::vector<GLuint> &shaders) -> GLuint
-	{
-		using namespace GraphicsEngine;
-
-		GLuint shaderProgram = GL::CreateProgram();
-		for (auto shader : shaders)
-		{
-			if (shader != 0)
-				GL::AttachShader(shaderProgram, shader);
-		}
-
-		GL::LinkProgram(shaderProgram);
-
-		GLint success;
-		GL::GetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			GLint infoLogLength;
-			GL::GetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
-
-			std::string infoLog(infoLogLength, '\0');
-			GL::GetProgramInfoLog(shaderProgram, infoLogLength, nullptr, infoLog.data());
-
-			return 0;
-		}
-
-		for (auto shader : shaders)
-		{
-			GL::DeleteShader(shader);
-		}
-
-		return shaderProgram;
-	}
-
-}
-
 namespace GraphicsEngine
 {
 
-	IShaderPtr CreateShaderFromSourceCode(std::string_view vert, std::string_view geom, std::string_view frag)
-	{
-		return std::make_shared<Shader>(vert, geom, frag);
-	}
-
-	Shader::Shader(std::string_view vertSource, std::string_view geomSource, std::string_view fragSource)
+	namespace Helpers
 	{
 
-		auto vertShaderId = Helpers::CompileShader(GL_VERTEX_SHADER, vertSource.empty() ? nullptr : std::string(vertSource).c_str());
-		auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, geomSource.empty() ? nullptr : std::string(geomSource).c_str());
-		auto fragShaderId = Helpers::CompileShader(GL_FRAGMENT_SHADER, fragSource.empty() ? nullptr : std::string(fragSource).c_str());
-		m_Id = Helpers::LinkProgram({vertShaderId, geomShaderId, fragShaderId});
-		if (m_Id == 0)
+		// Declarations of helper functions.
+
+		auto CompileShader(GLenum shaderType, const char* source) -> GLuint;
+		auto CompileShadersAndLinkProgram(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id;
+		auto LinkProgram(const std::vector<GLuint>& shaders) -> GLuint;
+
+		// Definitions of helper functions.
+
+		auto CompileShadersAndLinkProgram(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id
 		{
-			GetLog()->Error("Failed to create shader program.");
-			return;
+			auto vertShaderId = Helpers::CompileShader(GL_VERTEX_SHADER, vert.empty() ? nullptr : std::string(vert).c_str());
+			auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, oGeom ? std::string(*oGeom).c_str() : nullptr);
+			auto fragShaderId = Helpers::CompileShader(GL_FRAGMENT_SHADER, frag.empty() ? nullptr : std::string(frag).c_str());
+			auto id = Helpers::LinkProgram({ vertShaderId, geomShaderId, fragShaderId });
+			if (id == 0)
+				GetLog()->Error("Failed to create shader program.");
+
+			return id;
 		}
 
+		auto CompileShader(GLenum shaderType, const char* source) -> GLuint
+		{
+			if (source == nullptr)
+				return 0;
+
+			GLuint shader = GL::CreateShader(shaderType);
+			GL::ShaderSource(shader, 1, &source, nullptr);
+			GL::CompileShader(shader);
+
+			auto spLog = GetLog();
+
+			GLint success;
+			GL::GetShaderiv(shader, GL_COMPILE_STATUS, &success);
+			if (!success)
+			{
+				if (spLog)
+					spLog->Error("Error when compiling shader.");
+
+				GLint infoLogLength;
+				GL::GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+				std::string infoLog(infoLogLength, '\0');
+				GL::GetShaderInfoLog(shader, infoLogLength, nullptr, infoLog.data());
+				if (spLog)
+					spLog->Info(infoLog);
+
+				return 0;
+			}
+
+			return shader;
+		}
+
+		auto LinkProgram(const std::vector<GLuint>& shaders) -> GLuint
+		{
+			GLuint shaderProgram = GL::CreateProgram();
+			for (auto shader : shaders)
+			{
+				if (shader != 0)
+					GL::AttachShader(shaderProgram, shader);
+			}
+
+			GL::LinkProgram(shaderProgram);
+
+			GLint success;
+			GL::GetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+			if (!success)
+			{
+				GLint infoLogLength;
+				GL::GetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+				std::string infoLog(infoLogLength, '\0');
+				GL::GetProgramInfoLog(shaderProgram, infoLogLength, nullptr, infoLog.data());
+
+				return 0;
+			}
+
+			for (auto shader : shaders)
+			{
+				GL::DeleteShader(shader);
+			}
+
+			return shaderProgram;
+		}
+
+	}
+
+	Shader::Shader(StringView vertSource, std::string_view fragSource, std::optional<StringView> oGeomSource)
+		: id(Helpers::CompileShadersAndLinkProgram(vertSource, fragSource, oGeomSource))
+	{
 		// Grab the list of uniforms from the shader.
 		GLint count;
-		GL::GetProgramiv(m_Id, GL_ACTIVE_UNIFORMS, &count);
+		GL::GetProgramiv(id, GL_ACTIVE_UNIFORMS, &count);
 
 		GLint maxLength;
-		GL::GetProgramiv(m_Id, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLength);
+		GL::GetProgramiv(id, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLength);
 
 		m_Uniforms.clear();
 		for (int i = 0; i < count; ++i)
@@ -111,10 +112,10 @@ namespace GraphicsEngine
 			GLenum type;
 			std::string name(maxLength, '\0');
 			GLsizei length; // name length
-			GL::GetActiveUniform(m_Id, i, maxLength, &length, &size, &type, name.data());
+			GL::GetActiveUniform(id, i, maxLength, &length, &size, &type, name.data());
 			name.resize(strlen(name.c_str()));
 
-			GLint location = GL::GetUniformLocation(m_Id, name.data());
+			GLint location = GL::GetUniformLocation(id, name.data());
 
 			Uniform uniform(name, location);
 			m_Uniforms.push_back(uniform);
@@ -124,14 +125,14 @@ namespace GraphicsEngine
 			case GL_FLOAT:
 			{
 				float data;
-				GL::GetUniformfv(m_Id, location, &data);
+				GL::GetUniformfv(id, location, &data);
 				SetUniformData(name, data);
 				break;
 			}
 			case GL_FLOAT_VEC4:
 			{
 				std::array<float, 4> v;
-				GL::GetUniformfv(m_Id, location, v.data());
+				GL::GetUniformfv(id, location, v.data());
 				glm::vec4 data(v[0], v[1], v[2], v[3]);
 				SetUniformData(name, data);
 				break;
@@ -139,14 +140,14 @@ namespace GraphicsEngine
 			case GL_FLOAT_MAT4:
 			{
 				glm::mat4 m;
-				GL::GetUniformfv(m_Id, location, glm::value_ptr(m));
+				GL::GetUniformfv(id, location, glm::value_ptr(m));
 				SetUniformData(name, m);
 				break;
 			}
 			case GL_SAMPLER_2D:
 			{
 				int data;
-				GL::GetUniformiv(m_Id, location, &data);
+				GL::GetUniformiv(id, location, &data);
 				SetUniformData(name, data);
 				break;
 			}
@@ -159,16 +160,11 @@ namespace GraphicsEngine
 		}
 	}
 
-	auto Shader::GetId() const -> unsigned int
-	{
-		return m_Id;
-	}
-
     auto Shader::GetActiveUniform(std::string_view name) -> Uniform*
     {
         auto it = std::ranges::find_if(m_Uniforms, [&name](const Uniform& uniform)
 		{ 
-			return uniform.Name == name; 
+			return uniform.name == name; 
 		});
 
 		if (it != m_Uniforms.end())
@@ -180,7 +176,7 @@ namespace GraphicsEngine
     auto Shader::GetActiveUniformNames () const -> StringViews
 	{
 		StringViews names(m_Uniforms.size());
-		std::ranges::transform(m_Uniforms, names.begin(), [](const Uniform& uniform) -> StringView { return uniform.Name; });
+		std::ranges::transform(m_Uniforms, names.begin(), [](const Uniform& uniform) -> StringView { return uniform.name; });
 		return names;
 	}
 
@@ -190,10 +186,10 @@ namespace GraphicsEngine
 		if (!pUniform)
 			return;
 
-		pUniform->Data = data;
+		pUniform->data = data;
 		
-		const auto location = pUniform->Location;
-		GL::UseProgram(m_Id);
+		const auto location = pUniform->location;
+		GL::UseProgram(id);
 		if (std::holds_alternative<float>(data))
 			GL::Uniform1f(location, std::get<float>(data));
 		else if (std::holds_alternative<glm::mat4x4>(data))
@@ -207,11 +203,6 @@ namespace GraphicsEngine
 			GL::Uniform1i(location, std::get<int>(data));
 		else
 			GetLog()->Warn("Data type not handled by Uniform::SetData.");
-	}
-
-	auto Shader::Use() const -> void
-	{
-		GL::UseProgram(m_Id);
 	}
 
 }

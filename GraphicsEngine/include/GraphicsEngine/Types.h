@@ -13,6 +13,21 @@ namespace GraphicsEngine
 		float a = 1.f;
 	};
 
+	using Id = unsigned int;
+
+	class IEngine;
+	using IEnginePtr = std::shared_ptr<IEngine>;
+
+	class IEntity;
+	using IEntityPtr = std::shared_ptr<IEntity>;
+	using IEntities = std::vector<IEntityPtr>;
+
+	class ITexture;
+	using ITexturePtr = std::shared_ptr<ITexture>;
+	using ITextures = std::vector<ITexturePtr>;
+
+	using Path = std::filesystem::path;
+
 	enum class PolygonMode
 	{
 		Fill,
@@ -20,7 +35,7 @@ namespace GraphicsEngine
 		Point
 	};
 
-	using ShaderId = unsigned int;
+	using ShaderId = Id;
 
 	using String = std::string;
 

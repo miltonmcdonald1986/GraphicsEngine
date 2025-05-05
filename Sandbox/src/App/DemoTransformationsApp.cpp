@@ -26,14 +26,10 @@ namespace
         // Make the call to glViewport
         spEngine->ResizeViewport(newWidth, newHeight);
 
-        // Update the projection matrix
-        auto spShader = spEngine->GetCurrentShader();
-        if (!spShader)
-            return;
-
         auto fWidth = std::bit_cast<float>(newWidth);
         auto fHeight = std::bit_cast<float>(newHeight);
-        spShader->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+        auto pShaderManager = pApp->GetEngine()->GetShaderManager();
+        pShaderManager->SetUniformData(pShaderManager->GetCurrentShader(), "projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
     }
 
 }
@@ -70,16 +66,16 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
         GraphicsEngine::CreateAttribute(texCoords)
     }, indices);
 
-    auto [spShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
-    m_spShader = spShader;
+    auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    m_ShaderId = shaderId;
 
-    m_spEntity->SetShader(m_spShader);
+    m_spEntity->SetShaderId(m_ShaderId);
     m_spEntity->SetTextures(textures);
 
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    m_spShader->SetUniformData("projection", glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
+    GetEngine()->GetShaderManager()->SetUniformData(m_ShaderId, "projection", glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
 }
 
 DemoTransformationsApp::~DemoTransformationsApp()
@@ -99,7 +95,7 @@ auto DemoTransformationsApp::Iterate() -> void
     trans = glm::rotate(trans, seconds, glm::vec3(0.f, 0.f, 1.f));
 	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
     m_spEntity->SetModelMatrix(trans);
-    m_spShader->SetUniformData("view", glm::mat4(1.f));
+    GetEngine()->GetShaderManager()->SetUniformData(m_ShaderId, "view", glm::mat4(1.f));
 
     App::Iterate();
 }
