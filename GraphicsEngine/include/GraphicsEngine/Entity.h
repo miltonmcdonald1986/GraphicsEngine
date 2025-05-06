@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IAttribute.h"
-#include "IEntity.h"
 #include "Types.h"
 
 namespace GraphicsEngine
@@ -45,8 +44,8 @@ namespace GraphicsEngine
 	private:
 
 		/// @brief Constructs an entity using raw graphical data.
-		/// @param data Tuple containing the number of indices, number of vertices, and VAO handle.
-		explicit Entity(const std::tuple<GLsizei, GLsizei, GLuint>& data);
+		/// @param data Tuple containing the VAO handle, the number of indices, and number of vertices.
+		explicit Entity(const std::tuple<GLuint, GLsizei, GLsizei>& data);
 	};
 
 }

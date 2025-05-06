@@ -6,7 +6,6 @@
 #include "EntityManager.h"
 #include "IAttribute.h"
 #include "ICamera.h"
-#include "IEntity.h"
 #include "ILog.h"
 #include "ShaderManager.h"
 #include "Types.h"

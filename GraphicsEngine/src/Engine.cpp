@@ -106,11 +106,11 @@ namespace GraphicsEngine
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
 				m_upShaderManagerImpl->SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
 			}
-			GL::BindVertexArray(pEntity->vao);
-			if (pEntity->numIndices > 0)
-				GL::DrawElements(GL_TRIANGLES, pEntity->numIndices, GL_UNSIGNED_INT, nullptr);
+			GL::BindVertexArray(pEntity->ENTITY_ID);
+			if (pEntity->NUM_INDICES> 0)
+				GL::DrawElements(GL_TRIANGLES, pEntity->NUM_INDICES, GL_UNSIGNED_INT, nullptr);
 			else
-				GL::DrawArrays(GL_TRIANGLES, 0, pEntity->numVertices);
+				GL::DrawArrays(GL_TRIANGLES, 0, pEntity->NUM_VERTICES);
 		}
 	}
 

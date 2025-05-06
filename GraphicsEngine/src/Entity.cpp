@@ -6,7 +6,7 @@
 namespace GraphicsEngine
 {
 
-	auto InitEntity(const IAttributes& attributes, const Indices& indices) -> std::tuple<GLsizei, GLsizei, GLuint>
+	auto InitEntity(const IAttributes& attributes, const Indices& indices) -> std::tuple<GLuint, GLsizei, GLsizei>
 	{
 		size_t numAttributes = attributes.size();
 
@@ -35,7 +35,7 @@ namespace GraphicsEngine
 			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 		}
 
-		return std::make_tuple(static_cast<GLsizei>(indices.size()), std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices(), vao);
+		return std::make_tuple(vao, static_cast<GLsizei>(indices.size()), std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices());
 	}
 
 	Entity::Entity(const IAttributes& attributes, const Indices& indices)
@@ -43,10 +43,10 @@ namespace GraphicsEngine
 	{
 	}
 
-	Entity::Entity(const std::tuple<GLsizei, GLsizei, GLuint>& data)
-		:	numIndices(std::get<0>(data)),
-			numVertices(std::get<1>(data)),
-			vao(std::get<2>(data))
+	Entity::Entity(const std::tuple<GLuint, GLsizei, GLsizei>& data)
+		:	ENTITY_ID(std::get<0>(data)),
+			NUM_INDICES(std::get<1>(data)),
+			NUM_VERTICES(std::get<2>(data))
 	{
 	}
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IEngine.h"
-#include "IEntity.h"
 #include "ITexture.h"
 #include "DllImpExp.h"
 
