@@ -12,8 +12,7 @@ file(GLOB ENGINE_SRC
 	${ENGINE_SOURCE_FILES}
 )
 source_group("Interfaces" FILES ${ENGINE_INTERFACES})
-source_group("Header Files" FILES ${ENGINE_HEADER_FILES})
-source_group("Source Files" FILES ${ENGINE_SOURCE_FILES})
+source_group("Source Files" FILES ${ENGINE_HEADER_FILES} ${ENGINE_SOURCE_FILES})
 
 add_library(GraphicsEngine SHARED ${ENGINE_SRC})
 target_compile_definitions(GraphicsEngine PRIVATE GRAPHICSENGINE_EXPORTS)

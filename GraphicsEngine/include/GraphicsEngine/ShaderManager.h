@@ -8,38 +8,47 @@ namespace GraphicsEngine
 {
 
 	/// @class ShaderManager
-	/// @brief Manages shader programs and uniform data.
-	/// 
-	/// @remarks	The IEngine class owns a unique_ptr to the ShaderManager, managing its lifetime. Clients can call
-	///				GetShaderManager() to obtain a raw pointer to the ShaderManager. However, ownership remains with 
-	///				the engine, so clients must not attempt to delete or modify its lifespan.
+	/// @brief Abstract base class for managing shaders in the graphics engine.
+	///
+	/// This class provides an interface for adding shaders, retrieving the current shader,
+	/// and setting uniform data for shaders.
+	///
+	/// @remarks This class should not be directly instantiated. The graphics engine will
+	/// hold a unique pointer to this class. Clients can obtain a raw pointer to the
+	/// ShaderManager by calling `IEngine::GetShaderManager()`. However, the lifetime of
+	/// the ShaderManager is managed by the engine, and clients should not attempt to
+	/// manage or delete it.
 	class ShaderManager
 	{
 	public:
 
+		/// @brief Virtual destructor for ShaderManager.
 		virtual ~ShaderManager() = default;
 
-		/// @brief Add a shader from files.
-		/// @param[in] vert Path to the vertex shader.
-		/// @param[in] frag Path to the fragment shader.
-		/// @param[in] oGeom Optional path to the fragment shader.
-		/// @returns If it succeeds, a shader id; nullopt otherwise.
+		/// @brief Adds a shader to the manager.
+		/// 
+		/// @param vert Path to the vertex shader file.
+		/// @param frag Path to the fragment shader file.
+		/// @param oGeom Optional path to the geometry shader file (default: std::nullopt).
+		/// @return An optional ShaderId if the shader was successfully added, or std::nullopt otherwise.
 		virtual auto AddShader(
 			const Path& vert, 
 			const Path& frag, 
 			const OptPath& oGeom = std::nullopt
 		) -> OptShaderId = 0;
 
-		/// @brief Get the id of the current shader.
-		/// @returns The id of the currently used shader program, if it exists; nullopt otherwise.
+		/// @brief Retrieves the currently active shader.
+		/// 
+		/// @return An optional ShaderId of the currently active shader, or std::nullopt if no shader is active.
 		virtual auto GetCurrentShader(
 		) const -> OptShaderId = 0;
 
-		/// @brief Sets uniform data for a shader program.
-		/// @param[in] id The id of the shader program.
-		/// @param[in] name The name of the uniform variable.
-		/// @param[in] data The new value of the uniform variable.
-		/// @returns true if it succeeds; false otherwise.
+		/// @brief Sets uniform data for a shader.
+		/// 
+		/// @param id The ID of the shader.
+		/// @param name The name of the uniform variable.
+		/// @param data The data to set for the uniform variable.
+		/// @return True if the uniform data was successfully set, false otherwise.
 		virtual auto SetUniformData(
 			ShaderId id,
 			StringView name,
