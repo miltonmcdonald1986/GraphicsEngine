@@ -16,12 +16,18 @@ namespace GraphicsEngine
 	using Id = unsigned int;
 	using OptId = std::optional<Id>;
 
+	using EntityId = Id;
+	using EntityIds = std::vector<EntityId>;
+
 	class IEngine;
 	using IEnginePtr = std::shared_ptr<IEngine>;
 
 	class IEntity;
 	using IEntityPtr = std::shared_ptr<IEntity>;
 	using IEntities = std::vector<IEntityPtr>;
+
+	using Index = unsigned int;
+	using Indices = std::vector<Index>;
 
 	class ITexture;
 	using ITexturePtr = std::shared_ptr<ITexture>;

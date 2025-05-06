@@ -17,12 +17,12 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	};
 
 	GraphicsEngine::IAttributes attributes = { GraphicsEngine::CreateAttribute(vertices) };
-	auto spEntity = spEngine->CreateNewEntity(attributes);
+	auto pEntity = spEngine->GetEntityManager()->AddEntity(attributes);
 	auto pShaderManager = spEngine->GetShaderManager();
 
 	auto shaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.frag");
 	pShaderManager->SetUniformData(*shaderId, m_UniformName, 1.f);
-	spEntity->SetShaderId(*shaderId);
+	pEntity->shaderId = *shaderId;
 }
 
 auto DemoFlashingGreenTriangleApp::Iterate() -> void

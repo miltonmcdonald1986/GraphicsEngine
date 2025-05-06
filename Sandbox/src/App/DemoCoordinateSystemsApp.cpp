@@ -31,14 +31,14 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
         2, 3, 0
     };
 
-    auto spEntity = spEngine->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
-    if (!spEntity)
+    auto pEntity = spEngine->GetEntityManager()->AddEntity({ spAttrVertices, spAttrTexCoords }, indices);
+    if (!pEntity)
     {
         GetEngine()->GetLog()->Error("Failed to create entity.");
         return;
     }
 
-    spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
+    pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
     auto pShaderManager = spEngine->GetShaderManager();
     if (!pShaderManager)
@@ -48,8 +48,8 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     pShaderManager->SetUniformData(shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
     pShaderManager->SetUniformData(shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
-    spEntity->SetShaderId(shaderId);
-    spEntity->SetTextures(textures);
+    pEntity->shaderId = shaderId;
+    pEntity->textures = textures;
 }
 
 auto DemoCoordinateSystemsApp::Iterate() -> void

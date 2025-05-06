@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <optional>
 
+#include "EntityManager.h"
 #include "IAttribute.h"
 #include "ICamera.h"
 #include "IEntity.h"
@@ -19,10 +20,10 @@ namespace GraphicsEngine
 	public:
 		virtual ~IEngine() = default;
 
-		virtual auto CreateNewEntity(const IAttributes& attributes, const std::vector<unsigned int>& indices = {}) -> IEntityPtr = 0;
 		virtual auto CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr = 0;
 		virtual auto GetBackgroundColor() const -> Color = 0;
 		virtual auto GetCamera() const -> ICameraPtr = 0;
+		virtual auto GetEntityManager() -> EntityManager* = 0;
 		virtual auto GetLog() const -> ILogPtr = 0;
 		virtual auto GetShaderManager() -> ShaderManager* = 0;
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;

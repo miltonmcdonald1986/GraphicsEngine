@@ -16,7 +16,8 @@ namespace GraphicsEngine
 	}
 
 	Engine::Engine()
-		:	m_upShaderManagerImpl(CreateShaderManagerImpl(this)),
+		:	m_upEntityManagerImpl(CreateEntityManagerImpl(this)),
+			m_upShaderManagerImpl(CreateShaderManagerImpl(this)),
 			m_spLog(CreateLog())
 	{
 		if (gladLoadGL() == 0)
@@ -41,45 +42,6 @@ namespace GraphicsEngine
 		spdlog::shutdown();
 	}
 
-	auto Engine::CreateNewEntity(const IAttributes& attributes, const std::vector<unsigned int>& indices) -> IEntityPtr
-	{
-		size_t numAttributes = attributes.size();
-
-		GLuint vao;
-		GL::GenVertexArrays(1, &vao);
-		GL::BindVertexArray(vao);
-
-		std::vector<GLuint> buffers(numAttributes);
-		GL::GenBuffers(static_cast<GLsizei>(numAttributes), buffers.data());
-
-		for (size_t i = 0; i < numAttributes; ++i)
-		{
-			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
-			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
-			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), static_cast<const void*>(spAttribute->GetData().data()), GL_STATIC_DRAW);
-			auto index = static_cast<GLuint>(i);
-			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
-			GL::EnableVertexAttribArray(index);
-		}
-
-		if (!indices.empty())
-		{
-			GLuint eboBuffer;
-			GL::GenBuffers(1, &eboBuffer);
-			GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboBuffer);
-			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-		}
-
-		EntityPtr spEntity = CreateEntity();
-		spEntity->SetVAO(vao);
-		spEntity->SetNumVertices(std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices());
-		spEntity->SetNumIndices(indices.empty() ? 0 : static_cast<int>(indices.size()));
-
-		m_Entities.push_back(spEntity);
-
-		return std::dynamic_pointer_cast<IEntity>(spEntity);
-	}
-
 	auto Engine::CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr
 	{
 		ITexturePtr spTexture = CreateTextureFromFile(textureName, path);
@@ -95,6 +57,11 @@ namespace GraphicsEngine
 	auto Engine::GetCamera() const -> ICameraPtr
 	{
 		return m_spCamera;
+	}
+
+	auto Engine::GetEntityManager() -> EntityManager*
+	{
+		return m_upEntityManagerImpl.get();
 	}
 
 	auto Engine::GetLog() const -> ILogPtr
@@ -115,18 +82,20 @@ namespace GraphicsEngine
 	auto Engine::Render() -> void
 	{
 		GL::Clear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		for (auto spEntity : m_Entities)
+		for (auto entId : m_upEntityManagerImpl->GetEntityIds())
 		{
-			auto shaderId = spEntity->GetShaderId();			
+			auto pEntity = m_upEntityManagerImpl->GetEntity(entId);
+
+			auto shaderId = pEntity->shaderId;
 			m_upShaderManagerImpl->UseShader(shaderId);
-			m_upShaderManagerImpl->SetUniformData(shaderId, "model", spEntity->GetModelMatrix());
+			m_upShaderManagerImpl->SetUniformData(shaderId, "model", pEntity->modelMatrix);
 			if (m_spCamera)
 			{
 				m_upShaderManagerImpl->SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
 				m_upShaderManagerImpl->SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
 			}
 
-			auto textures = spEntity->GetTextures();
+			auto textures = pEntity->textures;
 			for (size_t i = 0; i < textures.size(); ++i)
 			{
 				auto spTexture = std::dynamic_pointer_cast<Texture>(textures[i]);
@@ -137,11 +106,11 @@ namespace GraphicsEngine
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
 				m_upShaderManagerImpl->SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
 			}
-			GL::BindVertexArray(spEntity->GetVAO());
-			if (spEntity->GetNumIndices() > 0)
-				GL::DrawElements(GL_TRIANGLES, spEntity->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+			GL::BindVertexArray(pEntity->vao);
+			if (pEntity->numIndices > 0)
+				GL::DrawElements(GL_TRIANGLES, pEntity->numIndices, GL_UNSIGNED_INT, nullptr);
 			else
-				GL::DrawArrays(GL_TRIANGLES, 0, spEntity->GetNumVertices());
+				GL::DrawArrays(GL_TRIANGLES, 0, pEntity->numVertices);
 		}
 	}
 
@@ -186,20 +155,4 @@ namespace GraphicsEngine
 		}
 	}
 
-    auto Engine::GetNextAvailableEntityId() const -> unsigned int
-    {
-		unsigned int id = 1;
-
-		auto IdIsTaken = [&id](IEntityPtr spEntity) 
-		{ 
-			return spEntity->GetId() == id; 
-		};
-
-		while (std::ranges::find_if(m_Entities, IdIsTaken) != m_Entities.end())
-		{
-		 	id++;
-		}
-
-		return id;
-	}
 }

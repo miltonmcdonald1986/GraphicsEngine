@@ -9,5 +9,5 @@ public:
 	auto Iterate() -> void override;
 
 private:
-	GraphicsEngine::IEntityPtr m_spEntity = nullptr;
+	GraphicsEngine::Entity* m_pEntity = nullptr;
 };

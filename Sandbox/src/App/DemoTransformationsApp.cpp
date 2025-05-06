@@ -61,7 +61,7 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
         2, 3, 0
     };
 
-    m_spEntity = spEngine->CreateNewEntity({
+    m_pEntity = spEngine->GetEntityManager()->AddEntity({
         GraphicsEngine::CreateAttribute(vertices),
         GraphicsEngine::CreateAttribute(texCoords)
     }, indices);
@@ -69,8 +69,8 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
     m_ShaderId = shaderId;
 
-    m_spEntity->SetShaderId(m_ShaderId);
-    m_spEntity->SetTextures(textures);
+    m_pEntity->shaderId = m_ShaderId;
+    m_pEntity->textures = textures;
 
     int width;
     int height;
@@ -94,7 +94,7 @@ auto DemoTransformationsApp::Iterate() -> void
     trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.f));
     trans = glm::rotate(trans, seconds, glm::vec3(0.f, 0.f, 1.f));
 	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
-    m_spEntity->SetModelMatrix(trans);
+    m_pEntity->modelMatrix = trans;
     GetEngine()->GetShaderManager()->SetUniformData(m_ShaderId, "view", glm::mat4(1.f));
 
     App::Iterate();

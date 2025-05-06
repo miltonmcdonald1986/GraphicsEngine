@@ -34,8 +34,8 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	auto posAttribute = GraphicsEngine::CreateAttribute(vertices);
 	attributes.push_back(posAttribute);
 	
-	auto spEntity = spEngine->CreateNewEntity(attributes);
-	spEntity->SetShaderId(shaderId);
+	auto pEntity = spEngine->GetEntityManager()->AddEntity(attributes);
+	pEntity->shaderId = shaderId;
 
 	if (auto spCamera = GraphicsEngine::CreateCameraViewport())
 		spEngine->SetCamera(spCamera);

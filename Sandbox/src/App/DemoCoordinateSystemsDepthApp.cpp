@@ -14,9 +14,9 @@ DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow
     auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
 
     auto spEntityFactory = GraphicsEngine::CreateEntityFactory(GetEngine());
-    m_spEntity = spEntityFactory->CreateCubeTextured(shaderId, textures);
+    m_pEntity = spEntityFactory->CreateCubeTextured(shaderId, textures);
 
-    m_spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f)));
+    m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
     auto pShaderManager = GetEngine()->GetShaderManager();
     pShaderManager->SetUniformData(shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
@@ -33,8 +33,8 @@ auto DemoCoordinateSystemsDepthApp::Iterate() -> void
     auto pShaderManager = GetEngine()->GetShaderManager();
     auto shaderId = pShaderManager->GetCurrentShader();
 
-    m_spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), seconds * glm::radians(50.f), glm::vec3(0.5f, 1.f, 0.f)));
-    pShaderManager->SetUniformData(*shaderId, "model", m_spEntity->GetModelMatrix());
+    m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), seconds * glm::radians(50.f), glm::vec3(0.5f, 1.f, 0.f));
+    pShaderManager->SetUniformData(*shaderId, "model", m_pEntity->modelMatrix);
 
     int width;
     int height;

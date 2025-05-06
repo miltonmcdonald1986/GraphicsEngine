@@ -30,10 +30,10 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 	
-	auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);	
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);	
 
 	if (auto oShaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR) / "DemoContainer.vert", std::filesystem::path(SHADERS_DIR) / "DemoContainer.frag"))
-		spEntity->SetShaderId(*oShaderId);
+		pEntity->shaderId = *oShaderId;
 	
-	spEntity->SetTextures({ spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") });
+	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") };
 }

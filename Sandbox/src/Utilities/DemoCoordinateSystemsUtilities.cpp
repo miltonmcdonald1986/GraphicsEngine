@@ -6,7 +6,7 @@
 namespace Utilities
 {
 
-    auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> GraphicsEngine::IEntities
+    auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> std::vector<GraphicsEngine::Entity*>
     {
         auto [spShader, textures] = PrepareShaderAndTextures(spEngine);
         
@@ -25,14 +25,14 @@ namespace Utilities
             glm::vec3(-1.3f, 1.0f, -1.5f)
         };
 
-        GraphicsEngine::IEntities cubes;
+        std::vector<GraphicsEngine::Entity*> cubes;
         for (size_t i = 0; i < positions.size(); ++i)
         {
             cubes.push_back(spEntityFactory->CreateCubeTextured(spShader, textures));
             auto model = glm::mat4(1.0f);
             model = glm::translate(model, positions[i]);
             model = glm::rotate(model, glm::radians(20.f * i), glm::vec3(1.0f, 0.3f, 0.5f));
-            cubes.back()->SetModelMatrix(model);
+            cubes.back()->modelMatrix = model;
         }
 
         return cubes;

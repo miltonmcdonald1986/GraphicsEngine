@@ -15,7 +15,7 @@ namespace GraphicsEngine
     {
     }
 
-    auto EntityFactory::CreateCubeTextured(Id shaderId, const ITextures& textures) -> IEntityPtr
+    auto EntityFactory::CreateCubeTextured(Id shaderId, const ITextures& textures) -> Entity*
 	{
         // A cube has eight vertices
         auto v0 = glm::vec3(-0.5f, -0.5f,  0.5f);
@@ -69,17 +69,12 @@ namespace GraphicsEngine
 			22, 23, 20  // FACE 5, triangle 1
         };
 
-        auto spEntity = m_spEngine->CreateNewEntity({ spAttrVertices, spAttrTexCoords }, indices);
-        if (!spEntity)
-        {
-            m_spEngine->GetLog()->Error("Failed to create entity.");
-            return nullptr;
-        }
+        auto pEntity = m_spEngine->GetEntityManager()->AddEntity({ spAttrVertices, spAttrTexCoords }, indices);
+        
+        pEntity->shaderId = shaderId;
+        pEntity->textures = textures;
 
-        spEntity->SetShaderId(shaderId);
-        spEntity->SetTextures(textures);
-
-        return spEntity;
+        return pEntity;
 	}
 
 }

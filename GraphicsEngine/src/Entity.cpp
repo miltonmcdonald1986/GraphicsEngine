@@ -1,85 +1,53 @@
 #include "Entity.h"
 
+#include "Attribute.h"
+#include "SafeGL.h"
+
 namespace GraphicsEngine
 {
-	auto CreateEntity() -> EntityPtr
+
+	auto InitEntity(const IAttributes& attributes, const Indices& indices) -> std::tuple<GLsizei, GLsizei, GLuint>
 	{
-		return std::make_shared<Entity>();
+		size_t numAttributes = attributes.size();
+
+		GLuint vao;
+		GL::GenVertexArrays(1, &vao);
+		GL::BindVertexArray(vao);
+
+		std::vector<GLuint> buffers(numAttributes);
+		GL::GenBuffers(static_cast<GLsizei>(numAttributes), buffers.data());
+
+		for (size_t i = 0; i < numAttributes; ++i)
+		{
+			AttributePtr spAttribute = std::dynamic_pointer_cast<Attribute>(attributes[i]);
+			GL::BindBuffer(GL_ARRAY_BUFFER, buffers[i]);
+			GL::BufferData(GL_ARRAY_BUFFER, spAttribute->GetNumBytes(), static_cast<const void*>(spAttribute->GetData().data()), GL_STATIC_DRAW);
+			auto index = static_cast<GLuint>(i);
+			GL::VertexAttribPointer(index, spAttribute->GetNumComponents(), spAttribute->GetType(), GL_FALSE, spAttribute->GetStride(), nullptr);
+			GL::EnableVertexAttribArray(index);
+		}
+
+		if (!indices.empty())
+		{
+			GLuint eboBuffer;
+			GL::GenBuffers(1, &eboBuffer);
+			GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboBuffer);
+			GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+		}
+
+		return std::make_tuple(static_cast<GLsizei>(indices.size()), std::dynamic_pointer_cast<Attribute>(attributes[0])->GetNumVertices(), vao);
 	}
 
-	auto operator<=>(const GraphicsEngine::IEntityPtr& e1, const GraphicsEngine::IEntityPtr& e2)
+	Entity::Entity(const IAttributes& attributes, const Indices& indices)
+		: Entity(InitEntity(attributes, indices))
 	{
-		return e1->GetId() <=> e2->GetId();
 	}
 
-	auto Entity::GetId() const -> unsigned int
+	Entity::Entity(const std::tuple<GLsizei, GLsizei, GLuint>& data)
+		:	numIndices(std::get<0>(data)),
+			numVertices(std::get<1>(data)),
+			vao(std::get<2>(data))
 	{
-		return m_Id;
-	}
-
-	auto Entity::GetModelMatrix() const -> glm::mat4
-	{
-		return m_ModelMatrix;
-	}
-
-	auto Entity::GetNumIndices() const -> int
-	{
-		return m_NumIndices;
-	}
-
-	auto Entity::GetNumVertices() const -> int
-	{
-		return m_NumVertices;
-	}
-
-	auto Entity::GetShaderId() const -> Id
-	{
-		return m_ShaderId;
-	}
-
-	auto Entity::GetTextures() const -> ITextures
-	{
-		return m_spTextures;
-	}
-
-	auto Entity::GetVAO() const -> unsigned int
-	{
-		return m_VAO;
-	}
-
-	auto Entity::SetNumIndices(GLsizei numIndices) -> void
-	{
-		m_NumIndices = numIndices;
-	}
-
-    auto Entity::SetId(unsigned int id) -> void
-    {
-		m_Id = id;
-    }
-
-	auto Entity::SetModelMatrix(const glm::mat4& model) -> void
-	{
-		m_ModelMatrix = model;
-	}
-
-    auto Entity::SetNumVertices(GLsizei numVertices) -> void
-	{
-		m_NumVertices = numVertices;
-	}
-
-	auto Entity::SetShaderId(Id id) -> void
-	{
-		m_ShaderId = id;
-	}
-
-	auto Entity::SetTextures(const ITextures& textures) -> void
-	{
-		m_spTextures = textures;
-	}
-
-	auto Entity::SetVAO(GLuint vao) -> void
-	{
-		m_VAO = vao;
 	}
 
 }

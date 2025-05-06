@@ -13,7 +13,7 @@ namespace GraphicsEngine
 	public:
 		virtual ~IEntityFactory() = default;
 
-		virtual auto CreateCubeTextured(Id shaderId, const ITextures& textures) -> IEntityPtr = 0;
+		virtual auto CreateCubeTextured(Id shaderId, const ITextures& textures) -> Entity* = 0;
 	};
 
 	using IEntityFactoryPtr = std::shared_ptr<IEntityFactory>;
