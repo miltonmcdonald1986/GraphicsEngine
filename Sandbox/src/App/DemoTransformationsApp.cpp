@@ -29,7 +29,7 @@ namespace
         auto fWidth = std::bit_cast<float>(newWidth);
         auto fHeight = std::bit_cast<float>(newHeight);
         auto pShaderManager = pApp->GetEngine()->GetShaderManager();
-        pShaderManager->SetUniformData(pShaderManager->GetCurrentShader(), "projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+        pShaderManager->SetUniformData(*pShaderManager->GetCurrentShader(), "projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
     }
 
 }

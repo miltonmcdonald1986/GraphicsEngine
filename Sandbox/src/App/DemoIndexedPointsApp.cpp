@@ -24,6 +24,6 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
     };
 
     auto spEntity = spEngine->CreateNewEntity({ GraphicsEngine::CreateAttribute(vertices) }, indices);
-    auto shaderId = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.vert", std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.frag");
-    spEntity->SetShaderId(shaderId);
+    auto shaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.vert", std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.frag");
+    spEntity->SetShaderId(*shaderId);
 }

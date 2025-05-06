@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IEngine.h"
-#include "ShaderManager.h"
+#include "ShaderManagerImpl.h"
 
 namespace GraphicsEngine
 {
@@ -30,7 +30,7 @@ namespace GraphicsEngine
 
 		Color m_BackgroundColor{};
 		PolygonMode m_PolygonMode = PolygonMode::Fill;
-		ShaderManager m_ShaderManager;
+		ShaderManagerImplPtr m_upShaderManagerImpl = nullptr;
 		IEntities m_Entities;
 		ITextures m_Textures;
 		ILogPtr m_spLog = nullptr;

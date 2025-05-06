@@ -34,12 +34,12 @@ auto DemoCoordinateSystemsDepthApp::Iterate() -> void
     auto shaderId = pShaderManager->GetCurrentShader();
 
     m_spEntity->SetModelMatrix(glm::rotate(glm::mat4(1.f), seconds * glm::radians(50.f), glm::vec3(0.5f, 1.f, 0.f)));
-    pShaderManager->SetUniformData(shaderId, "model", m_spEntity->GetModelMatrix());
+    pShaderManager->SetUniformData(*shaderId, "model", m_spEntity->GetModelMatrix());
 
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    pShaderManager->SetUniformData(shaderId, "projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+    pShaderManager->SetUniformData(*shaderId, "projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }

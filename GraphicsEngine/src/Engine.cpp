@@ -16,7 +16,7 @@ namespace GraphicsEngine
 	}
 
 	Engine::Engine()
-		:	m_ShaderManager(this),
+		:	m_upShaderManagerImpl(CreateShaderManagerImpl(this)),
 			m_spLog(CreateLog())
 	{
 		if (gladLoadGL() == 0)
@@ -109,7 +109,7 @@ namespace GraphicsEngine
 
 	auto Engine::GetShaderManager() -> ShaderManager*
 	{
-		return &m_ShaderManager;
+		return m_upShaderManagerImpl.get();
 	}
 
 	auto Engine::Render() -> void
@@ -118,12 +118,12 @@ namespace GraphicsEngine
 		for (auto spEntity : m_Entities)
 		{
 			auto shaderId = spEntity->GetShaderId();			
-			m_ShaderManager.UseShader(shaderId);
-			m_ShaderManager.SetUniformData(shaderId, "model", spEntity->GetModelMatrix());
+			m_upShaderManagerImpl->UseShader(shaderId);
+			m_upShaderManagerImpl->SetUniformData(shaderId, "model", spEntity->GetModelMatrix());
 			if (m_spCamera)
 			{
-				m_ShaderManager.SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
-				m_ShaderManager.SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
+				m_upShaderManagerImpl->SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
+				m_upShaderManagerImpl->SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
 			}
 
 			auto textures = spEntity->GetTextures();
@@ -135,7 +135,7 @@ namespace GraphicsEngine
 				
 				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
-				m_ShaderManager.SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
+				m_upShaderManagerImpl->SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
 			}
 			GL::BindVertexArray(spEntity->GetVAO());
 			if (spEntity->GetNumIndices() > 0)

@@ -14,6 +14,7 @@ namespace GraphicsEngine
 	};
 
 	using Id = unsigned int;
+	using OptId = std::optional<Id>;
 
 	class IEngine;
 	using IEnginePtr = std::shared_ptr<IEngine>;
@@ -27,6 +28,7 @@ namespace GraphicsEngine
 	using ITextures = std::vector<ITexturePtr>;
 
 	using Path = std::filesystem::path;
+	using OptPath = std::optional<Path>;
 
 	enum class PolygonMode
 	{
@@ -36,12 +38,14 @@ namespace GraphicsEngine
 	};
 
 	using ShaderId = Id;
+	using OptShaderId = std::optional<ShaderId>;
 
 	using String = std::string;
 
 	using StringView = std::string_view;
 	using StringViews = std::vector<StringView>;
-	
+	using OptStringView = std::optional<StringView>;
+
 	using UniformData = std::variant<
 		float,
 		glm::mat4x4,

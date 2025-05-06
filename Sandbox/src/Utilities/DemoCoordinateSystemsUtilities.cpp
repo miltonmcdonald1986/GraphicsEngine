@@ -45,7 +45,7 @@ namespace Utilities
         if (!spEngine)
             return result;
 
-        auto shaderId = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
+        auto shaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
         if (shaderId == 0)
         {
             spEngine->GetLog()->Error("Failed to create shader.");
@@ -68,7 +68,7 @@ namespace Utilities
             return result;
         }
 
-        result.first = shaderId;
+        result.first = *shaderId;
         result.second = { spTexture1, spTexture2 };
 
         return result;

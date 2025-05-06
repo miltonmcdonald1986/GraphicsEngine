@@ -1,8 +1,9 @@
-#include "ShaderManager.h"
+#include "ShaderManagerImpl.h"
 
+#include "Fwd.h"
 #include "IEngine.h"
-#include "SafeGL.h"
 #include "Log.h"
+#include "SafeGL.h"
 #include "Uniform.h"
 
 namespace GraphicsEngine
@@ -15,6 +16,7 @@ namespace GraphicsEngine
 
 		auto CompileShader(GLenum shaderType, const char* source) -> GLuint;
 		auto CompileShadersAndLinkProgram(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id;
+		auto ErrorMessageShaderWithIdDoesNotExist(ShaderId id) -> String;
 		auto LinkProgram(const std::vector<GLuint>& shaders) -> GLuint;
 
 		// Definitions of helper functions.
@@ -63,6 +65,11 @@ namespace GraphicsEngine
 			return shader;
 		}
 
+		auto ErrorMessageShaderWithIdDoesNotExist(ShaderId id) -> String
+		{
+			return std::format("Shader with id {} does not exist.", id);
+		}
+
 		auto LinkProgram(const std::vector<GLuint>& shaders) -> GLuint
 		{
 			GLuint shaderProgram = GL::CreateProgram();
@@ -97,12 +104,12 @@ namespace GraphicsEngine
 
 	}
 
-	ShaderManager::ShaderManager(IEngine* pEngine)
+	ShaderManagerImpl::ShaderManagerImpl(IEngine* pEngine)
 		: m_pEngine(pEngine)
 	{
 	}
 
-	auto ShaderManager::AddShaderFromFiles(const Path& vert, const Path& frag, const std::optional<Path>& oGeom) -> Id
+	auto ShaderManagerImpl::AddShader(const Path& vert, const Path& frag, const OptPath& oGeom) -> OptShaderId
 	{
 		auto GetSourceFromFile = [this](const Path& path) -> String
 			{
@@ -129,7 +136,68 @@ namespace GraphicsEngine
 		return AddShaderFromSource(vertSource, fragSource, oGeomSource);
 	}
 
-	auto ShaderManager::AddShaderFromSource(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id
+	auto ShaderManagerImpl::GetCurrentShader() const -> OptShaderId
+	{
+		GLint id;
+		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
+
+		return id == 0 ? std::nullopt : OptShaderId(id);
+	}
+
+	auto ShaderManagerImpl::SetUniformData(ShaderId id, StringView name, const UniformData& data) -> bool
+	{
+		if (!m_Shaders.contains(id))
+		{
+			GetLog()->Error(Helpers::ErrorMessageShaderWithIdDoesNotExist(id));
+			return false;
+		}
+
+		auto& uniforms = m_Shaders.at(id);
+		auto itUniform = std::ranges::find_if(uniforms, [&name](const Uniform& uniform) { return uniform.name == name; });
+		if (itUniform == uniforms.end())
+		{
+			GetLog()->Error(std::format("Shader {}: Uniform with name {} does not exist.", id, name));
+			return false;
+		}
+
+		auto& uniform = *itUniform;
+		uniform.data = data;
+
+		const auto location = uniform.location;
+		GL::UseProgram(id);
+		if (std::holds_alternative<float>(data))
+			GL::Uniform1f(location, std::get<float>(data));
+		else if (std::holds_alternative<glm::mat4x4>(data))
+			GL::UniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(std::get<glm::mat4>(data)));
+		else if (std::holds_alternative<glm::vec4>(data))
+		{
+			auto v = std::get<glm::vec4>(data);
+			GL::Uniform4f(location, v[0], v[1], v[2], v[3]);
+		}
+		else if (std::holds_alternative<int>(data))
+			GL::Uniform1i(location, std::get<int>(data));
+		else
+		{
+			GetLog()->Error("Data type not handled by Uniform::SetData.");
+			return false;
+		}
+
+		return true;
+	}
+
+	auto ShaderManagerImpl::UseShader(ShaderId id) const -> bool
+	{
+		if (!m_Shaders.contains(id))
+		{
+			GetLog()->Error(Helpers::ErrorMessageShaderWithIdDoesNotExist(id));
+			return false;
+		}
+
+		GL::UseProgram(id);
+		return true;
+	}
+
+	auto ShaderManagerImpl::AddShaderFromSource(StringView vert, StringView frag, OptStringView oGeom) -> OptShaderId
 	{
 		auto id = Helpers::CompileShadersAndLinkProgram(vert, frag, oGeom);
 
@@ -198,50 +266,12 @@ namespace GraphicsEngine
 			}
 		}
 
-		return id;
+		return id == 0 ? std::nullopt : OptShaderId(id);
 	}
 
-	auto ShaderManager::GetCurrentShader() const -> Id
+	auto CreateShaderManagerImpl(IEngine* pEngine) -> ShaderManagerImplPtr
 	{
-		GLint id;
-		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
-
-		return id;
-	}
-
-	auto ShaderManager::SetUniformData(Id id, StringView name, const UniformData& data) -> void
-	{
-		if (!m_Shaders.contains(id))
-			return;
-
-		auto& uniforms = m_Shaders.at(id);
-		auto itUniform = std::ranges::find_if(uniforms, [&name](const Uniform& uniform) { return uniform.name == name; });
-		if (itUniform == uniforms.end())
-			return;
-
-		auto& uniform = *itUniform;
-		uniform.data = data;
-
-		const auto location = uniform.location;
-		GL::UseProgram(id);
-		if (std::holds_alternative<float>(data))
-			GL::Uniform1f(location, std::get<float>(data));
-		else if (std::holds_alternative<glm::mat4x4>(data))
-			GL::UniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(std::get<glm::mat4>(data)));
-		else if (std::holds_alternative<glm::vec4>(data))
-		{
-			auto v = std::get<glm::vec4>(data);
-			GL::Uniform4f(location, v[0], v[1], v[2], v[3]);
-		}
-		else if (std::holds_alternative<int>(data))
-			GL::Uniform1i(location, std::get<int>(data));
-		else
-			GetLog()->Warn("Data type not handled by Uniform::SetData.");
-	}
-
-	auto ShaderManager::UseShader(Id id) const -> void
-	{
-		GL::UseProgram(id);
+		return std::make_unique<ShaderManagerImpl>(pEngine);
 	}
 
 }
