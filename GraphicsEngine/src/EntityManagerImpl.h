@@ -41,5 +41,3 @@ namespace GraphicsEngine
 	auto CreateEntityManagerImpl(IEngine* pEngine) -> EntityManagerImplPtr;
 
 }
-
-
