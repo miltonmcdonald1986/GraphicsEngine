@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "GraphicsEngine/DllImpExp.h"
 
 namespace GraphicsEngine
