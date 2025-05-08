@@ -5,7 +5,7 @@
 namespace GraphicsEngine
 {
 
-	auto GraphicsEngine::CreateEntityManagerImpl(
+	auto CreateEntityManagerImpl(
 		IEngine* pEngine
 	) -> EntityManagerImplPtr
 	{
