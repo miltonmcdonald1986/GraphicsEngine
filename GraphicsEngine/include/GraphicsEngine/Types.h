@@ -2,7 +2,6 @@
 
 #include <variant>
 
-/// @brief The GraphicsEngine namespace contains all the classes and functions for the graphics engine.
 namespace GraphicsEngine
 {
 
@@ -58,16 +57,6 @@ namespace GraphicsEngine
 		glm::mat4x4,
 		glm::vec4,
 		int
-	>;
-
-	/// @namespace GraphicsEngine::AttributeFactory
-	/// @brief Provides utilities for creating various types of vertex attributes.
-	///
-	/// The `AttributeFactory` namespace contains functions and utilities for generating
-	/// vertex attributes that can be used in the graphics engine. These attributes are
-	/// typically used to define geometric shapes or other graphical elements.
-	namespace AttributeFactory
-	{
-	}
+		>;
 
 }
