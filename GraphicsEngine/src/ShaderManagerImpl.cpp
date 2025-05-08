@@ -220,7 +220,7 @@ namespace GraphicsEngine
 			std::string name(maxLength, '\0');
 			GLsizei length; // name length
 			GL::GetActiveUniform(id, i, maxLength, &length, &size, &type, name.data());
-			name.resize(strlen(name.c_str()));
+			name.resize(length);
 
 			GLint location = GL::GetUniformLocation(id, name.data());
 
