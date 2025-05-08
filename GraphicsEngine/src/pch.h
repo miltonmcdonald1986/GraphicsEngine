@@ -1,9 +1,9 @@
 #pragma once
 
-#include <cmath>
 #include <filesystem>
 #include <format>
 #include <fstream>
+#include <math.h>
 #include <numbers>
 #include <numeric>
 #include <ranges>
