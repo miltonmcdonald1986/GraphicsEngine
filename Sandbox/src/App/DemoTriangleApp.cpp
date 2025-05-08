@@ -29,7 +29,6 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	}
 
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::AttributeFactory::Triangle::SSS(1.f, 1.f, 1.f) });
-	//pEntity->modelMatrix = model;
 	pEntity->shaderId = shaderId;
 
 	if (auto spCamera = GraphicsEngine::CreateCameraViewport())

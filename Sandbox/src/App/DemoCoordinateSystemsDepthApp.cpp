@@ -6,21 +6,24 @@
 
 #include "glm/ext/matrix_clip_space.hpp"
 
+auto InitCube(GraphicsEngine::IEnginePtr spEngine) -> GraphicsEngine::Entity*
+{
+    auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(spEngine);
+    auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
+    return spEntityFactory->CreateCubeTextured(shaderId, textures);
+}
+
 DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow)
-    : App(pWindow)
+    :   App(pWindow),
+        m_pEntity(InitCube(GetEngine()))
 {
     GetEngine()->SetBackgroundColor(GraphicsEngine::Color{.r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f});
-
-    auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
-
-    auto spEntityFactory = GraphicsEngine::CreateEntityFactory(GetEngine());
-    m_pEntity = spEntityFactory->CreateCubeTextured(shaderId, textures);
 
     m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
     auto pShaderManager = GetEngine()->GetShaderManager();
-    pShaderManager->SetUniformData(shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    pShaderManager->SetUniformData(shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
+    pShaderManager->SetUniformData(m_pEntity->shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    pShaderManager->SetUniformData(m_pEntity->shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 }
 
 auto DemoCoordinateSystemsDepthApp::Iterate() -> void
