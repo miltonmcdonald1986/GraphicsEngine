@@ -1,0 +1,31 @@
+/** 
+ * @file GraphicsEngine.dox
+ * @brief Documentation for the GraphicsEngine namespace hierarchy.
+ */
+
+/**
+ * @namespace GraphicsEngine
+ * @brief Core graphics engine functionalities.
+ * 
+ * The GraphicsEngine namespace provides rendering utilities, resource management, 
+ * and graphical abstraction for different rendering techniques.
+ */
+namespace GraphicsEngine {}
+
+/**
+ * @namespace GraphicsEngine::AttributeFactory
+ * @brief Handles attribute creation for various graphical elements.
+ * 
+ * The AttributeFactory namespace provides tools for defining and 
+ * managing vertex attributes used in rendering.
+ */
+namespace GraphicsEngine::AttributeFactory {}
+
+/**
+ * @namespace GraphicsEngine::AttributeFactory::Triangle
+ * @brief Special utilities for triangle-based attributes.
+ * 
+ * This namespace is dedicated to constructing and managing triangle-specific 
+ * attributes in the graphics pipeline.
+ */
+namespace GraphicsEngine::AttributeFactory::Triangle {}

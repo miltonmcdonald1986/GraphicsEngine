@@ -10,7 +10,6 @@
 #include "ShaderManager.h"
 #include "Types.h"
 
-/// @brief The GraphicsEngine namespace contains all the classes and functions for the graphics engine.
 namespace GraphicsEngine
 {
 
