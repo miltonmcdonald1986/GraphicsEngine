@@ -34,8 +34,78 @@ namespace GraphicsEngine::AttributeFactory::Triangle
 
 	}
 
+	auto AAS(float A, float B, float a) -> GraphicsEngine::IAttributePtr
+	{
+		if (A <= 0.f || B <= 0.f)
+			return nullptr;
+
+		if (a <= 0.f)
+			return nullptr;
+
+		if (A + B >= std::numbers::pi_v<float>)
+			return nullptr;
+
+		glm::vec3 v0(0.f, 0.f, 0.f);
+		
+		float b = a * std::sin(B) / std::sin(A);
+		float c0 = b * std::cos(A);
+		float c1 = a * std::cos(B);
+		float c = c0 + c1;
+		glm::vec3 v1(c, 0.f, 0.f);
+		glm::vec3 v2(c0, a * std::sin(B), 0.f);
+
+		Helpers::CenterTriangle(v0, v1, v2);
+
+		return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+	}
+
+	auto ASA(float A, float c, float B) -> GraphicsEngine::IAttributePtr
+	{
+		if (A <= 0.f || B <= 0.f)
+			return nullptr;
+
+		if (c <= 0.f)
+			return nullptr;
+
+		if (A + B >= std::numbers::pi_v<float>)
+			return nullptr;
+
+		glm::vec3 v0(0.f, 0.f, 0.f);
+		glm::vec3 v1(c, 0.f, 0.f);
+		
+		float C = std::numbers::pi_v<float> - A - B;
+		float a = c * std::sin(A) / std::sin(C);
+		float x = c - a * std::cos(B);
+		float y = a * std::sin(B);
+		glm::vec3 v2(x, y, 0.f);
+
+		Helpers::CenterTriangle(v0, v1, v2);
+
+		return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+	}
+
+	auto HL(float hypotenuse, float leg) -> GraphicsEngine::IAttributePtr
+	{
+		if (hypotenuse <= 0.f || leg <= 0.f)
+			return nullptr;
+
+		if (hypotenuse <= leg)
+			return nullptr;
+
+		glm::vec3 v0(0.f, 0.f, 0.f);
+		glm::vec3 v1(leg, 0.f, 0.f);
+		glm::vec3 v2(0.f, std::sqrt(std::pow(hypotenuse, 2.f) - std::pow(leg, 2.f)), 0.f);
+
+		Helpers::CenterTriangle(v0, v1, v2);
+
+		return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+	}
+
 	auto SAS(float a, float C, float b) -> GraphicsEngine::IAttributePtr
 	{
+		if (a <= 0.f || b <= 0.f)
+			return nullptr;
+
 		if (C <= 0.f || C >= std::numbers::pi_v<float>)
 			return nullptr;
 
