@@ -42,8 +42,8 @@ namespace GraphicsEngine::AttributeFactory::Triangle
 		glm::vec3 v0(0.f, 0.f, 0.f);
 		glm::vec3 v1(a, 0.f, 0.f);
 
-		float y = b * std::sinf(C);
-		float x = a - b * std::cosf(C);
+		float y = b * std::sin(C);
+		float x = a - b * std::cos(C);
 		glm::vec3 v2(x, y, 0.f);
 
 		Helpers::CenterTriangle(v0, v1, v2);
@@ -59,8 +59,8 @@ namespace GraphicsEngine::AttributeFactory::Triangle
 		glm::vec3 v0(0.f, 0.f, 0.f);
 		glm::vec3 v1(c, 0.f, 0.f);
 
-		float x = (std::powf(a, 2.f) - std::powf(b, 2.f) + std::powf(c, 2.f) / (2.f * c));
-		float y = std::sqrtf(std::powf(a, 2.f) - std::powf((std::powf(a, 2.f) - std::powf(b, 2.f) + std::powf(c, 2.f)) / (2.f * c), 2.f));
+		float x = (std::pow(a, 2.f) - std::pow(b, 2.f) + std::pow(c, 2.f) / (2.f * c));
+		float y = std::sqrt(std::pow(a, 2.f) - std::pow((std::pow(a, 2.f) - std::pow(b, 2.f) + std::pow(c, 2.f)) / (2.f * c), 2.f));
 		glm::vec3 v2(x, y, 0.f);
 
 		auto centroid = *Helpers::ComputeCentroid({ v0, v1, v2 });
