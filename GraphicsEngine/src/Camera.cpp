@@ -1,9 +1,11 @@
 #include "Camera.h"
+#include "ObservableImpl.h"
 
 namespace GraphicsEngine
 {
 
 	Camera::Camera()
+		: m_upObservable(CreateObservable<glm::mat4, glm::mat4>())
 	{
 		UpdateViewMatrix();
 	}
@@ -26,6 +28,11 @@ namespace GraphicsEngine
 	auto Camera::GetFront() const -> glm::vec3
 	{
 		return glm::normalize(GetViewDir());
+	}
+
+	auto Camera::GetObservable() const -> Observable<glm::mat4, glm::mat4>*
+	{
+		return m_upObservable.get();
 	}
 
 	auto Camera::GetProjectionMatrix() const -> glm::mat4
@@ -73,6 +80,7 @@ namespace GraphicsEngine
 	auto Camera::SetProjectionMatrix(const glm::mat4& proj) -> void
 	{
 		m_ProjectionMatrix = proj;
+		m_upObservable->NotifyObservers(m_ViewMatrix, m_ProjectionMatrix);
 	}
 
 	auto Camera::SetUp(const glm::vec3& up) -> void
@@ -84,6 +92,7 @@ namespace GraphicsEngine
 	auto Camera::UpdateViewMatrix() -> void
 	{
 		m_ViewMatrix = glm::lookAt(m_Eye, m_Center, m_Up);
+		m_upObservable->NotifyObservers(m_ViewMatrix, m_ProjectionMatrix);
 	}
 
 	CameraPtr CreateCamera()

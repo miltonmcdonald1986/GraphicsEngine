@@ -30,6 +30,8 @@ namespace GraphicsEngine
 			if (id == 0)
 				GetLog()->Error("Failed to create shader program.");
 
+			GL::UseProgram(id);
+
 			return id;
 		}
 

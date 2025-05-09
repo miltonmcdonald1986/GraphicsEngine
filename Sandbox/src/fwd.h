@@ -3,6 +3,13 @@
 #include <memory>
 #include <vector>
 
+#ifdef _WIN32
+#include <windows.h>
+#define OUTPUT_DEBUG_STRING(msg) OutputDebugStringA(msg)
+#else
+#define OUTPUT_DEBUG_STRING(msg) ((void)0)  // Does nothing on non-Windows systems
+#endif
+
 namespace GraphicsEngine
 {
 	class IEngine;

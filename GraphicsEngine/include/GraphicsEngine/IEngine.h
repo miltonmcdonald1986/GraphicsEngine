@@ -23,7 +23,12 @@ namespace GraphicsEngine
 		virtual auto GetCamera() const -> ICameraPtr = 0;
 		virtual auto GetEntityManager() -> EntityManager* = 0;
 		virtual auto GetLog() const -> ILogPtr = 0;
+
+		/// @brief Retrieves the shader manager associated with the engine.
+		/// @return A pointer to the ShaderManager instance.
+		/// @note The ShaderManager is responsible for managing and compiling shaders used in the graphics engine.
 		virtual auto GetShaderManager() -> ShaderManager* = 0;
+
 		virtual auto GetPolygonMode() const -> PolygonMode = 0;
 		virtual auto Render() -> void = 0;
 		virtual auto ResizeViewport(int width, int height) -> void = 0;

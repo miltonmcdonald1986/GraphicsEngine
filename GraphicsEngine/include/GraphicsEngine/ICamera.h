@@ -7,6 +7,8 @@
 
 #include "glm/mat4x4.hpp"
 
+#include "Observable.h"
+
 namespace GraphicsEngine
 {
 
@@ -19,6 +21,11 @@ namespace GraphicsEngine
 		/// @brief Get the viewing direction of the camera.
 		/// @return The direction the camera is looking.
 		virtual auto GetFront() const -> glm::vec3 = 0;
+
+		/// @brief Retrieves an observable object for the camera's view and projection matrices.
+		/// @return An ObservablePtr containing the view matrix and projection matrix of the camera.
+		/// @note The observable allows tracking changes to the camera's matrices in real-time.
+		virtual auto GetObservable() const -> Observable<glm::mat4, glm::mat4>* = 0;
 
 		/// @brief Gets the projection matrix of the camera.
 		/// @return A 4x4 projection matrix.

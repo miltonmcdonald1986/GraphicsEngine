@@ -13,6 +13,11 @@ namespace GraphicsEngine
 		return m_spCamera->GetFront();
 	}
 
+	auto CameraViewport::GetObservable() const -> Observable<glm::mat4, glm::mat4>*
+	{
+		return m_spCamera->GetObservable();
+	}
+
 	auto CameraViewport::GetProjectionMatrix() const -> glm::mat4
 	{
 		return m_spCamera->GetProjectionMatrix();

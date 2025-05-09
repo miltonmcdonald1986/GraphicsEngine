@@ -66,7 +66,8 @@ auto App::Iterate() -> void
 
     RenderDockSpace();
 
-    m_spEngine->Render();
+    if (m_spEngine)
+        m_spEngine->Render();
 
     IterateWidgets();
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IAttribute.h"
+#include "Observable.h"
 #include "Types.h"
 
 namespace GraphicsEngine
@@ -30,6 +31,9 @@ namespace GraphicsEngine
 
 		/// @brief Number of vertices in the entity.
 		const int		NUM_VERTICES;
+
+		/// @brief Callback function for when camera view or projection matrices are updated.
+		Observable<glm::mat4, glm::mat4>::Callback fnCameraCallback = nullptr;
 
 		/// @brief Transformation matrix representing the entity's position, rotation, and scale.
 		/// @details Defaults to the identity matrix.

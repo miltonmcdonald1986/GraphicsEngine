@@ -15,7 +15,7 @@ namespace GraphicsEngine
 	///
 	/// @remarks This class should not be directly instantiated. The graphics engine will
 	/// hold a unique pointer to this class. Clients can obtain a raw pointer to the
-	/// ShaderManager by calling `IEngine::GetShaderManager()`. However, the lifetime of
+	/// ShaderManager by calling @ref IEngine::GetShaderManager. However, the lifetime of
 	/// the ShaderManager is managed by the engine, and clients should not attempt to
 	/// manage or delete it.
 	class ShaderManager

@@ -88,12 +88,12 @@ namespace GraphicsEngine
 
 			auto shaderId = pEntity->shaderId;
 			m_upShaderManagerImpl->UseShader(shaderId);
-			m_upShaderManagerImpl->SetUniformData(shaderId, "model", pEntity->modelMatrix);
-			if (m_spCamera)
-			{
-				m_upShaderManagerImpl->SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
-				m_upShaderManagerImpl->SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
-			}
+			//m_upShaderManagerImpl->SetUniformData(shaderId, "model", pEntity->modelMatrix);
+			//if (m_spCamera)
+			//{
+			//	m_upShaderManagerImpl->SetUniformData(shaderId, "view", m_spCamera->GetViewMatrix());
+			//	m_upShaderManagerImpl->SetUniformData(shaderId, "projection", m_spCamera->GetProjectionMatrix());
+			//}
 
 			auto textures = pEntity->textures;
 			for (size_t i = 0; i < textures.size(); ++i)
