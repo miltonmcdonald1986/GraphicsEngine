@@ -2,6 +2,7 @@
 #include "DemoCoordinateSystemsUtilities.h"
 #include "EngineLogWidget.h"
 
+#include "GraphicsEngine/AttributeFactory.h"
 #include "GraphicsEngine/IEntityFactory.h"
 
 #include "glm/ext/matrix_clip_space.hpp"
@@ -10,7 +11,14 @@ auto InitCube(GraphicsEngine::IEnginePtr spEngine) -> GraphicsEngine::Entity*
 {
     auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(spEngine);
     auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
-    return spEntityFactory->CreateCubeTextured(shaderId, textures);
+
+    auto spAttrPos = GraphicsEngine::AttributeFactory::Cube::Position();
+    auto spAttrTexCoords = GraphicsEngine::AttributeFactory::Cube::TextureCoordinates();
+    auto spCube = spEntityFactory->AddCube({ spAttrPos, spAttrTexCoords });
+    spCube->shaderId = shaderId;
+    spCube->textures = textures;
+
+    return spCube;
 }
 
 DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow)

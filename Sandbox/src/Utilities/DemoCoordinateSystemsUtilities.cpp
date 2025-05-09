@@ -1,5 +1,6 @@
 #include "DemoCoordinateSystemsUtilities.h"
 
+#include "GraphicsEngine/AttributeFactory.h"
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/IEntityFactory.h"
 
@@ -8,7 +9,7 @@ namespace Utilities
 
     auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> std::vector<GraphicsEngine::Entity*>
     {
-        auto [spShader, textures] = PrepareShaderAndTextures(spEngine);
+        auto [shaderId, textures] = PrepareShaderAndTextures(spEngine);
         
         auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
 
@@ -28,10 +29,16 @@ namespace Utilities
         std::vector<GraphicsEngine::Entity*> cubes;
         for (size_t i = 0; i < positions.size(); ++i)
         {
-            cubes.push_back(spEntityFactory->CreateCubeTextured(spShader, textures));
+            auto attrPos = GraphicsEngine::AttributeFactory::Cube::Position();
+            auto attrTexCoords = GraphicsEngine::AttributeFactory::Cube::TextureCoordinates();
+            auto spCube = spEntityFactory->AddCube({ attrPos, attrTexCoords });
+            spCube->shaderId = shaderId;
+            spCube->textures = textures;
+
+            cubes.push_back(spCube);
             auto model = glm::mat4(1.0f);
             model = glm::translate(model, positions[i]);
-            model = glm::rotate(model, glm::radians(20.f * i), glm::vec3(1.0f, 0.3f, 0.5f));
+            model = glm::rotate(model, glm::radians(20.f * static_cast<float>(i)), glm::vec3(1.0f, 0.3f, 0.5f));
             cubes.back()->modelMatrix = model;
         }
 
