@@ -10,7 +10,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 	if (!spEngine)
 		return;
 	
-	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -26,7 +26,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 		glm::vec2(0.5f, 1.f)
 	};
 
-	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) });
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords });
 	pEntity->shaderId = *spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.frag");
 	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"wall.jpg") };
 

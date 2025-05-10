@@ -7,7 +7,7 @@ PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEngin
 {
     switch (GetEngine()->GetPolygonMode())
     {
-	using enum GraphicsEngine::PolygonMode;
+	using enum GraphicsEngine::Types::PolygonMode;
     case Fill:
         m_Mode = 2;
         break;
@@ -23,7 +23,7 @@ PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEngin
 
 void PolygonModeWidget::Iterate(bool* pShow)
 {
-	using enum GraphicsEngine::PolygonMode;
+	using enum GraphicsEngine::Types::PolygonMode;
 
     auto spEngine = GetEngine();
     ImGui::Begin("Polygon Mode", pShow, ImGuiWindowFlags_AlwaysAutoResize);

@@ -8,11 +8,11 @@ namespace GraphicsEngine
 	struct Uniform
 	{
 		Uniform() = delete;
-		Uniform(StringView name, int location);
+		Uniform(Types::StringView name, int location);
 
-		const String name;
+		const Types::String name;
 		const int location;
-		UniformData data;
+		Types::UniformData data;
 	};
 
 }

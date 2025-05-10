@@ -15,7 +15,7 @@ namespace GraphicsEngine
     {
     }
 
-    auto EntityFactory::AddCube(const IAttributes& attributes) -> Entity*
+    auto EntityFactory::AddCube(const Types::VertexAttributes& attributes) -> Entity*
     {
         // Each face is made of two triangles with vertices determined by the following indices
         std::vector<unsigned int> indices = {

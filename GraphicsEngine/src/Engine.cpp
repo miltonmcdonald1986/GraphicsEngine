@@ -49,7 +49,7 @@ namespace GraphicsEngine
 		return spTexture;
 	}
 
-	auto Engine::GetBackgroundColor() const -> Color
+	auto Engine::GetBackgroundColor() const -> Types::Color
 	{
 		return m_BackgroundColor;
 	}
@@ -69,7 +69,7 @@ namespace GraphicsEngine
 		return m_spLog;
 	}
 
-	auto Engine::GetPolygonMode() const -> PolygonMode
+	auto Engine::GetPolygonMode() const -> Types::PolygonMode
 	{
 		return m_PolygonMode;
 	}
@@ -122,7 +122,7 @@ namespace GraphicsEngine
 		}
 	}
 
-	auto Engine::SetBackgroundColor(const Color& color) -> void
+	auto Engine::SetBackgroundColor(const Types::Color& color) -> void
 	{
 		m_BackgroundColor = color;
 		GL::ClearColor(m_BackgroundColor.r, m_BackgroundColor.g, m_BackgroundColor.b, m_BackgroundColor.a);
@@ -133,9 +133,9 @@ namespace GraphicsEngine
 		m_spCamera = spCamera;
 	}
 
-	auto Engine::SetPolygonMode(PolygonMode polygonMode) -> void
+	auto Engine::SetPolygonMode(Types::PolygonMode polygonMode) -> void
 	{
-		using enum GraphicsEngine::PolygonMode;
+		using enum GraphicsEngine::Types::PolygonMode;
 		
 		m_PolygonMode = polygonMode;
 		switch (m_PolygonMode)

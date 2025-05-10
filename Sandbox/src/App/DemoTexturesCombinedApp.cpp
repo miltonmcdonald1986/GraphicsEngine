@@ -10,7 +10,7 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 	if (!spEngine)
 		return;
 
-	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -33,7 +33,7 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 
-	m_pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);
+	m_pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);
 
 	auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(spEngine);
 	m_pEntity->shaderId = shaderId;

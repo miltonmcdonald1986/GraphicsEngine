@@ -3,7 +3,7 @@
 namespace GraphicsEngine
 {
 
-	Uniform::Uniform(StringView name, int location)
+	Uniform::Uniform(Types::StringView name, int location)
 		:	name(std::string(name)),
 			location(location)
 	{

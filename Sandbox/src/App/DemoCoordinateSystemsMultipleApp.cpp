@@ -10,7 +10,7 @@
 DemoCoordinateSystemsMultipleApp::DemoCoordinateSystemsMultipleApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    GetEngine()->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    GetEngine()->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     Utilities::CreateTenTexturedCubes(GetEngine());
 

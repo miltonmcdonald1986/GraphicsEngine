@@ -29,3 +29,13 @@ namespace GraphicsEngine::AttributeFactory {}
  * attributes in the graphics pipeline.
  */
 namespace GraphicsEngine::AttributeFactory::Triangle {}
+
+/**
+ * @namespace GraphicsEngine::Types
+ * @brief Contains common types and utilities used throughout the GraphicsEngine.
+ *
+ * This namespace provides type definitions, enums, and utility structures
+ * that are essential for the GraphicsEngine's functionality. It includes
+ * types for colors, identifiers, indices, paths, shader IDs, and more.
+ * Additionally, it defines variants for uniform data and vertex attributes.
+ */

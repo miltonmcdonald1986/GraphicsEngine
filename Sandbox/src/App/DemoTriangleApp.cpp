@@ -26,14 +26,14 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	auto spEngine = GetEngine();
 
 	// Set some misc items
-	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
-	spEngine->SetPolygonMode(GraphicsEngine::PolygonMode::Fill);
+	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetPolygonMode(GraphicsEngine::Types::PolygonMode::Fill);
 
 	// Create a triangle
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::AttributeFactory::Triangle::SSS(1.f, 1.f, 1.f) });
 	
 	// Create a shader
-	auto shadersDir = GraphicsEngine::Path(SHADERS_DIR);
+	auto shadersDir = GraphicsEngine::Types::Path(SHADERS_DIR);
 	pEntity->shaderId = *spEngine->GetShaderManager()->AddShader(shadersDir / "DemoTriangle.vert", shadersDir / "DemoTriangle.frag");
 	
 	// Create a camera

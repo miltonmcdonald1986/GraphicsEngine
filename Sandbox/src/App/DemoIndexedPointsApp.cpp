@@ -9,7 +9,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
     if (!spEngine)
         return;
     
-    spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     std::vector<glm::vec3> vertices = {
         glm::vec3(0.5f, 0.5f, 0.0f),
@@ -23,7 +23,7 @@ DemoIndexedPointsApp::DemoIndexedPointsApp(GLFWwindow* pWindow)
         1, 2, 3
     };
 
-    auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::CreateAttribute(vertices) }, indices);
+    auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices }, indices);
     auto shaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.vert", std::filesystem::path(SHADERS_DIR)/"DemoIndexedPoints.frag");
     pEntity->shaderId = *shaderId;
 }

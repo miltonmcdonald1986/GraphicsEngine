@@ -25,7 +25,7 @@ DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow
     :   App(pWindow),
         m_pEntity(InitCube(GetEngine()))
 {
-    GetEngine()->SetBackgroundColor(GraphicsEngine::Color{.r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f});
+    GetEngine()->SetBackgroundColor(GraphicsEngine::Types::Color{.r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f});
 
     m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 

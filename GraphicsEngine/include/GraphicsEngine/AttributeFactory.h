@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IAttribute.h"
+#include "Types.h"
 #include "DllImpExp.h"
 
 namespace GraphicsEngine::AttributeFactory 
@@ -17,7 +18,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// ensuring proper texture mapping for all six faces.
 		///
 		/// @return A pointer to the created texture coordinate attribute.
-		GRAPHICSENGINE_API auto TextureCoordinates() -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto TextureCoordinates() -> Types::VertexAttribute;
 
 		/// @brief Creates a vertex attribute representing the positions of the cube's vertices.
 		/// 
@@ -26,7 +27,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// at the origin, ensuring each face of the cube has unique vertices for proper rendering.
 		///
 		/// @return A pointer to the created position attribute.
-		GRAPHICSENGINE_API auto Position() -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto Position() -> Types::VertexAttribute;
 
 	}
 
@@ -43,7 +44,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param B The second angle (in radians).
 		/// @param a The length of the side opposite angle @p A.
 		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto AAS(float A, float B, float a) -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto AAS(float A, float B, float a) -> Types::VertexAttribute;
 
 		/// @brief Creates a vertex attribute with three vertices based on the 
 		/// Angle-Side-Angle (ASA) triangle configuration.
@@ -55,7 +56,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param c The length of the included side.
 		/// @param B The second angle (in radians).
 		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto ASA(float A, float c, float B) -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto ASA(float A, float c, float B) -> Types::VertexAttribute;
 
 		/// @brief Creates a vertex attribute with three vertices based on the 
 		/// Hypotenuse-Leg (HL) triangle configuration.
@@ -66,7 +67,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param hypotenuse The length of the hypotenuse.
 		/// @param leg The length of a leg.
 		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto HL(float hypotenuse, float leg) -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto HL(float hypotenuse, float leg) -> Types::VertexAttribute;
 
 		/// @brief Creates a vertex attribute with three vertices based on the 
 		/// Side-Angle-Side (SAS) triangle configuration.
@@ -78,7 +79,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param C The angle (in radians) between the two sides.
 		/// @param b The length of the second side of the triangle.
 		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto SAS(float a, float C, float b) -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto SAS(float a, float C, float b) -> Types::VertexAttribute;
 
 		/// @brief Creates a vertex attribute with three vertices based on the 
 		/// Side-Side-Side (SSS) triangle configuration.
@@ -90,7 +91,7 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param b The length of the second side of the triangle.
 		/// @param c The length of the third side of the triangle.
 		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto SSS(float a, float b, float c) -> GraphicsEngine::IAttributePtr;
+		GRAPHICSENGINE_API auto SSS(float a, float b, float c) -> Types::VertexAttribute;
 
 	}
 

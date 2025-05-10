@@ -10,6 +10,8 @@
 namespace GraphicsEngine
 {
 
+	class IEngine;
+
 	class EntityManagerImpl : public EntityManager
 	{
 	public:
@@ -19,21 +21,21 @@ namespace GraphicsEngine
 		~EntityManagerImpl() override = default;
 
 		auto AddEntity(
-			const IAttributes& attributes, 
-			const Indices& indices
+			const Types::VertexAttributes& attributes, 
+			const Types::Indices& indices
 		) -> Entity* override;
 
 		auto GetEntity(
-			EntityId id
+			Types::EntityId id
 		) -> Entity* override;
 
 		auto GetEntityIds(
-		) const -> EntityIds override;
+		) const ->Types::EntityIds override;
 
 	private:
 
 		IEngine* m_pEngine;
-		std::unordered_map<EntityId, Entity> m_Entities;
+		std::unordered_map<Types::EntityId, Entity> m_Entities;
 
 	};
 

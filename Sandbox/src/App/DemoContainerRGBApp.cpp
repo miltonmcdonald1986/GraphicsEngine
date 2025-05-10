@@ -6,7 +6,7 @@ DemoContainerRGBApp::DemoContainerRGBApp(GLFWwindow* pWindow)
 	: App(pWindow)
 {
 	auto spEngine = GetEngine();
-	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -39,11 +39,7 @@ DemoContainerRGBApp::DemoContainerRGBApp(GLFWwindow* pWindow)
 
 	auto oShaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR) / "DemoContainerRGB.vert", std::filesystem::path(SHADERS_DIR) / "DemoContainerRGB.frag");
 
-	auto pEntity = spEngine->GetEntityManager()->AddEntity({
-		GraphicsEngine::CreateAttribute(vertices), 
-		GraphicsEngine::CreateAttribute(colors),
-		GraphicsEngine::CreateAttribute(texCoords) 
-		}, indices);
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, colors, texCoords }, indices);
 
 	pEntity->shaderId = *oShaderId;
 	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") };

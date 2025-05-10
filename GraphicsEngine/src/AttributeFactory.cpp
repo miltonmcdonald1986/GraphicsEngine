@@ -6,7 +6,7 @@ namespace GraphicsEngine::AttributeFactory
 	namespace Cube
 	{
 
-		auto GraphicsEngine::AttributeFactory::Cube::TextureCoordinates() -> GraphicsEngine::IAttributePtr
+		auto GraphicsEngine::AttributeFactory::Cube::TextureCoordinates() -> Types::VertexAttribute
 		{
 			// Each face has four texture coordinates, which we apply in counterclockwise order.
 			auto t0 = glm::vec2(0.f, 0.f);
@@ -15,17 +15,17 @@ namespace GraphicsEngine::AttributeFactory
 			auto t3 = glm::vec2(0.f, 1.f);
 
 			// Associate each face to the texture coordinates
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec2>{
+			return std::vector<glm::vec2>{
 				t0, t1, t2, t3, // FACE 0
 				t0, t1, t2, t3, // FACE 1
 				t0, t1, t2, t3, // FACE 2
 				t0, t1, t2, t3, // FACE 3
 				t0, t1, t2, t3, // FACE 4
 				t0, t1, t2, t3  // FACE 5
-			});
+			};
 		}
 
-		auto GraphicsEngine::AttributeFactory::Cube::Position() -> GraphicsEngine::IAttributePtr
+		auto GraphicsEngine::AttributeFactory::Cube::Position() -> Types::VertexAttribute
 		{
 			// A cube has eight vertices
 			auto v0 = glm::vec3(-0.5f, -0.5f, 0.5f);
@@ -38,14 +38,14 @@ namespace GraphicsEngine::AttributeFactory
 			auto v7 = glm::vec3(-0.5f, 0.5f, -0.5f);
 
 			// A cube has six faces
-			return  GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{
+			return  std::vector<glm::vec3>{
 				v0, v1, v2, v3, // FACE 0
 				v1, v4, v5, v2, // FACE 1
 				v4, v6, v7, v5, // FACE 2
 				v6, v0, v3, v7, // FACE 3
 				v6, v4, v1, v0, // FACE 4
 				v3, v2, v5, v7  // FACE 5
-			});
+			};
 		}
 
 	}
@@ -87,16 +87,16 @@ namespace GraphicsEngine::AttributeFactory
 
 		}
 
-		auto AAS(float A, float B, float a) -> GraphicsEngine::IAttributePtr
+		auto AAS(float A, float B, float a) -> Types::VertexAttribute
 		{
 			if (A <= 0.f || B <= 0.f)
-				return nullptr;
+				return {};
 
 			if (a <= 0.f)
-				return nullptr;
+				return {};
 
 			if (A + B >= std::numbers::pi_v<float>)
-				return nullptr;
+				return {};
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 
@@ -109,19 +109,19 @@ namespace GraphicsEngine::AttributeFactory
 
 			Helpers::CenterTriangle(v0, v1, v2);
 
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto ASA(float A, float c, float B) -> GraphicsEngine::IAttributePtr
+		auto ASA(float A, float c, float B) -> Types::VertexAttribute
 		{
 			if (A <= 0.f || B <= 0.f)
-				return nullptr;
+				return {};
 
 			if (c <= 0.f)
-				return nullptr;
+				return {};
 
 			if (A + B >= std::numbers::pi_v<float>)
-				return nullptr;
+				return {};
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 			glm::vec3 v1(c, 0.f, 0.f);
@@ -134,16 +134,16 @@ namespace GraphicsEngine::AttributeFactory
 
 			Helpers::CenterTriangle(v0, v1, v2);
 
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto HL(float hypotenuse, float leg) -> GraphicsEngine::IAttributePtr
+		auto HL(float hypotenuse, float leg) -> Types::VertexAttribute
 		{
 			if (hypotenuse <= 0.f || leg <= 0.f)
-				return nullptr;
+				return {};
 
 			if (hypotenuse <= leg)
-				return nullptr;
+				return {};
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 			glm::vec3 v1(leg, 0.f, 0.f);
@@ -151,16 +151,16 @@ namespace GraphicsEngine::AttributeFactory
 
 			Helpers::CenterTriangle(v0, v1, v2);
 
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto SAS(float a, float C, float b) -> GraphicsEngine::IAttributePtr
+		auto SAS(float a, float C, float b) -> Types::VertexAttribute
 		{
 			if (a <= 0.f || b <= 0.f)
-				return nullptr;
+				return {};
 
 			if (C <= 0.f || C >= std::numbers::pi_v<float>)
-				return nullptr;
+				return {};
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 			glm::vec3 v1(a, 0.f, 0.f);
@@ -171,13 +171,13 @@ namespace GraphicsEngine::AttributeFactory
 
 			Helpers::CenterTriangle(v0, v1, v2);
 
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto SSS(float a, float b, float c) -> GraphicsEngine::IAttributePtr
+		auto SSS(float a, float b, float c) -> Types::VertexAttribute
 		{
 			if (!Helpers::ValidTriangle(a, b, c))
-				return nullptr;
+				return {};
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 			glm::vec3 v1(c, 0.f, 0.f);
@@ -188,7 +188,7 @@ namespace GraphicsEngine::AttributeFactory
 
 			Helpers::CenterTriangle(v0, v1, v2);
 
-			return GraphicsEngine::CreateAttribute(std::vector<glm::vec3>{ v0, v1, v2 });
+			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
 	}

@@ -2,7 +2,7 @@
 
 #include <variant>
 
-namespace GraphicsEngine
+namespace GraphicsEngine::Types
 {
 
 	struct Color
@@ -19,19 +19,8 @@ namespace GraphicsEngine
 	using EntityId = Id;
 	using EntityIds = std::vector<EntityId>;
 
-	class IEngine;
-	using IEnginePtr = std::shared_ptr<IEngine>;
-
-	class IEntity;
-	using IEntityPtr = std::shared_ptr<IEntity>;
-	using IEntities = std::vector<IEntityPtr>;
-
 	using Index = unsigned int;
 	using Indices = std::vector<Index>;
-
-	class ITexture;
-	using ITexturePtr = std::shared_ptr<ITexture>;
-	using ITextures = std::vector<ITexturePtr>;
 
 	using Path = std::filesystem::path;
 	using OptPath = std::optional<Path>;
@@ -57,6 +46,13 @@ namespace GraphicsEngine
 		glm::mat4x4,
 		glm::vec4,
 		int
-		>;
+	>;
+
+	using VertexAttribute = std::variant<
+		std::vector<glm::vec2>,
+		std::vector<glm::vec3>
+	>;
+
+	using VertexAttributes = std::vector<VertexAttribute>;
 
 }

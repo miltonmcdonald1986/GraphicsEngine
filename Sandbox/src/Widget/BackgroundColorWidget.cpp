@@ -6,7 +6,7 @@
 BackgroundColorWidget::BackgroundColorWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
-    GraphicsEngine::Color color = spEngine->GetBackgroundColor();
+    GraphicsEngine::Types::Color color = spEngine->GetBackgroundColor();
     m_Color[0] = color.r;
     m_Color[1] = color.g;
     m_Color[2] = color.b;
@@ -18,7 +18,7 @@ void BackgroundColorWidget::Iterate(bool* pShow)
 
     if (ImGui::ColorEdit4("##2f", m_Color.data(), ImGuiColorEditFlags_Float))
     {
-        GraphicsEngine::Color color;
+        GraphicsEngine::Types::Color color;
         color.r = m_Color[0];
         color.g = m_Color[1];
         color.b = m_Color[2];

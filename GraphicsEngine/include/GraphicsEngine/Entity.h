@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IAttribute.h"
+#include "ITexture.h"
 #include "Observable.h"
 #include "Types.h"
 
@@ -21,16 +22,16 @@ namespace GraphicsEngine
 		/// @brief Constructs an Entity with the given attributes and indices.
 		/// @param attributes Vertex attributes defining the entity's geometry.
 		/// @param indices Index buffer specifying the order in which vertices are drawn.
-		Entity(const IAttributes& attributes, const Indices& indices);
+		Entity(const Types::VertexAttributes& attributes, const Types::Indices& indices);
 
 		/// @brief Unique identifier for the entity.
-		const EntityId	ENTITY_ID;
+		const Types::EntityId ENTITY_ID;
 
 		/// @brief Number of indices in the index buffer.
-		const int		NUM_INDICES;
+		const int NUM_INDICES;
 
 		/// @brief Number of vertices in the entity.
-		const int		NUM_VERTICES;
+		const int NUM_VERTICES;
 
 		/// @brief Callback function for when camera view or projection matrices are updated.
 		Observable<glm::mat4, glm::mat4>::Callback fnCameraCallback = nullptr;
@@ -40,10 +41,10 @@ namespace GraphicsEngine
 		glm::mat4	modelMatrix = glm::mat4(1.f);
 
 		/// @brief ID of the shader program associated with the entity.
-		ShaderId	shaderId = 0;
+		Types::ShaderId shaderId = 0;
 
 		/// @brief Collection of textures applied to the entity.
-		ITextures	textures;
+		ITextures textures;
 
 	private:
 

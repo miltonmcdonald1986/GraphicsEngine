@@ -11,7 +11,7 @@ namespace GraphicsEngine
 		explicit EntityFactory(IEnginePtr spEngine);
 		~EntityFactory() override = default;
 
-		auto AddCube(const IAttributes& attributes) -> Entity* override;
+		auto AddCube(const Types::VertexAttributes& attributes) -> Entity* override;
 
 	private:
 		IEnginePtr m_spEngine = nullptr;

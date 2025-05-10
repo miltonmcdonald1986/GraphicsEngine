@@ -20,8 +20,8 @@ namespace GraphicsEngine
 	}
 
 	auto EntityManagerImpl::AddEntity(
-		const IAttributes& attributes, 
-		const Indices& indices
+		const Types::VertexAttributes& attributes, 
+		const Types::Indices& indices
 	) -> Entity*
 	{
 		Entity entity(attributes, indices);
@@ -30,7 +30,7 @@ namespace GraphicsEngine
 	}
 
 	auto EntityManagerImpl::GetEntity(
-		EntityId id
+		Types::EntityId id
 	) -> Entity*
 	{
 		if (m_Entities.contains(id))
@@ -40,9 +40,9 @@ namespace GraphicsEngine
 	}
 
 	auto EntityManagerImpl::GetEntityIds(
-	) const -> EntityIds
+	) const -> Types::EntityIds
 	{
-		return EntityIds(std::views::keys(m_Entities).begin(), std::views::keys(m_Entities).end());
+		return Types::EntityIds(std::views::keys(m_Entities).begin(), std::views::keys(m_Entities).end());
 	}
 
 }

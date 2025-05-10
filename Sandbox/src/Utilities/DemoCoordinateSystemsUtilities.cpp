@@ -45,9 +45,9 @@ namespace Utilities
         return cubes;
     }
 
-    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::ShaderId, GraphicsEngine::ITextures>
+    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Types::ShaderId, GraphicsEngine::ITextures>
     {
-        auto result = std::make_pair(GraphicsEngine::ShaderId(0), GraphicsEngine::ITextures{});
+        auto result = std::make_pair(GraphicsEngine::Types::ShaderId(0), GraphicsEngine::ITextures{});
 
         if (!spEngine)
             return result;

@@ -32,16 +32,16 @@ namespace GraphicsEngine
 		/// @param oGeom Optional path to the geometry shader file (default: std::nullopt).
 		/// @return An optional ShaderId if the shader was successfully added, or std::nullopt otherwise.
 		virtual auto AddShader(
-			const Path& vert, 
-			const Path& frag, 
-			const OptPath& oGeom = std::nullopt
-		) -> OptShaderId = 0;
+			const Types::Path& vert, 
+			const Types::Path& frag, 
+			const Types::OptPath& oGeom = std::nullopt
+		) -> Types::OptShaderId = 0;
 
 		/// @brief Retrieves the currently active shader.
 		/// 
 		/// @return An optional ShaderId of the currently active shader, or std::nullopt if no shader is active.
 		virtual auto GetCurrentShader(
-		) const -> OptShaderId = 0;
+		) const ->Types::OptShaderId = 0;
 
 		/// @brief Sets uniform data for a shader.
 		/// 
@@ -50,9 +50,9 @@ namespace GraphicsEngine
 		/// @param data The data to set for the uniform variable.
 		/// @return True if the uniform data was successfully set, false otherwise.
 		virtual auto SetUniformData(
-			ShaderId id,
-			StringView name,
-			const UniformData& data
+			Types::ShaderId id,
+			Types::StringView name,
+			const Types::UniformData& data
 		) -> bool = 0;
 
 	};

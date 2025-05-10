@@ -23,21 +23,21 @@ namespace GraphicsEngine
 		/// @param indices Optional index buffer specifying the order in which vertices are drawn.
 		/// @return Pointer to the newly created Entity.
 		virtual auto AddEntity(
-			const IAttributes& attributes, 
-			const Indices& indices = {}
+			const Types::VertexAttributes& attributes, 
+			const Types::Indices& indices = {}
 		) -> Entity* = 0;
 
 		/// @brief Retrieves an entity by its unique ID.
 		/// @param id The identifier of the entity.
 		/// @return Pointer to the requested Entity, or `nullptr` if not found.
 		virtual auto GetEntity(
-			EntityId id
+			Types::EntityId id
 		) -> Entity* = 0;
 		
 		/// @brief Gets a collection of all registered entity IDs.
 		/// @return A list of entity IDs currently managed by the EntityManager.
 		virtual auto GetEntityIds(
-		) const -> EntityIds = 0;
+		) const -> Types::EntityIds = 0;
 	};
 
 }

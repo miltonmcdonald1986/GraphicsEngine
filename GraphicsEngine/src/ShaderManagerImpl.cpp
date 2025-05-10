@@ -15,13 +15,13 @@ namespace GraphicsEngine
 		// Declarations of helper functions.
 
 		auto CompileShader(GLenum shaderType, const char* source) -> GLuint;
-		auto CompileShadersAndLinkProgram(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id;
-		auto ErrorMessageShaderWithIdDoesNotExist(ShaderId id) -> String;
+		auto CompileShadersAndLinkProgram(Types::StringView vert, Types::StringView frag, std::optional<Types::StringView> oGeom) -> Types::Id;
+		auto ErrorMessageShaderWithIdDoesNotExist(Types::ShaderId id) -> Types::String;
 		auto LinkProgram(const std::vector<GLuint>& shaders) -> GLuint;
 
 		// Definitions of helper functions.
 
-		auto CompileShadersAndLinkProgram(StringView vert, StringView frag, std::optional<StringView> oGeom) -> Id
+		auto CompileShadersAndLinkProgram(Types::StringView vert, Types::StringView frag, std::optional<Types::StringView> oGeom) -> Types::Id
 		{
 			auto vertShaderId = Helpers::CompileShader(GL_VERTEX_SHADER, vert.empty() ? nullptr : std::string(vert).c_str());
 			auto geomShaderId = Helpers::CompileShader(GL_GEOMETRY_SHADER, oGeom ? std::string(*oGeom).c_str() : nullptr);
@@ -67,7 +67,7 @@ namespace GraphicsEngine
 			return shader;
 		}
 
-		auto ErrorMessageShaderWithIdDoesNotExist(ShaderId id) -> String
+		auto ErrorMessageShaderWithIdDoesNotExist(Types::ShaderId id) -> Types::String
 		{
 			return std::format("Shader with id {} does not exist.", id);
 		}
@@ -111,9 +111,9 @@ namespace GraphicsEngine
 	{
 	}
 
-	auto ShaderManagerImpl::AddShader(const Path& vert, const Path& frag, const OptPath& oGeom) -> OptShaderId
+	auto ShaderManagerImpl::AddShader(const Types::Path& vert, const Types::Path& frag, const Types::OptPath& oGeom) -> Types::OptShaderId
 	{
-		auto GetSourceFromFile = [this](const Path& path) -> String
+		auto GetSourceFromFile = [this](const Types::Path& path) -> Types::String
 			{
 				if (path.empty())
 					return "";
@@ -134,19 +134,19 @@ namespace GraphicsEngine
 
 		auto vertSource = GetSourceFromFile(vert);
 		auto fragSource = GetSourceFromFile(frag);
-		std::optional<String> oGeomSource = oGeom ? std::optional<String>(GetSourceFromFile(*oGeom)) : std::nullopt;
+		std::optional<Types::String> oGeomSource = oGeom ? std::optional<Types::String>(GetSourceFromFile(*oGeom)) : std::nullopt;
 		return AddShaderFromSource(vertSource, fragSource, oGeomSource);
 	}
 
-	auto ShaderManagerImpl::GetCurrentShader() const -> OptShaderId
+	auto ShaderManagerImpl::GetCurrentShader() const -> Types::OptShaderId
 	{
 		GLint id;
 		GL::GetIntegerv(GL_CURRENT_PROGRAM, &id);
 
-		return id == 0 ? std::nullopt : OptShaderId(id);
+		return id == 0 ? std::nullopt : Types::OptShaderId(id);
 	}
 
-	auto ShaderManagerImpl::SetUniformData(ShaderId id, StringView name, const UniformData& data) -> bool
+	auto ShaderManagerImpl::SetUniformData(Types::ShaderId id, Types::StringView name, const Types::UniformData& data) -> bool
 	{
 		if (!m_Shaders.contains(id))
 		{
@@ -187,7 +187,7 @@ namespace GraphicsEngine
 		return true;
 	}
 
-	auto ShaderManagerImpl::UseShader(ShaderId id) const -> bool
+	auto ShaderManagerImpl::UseShader(Types::ShaderId id) const -> bool
 	{
 		if (!m_Shaders.contains(id))
 		{
@@ -199,7 +199,7 @@ namespace GraphicsEngine
 		return true;
 	}
 
-	auto ShaderManagerImpl::AddShaderFromSource(StringView vert, StringView frag, OptStringView oGeom) -> OptShaderId
+	auto ShaderManagerImpl::AddShaderFromSource(Types::StringView vert, Types::StringView frag, Types::OptStringView oGeom) -> Types::OptShaderId
 	{
 		auto id = Helpers::CompileShadersAndLinkProgram(vert, frag, oGeom);
 
@@ -268,7 +268,7 @@ namespace GraphicsEngine
 			}
 		}
 
-		return id == 0 ? std::nullopt : OptShaderId(id);
+		return id == 0 ? std::nullopt : Types::OptShaderId(id);
 	}
 
 	auto CreateShaderManagerImpl(IEngine* pEngine) -> ShaderManagerImplPtr

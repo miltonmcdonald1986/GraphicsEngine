@@ -11,6 +11,8 @@
 namespace GraphicsEngine
 {
 
+	class IEngine;
+
 	class ShaderManagerImpl : public ShaderManager
 	{
 	public:
@@ -20,34 +22,34 @@ namespace GraphicsEngine
 		~ShaderManagerImpl() override = default;
 
 		auto AddShader(
-			const Path& vert,
-			const Path& frag,
-			const OptPath& oGeom
-		) -> OptShaderId override;
+			const Types::Path& vert,
+			const Types::Path& frag,
+			const Types::OptPath& oGeom
+		) -> Types::OptShaderId override;
 
 		auto GetCurrentShader(
-		) const->OptShaderId override;
+		) const->Types::OptShaderId override;
 
 		auto SetUniformData(
-			ShaderId id,
-			StringView name,
-			const UniformData& data
+			Types::ShaderId id,
+			Types::StringView name,
+			const Types::UniformData& data
 		) -> bool override;
 
 		auto UseShader(
-			ShaderId id
+			Types::ShaderId id
 		) const -> bool;
 
 	private:
 
 		auto AddShaderFromSource(
-			StringView vert,
-			StringView frag,
-			OptStringView oGeom = std::nullopt
-		) -> OptShaderId;
+			Types::StringView vert,
+			Types::StringView frag,
+			Types::OptStringView oGeom = std::nullopt
+		) -> Types::OptShaderId;
 
 		IEngine* m_pEngine;
-		std::unordered_map<Id, Uniforms> m_Shaders;
+		std::unordered_map<Types::Id, Uniforms> m_Shaders;
 
 	};
 

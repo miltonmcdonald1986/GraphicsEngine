@@ -40,7 +40,7 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
     m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, OnFramebufferSize);
 
     auto spEngine = GetEngine();
-    spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     std::vector<glm::vec3> vertices = {
         glm::vec3(-0.5f, -0.5f, 0.f),
@@ -61,10 +61,7 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
         2, 3, 0
     };
 
-    m_pEntity = spEngine->GetEntityManager()->AddEntity({
-        GraphicsEngine::CreateAttribute(vertices),
-        GraphicsEngine::CreateAttribute(texCoords)
-    }, indices);
+    m_pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);
 
     auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
 

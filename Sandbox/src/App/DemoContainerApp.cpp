@@ -7,7 +7,7 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 {
 	auto spEngine = GetEngine();
 
-	spEngine->SetBackgroundColor(GraphicsEngine::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
 	std::vector<glm::vec3> vertices =
 	{
@@ -30,7 +30,7 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 	
-	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::CreateAttribute(vertices), GraphicsEngine::CreateAttribute(texCoords) }, indices);	
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);	
 
 	if (auto oShaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR) / "DemoContainer.vert", std::filesystem::path(SHADERS_DIR) / "DemoContainer.frag"))
 		pEntity->shaderId = *oShaderId;

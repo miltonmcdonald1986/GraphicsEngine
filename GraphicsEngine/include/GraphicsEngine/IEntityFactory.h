@@ -22,7 +22,7 @@ namespace GraphicsEngine
 		///			in the generated cube.
 		/// @note	Attribute factory functions for **Pos, TexCoords**, etc., which generate **24-vertex attributes**,
 		///			can be found in @ref AttributeFactory.h.
-		virtual auto AddCube(const IAttributes& attributes) -> Entity* = 0;
+		virtual auto AddCube(const Types::VertexAttributes& attributes) -> Entity* = 0;
 	};
 	
 	/// @brief Alias for a shared pointer to IEntityFactory.
