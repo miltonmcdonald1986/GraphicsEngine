@@ -6,6 +6,7 @@ enum class Apps : int
 	DemoCoordianteSystemsMultiple,
 	DemoCoordinateSystemsDepth,
 	DemoCoordinateSystems,
+	DemoFlyCameraApp,
 	DemoTransformations,
 	DemoTexturesCombined,
 	DemoContainerRGB,

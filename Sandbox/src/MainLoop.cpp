@@ -7,6 +7,7 @@
 #include "DemoCoordinateSystemsDepthApp.h"
 #include "DemoCoordinateSystemsMultipleApp.h"
 #include "DemoFlashingGreenTriangleApp.h"
+#include "DemoFlyCameraApp.h"
 #include "DemoIndexedPointsApp.h"
 #include "DemoTexturedTriangleApp.h"
 #include "DemoTexturesCombinedApp.h"
@@ -35,6 +36,12 @@ auto RunApp(GLFWwindow* pWindow, Apps whichApp)
 	case Apps::Test:
 	{
 		TestApp app(pWindow);
+		app.Run();
+		break;
+	}
+	case Apps::DemoFlyCameraApp:
+	{
+		DemoFlyCameraApp app(pWindow);
 		app.Run();
 		break;
 	}

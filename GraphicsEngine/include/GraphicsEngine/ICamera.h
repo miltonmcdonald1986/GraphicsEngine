@@ -52,6 +52,12 @@ namespace GraphicsEngine
 		virtual auto SetEye(const glm::vec3& eye) -> void = 0;
 	};
 
+	/// @brief Alias for a shared pointer to the ICamera interface.
 	using ICameraPtr = std::shared_ptr<ICamera>;
+
+	/// @brief Alias for a callback function that takes two 4x4 matrices (view and projection).
+	/// @details	This callback is typically used to handle updates to the camera's view and projection matrices.
+	///				It is any function of the form `void Fn(const glm::mat4& view, const glm::mat4& projection)`
+	using ICameraCallback = Observable<glm::mat4, glm::mat4>::Callback;
 
 }

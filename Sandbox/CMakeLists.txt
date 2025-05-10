@@ -24,14 +24,10 @@ file(GLOB SANDBOX_SRC
 	${SANDBOX_SHADERS}
 	${SANDBOX_TEXTURES}
 )
-source_group("Header Files" FILES ${SANDBOX_HEADER_FILES})
-source_group("Header Files/App" FILES ${SANDBOX_APP_HEADER_FILES})
-source_group("Header Files/Utilities" FILES ${SANDBOX_UTILITIES_HEADER_FILES})
-source_group("Header Files/Widget" FILES ${SANDBOX_WIDGET_HEADER_FILES})
-source_group("Source Files" FILES ${SANDBOX_SOURCE_FILES})
-source_group("Source Files/App" FILES ${SANDBOX_APP_SOURCE_FILES})
-source_group("Source Files/Utilities" FILES ${SANDBOX_UTILITIES_SOURCE_FILES})
-source_group("Source Files/Widget" FILES ${SANDBOX_WIDGET_SOURCE_FILES})
+source_group("Source Files" FILES ${SANDBOX_HEADER_FILES} ${SANDBOX_SOURCE_FILES})
+source_group("Source Files/App" FILES ${SANDBOX_APP_HEADER_FILES} ${SANDBOX_APP_SOURCE_FILES})
+source_group("Source Files/Utilities" FILES ${SANDBOX_UTILITIES_HEADER_FILES} ${SANDBOX_UTILITIES_SOURCE_FILES})
+source_group("Source Files/Widget" FILES ${SANDBOX_WIDGET_HEADER_FILES} ${SANDBOX_WIDGET_SOURCE_FILES})
 source_group("Shaders" FILES ${SANDBOX_SHADERS})
 source_group("Textures" FILES ${SANDBOX_TEXTURES})
 

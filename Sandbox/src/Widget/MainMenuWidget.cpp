@@ -10,6 +10,7 @@ const AppMap_t AppMap =
 	std::make_pair(Apps::DemoCoordianteSystemsMultiple, "Demo coordinate systems multiple"),
 	std::make_pair(Apps::DemoCoordinateSystemsDepth, "Demo coordinate systems depth"),
 	std::make_pair(Apps::DemoCoordinateSystems, "Demo coordinate systems"),
+	std::make_pair(Apps::DemoFlyCameraApp, "Demo fly camera"),
 	std::make_pair(Apps::DemoTransformations, "Demo transformations"),
 	std::make_pair(Apps::DemoTexturesCombined, "Demo textures combined"),
 	std::make_pair(Apps::DemoContainerRGB, "Demo container rgb"),

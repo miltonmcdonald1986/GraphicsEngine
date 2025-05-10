@@ -2,16 +2,18 @@
 
 #include "App.h"
 
-class TestApp : public App
+#include "GLFW/glfw3.h"
+
+class DemoFlyCameraApp : public App
 {
 
 public:
 
-	explicit TestApp(
+	explicit DemoFlyCameraApp(
 		GLFWwindow* pWindow
 	);
 
-	~TestApp(
+	~DemoFlyCameraApp(
 	) override;
 
 	auto Iterate(
