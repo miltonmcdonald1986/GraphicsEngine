@@ -7,7 +7,7 @@ class PolygonModeWidget : public Widget
 public:
     PolygonModeWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
 
-    auto Iterate() -> void override;
+    auto Iterate(bool* pShow) -> void override;
 
 private:
     int m_Mode = 0;

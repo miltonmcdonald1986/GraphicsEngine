@@ -2,6 +2,7 @@
 
 #include "GraphicsEngine/IEngine.h"
 
+#include "EngineLogWidget.h"
 #include "Widget.h"
 
 namespace AppCallbacks
@@ -27,7 +28,7 @@ namespace AppCallbacks
         glfwSwapBuffers(pWindow);
     }
 
-    auto OnKey(GLFWwindow* pWindow, int key, int /*scancode*/, int action, int /*mods*/) -> void
+    auto OnKey(GLFWwindow* pWindow, int key, int scancode, int action, int mods) -> void
     {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         {
@@ -35,6 +36,8 @@ namespace AppCallbacks
             if (pApp)
                 pApp->SetIsRunning(false);
         }
+        else
+            ImGui_ImplGlfw_KeyCallback(pWindow, key, scancode, action, mods);
     }
 
 }
@@ -49,6 +52,8 @@ App::App(GLFWwindow* pWindow)
     glfwSetWindowUserPointer(m_pWindow, this);
 
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, AppCallbacks::OnKey);
+
+    m_spWidgetEngineLog = CreateEngineLogWidget(m_pWindow, m_spEngine);
 }
 
 App::~App()
@@ -114,11 +119,30 @@ auto App::Run() -> void
     }
 }
 
-auto App::IterateWidgets() const -> void
+auto App::IterateWidgets() -> void
 {
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::GetIO().KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_L))
+            m_ShowEngineLogWidget = !m_ShowEngineLogWidget;
+
+        if (ImGui::BeginMenu("View"))
+        {
+            if (ImGui::MenuItem("Engine Log", "Ctrl+L"))
+                m_ShowEngineLogWidget = true;
+
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndMainMenuBar();
+    }
+
+    if (m_ShowEngineLogWidget)
+        m_spWidgetEngineLog->Iterate(&m_ShowEngineLogWidget);
+
 	for (const auto& upWidget : m_Widgets)
 	{
-		upWidget->Iterate();
+		upWidget->Iterate(nullptr);
 	}
 }
 

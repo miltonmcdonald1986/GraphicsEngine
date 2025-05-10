@@ -6,5 +6,5 @@ class DearImGuiDemoWindowWidget : public Widget
 {
 public:
     DearImGuiDemoWindowWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine);
-    auto Iterate() -> void override;
+    auto Iterate(bool* pShow) -> void override;
 };

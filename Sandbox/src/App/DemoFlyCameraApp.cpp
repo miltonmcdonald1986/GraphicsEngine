@@ -17,8 +17,14 @@ namespace
         spEngine->GetShaderManager()->SetUniformData(*spEngine->GetShaderManager()->GetCurrentShader(), "projection", projection);
     }
 
-    void OnScroll(GLFWwindow* pWindow, double /*xOffset*/, double yOffset)
+    void OnScroll(GLFWwindow* pWindow, double xOffset, double yOffset)
     {
+        if (ImGui::GetIO().WantCaptureMouse)
+        {
+            ImGui_ImplGlfw_ScrollCallback(pWindow, xOffset, yOffset);
+            return;
+        }
+
         if (!pWindow)
             return;
 

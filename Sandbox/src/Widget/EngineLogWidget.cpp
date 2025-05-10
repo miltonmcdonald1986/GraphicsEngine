@@ -10,7 +10,7 @@ EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr
 {
 }
 
-auto EngineLogWidget::Iterate() -> void
+auto EngineLogWidget::Iterate(bool* pShow) -> void
 {
     using namespace GraphicsEngine;
 
@@ -18,7 +18,7 @@ auto EngineLogWidget::Iterate() -> void
 
     m_LogLevel = std::to_underlying(m_spLog->GetLevel());
 
-    ImGui::Begin("Graphics Engine Log");
+    ImGui::Begin("Graphics Engine Log", pShow);
     if (ImGui::Button("Clear Log"))
         m_spLog->ClearMessages();
     ImGui::Text("Log Level");

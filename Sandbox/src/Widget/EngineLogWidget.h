@@ -10,7 +10,7 @@ public:
 
     EngineLogWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
 
-    auto Iterate() -> void override;
+    auto Iterate(bool* pShow) -> void override;
 
 private:
 
@@ -18,5 +18,5 @@ private:
     int m_LogLevel = 0;
 };
 
-using EngineLogWidgetPtr = std::unique_ptr<EngineLogWidget>;
+using EngineLogWidgetPtr = std::shared_ptr<EngineLogWidget>;
 auto CreateEngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> EngineLogWidgetPtr;

@@ -21,12 +21,12 @@ PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEngin
     }
 }
 
-void PolygonModeWidget::Iterate()
+void PolygonModeWidget::Iterate(bool* pShow)
 {
 	using enum GraphicsEngine::PolygonMode;
 
     auto spEngine = GetEngine();
-    ImGui::Begin("Polygon Mode", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Begin("Polygon Mode", pShow, ImGuiWindowFlags_AlwaysAutoResize);
     if (ImGui::RadioButton("Point", &m_Mode, 0))
         spEngine->SetPolygonMode(Point);
     ImGui::SameLine();

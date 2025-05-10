@@ -42,7 +42,7 @@ MainMenuWidget::MainMenuWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr s
 {
 }
 
-auto MainMenuWidget::Iterate() -> void
+auto MainMenuWidget::Iterate(bool* /*pShow*/) -> void
 {
 	ImGui::OpenPopup("Main Menu");
 

@@ -5,7 +5,7 @@ DearImGuiDemoWindowWidget::DearImGuiDemoWindowWidget(GLFWwindow* pWindow, Graphi
 {
 }
 
-auto DearImGuiDemoWindowWidget::Iterate() -> void
+auto DearImGuiDemoWindowWidget::Iterate(bool* pShow) -> void
 {
-    ImGui::ShowDemoWindow();
+    ImGui::ShowDemoWindow(pShow);
 }

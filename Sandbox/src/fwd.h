@@ -30,5 +30,5 @@ typedef struct GLFWwindow GLFWwindow;	//NOSONAR
 typedef void (*GLFWkeyfun)(GLFWwindow* window, int key, int scancode, int action, int mods);	//NOSONAR
 
 class Widget;
-using WidgetPtr = std::unique_ptr<Widget>;
+using WidgetPtr = std::shared_ptr<Widget>;
 using Widgets = std::vector<WidgetPtr>;

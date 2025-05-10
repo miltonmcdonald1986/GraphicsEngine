@@ -8,7 +8,7 @@ public:
 
 	Widget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
 	virtual ~Widget() = default;
-	virtual auto Iterate() -> void = 0;
+	virtual auto Iterate(bool* pShow = nullptr) -> void = 0;
 
 protected:
 

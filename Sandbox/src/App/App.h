@@ -4,6 +4,9 @@
 
 #include "GraphicsEngine/IEngine.h"
 
+class EngineLogWidget;
+using EngineLogWidgetPtr = std::shared_ptr<EngineLogWidget>;
+
 class App
 {
 public:
@@ -23,16 +26,19 @@ protected:
 	auto GetIsRunning() const -> bool;
 	auto GetWidgets() -> Widgets&;
 	auto GetWindow() const -> GLFWwindow*;
-	auto IterateWidgets() const -> void;
+	auto IterateWidgets() -> void;
 
 private:
+
 	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
 	GraphicsEngine::IEnginePtr m_spEngine = nullptr;
+	EngineLogWidgetPtr m_spWidgetEngineLog = nullptr;
 	Widgets m_Widgets;
 	void* m_PrevUserPointer = nullptr;	//NOSONAR: GLFW does not have a proper type for this
+	bool m_ShowEngineLogWidget = false;
 };
 
 namespace AppCallbacks

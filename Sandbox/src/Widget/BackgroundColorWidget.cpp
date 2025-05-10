@@ -12,9 +12,9 @@ BackgroundColorWidget::BackgroundColorWidget(GLFWwindow* pWindow, GraphicsEngine
     m_Color[2] = color.b;
 }
 
-void BackgroundColorWidget::Iterate()
+void BackgroundColorWidget::Iterate(bool* pShow)
 {
-    ImGui::Begin("Background Color", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Begin("Background Color", pShow, ImGuiWindowFlags_AlwaysAutoResize);
 
     if (ImGui::ColorEdit4("##2f", m_Color.data(), ImGuiColorEditFlags_Float))
     {
