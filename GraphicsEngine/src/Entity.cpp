@@ -1,6 +1,5 @@
 #include "Entity.h"
 
-#include "Attribute.h"
 #include "Log.h"
 #include "SafeGL.h"
 

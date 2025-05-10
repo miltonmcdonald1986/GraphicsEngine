@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entity.h"
-#include "IAttribute.h"
 #include "Types.h"
 
 namespace GraphicsEngine

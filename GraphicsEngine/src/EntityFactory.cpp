@@ -1,6 +1,5 @@
 #include "EntityFactory.h"
 
-#include "IAttribute.h"
 
 namespace GraphicsEngine
 {

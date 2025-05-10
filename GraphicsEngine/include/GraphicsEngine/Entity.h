@@ -1,6 +1,5 @@
 #pragma once
 
-#include "IAttribute.h"
 #include "ITexture.h"
 #include "Observable.h"
 #include "Types.h"

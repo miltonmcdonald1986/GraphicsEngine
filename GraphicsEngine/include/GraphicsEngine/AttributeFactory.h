@@ -1,6 +1,5 @@
 #pragma once
 
-#include "IAttribute.h"
 #include "Types.h"
 #include "DllImpExp.h"
 
