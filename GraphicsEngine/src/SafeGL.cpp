@@ -191,6 +191,14 @@ namespace GraphicsEngine::GL
 		return result;
 	}
 
+	auto IsProgram (GLuint program) -> GLboolean
+	{
+		GLboolean isProgram = glIsProgram (program);
+		HandleError ();
+		
+		return isProgram;
+	}
+
 	auto LinkProgram(GLuint program) -> void
 	{
 		glLinkProgram(program);

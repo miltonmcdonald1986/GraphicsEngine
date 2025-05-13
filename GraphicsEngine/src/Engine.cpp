@@ -84,13 +84,15 @@ namespace GraphicsEngine
 		for (auto entId : m_upEntityManagerImpl->GetEntityIds())
 		{
 			auto pEntity = m_upEntityManagerImpl->GetEntity(entId);
+			if (!pEntity)
+				continue;
 
-			auto shaderId = pEntity->shaderId;
-			m_upShaderManagerImpl->UseShader(shaderId);
-			
-			// Want to get this line out of the engine rendering cycle, and somehow have it handled by the entities or something.
-			m_upShaderManagerImpl->SetUniformData(shaderId, "model", pEntity->modelMatrix);
-			
+			if (!pEntity->pShader)
+				continue;
+
+			pEntity->pShader->Use();
+			pEntity->pShader->SetUniformData ("model", pEntity->modelMatrix);
+
 			auto textures = pEntity->textures;
 			for (size_t i = 0; i < textures.size(); ++i)
 			{
@@ -100,7 +102,7 @@ namespace GraphicsEngine
 				
 				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
-				m_upShaderManagerImpl->SetUniformData(shaderId, spTexture->GetName(), static_cast<int>(i));
+				pEntity->pShader->SetUniformData(spTexture->GetName(), static_cast<int>(i));
 			}
 			GL::BindVertexArray(pEntity->ENTITY_ID);
 			if (pEntity->NUM_INDICES> 0)

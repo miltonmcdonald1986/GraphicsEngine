@@ -78,5 +78,5 @@ auto EngineLogWidget::Iterate(bool* pShow) -> void
 
 auto CreateEngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> EngineLogWidgetPtr
 {
-    return std::make_unique<EngineLogWidget>(pWindow, spEngine);
+    return std::make_shared<EngineLogWidget>(pWindow, spEngine);
 }

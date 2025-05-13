@@ -37,3 +37,8 @@ void PolygonModeWidget::Iterate(bool* pShow)
         spEngine->SetPolygonMode(Fill);
     ImGui::End();
 }
+
+auto CreatePolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> PolygonModeWidgetPtr
+{
+    return std::make_shared<PolygonModeWidget>(pWindow, spEngine);
+}

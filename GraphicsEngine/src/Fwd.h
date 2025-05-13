@@ -4,8 +4,4 @@
 
 namespace GraphicsEngine
 {
-
-	struct Uniform;
-	using Uniforms = std::vector<Uniform>;
-
 }

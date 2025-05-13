@@ -3,6 +3,8 @@
 #include "GraphicsEngine/IEngine.h"
 
 #include "EngineLogWidget.h"
+#include "PolygonModeWidget.h"
+#include "ShaderWidget.h"
 #include "Widget.h"
 
 namespace AppCallbacks
@@ -24,8 +26,7 @@ namespace AppCallbacks
         // Tell the engine that the viewport was resized
         spEngine->ResizeViewport(newWidth, newHeight);
 
-        spEngine->Render();
-        glfwSwapBuffers(pWindow);
+        pApp->Iterate ();
     }
 
     auto OnKey(GLFWwindow* pWindow, int key, int scancode, int action, int mods) -> void
@@ -54,6 +55,8 @@ App::App(GLFWwindow* pWindow)
     m_PrevKeyCallback = glfwSetKeyCallback(m_pWindow, AppCallbacks::OnKey);
 
     m_spWidgetEngineLog = CreateEngineLogWidget(m_pWindow, m_spEngine);
+    m_spWidgetPolygonMode = CreatePolygonModeWidget(m_pWindow, m_spEngine);
+    m_spWidgetShader = CreateShaderWidget (m_pWindow, m_spEngine);
 }
 
 App::~App()
@@ -126,10 +129,16 @@ auto App::IterateWidgets() -> void
         if (ImGui::GetIO().KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_L))
             m_ShowEngineLogWidget = !m_ShowEngineLogWidget;
 
-        if (ImGui::BeginMenu("View"))
+        if (ImGui::BeginMenu("Widgets"))
         {
             if (ImGui::MenuItem("Engine Log", "Ctrl+L"))
                 m_ShowEngineLogWidget = true;
+
+            if (ImGui::MenuItem("Polygon Mode"))
+                m_ShowPolygonModeWidget = true;
+
+            if (ImGui::MenuItem ("Shader"))
+                m_ShowShaderWidget = true;
 
             ImGui::EndMenu();
         }
@@ -139,6 +148,10 @@ auto App::IterateWidgets() -> void
 
     if (m_ShowEngineLogWidget)
         m_spWidgetEngineLog->Iterate(&m_ShowEngineLogWidget);
+    if (m_ShowPolygonModeWidget)
+        m_spWidgetPolygonMode->Iterate(&m_ShowPolygonModeWidget);
+    if (m_ShowShaderWidget)
+        m_spWidgetShader->Iterate (&m_ShowShaderWidget);
 
 	for (const auto& upWidget : m_Widgets)
 	{

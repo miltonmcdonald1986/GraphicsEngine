@@ -7,13 +7,15 @@
 #include "GraphicsEngine/AttributeFactory.h"
 #include "GraphicsEngine/ICameraViewport.h"
 #include "GraphicsEngine/IEngine.h"
+#include "GraphicsEngine/ShaderSnippets.h"
+#include "GraphicsEngine/ShaderUtilities.h"
 
 auto OnCamera(GraphicsEngine::IEnginePtr spEngine, const glm::mat4& /*view*/, const glm::mat4& projection) -> void
 {
 	if (!spEngine)
 		return;
 
-	spEngine->GetShaderManager()->SetUniformData(*spEngine->GetShaderManager()->GetCurrentShader(), "projection", projection);
+	spEngine->GetShaderManager()->GetCurrentShader()->SetUniformData("transformationMatrix", projection);
 }
 
 DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
@@ -34,7 +36,11 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	
 	// Create a shader
 	auto shadersDir = GraphicsEngine::Types::Path(SHADERS_DIR);
-	pEntity->shaderId = *spEngine->GetShaderManager()->AddShader(shadersDir / "DemoTriangle.vert", shadersDir / "DemoTriangle.frag");
+	std::string vertexShader = 
+		GraphicsEngine::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.vert") 
+		+ GraphicsEngine::ShaderSnippets::Transformation;
+	std::string fragmentShader = GraphicsEngine::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.frag");
+	pEntity->pShader = spEngine->GetShaderManager ()->AddShaderFromSource (vertexShader, fragmentShader);
 	
 	// Create a camera
 	spEngine->SetCamera(GraphicsEngine::CreateCameraViewport());

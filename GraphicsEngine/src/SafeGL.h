@@ -47,6 +47,7 @@ namespace GraphicsEngine::GL
 	auto GetUniformfv(GLuint program, GLint location, GLfloat* params) -> void;
 	auto GetUniformiv(GLuint program, GLint location, GLint* params) -> void;
 	auto GetUniformLocation(GLuint program, const GLchar* name) -> GLint;
+	auto IsProgram (GLuint program) -> GLboolean;
 	auto LinkProgram(GLuint program) -> void;
 	auto PolygonMode(GLenum face, GLenum mode) -> void;
 	auto ShaderSource(GLuint shader, GLsizei count, const GLchar** string, const GLint* length) -> void;

@@ -40,15 +40,11 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
 
     pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
-    auto pShaderManager = spEngine->GetShaderManager();
-    if (!pShaderManager)
-        return;
+    auto [pShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    pShader->SetUniformData("view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
-    auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
-    pShaderManager->SetUniformData(shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    pShaderManager->SetUniformData(shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
-
-    pEntity->shaderId = shaderId;
+    pEntity->pShader = pShader;
     pEntity->textures = textures;
 }
 
@@ -58,8 +54,8 @@ auto DemoCoordinateSystemsApp::Iterate() -> void
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
 
-    auto pShaderManager = GetEngine()->GetShaderManager();
-    pShaderManager->SetUniformData(*pShaderManager->GetCurrentShader(), "projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+    auto pShader = GetEngine()->GetShaderManager()->GetCurrentShader();
+    pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }

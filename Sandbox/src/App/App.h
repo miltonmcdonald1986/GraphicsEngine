@@ -7,6 +7,12 @@
 class EngineLogWidget;
 using EngineLogWidgetPtr = std::shared_ptr<EngineLogWidget>;
 
+class PolygonModeWidget;
+using PolygonModeWidgetPtr = std::shared_ptr<PolygonModeWidget>;
+
+class ShaderWidget;
+using ShaderWidgetPtr = std::shared_ptr<ShaderWidget>;
+
 class App
 {
 public:
@@ -36,9 +42,13 @@ private:
 	GLFWwindow* m_pWindow;
 	GraphicsEngine::IEnginePtr m_spEngine = nullptr;
 	EngineLogWidgetPtr m_spWidgetEngineLog = nullptr;
+	PolygonModeWidgetPtr m_spWidgetPolygonMode = nullptr;
+	ShaderWidgetPtr m_spWidgetShader = nullptr;
 	Widgets m_Widgets;
 	void* m_PrevUserPointer = nullptr;	//NOSONAR: GLFW does not have a proper type for this
 	bool m_ShowEngineLogWidget = false;
+	bool m_ShowPolygonModeWidget = false;
+	bool m_ShowShaderWidget = false;
 };
 
 namespace AppCallbacks

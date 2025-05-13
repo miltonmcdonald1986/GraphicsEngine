@@ -6,6 +6,7 @@
 #include <unordered_map>
 
 #include "Fwd.h"
+#include "ShaderImpl.h"
 #include "Types.h"
 
 namespace GraphicsEngine
@@ -21,35 +22,24 @@ namespace GraphicsEngine
 
 		~ShaderManagerImpl() override = default;
 
-		auto AddShader(
+		auto AddShaderFromFiles (
 			const Types::Path& vert,
 			const Types::Path& frag,
 			const Types::OptPath& oGeom
-		) -> Types::OptShaderId override;
+		) -> Shader* override;
 
-		auto GetCurrentShader(
-		) const->Types::OptShaderId override;
+		auto AddShaderFromSource (
+			const Types::StringView& vert,
+			const Types::StringView& frag,
+			const Types::OptStringView& oGeom
+		) -> Shader* override;
 
-		auto SetUniformData(
-			Types::ShaderId id,
-			Types::StringView name,
-			const Types::UniformData& data
-		) -> bool override;
+		auto GetCurrentShader () -> Shader* override;
 
-		auto UseShader(
-			Types::ShaderId id
-		) const -> bool;
-
-	private:
-
-		auto AddShaderFromSource(
-			Types::StringView vert,
-			Types::StringView frag,
-			Types::OptStringView oGeom = std::nullopt
-		) -> Types::OptShaderId;
+		auto GetShader (Types::ShaderId id) -> Shader* override;
 
 		IEngine* m_pEngine;
-		std::unordered_map<Types::Id, Uniforms> m_Shaders;
+		std::unordered_map<Types::ShaderId, ShaderImpl> m_Shaders;
 
 	};
 

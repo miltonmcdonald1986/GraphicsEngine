@@ -27,7 +27,7 @@ DemoTexturedTriangleApp::DemoTexturedTriangleApp(GLFWwindow* pWindow)
 	};
 
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords });
-	pEntity->shaderId = *spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.frag");
+	pEntity->pShader = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoTexturedTriangle.frag");
 	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"wall.jpg") };
 
 	if (auto spCamera = GraphicsEngine::CreateCameraViewport())

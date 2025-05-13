@@ -9,4 +9,9 @@ namespace GraphicsEngine
 	{
 	}
 
+	Uniform::Uniform (const Uniform& other)
+		: name (std::string(other.name)), location (other.location), data (other.data) 
+	{
+	}
+
 }

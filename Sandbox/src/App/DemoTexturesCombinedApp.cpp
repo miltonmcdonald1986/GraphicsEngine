@@ -35,12 +35,12 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 
 	m_pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);
 
-	auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(spEngine);
-	m_pEntity->shaderId = shaderId;
+	auto [pShader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
+	m_pEntity->pShader = pShader;
 	m_pEntity->textures = textures;
 	
 	m_pEntity->modelMatrix = glm::mat4(1.f);
-	GetEngine()->GetShaderManager()->SetUniformData(m_pEntity->shaderId, "view", glm::mat4(1.f));
+	m_pEntity->pShader->SetUniformData("view", glm::mat4(1.f));
 }
 
 auto DemoTexturesCombinedApp::Iterate() -> void
@@ -50,7 +50,7 @@ auto DemoTexturesCombinedApp::Iterate() -> void
 	glfwGetWindowSize(GetWindow(), &width, &height);
 	auto fWidth = static_cast<float>(width);
 	auto fHeight = static_cast<float>(height);
-	GetEngine()->GetShaderManager()->SetUniformData(m_pEntity->shaderId, "projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+	m_pEntity->pShader->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
 
 	App::Iterate();
 }

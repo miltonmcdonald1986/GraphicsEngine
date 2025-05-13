@@ -12,3 +12,6 @@ public:
 private:
     int m_Mode = 0;
 };
+
+using PolygonModeWidgetPtr = std::shared_ptr<PolygonModeWidget>;
+auto CreatePolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> PolygonModeWidgetPtr;

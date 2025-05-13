@@ -37,10 +37,7 @@ DemoContainerRGBApp::DemoContainerRGBApp(GLFWwindow* pWindow)
 		2, 3, 0
 	};
 
-	auto oShaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR) / "DemoContainerRGB.vert", std::filesystem::path(SHADERS_DIR) / "DemoContainerRGB.frag");
-
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, colors, texCoords }, indices);
-
-	pEntity->shaderId = *oShaderId;
+	pEntity->pShader = spEngine->GetShaderManager ()->AddShaderFromFiles (std::filesystem::path (SHADERS_DIR) / "DemoContainerRGB.vert", std::filesystem::path (SHADERS_DIR) / "DemoContainerRGB.frag");
 	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") };
 }

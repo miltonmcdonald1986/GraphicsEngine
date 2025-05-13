@@ -9,13 +9,13 @@
 
 auto InitCube(GraphicsEngine::IEnginePtr spEngine) -> GraphicsEngine::Entity*
 {
-    auto [shaderId, textures] = Utilities::PrepareShaderAndTextures(spEngine);
+    auto [pShader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
     auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
 
     auto spAttrPos = GraphicsEngine::AttributeFactory::Cube::Position();
     auto spAttrTexCoords = GraphicsEngine::AttributeFactory::Cube::TextureCoordinates();
     auto spCube = spEntityFactory->AddCube({ spAttrPos, spAttrTexCoords });
-    spCube->shaderId = shaderId;
+    spCube->pShader = pShader;
     spCube->textures = textures;
 
     return spCube;
@@ -29,9 +29,9 @@ DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow
 
     m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
-    auto pShaderManager = GetEngine()->GetShaderManager();
-    pShaderManager->SetUniformData(m_pEntity->shaderId, "view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
-    pShaderManager->SetUniformData(m_pEntity->shaderId, "projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
+    auto pShader = GetEngine ()->GetShaderManager ()->GetCurrentShader ();
+    pShader->SetUniformData("view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
+    pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 }
 
 auto DemoCoordinateSystemsDepthApp::Iterate() -> void
@@ -41,16 +41,14 @@ auto DemoCoordinateSystemsDepthApp::Iterate() -> void
     auto diff = now - start;
     auto seconds = std::chrono::duration<float>(diff).count();
 
-    auto pShaderManager = GetEngine()->GetShaderManager();
-    auto shaderId = pShaderManager->GetCurrentShader();
-
+    auto pShader = GetEngine()->GetShaderManager()->GetCurrentShader ();
     m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), seconds * glm::radians(50.f), glm::vec3(0.5f, 1.f, 0.f));
-    pShaderManager->SetUniformData(*shaderId, "model", m_pEntity->modelMatrix);
+    pShader->SetUniformData("model", m_pEntity->modelMatrix);
 
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    pShaderManager->SetUniformData(*shaderId, "projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+    pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }

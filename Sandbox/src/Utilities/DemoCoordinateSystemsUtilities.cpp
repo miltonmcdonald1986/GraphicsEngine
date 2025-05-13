@@ -9,7 +9,7 @@ namespace Utilities
 
     auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> std::vector<GraphicsEngine::Entity*>
     {
-        auto [shaderId, textures] = PrepareShaderAndTextures(spEngine);
+        auto [pShader, textures] = PrepareShaderAndTextures(spEngine);
         
         auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
 
@@ -32,7 +32,7 @@ namespace Utilities
             auto attrPos = GraphicsEngine::AttributeFactory::Cube::Position();
             auto attrTexCoords = GraphicsEngine::AttributeFactory::Cube::TextureCoordinates();
             auto spCube = spEntityFactory->AddCube({ attrPos, attrTexCoords });
-            spCube->shaderId = shaderId;
+            spCube->pShader = pShader;
             spCube->textures = textures;
 
             cubes.push_back(spCube);
@@ -45,15 +45,16 @@ namespace Utilities
         return cubes;
     }
 
-    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Types::ShaderId, GraphicsEngine::ITextures>
+    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Shader*, GraphicsEngine::ITextures>
     {
-        auto result = std::make_pair(GraphicsEngine::Types::ShaderId(0), GraphicsEngine::ITextures{});
+        GraphicsEngine::Shader* pShader;
+        auto result = std::make_pair(pShader, GraphicsEngine::ITextures{});
 
         if (!spEngine)
             return result;
 
-        auto shaderId = spEngine->GetShaderManager()->AddShader(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
-        if (shaderId == 0)
+        pShader = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.vert", std::filesystem::path(SHADERS_DIR)/"DemoCoordinateSystems.frag");
+        if (!pShader)
         {
             spEngine->GetLog()->Error("Failed to create shader.");
             return result;
@@ -75,7 +76,7 @@ namespace Utilities
             return result;
         }
 
-        result.first = *shaderId;
+        result.first = pShader;
         result.second = { spTexture1, spTexture2 };
 
         return result;

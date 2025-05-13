@@ -2,6 +2,7 @@
 
 #include "ITexture.h"
 #include "Observable.h"
+#include "Shader.h"
 #include "Types.h"
 
 namespace GraphicsEngine
@@ -11,6 +12,10 @@ namespace GraphicsEngine
 	///
 	/// An Entity encapsulates vertex attributes, indices, shader information, and textures.
 	/// It maintains transformation data via `modelMatrix`, allowing for manipulation in world space.
+	/// 
+	/// @note Entities should never be created directly. Instead, use the `AddEntity` method
+	/// of the `EntityManager` to create and manage entities. This ensures proper initialization 
+	/// and integration with the graphics engine's entity management system.
 	struct Entity
 	{
 	public:
@@ -39,16 +44,14 @@ namespace GraphicsEngine
 		/// @details Defaults to the identity matrix.
 		glm::mat4	modelMatrix = glm::mat4(1.f);
 
-		/// @brief ID of the shader program associated with the entity.
-		Types::ShaderId shaderId = 0;
+		/// @brief The shader program associated with the entity.
+		Shader* pShader = nullptr;
 
 		/// @brief Collection of textures applied to the entity.
 		ITextures textures;
 
 	private:
 
-		/// @brief Constructs an entity using raw graphical data.
-		/// @param data Tuple containing the VAO handle, the number of indices, and number of vertices.
 		explicit Entity(const std::tuple<GLuint, GLsizei, GLsizei>& data);
 	};
 
