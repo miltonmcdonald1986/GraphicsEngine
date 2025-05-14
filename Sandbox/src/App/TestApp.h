@@ -17,8 +17,4 @@ public:
 	auto Iterate(
 	) -> void override;
 
-private:
-
-	GLFWscrollfun m_pPrevScrollCallback = nullptr;
-
 };
