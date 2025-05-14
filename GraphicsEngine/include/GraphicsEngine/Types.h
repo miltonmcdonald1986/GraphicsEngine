@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <variant>
 
 #include "glm/mat4x4.hpp"
