@@ -47,7 +47,7 @@ namespace Utilities
 
     auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Shader*, GraphicsEngine::ITextures>
     {
-        GraphicsEngine::Shader* pShader;
+        GraphicsEngine::Shader* pShader = nullptr;
         auto result = std::make_pair(pShader, GraphicsEngine::ITextures{});
 
         if (!spEngine)

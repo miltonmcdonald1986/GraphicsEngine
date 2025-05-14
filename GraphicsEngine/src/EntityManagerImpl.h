@@ -34,7 +34,7 @@ namespace GraphicsEngine
 
 	private:
 
-		IEngine* m_pEngine;
+		[[maybe_unused]] IEngine* m_pEngine;
 		std::unordered_map<Types::EntityId, Entity> m_Entities;
 
 	};
