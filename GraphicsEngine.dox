@@ -22,6 +22,15 @@ namespace GraphicsEngine {}
 namespace GraphicsEngine::AttributeFactory {}
 
 /**
+ * @namespace GraphicsEngine::AttributeFactory::Cube
+ * @brief Special utilities for cube-based attributes.
+ * 
+ * This namespace is dedicated to constructing and managing cube-specific 
+ * attributes in the graphics pipeline.
+ */
+namespace GraphicsEngine::AttributeFactory::Cube {}
+
+/**
  * @namespace GraphicsEngine::AttributeFactory::Triangle
  * @brief Special utilities for triangle-based attributes.
  * 
