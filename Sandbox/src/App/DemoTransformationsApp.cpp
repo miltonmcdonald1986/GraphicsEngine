@@ -15,7 +15,7 @@ namespace
         if (newHeight == 0)
             return;
 
-        auto pApp = static_cast<DemoTransformationsApp*>(glfwGetWindowUserPointer(pWindow));
+        const auto* pApp = static_cast<DemoTransformationsApp*>(glfwGetWindowUserPointer(pWindow));
         if (!pApp)
             return;
 
@@ -35,10 +35,9 @@ namespace
 }
 
 DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
-    : App(pWindow)
+    :   App(pWindow),
+        m_pPrevFramebufferSizeCallback(glfwSetFramebufferSizeCallback (pWindow, OnFramebufferSize))
 {
-    m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, OnFramebufferSize);
-
     auto spEngine = GetEngine();
     spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 

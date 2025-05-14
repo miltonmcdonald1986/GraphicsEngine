@@ -233,9 +233,9 @@ namespace GraphicsEngine
 	}
 
 	ShaderImpl::ShaderImpl (const std::tuple<Types::StringView, Types::OptStringView, Types::ShaderId, Uniforms, Types::StringView>& data)
-		: Shader(data)
+		:	Shader(data),
+			m_Uniforms(Uniforms(std::get<3>(data)))
 	{
-		m_Uniforms = Uniforms (std::get<3> (data));
 	}
 
 	auto ShaderImpl::GetUniformData (Types::StringView name) const -> std::optional<Types::UniformData>

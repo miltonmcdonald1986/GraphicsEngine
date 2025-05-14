@@ -60,8 +60,6 @@ namespace Utilities
             return result;
         }
 
-        GraphicsEngine::ITextures textures;
-
         auto spTexture1 = spEngine->CreateNewTextureFromFile("texture1", std::filesystem::path(TEXTURES_DIR)/"container.jpg");
         if (!spTexture1)
         {

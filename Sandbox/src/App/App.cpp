@@ -44,11 +44,10 @@ namespace AppCallbacks
 }
 
 App::App(GLFWwindow* pWindow)
-	: m_pWindow(pWindow),
-	  m_spEngine(GraphicsEngine::CreateEngine())
+    :   m_pPrevFramebufferSizeCallback(glfwSetFramebufferSizeCallback (pWindow, AppCallbacks::OnFramebufferSize)),
+        m_pWindow(pWindow),
+	    m_spEngine(GraphicsEngine::CreateEngine())
 {
-    m_pPrevFramebufferSizeCallback = glfwSetFramebufferSizeCallback(pWindow, AppCallbacks::OnFramebufferSize);
-
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
     glfwSetWindowUserPointer(m_pWindow, this);
 

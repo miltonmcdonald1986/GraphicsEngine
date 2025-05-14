@@ -93,7 +93,7 @@ namespace GraphicsEngine
 			pEntity->pShader->Use();
 			pEntity->pShader->SetUniformData ("model", pEntity->modelMatrix);
 
-			auto textures = pEntity->textures;
+			auto& textures = pEntity->textures;
 			for (size_t i = 0; i < textures.size(); ++i)
 			{
 				auto spTexture = std::dynamic_pointer_cast<Texture>(textures[i]);

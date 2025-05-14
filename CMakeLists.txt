@@ -15,7 +15,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (MSVC)
 	string(REPLACE "/W3" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-	add_compile_options(/W4 /WX)
+	add_compile_options(/W4 /w14640 /WX /permissive-)
 else()
 	add_compile_options(-Wall -Wextra -Werror -Wno-unknown-pragmas)
 endif()

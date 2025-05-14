@@ -35,18 +35,12 @@ Log::Log()
 	// A rotating file sink provides logging that can be viewed in a text editor after the engine shuts down.
 
 	m_spRotatingFileSink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>("logs\\GraphicsEngine.log", 1024 * 1024 * 5, 3);
-	if (m_spRotatingFileSink)
-		sinks.push_back(m_spRotatingFileSink);
+	sinks.push_back(m_spRotatingFileSink);
 
 	m_spQueueSink = std::make_shared<queue_sink>(m_QueueSize);
-	if (m_spQueueSink)
-		sinks.push_back(m_spQueueSink);
-
-	// Create a logger with our sinks.
+	sinks.push_back(m_spQueueSink);
 
 	m_spLogger = std::make_shared<spdlog::logger>("Engine", std::begin(sinks), std::end(sinks));
-	if (!m_spLogger)
-		return;
 
 	spdlog::flush_every(std::chrono::seconds(3));
 	spdlog::register_logger(m_spLogger);

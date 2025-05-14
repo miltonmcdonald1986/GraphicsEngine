@@ -29,7 +29,7 @@ namespace
         if (!pWindow)
             return;
 
-        auto pApp = static_cast<DemoFlyCameraApp*>(glfwGetWindowUserPointer(pWindow));
+        const auto* pApp = static_cast<DemoFlyCameraApp*>(glfwGetWindowUserPointer(pWindow));
         if (!pApp)
             return;
 

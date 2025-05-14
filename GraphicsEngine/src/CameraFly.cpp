@@ -52,9 +52,8 @@ namespace GraphicsEngine
 		pitch = glm::clamp(pitch, -89.f, 89.f);
 		degrees = pitch - oldPitch;
 
-		glm::vec3 front = GetFront();
 		auto rotMat = glm::rotate(glm::mat4(1.f), glm::radians(degrees), GetRight());
-		front = glm::normalize(glm::vec3(rotMat * glm::vec4(GetFront(), 1.f)));
+		auto front = glm::normalize(glm::vec3(rotMat * glm::vec4(GetFront(), 1.f)));
 		m_spCamera->SetUp(glm::normalize(glm::vec3(rotMat * glm::vec4(m_spCamera->GetUp(), 1.f))));
 
 		auto dist = glm::length(m_spCamera->GetViewDir());

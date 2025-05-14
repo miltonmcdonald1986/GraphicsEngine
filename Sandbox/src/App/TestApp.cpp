@@ -16,7 +16,7 @@ namespace
         if (!pWindow)
             return;
 
-        auto pApp = static_cast<TestApp*>(glfwGetWindowUserPointer(pWindow));
+        const auto* pApp = static_cast<TestApp*>(glfwGetWindowUserPointer(pWindow));
         if (!pApp)
             return;
 
@@ -34,10 +34,9 @@ namespace
 }
 
 TestApp::TestApp(GLFWwindow* pWindow)
-    : App(pWindow)
+    :   App(pWindow),
+        m_pPrevScrollCallback(glfwSetScrollCallback (pWindow, OnScroll))
 {
-    m_pPrevScrollCallback = glfwSetScrollCallback(pWindow, OnScroll);
-
     // Call this before updating framebuffer stuff since this creates shaders.
     Utilities::CreateTenTexturedCubes(GetEngine());
 

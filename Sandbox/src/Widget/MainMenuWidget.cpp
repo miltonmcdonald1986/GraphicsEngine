@@ -49,14 +49,16 @@ auto MainMenuWidget::Iterate(bool* /*pShow*/) -> void
 	// Ensure the popup fills the entire screen
 	const ImGuiIO& io = ImGui::GetIO();
 	ImVec2 displaySize = io.DisplaySize;
-	float sx = io.DisplaySize.x;
-	float sy = io.DisplaySize.y;
-	float baseX = 800.f;
-	float baseY = 600.f;
 	ImGui::SetNextWindowSize(displaySize);
 	ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 	if (ImGui::BeginPopupModal("Main Menu", nullptr, ImGuiWindowFlags_NoTitleBar))
 	{
+		float sx = io.DisplaySize.x;
+		float sy = io.DisplaySize.y;
+
+		float baseX = 800.f;
+		float baseY = 600.f;
+
 		// Calculate position to center the contents
 		auto contentSize = ImVec2(300*sx/baseX, 200*sy/baseY); // Define the size of your content
 		auto windowSize = ImGui::GetWindowSize();
