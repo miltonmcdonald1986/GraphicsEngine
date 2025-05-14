@@ -55,7 +55,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential
         sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
-        
+
+    - name: Verify installed packages (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        dpkg -l | grep -E "libxinerama|libxcursor|xorg|libglu1-mesa|pkg-config"
+    
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
