@@ -151,11 +151,11 @@ auto App::IterateWidgets() -> void
         m_spWidgetPolygonMode->Iterate(&m_ShowPolygonModeWidget);
     if (m_ShowShaderWidget)
         m_spWidgetShader->Iterate (&m_ShowShaderWidget);
-
-	for (const auto& upWidget : m_Widgets)
-	{
-		upWidget->Iterate(nullptr);
-	}
+    
+    for (const auto& upWidget : m_Widgets)
+    {
+        upWidget->Iterate(nullptr);
+    }
 }
 
 auto App::SetIsRunning(bool isRunning) -> void
