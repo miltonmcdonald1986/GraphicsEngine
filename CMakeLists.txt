@@ -22,3 +22,4 @@ endif()
 
 add_subdirectory(GraphicsEngine)
 add_subdirectory(Sandbox)
+add_subdirectory(tests)
