@@ -6,7 +6,7 @@ namespace GraphicsEngine::AttributeFactory
 	namespace Cube
 	{
 
-		auto GraphicsEngine::AttributeFactory::Cube::TextureCoordinates() -> Types::VertexAttribute
+		auto TextureCoordinates() -> Types::VertexAttribute
 		{
 			// Each face has four texture coordinates, which we apply in counterclockwise order.
 			auto t0 = glm::vec2(0.f, 0.f);
@@ -25,7 +25,7 @@ namespace GraphicsEngine::AttributeFactory
 			};
 		}
 
-		auto GraphicsEngine::AttributeFactory::Cube::Position() -> Types::VertexAttribute
+		auto Position() -> Types::VertexAttribute
 		{
 			// A cube has eight vertices
 			auto v0 = glm::vec3(-0.5f, -0.5f, 0.5f);
