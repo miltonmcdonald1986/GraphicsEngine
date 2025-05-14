@@ -9,6 +9,15 @@ namespace GraphicsEngine::AttributeFactory
 	namespace Cube
 	{
 
+		/// @brief Creates a vertex attribute representing the positions of the cube's vertices.
+		/// 
+		/// This function generates a position attribute for a cube, defining the 3D coordinates 
+		/// of its vertices in space. The attribute contains 24 vertices for a unit cube centered 
+		/// at the origin, ensuring each face of the cube has unique vertices for proper rendering.
+		///
+		/// @return A pointer to the created position attribute.
+		GRAPHICSENGINE_API auto Position () -> Types::VertexAttribute;
+
 		/// @brief Creates a vertex attribute representing texture coordinates for a cube.
 		/// 
 		/// This function generates a texture coordinate attribute for a cube, which can be 
@@ -18,15 +27,6 @@ namespace GraphicsEngine::AttributeFactory
 		///
 		/// @return A pointer to the created texture coordinate attribute.
 		GRAPHICSENGINE_API auto TextureCoordinates() -> Types::VertexAttribute;
-
-		/// @brief Creates a vertex attribute representing the positions of the cube's vertices.
-		/// 
-		/// This function generates a position attribute for a cube, defining the 3D coordinates 
-		/// of its vertices in space. The attribute contains 24 vertices for a unit cube centered 
-		/// at the origin, ensuring each face of the cube has unique vertices for proper rendering.
-		///
-		/// @return A pointer to the created position attribute.
-		GRAPHICSENGINE_API auto Position() -> Types::VertexAttribute;
 
 	}
 
