@@ -17,8 +17,8 @@ jobs:
       - name: Download Clang compile_commands.json
         uses: actions/download-artifact@v4
         with:
-          name: compile-commands-clang
           path: build
+          merge-multiple: true
 
       - name: Run Clang-Tidy
         run: |
