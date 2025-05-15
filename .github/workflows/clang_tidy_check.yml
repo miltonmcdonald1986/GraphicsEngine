@@ -18,7 +18,14 @@ jobs:
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: clang_build.yml
+          path: build
+
+      - name: Move extracted files to build directory
+        run: mv build/clang-build-artifact/* build/
+
+      - name: Cleanup extracted directory
+        run: rm -rf build/clang-build-artifact
           
       - name: Run Clang-Tidy
         run: |
-          clang-tidy -p clang-build-artifact $(find GraphicsEngine Sandbox tests \( -name "*.cpp" -o -name "*.h" \))
+          clang-tidy -p build $(find GraphicsEngine Sandbox tests \( -name "*.cpp" -o -name "*.h" \))
