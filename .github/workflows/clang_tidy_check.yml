@@ -18,6 +18,9 @@ jobs:
         uses: dawidd6/action-download-artifact@v9
         with:
           workflow: clang_build.yml
+
+      - name: Move compile_commands.json to build directory
+        run: mv compile-commands-clang/compile_commands.json build/
           
       - name: Run Clang-Tidy
         run: |
