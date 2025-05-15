@@ -125,6 +125,10 @@ jobs:
           name: build-artifact-${{ matrix.os }}-${{ matrix.c_compiler }}
           path: build
 
+      - name: Set executable permissions for test binaries
+        if: runner.os == 'Linux'  # Only runs on Linux
+        run: chmod +x build/bin/GraphicsEngineTests
+
       - name: Run Tests
         working-directory: build/tests
         run: ctest --build-config ${{ matrix.build_type }}
