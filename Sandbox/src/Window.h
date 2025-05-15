@@ -3,5 +3,5 @@
 struct GLFWwindow;
 
 auto InitializeGLFW() -> GLFWwindow*;
-auto OnFramebufferSize(GLFWwindow* window, int width, int height) -> void;
+auto OnFramebufferSize(GLFWwindow* pWindow, int width, int height) -> void;
 auto TerminateGLFW(GLFWwindow* pWindow) -> void;

@@ -8,7 +8,7 @@ class EngineLogWidget : public Widget
 {
 public:
 
-    EngineLogWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
+    EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine);
 
     auto Iterate(bool* pShow) -> void override;
 

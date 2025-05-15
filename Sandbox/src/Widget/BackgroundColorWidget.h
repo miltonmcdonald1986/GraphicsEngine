@@ -7,7 +7,7 @@
 class BackgroundColorWidget : public Widget
 {
 public:
-    BackgroundColorWidget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
+    BackgroundColorWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine);
     auto Iterate(bool* pShow) -> void override;
 
 private:

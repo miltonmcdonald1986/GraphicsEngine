@@ -6,7 +6,7 @@ class Widget
 {
 public:
 
-	Widget(GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine);
+	Widget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine);
 	virtual ~Widget() = default;
 	virtual auto Iterate(bool* pShow = nullptr) -> void = 0;
 
