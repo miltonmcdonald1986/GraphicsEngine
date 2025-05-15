@@ -1,6 +1,6 @@
 # This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
-name: Build & Test
+name: ci
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    name: "Configure and build GraphicsEngine"
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -89,6 +90,7 @@ jobs:
         path: build
 
   tests:
+    name: "Run unit tests"
     runs-on: ${{ matrix.os }}
     needs: build  # Ensure tests run only after the build completes
     
