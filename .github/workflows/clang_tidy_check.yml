@@ -14,12 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Clang compile_commands.json
+      - name: 'download artifact'
         uses: actions/download-artifact@v4
         with:
-          path: build
-          merge-multiple: true
-
+          workflow: clang_build.yml
+          name: compile-commands-clang
+          branch: main
+          
       - name: Run Clang-Tidy
         run: |
           clang-tidy -p build $(find GraphicsEngine Sandbox tests \( -name "*.cpp" -o -name "*.h" \))
