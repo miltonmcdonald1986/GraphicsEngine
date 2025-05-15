@@ -2,6 +2,7 @@
 
 #include "Shader.h"
 #include "Types.h"
+#include "Uniform.h"
 
 namespace GraphicsEngine
 {

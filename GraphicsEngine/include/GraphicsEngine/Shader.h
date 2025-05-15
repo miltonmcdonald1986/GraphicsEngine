@@ -5,9 +5,6 @@
 namespace GraphicsEngine
 {
 
-	struct Uniform;
-	using Uniforms = std::unordered_map<Types::String, Uniform, Types::StringHash, std::equal_to<>>;
-
 	/// @class Shader
 	/// @brief Represents a shader in the graphics engine.
 	///
@@ -61,7 +58,7 @@ namespace GraphicsEngine
 
 	protected:
 
-		explicit Shader (const std::tuple<Types::StringView, Types::OptStringView, Types::ShaderId, Uniforms, Types::StringView>& data);
+		explicit Shader (const std::tuple<Types::StringView, Types::OptStringView, Types::ShaderId, Types::StringViews, Types::StringView>& data);
 
 	};
 

@@ -22,6 +22,8 @@ namespace GraphicsEngine
 			Types::StringView frag, 
 			std::optional<Types::StringView> oGeom
 		) -> Types::Id;
+
+		auto GetKeys (const Uniforms& uniforms) -> Types::StringViews;
 		
 		auto InitShader (
 			Types::StringView vert, 
@@ -31,34 +33,11 @@ namespace GraphicsEngine
 		
 		auto LinkProgram (const std::vector<GLuint>& shaders) -> GLuint;
 
-		auto SetUniformData (Types::ShaderId id, Uniform& uniform, const Types::UniformData& data)
-		{
-			if (!GL::IsProgram(id))
-				return false;
-
-			uniform.data = data;
-
-			const auto location = uniform.location;
-			GL::UseProgram (id);
-			if (std::holds_alternative<float> (data))
-				GL::Uniform1f (location, std::get<float> (data));
-			else if (std::holds_alternative<glm::mat4x4> (data))
-				GL::UniformMatrix4fv (location, 1, GL_FALSE, glm::value_ptr (std::get<glm::mat4> (data)));
-			else if (std::holds_alternative<glm::vec4> (data))
-			{
-				auto v = std::get<glm::vec4> (data);
-				GL::Uniform4f (location, v[0], v[1], v[2], v[3]);
-			}
-			else if (std::holds_alternative<int> (data))
-				GL::Uniform1i (location, std::get<int> (data));
-			else
-			{
-				GetLog ()->Error ("Data type not handled by Uniform::SetData.");
-				return false;
-			}
-
-			return true;
-		}
+		auto SetUniformData (
+			Types::ShaderId id,
+			Uniform& uniform,
+			const Types::UniformData& data
+		) -> bool;
 
 		// Definitions of helper functions
 
@@ -113,6 +92,17 @@ namespace GraphicsEngine
 			GL::UseProgram (id);
 
 			return id;
+		}
+
+		auto GetKeys (const Uniforms& uniforms) -> Types::StringViews
+		{
+			Types::StringViews keys;
+			std::transform (uniforms.begin (), uniforms.end (), std::back_inserter (keys), [] (const std::pair<Types::StringView, Uniform>& uniform)
+				{
+					return uniform.first;
+				});
+
+			return keys;
 		}
 
 		/// output tuple is 0: fragment Source, 1: optional geometry source, 2: shader id, 3: uniform names, and 4: vertex source
@@ -225,6 +215,39 @@ namespace GraphicsEngine
 			return shaderProgram;
 		}
 
+		auto SetUniformData (
+			Types::ShaderId id, 
+			Uniform& uniform, 
+			const Types::UniformData& data
+		) -> bool
+		{
+			if (!GL::IsProgram (id))
+				return false;
+
+			uniform.data = data;
+
+			const auto location = uniform.location;
+			GL::UseProgram (id);
+			if (std::holds_alternative<float> (data))
+				GL::Uniform1f (location, std::get<float> (data));
+			else if (std::holds_alternative<glm::mat4x4> (data))
+				GL::UniformMatrix4fv (location, 1, GL_FALSE, glm::value_ptr (std::get<glm::mat4> (data)));
+			else if (std::holds_alternative<glm::vec4> (data))
+			{
+				auto v = std::get<glm::vec4> (data);
+				GL::Uniform4f (location, v[0], v[1], v[2], v[3]);
+			}
+			else if (std::holds_alternative<int> (data))
+				GL::Uniform1i (location, std::get<int> (data));
+			else
+			{
+				GetLog ()->Error ("Data type not handled by Uniform::SetData.");
+				return false;
+			}
+
+			return true;
+		}
+
 	}
 
 	ShaderImpl::ShaderImpl (Types::StringView vert, Types::StringView frag, Types::OptStringView oGeom)
@@ -233,7 +256,13 @@ namespace GraphicsEngine
 	}
 
 	ShaderImpl::ShaderImpl (const std::tuple<Types::StringView, Types::OptStringView, Types::ShaderId, Uniforms, Types::StringView>& data)
-		:	Shader(data),
+		:	Shader(std::make_tuple(
+				std::get<0>(data),
+				std::get<1>(data),
+				std::get<2>(data),
+				GetKeys(std::get<3>(data)),
+				std::get<4>(data)
+			)),
 			m_Uniforms(Uniforms(std::get<3>(data)))
 	{
 	}
