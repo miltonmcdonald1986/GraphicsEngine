@@ -1,3 +1,8 @@
+<a href="https://scan.coverity.com/projects/miltonmcdonald1986-graphicsengine">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/31711/badge.svg"/>
+</a>
+
 # GraphicsEngine
 GraphicsEngine is a simple, cross-platform graphics engine written in C++ using OpenGL.
 
