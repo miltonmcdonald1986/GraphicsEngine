@@ -1,0 +1,25 @@
+name: Clang-Tidy Check
+
+on:
+  workflow_run:
+    workflows: ["Clang Build"]
+    types:
+      - completed
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Clang compile_commands.json
+        uses: actions/download-artifact@v4
+        with:
+          name: compile-commands-clang
+          path: build
+
+      - name: Run Clang-Tidy
+        run: |
+          clang-tidy -p build $(find GraphicsEngine Sandbox tests \( -name "*.cpp" -o -name "*.h" \))
