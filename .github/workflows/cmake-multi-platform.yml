@@ -135,3 +135,76 @@ jobs:
         working-directory: build/tests
         run: ctest --build-config ${{ matrix.build_type }}
 
+      - name: Capture Coverage Data
+        if: matrix.c_compiler == 'gcc'
+        run: |
+          lcov --gcov-tool /usr/bin/gcov --capture --directory build --output-
+
+            tests:
+    name: "Run unit tests"
+    runs-on: ${{ matrix.os }}
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Build Directory
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact-${{ matrix.os }}-${{ matrix.c_compiler }}
+          path: build
+
+      - name: Set executable permissions for test binaries
+        if: runner.os == 'Linux'
+        run: chmod +x build/bin/GraphicsEngineTests
+
+      - name: Run Tests
+        working-directory: build/tests
+        run: ctest --build-config ${{ matrix.build_type }}
+
+      - name: Capture Coverage Data
+        if: matrix.c_compiler == 'gcc'
+        run: |
+          lcov --gcov-tool /usr/bin/gcov --capture --directory build --output-file coverage.info
+
+      - name: Generate HTML Coverage Report
+        if: matrix.c_compiler == 'gcc'
+        run: |
+          genhtml coverage.info --output-directory coverage_report
+
+      - name: Upload Coverage Report as Artifact
+        if: matrix.c_compiler == 'gcc'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage_report/
+          
+      - name: Upload Coverage to Codecov
+        if: matrix.c_compiler == 'gcc'
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage.info
+          flags: unittests
