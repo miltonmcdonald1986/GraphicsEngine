@@ -64,6 +64,8 @@ jobs:
           path: coverage-report
       - name: List downloaded files
         run: ls -l
+      - name: Create _site directory
+        run: mkdir -p _site
       - name: Move artifacts to _site
         run: |
           mv doxygen-docs _site/doxygen-docs
