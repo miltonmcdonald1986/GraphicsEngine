@@ -164,3 +164,29 @@ jobs:
         with:
           file: coverage.info
           flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  deploy_docs:
+    name: "Deploy documentation & coverage report"
+    runs-on: ubuntu-latest
+    needs: tests  # Ensure this runs after tests complete
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Coverage Report Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: docs/coverage_report
+
+      - name: Generate Doxygen Documentation
+        run: |
+          sudo apt-get install -y doxygen
+          doxygen Doxyfile
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
