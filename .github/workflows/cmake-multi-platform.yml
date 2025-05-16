@@ -54,7 +54,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential lcov
+        sudo apt-get install -y build-essential
         sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
 
     - name: Verify installed packages (Linux)
@@ -120,6 +120,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install lcov (Linux)
+        if: matrix.c_compiler == 'gcc' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov
 
       - name: Download Build Directory
         uses: actions/download-artifact@v4
