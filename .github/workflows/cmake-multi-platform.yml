@@ -174,6 +174,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Backup index.html (if exists)
+        run: |
+          [ -f docs/index.html ] && cp docs/index.html /tmp/index.html || echo "No existing index.html"
+
       - name: Download Coverage Report Artifact
         uses: actions/download-artifact@v4
         with:
@@ -184,6 +188,10 @@ jobs:
         run: |
           sudo apt-get install -y doxygen
           doxygen Doxyfile
+
+      - name: Restore index.html
+        run: |
+          [ -f /tmp/index.html ] && mv /tmp/index.html docs/index.html || echo "No index.html to restore"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
