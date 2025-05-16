@@ -70,6 +70,8 @@ jobs:
         run: |
           mv doxygen-docs _site/doxygen-docs
           mv coverage-report _site/coverage-report
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
