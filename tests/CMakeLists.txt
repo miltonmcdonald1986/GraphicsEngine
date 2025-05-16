@@ -8,11 +8,11 @@ target_link_libraries(GraphicsEngineTests PRIVATE GraphicsEngine GTest::gtest GT
     
 # Enable coverage options based on compiler
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(unit_tests PRIVATE -fprofile-arcs -ftest-coverage)
-    target_link_options(unit_tests PRIVATE -lgcov)
+    target_compile_options(GraphicsEngineTests PRIVATE -fprofile-arcs -ftest-coverage)
+    target_link_options(GraphicsEngineTests PRIVATE -lgcov)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(unit_tests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
-    target_link_options(unit_tests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+    target_compile_options(GraphicsEngineTests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+    target_link_options(GraphicsEngineTests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
 endif()
 
 include(GoogleTest)
