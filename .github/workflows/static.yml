@@ -28,7 +28,7 @@ jobs:
           name: coverage-report
 
       - name: List downloaded files
-        run: ls -R
+        run: ls -l
     
       - name: Create publish directory
         run: |
