@@ -37,6 +37,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Fix permissions for _site
+        run: chmod -R u+w _site
       - name: Download doxygen-docs artifact
         uses: actions/download-artifact@v4
         with:
