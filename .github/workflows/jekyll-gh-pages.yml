@@ -53,6 +53,7 @@ jobs:
           mkdir -p _site
           mv doxygen-docs _site/doxygen-docs
           mv coverage-report _site/coverage-report
+          ls -R _site
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
