@@ -64,6 +64,10 @@ jobs:
           path: coverage-report
       - name: List downloaded files
         run: ls -l
+      - name: Move artifacts to _site
+        run: |
+          mv doxygen-docs _site/doxygen-docs
+          mv coverage-report _site/coverage-report
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
