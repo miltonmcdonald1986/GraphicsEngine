@@ -37,17 +37,6 @@ jobs:
         with:
           source: ./
           destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Download doxygen-docs artifact
         uses: actions/download-artifact@v4
         with:
@@ -64,14 +53,21 @@ jobs:
           path: coverage-report
       - name: List downloaded files
         run: ls -l
-      - name: Create _site directory
-        run: mkdir -p _site
       - name: Move artifacts to _site
         run: |
           mv doxygen-docs _site/doxygen-docs
           mv coverage-report _site/coverage-report
-      - name: Upload site artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
