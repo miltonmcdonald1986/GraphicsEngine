@@ -35,8 +35,8 @@ jobs:
       - name: Create publish directory
         run: |
           mkdir publish
-          cp -r doxygen-docs/* publish/
-          cp -r coverage-report/* publish/
+          cp -r doxygen-docs/* publish/doxygen-docs
+          cp -r coverage-report/* publish/coverage-report
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
