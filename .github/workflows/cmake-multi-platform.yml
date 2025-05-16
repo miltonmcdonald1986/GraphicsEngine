@@ -166,35 +166,21 @@ jobs:
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  deploy_docs:
-    name: "Deploy documentation & coverage report"
+  Doxygen:
+    name: "Generate API Documentation"
     runs-on: ubuntu-latest
-    needs: tests  # Ensure this runs after tests complete
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Backup index.html (if exists)
-        run: |
-          [ -f docs/index.html ] && cp docs/index.html /tmp/index.html || echo "No existing index.html"
-
-      - name: Download Coverage Report Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-report
-          path: docs/coverage_report
 
       - name: Generate Doxygen Documentation
         run: |
           sudo apt-get install -y doxygen
           doxygen Doxyfile
 
-      - name: Restore index.html
-        run: |
-          [ -f /tmp/index.html ] && mv /tmp/index.html docs/index.html || echo "No index.html to restore"
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Doxygen Documentation Artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          name: doxygen-docs
+          path: docs/html
