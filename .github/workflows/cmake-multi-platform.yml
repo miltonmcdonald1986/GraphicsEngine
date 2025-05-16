@@ -121,6 +121,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install lcov (Linux)
+        if: matrix.c_compiler == 'gcc' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov
+
       - name: Download Build Directory
         uses: actions/download-artifact@v4
         with:
@@ -135,3 +141,26 @@ jobs:
         working-directory: build/tests
         run: ctest --build-config ${{ matrix.build_type }}
 
+      - name: Capture Coverage Data
+        if: matrix.c_compiler == 'gcc'
+        run: |
+          lcov --gcov-tool /usr/bin/gcov --capture --directory build --output-file coverage.info
+
+      - name: Generate HTML Coverage Report
+        if: matrix.c_compiler == 'gcc'
+        run: |
+          genhtml coverage.info --output-directory coverage_report
+
+      - name: Upload Coverage Report as Artifact
+        if: matrix.c_compiler == 'gcc'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage_report/
+
+      - name: Upload Coverage to Codecov
+        if: matrix.c_compiler == 'gcc'
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage.info
+          flags: unittests
