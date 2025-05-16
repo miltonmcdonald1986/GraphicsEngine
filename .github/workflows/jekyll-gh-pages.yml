@@ -32,13 +32,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Fix permissions for _site
-        run: chmod -R u+w _site
       - name: Download doxygen-docs artifact
         uses: actions/download-artifact@v4
         with:
@@ -57,8 +50,14 @@ jobs:
         run: ls -l
       - name: Move artifacts to _site
         run: |
+          mkdir -p _site
           mv doxygen-docs _site/doxygen-docs
           mv coverage-report _site/coverage-report
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
