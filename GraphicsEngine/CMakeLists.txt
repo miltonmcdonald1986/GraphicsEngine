@@ -15,6 +15,15 @@ source_group("Interfaces" FILES ${ENGINE_INTERFACES})
 source_group("Source Files" FILES ${ENGINE_HEADER_FILES} ${ENGINE_SOURCE_FILES})
 
 add_library(GraphicsEngine SHARED ${ENGINE_SRC})
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(GraphicsEngine PRIVATE -fprofile-arcs -ftest-coverage)
+    target_link_options(GraphicsEngine PRIVATE -lgcov --coverage)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(GraphicsEngine PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+    target_link_options(GraphicsEngine PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+endif()
+
 target_compile_definitions(GraphicsEngine PRIVATE GRAPHICSENGINE_EXPORTS)
 
 target_include_directories(GraphicsEngine 
