@@ -1,0 +1,7 @@
+title: "Graphics Engine"
+description: "A Jekyll-based site for the GraphicsEngine project"
+keep_files:
+  - doxygen-docs
+  - coverage-report
+exclude:
+  - vcpkg # Prevent unnecessary processing of vcpkg directory
