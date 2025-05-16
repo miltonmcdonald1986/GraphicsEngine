@@ -36,6 +36,7 @@ jobs:
         run: |
           mkdir -p publish/doxygen-docs
           mkdir -p publish/coverage-report
+          cp index.html publish/index.html
           cp -r doxygen-docs/* publish/doxygen-docs
           cp -r coverage-report/* publish/coverage-report
 
