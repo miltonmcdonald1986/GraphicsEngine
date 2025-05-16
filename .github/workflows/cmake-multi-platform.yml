@@ -164,3 +164,4 @@ jobs:
         with:
           file: coverage.info
           flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
