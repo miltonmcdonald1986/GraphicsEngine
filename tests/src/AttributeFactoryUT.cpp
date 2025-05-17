@@ -2,11 +2,14 @@
 
 #include "GraphicsEngine/AttributeFactory.h"
 
-using namespace GraphicsEngine;
+namespace g = ::graphics_engine;
+namespace ga = ::g::attribute_factory;
+namespace gac = ga::cube;
+namespace gat = ga::triangle;
 
 TEST (AttributeFactoryTests, Cube_Position)
 {
-	Types::VertexAttribute attribute = AttributeFactory::Cube::Position ();
+	g::Attribute attribute = gac::Position ();
 	EXPECT_TRUE (std::holds_alternative<std::vector<glm::vec3>> (attribute));
 
 	auto v0 = glm::vec3 (-0.5f, -0.5f, 0.5f);
@@ -47,7 +50,7 @@ TEST (AttributeFactoryTests, Cube_Position)
 
 TEST (AttributeFactoryTests, Cube_TextureCoordinates) 
 {
-	Types::VertexAttribute attribute = AttributeFactory::Cube::TextureCoordinates ();
+	g::Attribute attribute = gac::TextureCoordinates ();
 	EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec2>> (attribute));
 	
 	auto t0 = glm::vec2 (0.f, 0.f);
@@ -84,7 +87,7 @@ TEST (AttributeFactoryTests, Cube_TextureCoordinates)
 
 TEST (AttributeFactoryTests, Triangle_AAS)
 {
-	std::expected<Types::VertexAttribute, Error> expectedAttribute = AttributeFactory::Triangle::AAS (0.5f, 1.f, 3.f);
+	g::ExpectAttribute expectedAttribute = gat::AAS (0.5f, 1.f, 3.f);
 	EXPECT_TRUE (expectedAttribute.has_value ());
 	
 	const auto& attribute = expectedAttribute.value ();

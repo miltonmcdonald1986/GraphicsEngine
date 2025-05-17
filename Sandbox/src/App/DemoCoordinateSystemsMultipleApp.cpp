@@ -10,11 +10,11 @@
 DemoCoordinateSystemsMultipleApp::DemoCoordinateSystemsMultipleApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    GetEngine()->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    GetEngine()->SetBackgroundColor(graphics_engine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     Utilities::CreateTenTexturedCubes(GetEngine());
 
-    auto spCamera = GraphicsEngine::CreateCameraFly();
+    auto spCamera = graphics_engine::CreateCameraFly();
     spCamera->SetEye(glm::vec3(0.f, 0.f, 3.f));
 
 	GetEngine()->SetCamera(spCamera);

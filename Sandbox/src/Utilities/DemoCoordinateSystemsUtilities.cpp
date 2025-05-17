@@ -7,11 +7,13 @@
 namespace Utilities
 {
 
-    auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> std::vector<GraphicsEngine::Entity*>
+    namespace gaf = ::graphics_engine::attribute_factory;
+
+    auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine) -> std::vector<graphics_engine::Entity*>
     {
         auto [pShader, textures] = PrepareShaderAndTextures(spEngine);
         
-        auto spEntityFactory = GraphicsEngine::CreateEntityFactory(spEngine);
+        auto spEntityFactory = graphics_engine::CreateEntityFactory(spEngine);
 
         std::vector<glm::vec3> positions = {
             glm::vec3(0.0f, 0.0f, 0.0f),
@@ -26,11 +28,11 @@ namespace Utilities
             glm::vec3(-1.3f, 1.0f, -1.5f)
         };
 
-        std::vector<GraphicsEngine::Entity*> cubes;
+        std::vector<graphics_engine::Entity*> cubes;
         for (size_t i = 0; i < positions.size(); ++i)
         {
-            auto attrPos = GraphicsEngine::AttributeFactory::Cube::Position();
-            auto attrTexCoords = GraphicsEngine::AttributeFactory::Cube::TextureCoordinates();
+            auto attrPos = gaf::cube::Position();
+            auto attrTexCoords = gaf::cube::TextureCoordinates();
             auto spCube = spEntityFactory->AddCube({ attrPos, attrTexCoords });
             spCube->pShader = pShader;
             spCube->textures = textures;
@@ -45,10 +47,10 @@ namespace Utilities
         return cubes;
     }
 
-    auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Shader*, GraphicsEngine::ITextures>
+    auto PrepareShaderAndTextures(graphics_engine::IEnginePtr spEngine) -> std::pair<graphics_engine::Shader*, graphics_engine::ITextures>
     {
-        GraphicsEngine::Shader* pShader = nullptr;
-        auto result = std::make_pair(pShader, GraphicsEngine::ITextures{});
+      graphics_engine::Shader* pShader = nullptr;
+        auto result = std::make_pair(pShader, graphics_engine::ITextures{});
 
         if (!spEngine)
             return result;

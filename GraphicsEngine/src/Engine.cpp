@@ -6,7 +6,7 @@
 #include "Texture.h"
 #include "Uniform.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	auto CreateEngine() -> IEnginePtr
@@ -136,7 +136,7 @@ namespace GraphicsEngine
 
 	auto Engine::SetPolygonMode(Types::PolygonMode polygonMode) -> void
 	{
-		using enum GraphicsEngine::Types::PolygonMode;
+		using enum graphics_engine::Types::PolygonMode;
 		
 		m_PolygonMode = polygonMode;
 		switch (m_PolygonMode)

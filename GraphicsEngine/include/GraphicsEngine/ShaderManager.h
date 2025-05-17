@@ -5,7 +5,7 @@
 #include "Shader.h"
 #include "Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @class ShaderManager

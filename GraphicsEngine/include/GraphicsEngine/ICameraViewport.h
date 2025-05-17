@@ -3,7 +3,7 @@
 #include "ICamera.h"
 #include "DllImpExp.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @brief A static camera that simply adjusts for window-resizing.
@@ -14,6 +14,6 @@ namespace GraphicsEngine
 	};
 
 	using ICameraViewportPtr = std::shared_ptr<ICameraViewport>;
-	GRAPHICSENGINE_API auto CreateCameraViewport() -> ICameraViewportPtr;
+	DLLEXPORT auto CreateCameraViewport() -> ICameraViewportPtr;
 
 }

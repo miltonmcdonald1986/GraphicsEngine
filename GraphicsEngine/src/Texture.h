@@ -5,7 +5,7 @@
 #include "Types.h"
 #include "ITexture.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class Texture : public ITexture

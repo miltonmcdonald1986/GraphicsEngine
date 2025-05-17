@@ -7,7 +7,7 @@
 
 #include "Entity.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class IEngine;
@@ -21,7 +21,7 @@ namespace GraphicsEngine
 		~EntityManagerImpl() override = default;
 
 		auto AddEntity(
-			const Types::VertexAttributes& attributes, 
+			const Attributes& attributes, 
 			const Types::Indices& indices
 		) -> Entity* override;
 

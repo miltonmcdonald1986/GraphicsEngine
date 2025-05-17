@@ -4,7 +4,7 @@
 #include "GraphicsEngine/Entity.h"
 #include "GraphicsEngine/Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	struct Entity;
@@ -21,7 +21,7 @@ namespace GraphicsEngine
 namespace Utilities
 {
 
-	auto CreateTenTexturedCubes(GraphicsEngine::IEnginePtr spEngine) -> std::vector<GraphicsEngine::Entity*>;
-	auto PrepareShaderAndTextures(GraphicsEngine::IEnginePtr spEngine) -> std::pair<GraphicsEngine::Shader*, GraphicsEngine::ITextures>;
+	auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine) -> std::vector<graphics_engine::Entity*>;
+	auto PrepareShaderAndTextures(graphics_engine::IEnginePtr spEngine) -> std::pair<graphics_engine::Shader*, graphics_engine::ITextures>;
 
 }

@@ -10,7 +10,9 @@
 #include "GraphicsEngine/ShaderSnippets.h"
 #include "GraphicsEngine/ShaderUtilities.h"
 
-auto OnCamera(GraphicsEngine::IEnginePtr spEngine, const glm::mat4& /*view*/, const glm::mat4& projection) -> void
+namespace g = ::graphics_engine;
+
+auto OnCamera(g::IEnginePtr spEngine, const glm::mat4& /*view*/, const glm::mat4& projection) -> void
 {
 	if (!spEngine)
 		return;
@@ -28,22 +30,22 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	auto spEngine = GetEngine();
 
 	// Set some misc items
-	spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
-	spEngine->SetPolygonMode(GraphicsEngine::Types::PolygonMode::Fill);
+	spEngine->SetBackgroundColor(g::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+	spEngine->SetPolygonMode(g::Types::PolygonMode::Fill);
 
 	// Create a triangle
-	auto pEntity = spEngine->GetEntityManager()->AddEntity({ GraphicsEngine::AttributeFactory::Triangle::SSS(1.f, 1.f, 1.f) });
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ g::attribute_factory::triangle::SSS(1.f, 1.f, 1.f) });
 	
 	// Create a shader
-	auto shadersDir = GraphicsEngine::Types::Path(SHADERS_DIR);
+	auto shadersDir = g::Types::Path(SHADERS_DIR);
 	std::string vertexShader = 
-		GraphicsEngine::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.vert") 
-		+ GraphicsEngine::ShaderSnippets::Transformation;
-	std::string fragmentShader = GraphicsEngine::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.frag");
+		g::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.vert") 
+		+ g::ShaderSnippets::Transformation;
+	std::string fragmentShader = g::ShaderUtilities::GetSourceFromFile (shadersDir / "DemoTriangle.frag");
 	pEntity->pShader = spEngine->GetShaderManager ()->AddShaderFromSource (vertexShader, fragmentShader);
 	
 	// Create a camera
-	spEngine->SetCamera(GraphicsEngine::CreateCameraViewport());
+	spEngine->SetCamera(g::CreateCameraViewport());
 	spEngine->GetCamera()->GetObservable()->AddObserver([this](const glm::mat4& view, const glm::mat4& projection) { OnCamera(GetEngine(), view, projection); });
 
 	int width;

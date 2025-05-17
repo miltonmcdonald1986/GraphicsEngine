@@ -9,7 +9,7 @@
 #include "ShaderManager.h"
 #include "Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class IEngine
@@ -37,6 +37,6 @@ namespace GraphicsEngine
 	};
 
 	using IEnginePtr = std::shared_ptr<IEngine>;
-	GRAPHICSENGINE_API auto CreateEngine() -> IEnginePtr;
+	DLLEXPORT auto CreateEngine() -> IEnginePtr;
 
 }

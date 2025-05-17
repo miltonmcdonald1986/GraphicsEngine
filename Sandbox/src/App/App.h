@@ -25,7 +25,7 @@ public:
 	virtual auto Run() -> void;
 	virtual auto SetIsRunning(bool isRunning) -> void;
 
-	auto GetEngine() const->GraphicsEngine::IEnginePtr;
+	auto GetEngine() const -> graphics_engine::IEnginePtr;
 
 protected:
 
@@ -40,7 +40,7 @@ private:
 	bool m_Running = true;
 	GLFWkeyfun m_PrevKeyCallback;
 	GLFWwindow* m_pWindow;
-	GraphicsEngine::IEnginePtr m_spEngine = nullptr;
+	graphics_engine::IEnginePtr m_spEngine = nullptr;
 	EngineLogWidgetPtr m_spWidgetEngineLog = nullptr;
 	PolygonModeWidgetPtr m_spWidgetPolygonMode = nullptr;
 	ShaderWidgetPtr m_spWidgetShader = nullptr;

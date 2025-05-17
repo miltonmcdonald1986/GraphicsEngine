@@ -1,6 +1,6 @@
 #include "CameraFly.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	auto CreateCameraFly() -> ICameraFlyPtr

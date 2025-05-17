@@ -4,7 +4,7 @@
 #include "Types.h"
 #include "Uniform.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class ShaderImpl : public Shader

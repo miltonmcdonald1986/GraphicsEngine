@@ -5,7 +5,7 @@
 
 #include "DllImpExp.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
     template <typename... Args>

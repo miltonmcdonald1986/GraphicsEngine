@@ -9,7 +9,7 @@
 #include "ShaderImpl.h"
 #include "Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class IEngine;

@@ -4,7 +4,7 @@
 
 #include "GraphicsEngine/IEngine.h"
 
-EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
+EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine),
       m_spLog(spEngine->GetLog())
 {
@@ -12,7 +12,7 @@ EngineLogWidget::EngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr
 
 auto EngineLogWidget::Iterate(bool* pShow) -> void
 {
-    using namespace GraphicsEngine;
+    using namespace graphics_engine;
 
     bool update = false;
 
@@ -76,7 +76,7 @@ auto EngineLogWidget::Iterate(bool* pShow) -> void
     ImGui::End();
 }
 
-auto CreateEngineLogWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> EngineLogWidgetPtr
+auto CreateEngineLogWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine) -> EngineLogWidgetPtr
 {
     return std::make_shared<EngineLogWidget>(pWindow, spEngine);
 }

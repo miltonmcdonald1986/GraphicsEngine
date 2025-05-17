@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "ObservableImpl.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	Camera::Camera()

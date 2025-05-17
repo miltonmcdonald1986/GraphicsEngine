@@ -10,7 +10,7 @@
 #define OUTPUT_DEBUG_STRING(msg) ((void)0)  // Does nothing on non-Windows systems
 #endif
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 	class IEngine;
 	using IEnginePtr = std::shared_ptr<IEngine>;

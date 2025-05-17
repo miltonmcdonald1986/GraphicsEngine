@@ -1,12 +1,15 @@
 #pragma once
 
+#include <expected>
 #include <filesystem>
 #include <variant>
 
 #include "glm/mat4x4.hpp"
 #include "glm/vec2.hpp"
 
-namespace GraphicsEngine::Types
+#include "Error.h"
+
+namespace graphics_engine::Types
 {
 
 	struct Color
@@ -59,12 +62,5 @@ namespace GraphicsEngine::Types
 		glm::vec4,
 		int
 	>;
-
-	using VertexAttribute = std::variant<
-		std::vector<glm::vec2>,
-		std::vector<glm::vec3>
-	>;
-
-	using VertexAttributes = std::vector<VertexAttribute>;
 
 }

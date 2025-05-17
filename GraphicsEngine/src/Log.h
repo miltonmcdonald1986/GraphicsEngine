@@ -17,7 +17,7 @@ namespace spdlog
 	}
 }
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class queue_sink : public spdlog::sinks::base_sink<std::mutex> {

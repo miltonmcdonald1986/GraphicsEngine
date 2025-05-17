@@ -3,7 +3,7 @@
 #include "ICameraFly.h"
 #include "Camera.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class CameraFly : public ICameraFly

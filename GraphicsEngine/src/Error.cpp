@@ -2,6 +2,6 @@
 
 #include "Log.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 }

@@ -3,7 +3,7 @@
 #include "ICameraViewport.h"
 #include "Camera.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class CameraViewport : public ICameraViewport

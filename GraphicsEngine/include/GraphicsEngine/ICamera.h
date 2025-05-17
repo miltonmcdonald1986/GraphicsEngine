@@ -9,7 +9,7 @@
 
 #include "Observable.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @brief The ICamera interface represents a camera in the graphics engine.

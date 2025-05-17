@@ -2,7 +2,7 @@
 
 #include "ICamera.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class Camera : public ICamera

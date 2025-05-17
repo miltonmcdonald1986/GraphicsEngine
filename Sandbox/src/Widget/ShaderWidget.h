@@ -9,7 +9,7 @@ public:
 
 	ShaderWidget (
 		GLFWwindow* spWindow, 
-		GraphicsEngine::IEnginePtr spEngine
+		graphics_engine::IEnginePtr spEngine
 	);
 
 	~ShaderWidget () override = default;
@@ -18,4 +18,4 @@ public:
 };
 
 using ShaderWidgetPtr = std::shared_ptr<ShaderWidget>;
-auto CreateShaderWidget (GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> ShaderWidgetPtr;
+auto CreateShaderWidget (GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine) -> ShaderWidgetPtr;

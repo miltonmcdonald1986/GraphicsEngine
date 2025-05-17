@@ -4,7 +4,7 @@
 #include "EntityManagerImpl.h"
 #include "ShaderManagerImpl.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	class Engine : public IEngine

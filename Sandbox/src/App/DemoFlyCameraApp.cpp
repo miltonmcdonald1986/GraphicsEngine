@@ -8,7 +8,7 @@
 namespace
 {
 
-    void OnCamera(GraphicsEngine::IEnginePtr spEngine, const glm::mat4& view, const glm::mat4& projection)
+    void OnCamera(graphics_engine::IEnginePtr spEngine, const glm::mat4& view, const glm::mat4& projection)
     {
         if (!spEngine)
             return;
@@ -37,7 +37,7 @@ namespace
         if (!spEngine)
             return;
 
-        auto spCamera = std::dynamic_pointer_cast<GraphicsEngine::ICameraFly>(spEngine->GetCamera());
+        auto spCamera = std::dynamic_pointer_cast<graphics_engine::ICameraFly>(spEngine->GetCamera());
         if (!spCamera)
             return;
 
@@ -49,14 +49,14 @@ namespace
 DemoFlyCameraApp::DemoFlyCameraApp(GLFWwindow* pWindow)
     : App(pWindow)
 {
-    GetEngine()->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    GetEngine()->SetBackgroundColor(graphics_engine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
     m_pPrevScrollCallback = glfwSetScrollCallback(pWindow, OnScroll);
 
     // Call this before updating framebuffer stuff since this creates shaders.
     Utilities::CreateTenTexturedCubes(GetEngine());
 
-    auto spCamera = GraphicsEngine::CreateCameraFly();
+    auto spCamera = graphics_engine::CreateCameraFly();
     spCamera->SetEye(glm::vec3(0.f, 0.f, 3.f));
     GetEngine()->SetCamera(spCamera);
     spCamera->GetObservable()->AddObserver([this](const glm::mat4& view, const glm::mat4& projection) { OnCamera(GetEngine(), view, projection); });
@@ -86,7 +86,7 @@ auto DemoFlyCameraApp::Iterate() -> void
     float tiltSpeed = 60.f; // degrees per second
     float angle = tiltSpeed * deltaTime; // degrees
 
-    auto spCamera = std::dynamic_pointer_cast<GraphicsEngine::ICameraFly>(GetEngine()->GetCamera());
+    auto spCamera = std::dynamic_pointer_cast<graphics_engine::ICameraFly>(GetEngine()->GetCamera());
     auto shiftIsPressed = (glfwGetKey(GetWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) || (glfwGetKey(GetWindow(), GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS);
     auto ctrlIsPressed = (glfwGetKey(GetWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(GetWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS);
     if (glfwGetKey(GetWindow(), GLFW_KEY_LEFT))

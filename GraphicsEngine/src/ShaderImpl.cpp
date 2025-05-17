@@ -4,7 +4,7 @@
 #include "SafeGL.h"
 #include "Uniform.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	namespace
@@ -282,7 +282,7 @@ namespace GraphicsEngine
 		if (itUniform == m_Uniforms.end ())
 			return false;
 
-		return GraphicsEngine::SetUniformData (ID, itUniform->second, data);
+		return graphics_engine::SetUniformData(ID, itUniform->second, data);
 	}
 
 	auto ShaderImpl::Use () const -> void

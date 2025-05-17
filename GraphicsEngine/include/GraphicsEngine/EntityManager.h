@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include "Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @brief Manages the lifecycle and retrieval of Entity objects within the graphics engine.
@@ -22,7 +22,7 @@ namespace GraphicsEngine
 		/// @param indices Optional index buffer specifying the order in which vertices are drawn.
 		/// @return Pointer to the newly created Entity.
 		virtual auto AddEntity(
-			const Types::VertexAttributes& attributes, 
+			const Attributes& attributes, 
 			const Types::Indices& indices = {}
 		) -> Entity* = 0;
 

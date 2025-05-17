@@ -1,7 +1,7 @@
 #include "EntityFactory.h"
 
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
     auto CreateEntityFactory(IEnginePtr spEngine) -> IEntityFactoryPtr
@@ -14,7 +14,7 @@ namespace GraphicsEngine
     {
     }
 
-    auto EntityFactory::AddCube(const Types::VertexAttributes& attributes) -> Entity*
+    auto EntityFactory::AddCube(const Attributes& attributes) -> Entity*
     {
         // Each face is made of two triangles with vertices determined by the following indices
         std::vector<unsigned int> indices = {

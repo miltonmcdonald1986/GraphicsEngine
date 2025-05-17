@@ -13,5 +13,5 @@ public:
 
 private:
 
-	GraphicsEngine::Types::StringView m_UniformName = "uGreenScalar";
+	graphics_engine::Types::StringView m_UniformName = "uGreenScalar";
 };

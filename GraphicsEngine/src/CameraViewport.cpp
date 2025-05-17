@@ -1,6 +1,6 @@
 #include "CameraViewport.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	CameraViewport::CameraViewport(CameraPtr spCamera)

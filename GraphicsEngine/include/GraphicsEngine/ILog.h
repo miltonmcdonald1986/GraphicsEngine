@@ -2,7 +2,7 @@
 
 #include <source_location>
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	enum class LogLevel

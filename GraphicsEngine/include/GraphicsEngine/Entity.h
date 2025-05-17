@@ -1,11 +1,12 @@
 #pragma once
 
+#include "Attribute.h"
 #include "ITexture.h"
 #include "Observable.h"
 #include "Shader.h"
 #include "Types.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @brief Represents a renderable entity within the graphics engine.
@@ -26,7 +27,7 @@ namespace GraphicsEngine
 		/// @brief Constructs an Entity with the given attributes and indices.
 		/// @param attributes Vertex attributes defining the entity's geometry.
 		/// @param indices Index buffer specifying the order in which vertices are drawn.
-		Entity(const Types::VertexAttributes& attributes, const Types::Indices& indices);
+		Entity(const Attributes& attributes, const Types::Indices& indices);
 
 		/// @brief Unique identifier for the entity.
 		const Types::EntityId ENTITY_ID;

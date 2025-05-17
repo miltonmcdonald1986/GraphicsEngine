@@ -11,5 +11,5 @@ public:
 
 private:
 	GLFWframebuffersizefun m_pPrevFramebufferSizeCallback = nullptr;
-	GraphicsEngine::Entity* m_pEntity = nullptr; 
+	graphics_engine::Entity* m_pEntity = nullptr;
 };

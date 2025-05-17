@@ -2,7 +2,7 @@
 
 #include "Log.h"
 
-namespace GraphicsEngine::ShaderUtilities
+namespace graphics_engine::ShaderUtilities
 {
 
 	auto GetSourceFromFile (const Types::Path& path) -> Types::String

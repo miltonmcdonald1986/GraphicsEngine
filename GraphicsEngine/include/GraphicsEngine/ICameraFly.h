@@ -3,7 +3,7 @@
 #include "ICamera.h"
 #include "DllImpExp.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	/// @brief A first-person style camera; can strafe, and adjust pitch and yaw.
@@ -19,6 +19,6 @@ namespace GraphicsEngine
 	};
 
 	using ICameraFlyPtr = std::shared_ptr<ICameraFly>;
-	GRAPHICSENGINE_API auto CreateCameraFly() -> ICameraFlyPtr;
+	DLLEXPORT auto CreateCameraFly() -> ICameraFlyPtr;
 
 }

@@ -1,12 +1,12 @@
 #include "AttributeFactory.h"
 
-namespace GraphicsEngine::AttributeFactory
+namespace graphics_engine::attribute_factory
 {
 
-	namespace Cube
+	namespace cube
 	{
 
-		auto TextureCoordinates() -> Types::VertexAttribute
+		Attribute TextureCoordinates()
 		{
 			// Each face has four texture coordinates, which we apply in counterclockwise order.
 			auto t0 = glm::vec2(0.f, 0.f);
@@ -25,7 +25,7 @@ namespace GraphicsEngine::AttributeFactory
 			};
 		}
 
-		auto Position() -> Types::VertexAttribute
+		Attribute Position()
 		{
 			// A cube has eight vertices
 			auto v0 = glm::vec3(-0.5f, -0.5f, 0.5f);
@@ -50,7 +50,7 @@ namespace GraphicsEngine::AttributeFactory
 
 	}
 
-	namespace Triangle
+	namespace triangle
 	{
 
 		namespace Helpers
@@ -87,7 +87,7 @@ namespace GraphicsEngine::AttributeFactory
 
 		}
 
-		auto AAS(float A, float B, float a) -> std::expected<Types::VertexAttribute, Error>
+		ExpectAttribute AAS(float A, float B, float a)
 		{
 			if (A <= 0.f || B <= 0.f)
 				return std::unexpected(Error{ ErrorCode::kInvalidAngle, "Provided angle is less than or equal to zero." });
@@ -112,7 +112,7 @@ namespace GraphicsEngine::AttributeFactory
 			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto ASA(float A, float c, float B) -> Types::VertexAttribute
+		Attribute ASA(float A, float c, float B)
 		{
 			if (A <= 0.f || B <= 0.f)
 				return {};
@@ -137,7 +137,7 @@ namespace GraphicsEngine::AttributeFactory
 			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto HL(float hypotenuse, float leg) -> Types::VertexAttribute
+		Attribute HL(float hypotenuse, float leg)
 		{
 			if (hypotenuse <= 0.f || leg <= 0.f)
 				return {};
@@ -154,7 +154,7 @@ namespace GraphicsEngine::AttributeFactory
 			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto SAS(float a, float C, float b) -> Types::VertexAttribute
+		Attribute SAS(float a, float C, float b)
 		{
 			if (a <= 0.f || b <= 0.f)
 				return {};
@@ -174,7 +174,7 @@ namespace GraphicsEngine::AttributeFactory
 			return std::vector<glm::vec3>{ v0, v1, v2 };
 		}
 
-		auto SSS(float a, float b, float c) -> Types::VertexAttribute
+		Attribute SSS(float a, float b, float c)
 		{
 			if (!Helpers::ValidTriangle(a, b, c))
 				return {};

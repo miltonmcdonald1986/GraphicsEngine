@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "SafeGL.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	namespace
@@ -21,7 +21,7 @@ namespace GraphicsEngine
 
 		auto LogAttributeCreation(const AttributeData& attrData) -> void
 		{
-			GraphicsEngine::GetLog()->Debug(std::format("Created new attribute:\n"
+			GetLog()->Debug(std::format("Created new attribute:\n"
 				"NumBytes: {}\n"
 				"Data: {}\n"
 				"NumComponents: {}\n"
@@ -76,7 +76,7 @@ namespace GraphicsEngine
 
 	}
 
-	auto InitEntity(const Types::VertexAttributes& attributes, const Types::Indices& indices) -> std::tuple<GLuint, GLsizei, GLsizei>
+	auto InitEntity(const Attributes& attributes, const Types::Indices& indices) -> std::tuple<GLuint, GLsizei, GLsizei>
 	{
 		size_t numAttributes = attributes.size();
 
@@ -118,7 +118,7 @@ namespace GraphicsEngine
 		return std::make_tuple(vao, static_cast<GLsizei>(indices.size()), numVertices);
 	}
 
-	Entity::Entity(const Types::VertexAttributes& attributes, const Types::Indices& indices)
+	Entity::Entity(const Attributes& attributes, const Types::Indices& indices)
 		: Entity(InitEntity(attributes, indices))
 	{
 	}

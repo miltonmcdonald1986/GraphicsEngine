@@ -2,12 +2,12 @@
 
 #ifdef _WIN32
     #ifdef GRAPHICSENGINE_EXPORTS
-		#define GRAPHICSENGINE_API __declspec(dllexport)
+		#define DLLEXPORT __declspec(dllexport)
 	#else
-		#define GRAPHICSENGINE_API __declspec(dllimport)
+		#define DLLEXPORT __declspec(dllimport)
 	#endif
 #elif defined(__linux__)
-    #define GRAPHICSENGINE_API
+    #define DLLEXPORT
 #else
-    #define GRAPHICSENGINE_API
+    #define DLLEXPORT
 #endif

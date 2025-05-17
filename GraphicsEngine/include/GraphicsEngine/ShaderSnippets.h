@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace GraphicsEngine::ShaderSnippets
+namespace graphics_engine::ShaderSnippets
 {
 
 inline const std::string Transformation = R"(

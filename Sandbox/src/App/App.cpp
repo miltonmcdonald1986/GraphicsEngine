@@ -46,7 +46,7 @@ namespace AppCallbacks
 App::App(GLFWwindow* pWindow)
     :   m_pPrevFramebufferSizeCallback(glfwSetFramebufferSizeCallback (pWindow, AppCallbacks::OnFramebufferSize)),
         m_pWindow(pWindow),
-	    m_spEngine(GraphicsEngine::CreateEngine())
+	    m_spEngine(graphics_engine::CreateEngine())
 {
     m_PrevUserPointer = glfwGetWindowUserPointer(m_pWindow);
     glfwSetWindowUserPointer(m_pWindow, this);
@@ -163,7 +163,7 @@ auto App::SetIsRunning(bool isRunning) -> void
     m_Running = isRunning;
 }
 
-auto App::GetEngine() const -> GraphicsEngine::IEnginePtr
+auto App::GetEngine() const -> graphics_engine::IEnginePtr
 {
     return m_spEngine;
 }

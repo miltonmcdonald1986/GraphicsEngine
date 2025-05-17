@@ -10,16 +10,16 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     if (!spEngine)
         return;
 
-    spEngine->SetBackgroundColor(GraphicsEngine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
+    spEngine->SetBackgroundColor(graphics_engine::Types::Color{ .r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f });
 
-    GraphicsEngine::Types::VertexAttribute vertex = std::vector<glm::vec3>{
+    graphics_engine::Attribute vertex = std::vector<glm::vec3>{
         glm::vec3(-0.5f, -0.5f, 0.f),
         glm::vec3(0.5f, -0.5f, 0.f),
         glm::vec3(0.5f, 0.5f, 0.f),
         glm::vec3(-0.5f, 0.5f, 0.f)
     };
 
-    GraphicsEngine::Types::VertexAttribute texCoords = std::vector<glm::vec2>{
+    graphics_engine::Attribute texCoords = std::vector<glm::vec2>{
         glm::vec2(0.f, 0.f),
         glm::vec2(1.f, 0.f),
         glm::vec2(1.f, 1.f),

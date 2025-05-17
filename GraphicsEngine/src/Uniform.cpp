@@ -1,6 +1,6 @@
 #include "Uniform.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	Uniform::Uniform(Types::StringView name, int location)

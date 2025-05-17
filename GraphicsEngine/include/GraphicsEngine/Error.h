@@ -1,6 +1,6 @@
 #pragma once
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	enum class ErrorCode

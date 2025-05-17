@@ -3,7 +3,7 @@
 #include "Error.h"
 #include "Log.h"
 
-namespace GraphicsEngine::GL
+namespace graphics_engine::GL
 {
 
 	namespace

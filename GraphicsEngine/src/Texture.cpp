@@ -5,7 +5,7 @@
 #include "Log.h"
 #include "SafeGL.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	auto CreateTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr

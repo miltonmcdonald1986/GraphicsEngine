@@ -2,22 +2,22 @@
 
 #include "Debug.h"
 
-namespace Helpers
+namespace graphics_engine
 {
 
-	auto CreateLog(std::shared_ptr<spdlog::logger> spLogger) -> GraphicsEngine::ILogPtr
-	{
-		return std::make_shared<GraphicsEngine::Log>(spLogger);
-	}
+namespace
+{
+
+auto CreateLog(std::shared_ptr<spdlog::logger> spLogger) -> ILogPtr
+{
+	return std::make_shared<Log>(spLogger);
+}
 
 }
 
-namespace GraphicsEngine
-{
-
 	auto GetLog() -> ILogPtr
 	{
-		return Helpers::CreateLog(spdlog::get("Engine"));
+		return CreateLog(spdlog::get("Engine"));
 	}
 
 	auto CreateLog() -> ILogPtr
@@ -96,32 +96,32 @@ auto Log::GetLevel() const -> LogLevel
 
 auto Log::Trace(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Trace, loc, message);
+	LogMessage(LogLevel::Trace, loc, message);
 }
 
 auto Log::Debug(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Debug, loc, message);
+	LogMessage(LogLevel::Debug, loc, message);
 }
 
 auto Log::Info(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Info, loc, message);
+	LogMessage(LogLevel::Info, loc, message);
 }
 
 auto Log::Warn(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Warn, loc, message);
+	LogMessage(LogLevel::Warn, loc, message);
 }
 
 auto Log::Error(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Error, loc, message);
+	LogMessage(LogLevel::Error, loc, message);
 }
 
 auto Log::Critical(std::string_view message, const std::source_location& loc) const -> void
 {
-	LogMessage(GraphicsEngine::LogLevel::Critical, loc, message);
+	LogMessage(LogLevel::Critical, loc, message);
 }
 
 auto Log::LogMessage(LogLevel level, const std::source_location& loc, std::string_view message) const -> void
@@ -135,22 +135,22 @@ auto Log::LogMessage(LogLevel level, const std::source_location& loc, std::strin
 	std::string output = loggerOutputStream.str();
 	switch (level)
 	{
-	case GraphicsEngine::LogLevel::Trace:
+	case LogLevel::Trace:
 		m_spLogger->trace(output);
 		break;
-	case GraphicsEngine::LogLevel::Debug:
+	case LogLevel::Debug:
 		m_spLogger->debug(output);
 		break;
-	case GraphicsEngine::LogLevel::Info:
+	case LogLevel::Info:
 		m_spLogger->info(output);
 		break;
-	case GraphicsEngine::LogLevel::Warn:
+	case LogLevel::Warn:
 		m_spLogger->warn(output);
 		break;
-	case GraphicsEngine::LogLevel::Error:
+	case LogLevel::Error:
 		m_spLogger->error(output);
 		break;
-	case GraphicsEngine::LogLevel::Critical:
+	case LogLevel::Critical:
 		m_spLogger->critical(output);
 		break;
 	default:
@@ -162,25 +162,25 @@ auto Log::SetLevel(LogLevel level) -> void
 {
 	switch (level)
 	{
-	case GraphicsEngine::LogLevel::Trace:
+	case LogLevel::Trace:
 		m_spLogger->set_level(spdlog::level::trace);
 		break;
-	case GraphicsEngine::LogLevel::Debug:
+	case LogLevel::Debug:
 		m_spLogger->set_level(spdlog::level::debug);
 		break;
-	case GraphicsEngine::LogLevel::Info:
+	case LogLevel::Info:
 		m_spLogger->set_level(spdlog::level::info);
 		break;
-	case GraphicsEngine::LogLevel::Warn:
+	case LogLevel::Warn:
 		m_spLogger->set_level(spdlog::level::warn);
 		break;
-	case GraphicsEngine::LogLevel::Error:
+	case LogLevel::Error:
 		m_spLogger->set_level(spdlog::level::err);
 		break;
-	case GraphicsEngine::LogLevel::Critical:
+	case LogLevel::Critical:
 		m_spLogger->set_level(spdlog::level::critical);
 		break;
-	case GraphicsEngine::LogLevel::Off:
+	case LogLevel::Off:
 		m_spLogger->set_level(spdlog::level::off);
 		break;
 	default:

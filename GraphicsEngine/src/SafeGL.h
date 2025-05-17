@@ -14,7 +14,7 @@ using GLsizeiptr = signed long long int;
 using GLsizeiptr = signed long int;
 #endif
 
-namespace GraphicsEngine::GL
+namespace graphics_engine::GL
 {
 
 	auto ActiveTexture(GLenum texture) -> void;

@@ -2,7 +2,7 @@
 
 #include "Uniform.h"
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	Shader::Shader (const std::tuple<Types::StringView, Types::OptStringView, Types::ShaderId, Types::StringViews, Types::StringView>& data)

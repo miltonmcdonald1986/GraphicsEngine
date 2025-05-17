@@ -14,7 +14,7 @@
 // 3. UNIFORM_NAMES;
 // 4. VERTEX_SHADER_SOURCE;
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 
 	namespace Helpers

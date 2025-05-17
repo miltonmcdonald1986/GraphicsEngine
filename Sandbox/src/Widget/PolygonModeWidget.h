@@ -5,7 +5,7 @@
 class PolygonModeWidget : public Widget
 {
 public:
-    PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine);
+    PolygonModeWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine);
 
     auto Iterate(bool* pShow) -> void override;
 
@@ -14,4 +14,4 @@ private:
 };
 
 using PolygonModeWidgetPtr = std::shared_ptr<PolygonModeWidget>;
-auto CreatePolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> PolygonModeWidgetPtr;
+auto CreatePolygonModeWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine) -> PolygonModeWidgetPtr;

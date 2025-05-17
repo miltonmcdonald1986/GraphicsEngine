@@ -2,12 +2,12 @@
 
 #include "GraphicsEngine/IEngine.h"
 
-PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
+PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
     switch (GetEngine()->GetPolygonMode())
     {
-	using enum GraphicsEngine::Types::PolygonMode;
+	using enum graphics_engine::Types::PolygonMode;
     case Fill:
         m_Mode = 2;
         break;
@@ -23,7 +23,7 @@ PolygonModeWidget::PolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEngin
 
 void PolygonModeWidget::Iterate(bool* pShow)
 {
-	using enum GraphicsEngine::Types::PolygonMode;
+	using enum graphics_engine::Types::PolygonMode;
 
     auto spEngine = GetEngine();
     ImGui::Begin("Polygon Mode", pShow, ImGuiWindowFlags_AlwaysAutoResize);
@@ -38,7 +38,7 @@ void PolygonModeWidget::Iterate(bool* pShow)
     ImGui::End();
 }
 
-auto CreatePolygonModeWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> PolygonModeWidgetPtr
+auto CreatePolygonModeWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine) -> PolygonModeWidgetPtr
 {
     return std::make_shared<PolygonModeWidget>(pWindow, spEngine);
 }

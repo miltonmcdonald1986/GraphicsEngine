@@ -35,7 +35,7 @@ const AppNames_t AppNames = ([](const AppMap_t& appMap)
 		return appNames;
 	})(AppMap);
 
-MainMenuWidget::MainMenuWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine, bool& appSelected, int& selectedItem)
+MainMenuWidget::MainMenuWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine, bool& appSelected, int& selectedItem)
 	: Widget(pWindow, spEngine)
 	, m_AppSelected(appSelected)
 	, m_SelectedItem(selectedItem)

@@ -2,6 +2,6 @@
 
 #include <vector>
 
-namespace GraphicsEngine
+namespace graphics_engine
 {
 }

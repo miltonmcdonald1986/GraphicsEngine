@@ -2,7 +2,7 @@
 
 #include "GraphicsEngine/IEngine.h"
 
-ShaderWidget::ShaderWidget (GLFWwindow* spWindow, GraphicsEngine::IEnginePtr spEngine)
+ShaderWidget::ShaderWidget (GLFWwindow* spWindow, graphics_engine::IEnginePtr spEngine)
 	: Widget(spWindow, spEngine)
 {
 }
@@ -71,7 +71,7 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 	ImGui::End ();
 }
 
-auto CreateShaderWidget (GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine) -> ShaderWidgetPtr
+auto CreateShaderWidget (GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine) -> ShaderWidgetPtr
 {
 	return std::make_shared<ShaderWidget> (pWindow, spEngine);
 }

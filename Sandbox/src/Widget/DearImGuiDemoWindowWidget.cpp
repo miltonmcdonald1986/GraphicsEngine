@@ -1,6 +1,6 @@
 #include "DearImGuiDemoWindowWidget.h"
 
-DearImGuiDemoWindowWidget::DearImGuiDemoWindowWidget(GLFWwindow* pWindow, GraphicsEngine::IEnginePtr spEngine)
+DearImGuiDemoWindowWidget::DearImGuiDemoWindowWidget(GLFWwindow* pWindow, graphics_engine::IEnginePtr spEngine)
     : Widget(pWindow, spEngine)
 {
 }
