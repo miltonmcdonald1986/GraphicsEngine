@@ -57,10 +57,19 @@ jobs:
         sudo apt-get install -y build-essential
         sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
 
+    - name: Install Clang 18 and libc++ (Linux, Clang only)
+      if: runner.os == 'Linux' && matrix.c_compiler == 'clang'
+      run: |
+        sudo apt-get install -y wget lsb-release gnupg
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 18
+        sudo apt-get install -y libc++-18-dev libc++abi-18-dev
+
     - name: Verify installed packages (Linux)
       if: runner.os == 'Linux'
       run: |
-        dpkg -l | grep -E "libxinerama|libxcursor|xorg|libglu1-mesa|pkg-config"
+        dpkg -l | grep -E "libxinerama|libxcursor|xorg|libglu1-mesa|pkg-config|clang|libc++"
     
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
@@ -74,10 +83,11 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_CXX_COMPILER=${{ matrix.c_compiler == 'clang' && runner.os == 'Linux' && 'clang++-18' || matrix.cpp_compiler }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler == 'clang' && runner.os == 'Linux' && 'clang-18' || matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}
+        ${{ (matrix.c_compiler == 'clang' && runner.os == 'Linux') && '-DCMAKE_CXX_FLAGS="-stdlib=libc++"' || '' }}
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
