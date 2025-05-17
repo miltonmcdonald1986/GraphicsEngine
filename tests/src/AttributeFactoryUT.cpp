@@ -3,13 +3,14 @@
 #include "GraphicsEngine/AttributeFactory.h"
 
 namespace g = ::graphics_engine;
-namespace ga = ::g::attribute_factory;
-namespace gac = ga::cube;
-namespace gat = ga::triangle;
+namespace ga = g::attributes;
+namespace gaa = g::attributes::attribute_factory;
+namespace gaac = gaa::cube;
+namespace gaat = gaa::triangle;
 
 TEST (AttributeFactoryTests, Cube_Position)
 {
-	g::Attribute attribute = gac::Position ();
+	ga::Attribute attribute = gaac::Position ();
 	EXPECT_TRUE (std::holds_alternative<std::vector<glm::vec3>> (attribute));
 
 	auto v0 = glm::vec3 (-0.5f, -0.5f, 0.5f);
@@ -50,7 +51,7 @@ TEST (AttributeFactoryTests, Cube_Position)
 
 TEST (AttributeFactoryTests, Cube_TextureCoordinates) 
 {
-	g::Attribute attribute = gac::TextureCoordinates ();
+	ga::Attribute attribute = gaac::TextureCoordinates ();
 	EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec2>> (attribute));
 	
 	auto t0 = glm::vec2 (0.f, 0.f);
@@ -87,7 +88,7 @@ TEST (AttributeFactoryTests, Cube_TextureCoordinates)
 
 TEST (AttributeFactoryTests, Triangle_AAS)
 {
-	g::ExpectAttribute expectedAttribute = gat::AAS (0.5f, 1.f, 3.f);
+	ga::ExpectAttribute expectedAttribute = gaat::AAS (0.5f, 1.f, 3.f);
 	EXPECT_TRUE (expectedAttribute.has_value ());
 	
 	const auto& attribute = expectedAttribute.value ();

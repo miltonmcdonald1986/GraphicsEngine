@@ -3,7 +3,7 @@
 #include "IEngine.h"
 #include "DllImpExp.h"
 
-namespace graphics_engine
+namespace graphics_engine::entities
 {
 
 	/// @brief Interface for creating entity objects.
@@ -22,7 +22,7 @@ namespace graphics_engine
 		///			in the generated cube.
 		/// @note	Attribute factory functions for **Pos, TexCoords**, etc., which generate **24-vertex attributes**,
 		///			can be found in @ref AttributeFactory.h.
-		virtual auto AddCube(const Attributes& attributes) -> Entity* = 0;
+		virtual auto AddCube(const attributes::Attributes& attributes) -> Entity* = 0;
 	};
 	
 	/// @brief Alias for a shared pointer to IEntityFactory.

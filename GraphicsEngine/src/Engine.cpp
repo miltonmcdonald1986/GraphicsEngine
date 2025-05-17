@@ -15,7 +15,7 @@ namespace graphics_engine
 	}
 
 	Engine::Engine()
-		:	m_upEntityManagerImpl(CreateEntityManagerImpl(this)),
+		:	m_upEntityManagerImpl(entities::CreateEntityManagerImpl(this)),
 			m_upShaderManagerImpl(CreateShaderManagerImpl(this)),
 			m_spLog(CreateLog())
 	{
@@ -58,7 +58,7 @@ namespace graphics_engine
 		return m_spCamera;
 	}
 
-	auto Engine::GetEntityManager() -> EntityManager*
+	auto Engine::GetEntityManager() -> entities::EntityManager*
 	{
 		return m_upEntityManagerImpl.get();
 	}

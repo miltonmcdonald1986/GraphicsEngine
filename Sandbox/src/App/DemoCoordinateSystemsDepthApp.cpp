@@ -7,13 +7,16 @@
 
 #include "glm/ext/matrix_clip_space.hpp"
 
-auto InitCube(graphics_engine::IEnginePtr spEngine) -> graphics_engine::Entity*
+namespace g = graphics_engine;
+namespace gaa = g::attributes::attribute_factory;
+
+auto InitCube(g::IEnginePtr spEngine) -> g::entities::Entity*
 {
     auto [pShader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
-    auto spEntityFactory = graphics_engine::CreateEntityFactory(spEngine);
+    auto spEntityFactory = g::entities::CreateEntityFactory(spEngine);
 
-    auto spAttrPos = graphics_engine::attribute_factory::cube::Position();
-    auto spAttrTexCoords = graphics_engine::attribute_factory::cube::TextureCoordinates();
+    auto spAttrPos = gaa::cube::Position();
+    auto spAttrTexCoords = gaa::cube::TextureCoordinates();
     auto spCube = spEntityFactory->AddCube({ spAttrPos, spAttrTexCoords });
     spCube->pShader = pShader;
     spCube->textures = textures;
@@ -25,7 +28,7 @@ DemoCoordinateSystemsDepthApp::DemoCoordinateSystemsDepthApp(GLFWwindow* pWindow
     :   App(pWindow),
         m_pEntity(InitCube(GetEngine()))
 {
-    GetEngine()->SetBackgroundColor(graphics_engine::Types::Color{.r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f});
+    GetEngine()->SetBackgroundColor(g::Types::Color{.r = 0.2f, .g = 0.3f, .b = 0.3f, .a = 1.f});
 
     m_pEntity->modelMatrix = glm::rotate(glm::mat4(1.f), glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 

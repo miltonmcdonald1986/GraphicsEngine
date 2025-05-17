@@ -21,7 +21,8 @@ namespace graphics_engine
 namespace Utilities
 {
 
-	auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine) -> std::vector<graphics_engine::Entity*>;
+	auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine)
+    -> std::vector<graphics_engine::entities::Entity*>;
 	auto PrepareShaderAndTextures(graphics_engine::IEnginePtr spEngine) -> std::pair<graphics_engine::Shader*, graphics_engine::ITextures>;
 
 }

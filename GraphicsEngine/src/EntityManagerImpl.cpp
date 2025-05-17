@@ -2,7 +2,7 @@
 
 #include "IEngine.h"
 
-namespace graphics_engine
+namespace graphics_engine::entities
 {
 
 	auto CreateEntityManagerImpl(
@@ -20,7 +20,7 @@ namespace graphics_engine
 	}
 
 	auto EntityManagerImpl::AddEntity(
-		const Attributes& attributes, 
+		const attributes::Attributes& attributes, 
 		const Types::Indices& indices
 	) -> Entity*
 	{

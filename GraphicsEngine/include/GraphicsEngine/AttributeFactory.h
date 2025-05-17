@@ -12,7 +12,7 @@
 #include "Attribute.h"
 #include "DllImpExp.h"
 
-namespace graphics_engine::attribute_factory {
+namespace graphics_engine::attributes::attribute_factory {
 
 namespace cube {
 
@@ -108,6 +108,6 @@ DLLEXPORT Attribute SSS(float a, float b, float c);
 
 }  // namespace triangle
 
-}  // namespace graphics_engine::attribute_factory
+}  // namespace graphics_engine::attributes::attribute_factory
 
 #endif  // GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ATTRIBUTEFACTORY_H_

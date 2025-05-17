@@ -16,7 +16,7 @@ namespace graphics_engine
 		auto CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr override;
 		auto GetBackgroundColor() const ->Types::Color override;
 		auto GetCamera() const -> ICameraPtr override;
-		auto GetEntityManager() -> EntityManager* override;
+		auto GetEntityManager() -> entities::EntityManager* override;
 		auto GetLog() const -> ILogPtr override;
 		auto GetPolygonMode() const ->Types::PolygonMode override;
 		auto GetShaderManager() -> ShaderManager* override;
@@ -28,7 +28,7 @@ namespace graphics_engine
 
 	private:
 		Types::Color m_BackgroundColor{};
-		EntityManagerImplPtr m_upEntityManagerImpl = nullptr;
+		entities::EntityManagerImplPtr m_upEntityManagerImpl = nullptr;
 		Types::PolygonMode m_PolygonMode = Types::PolygonMode::Fill;
 		ShaderManagerImplPtr m_upShaderManagerImpl = nullptr;
 		ITextures m_Textures;

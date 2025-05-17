@@ -1,50 +1,52 @@
-/** 
+/**
  * @file GraphicsEngine.dox
  * @brief Documentation for the GraphicsEngine namespace hierarchy.
  */
 
 /**
- * @namespace GraphicsEngine
+ * @namespace graphics_engine
  * @brief Core graphics engine functionalities.
- * 
- * The GraphicsEngine namespace provides rendering utilities, resource management, 
- * and graphical abstraction for different rendering techniques.
+ *
+ * The graphics_engine namespace provides rendering utilities, resource
+ * management, and graphical abstraction for different rendering techniques.
  */
-namespace GraphicsEngine {}
+namespace graphics_engine {}
 
 /**
- * @namespace GraphicsEngine::AttributeFactory
+ * @namespace graphics_engine::attribute_factory
  * @brief Handles attribute creation for various graphical elements.
- * 
- * The AttributeFactory namespace provides tools for defining and 
+ *
+ * The attribute_factory namespace provides tools for defining and
  * managing vertex attributes used in rendering.
  */
-namespace GraphicsEngine::AttributeFactory {}
+namespace graphics_engine::attribute_factory {}
 
 /**
- * @namespace GraphicsEngine::AttributeFactory::Cube
+ * @namespace graphics_engine::attribute_factory::cube
  * @brief Special utilities for cube-based attributes.
- * 
- * This namespace is dedicated to constructing and managing cube-specific 
+ *
+ * This namespace is dedicated to constructing and managing cube-specific
  * attributes in the graphics pipeline.
  */
-namespace GraphicsEngine::AttributeFactory::Cube {}
+namespace graphics_engine::attribute_factory::cube {}
 
 /**
- * @namespace GraphicsEngine::AttributeFactory::Triangle
+ * @namespace graphics_engine::attribute_factory::triangle
  * @brief Special utilities for triangle-based attributes.
- * 
- * This namespace is dedicated to constructing and managing triangle-specific 
+ *
+ * This namespace is dedicated to constructing and managing triangle-specific
  * attributes in the graphics pipeline.
  */
-namespace GraphicsEngine::AttributeFactory::Triangle {}
+namespace graphics_engine::attribute_factory::triangle {}
 
 /**
- * @namespace GraphicsEngine::Types
- * @brief Contains common types and utilities used throughout the GraphicsEngine.
+ * @namespace graphics_engine::Types
+ * @brief Contains common types and utilities used throughout the
+ * GraphicsEngine.
  *
  * This namespace provides type definitions, enums, and utility structures
  * that are essential for the GraphicsEngine's functionality. It includes
  * types for colors, identifiers, indices, paths, shader IDs, and more.
  * Additionally, it defines variants for uniform data and vertex attributes.
  */
+namespace graphics_engine::Types {}

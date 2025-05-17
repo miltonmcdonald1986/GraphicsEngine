@@ -20,7 +20,7 @@ namespace graphics_engine
 		virtual auto CreateNewTextureFromFile(std::string_view textureName, const std::filesystem::path& path) -> ITexturePtr = 0;
 		virtual auto GetBackgroundColor() const ->Types::Color = 0;
 		virtual auto GetCamera() const -> ICameraPtr = 0;
-		virtual auto GetEntityManager() -> EntityManager* = 0;
+		virtual auto GetEntityManager() -> entities::EntityManager* = 0;
 		virtual auto GetLog() const -> ILogPtr = 0;
 
 		/// @brief Retrieves the shader manager associated with the engine.

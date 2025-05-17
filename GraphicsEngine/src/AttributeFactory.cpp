@@ -1,6 +1,6 @@
 #include "AttributeFactory.h"
 
-namespace graphics_engine::attribute_factory
+namespace graphics_engine::attributes::attribute_factory
 {
 
 	namespace cube

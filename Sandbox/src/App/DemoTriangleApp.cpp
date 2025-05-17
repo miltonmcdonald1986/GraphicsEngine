@@ -34,7 +34,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow)
 	spEngine->SetPolygonMode(g::Types::PolygonMode::Fill);
 
 	// Create a triangle
-	auto pEntity = spEngine->GetEntityManager()->AddEntity({ g::attribute_factory::triangle::SSS(1.f, 1.f, 1.f) });
+	auto pEntity = spEngine->GetEntityManager()->AddEntity({ g::attributes::attribute_factory::triangle::SSS(1.f, 1.f, 1.f) });
 	
 	// Create a shader
 	auto shadersDir = g::Types::Path(SHADERS_DIR);

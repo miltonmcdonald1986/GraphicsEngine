@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "SafeGL.h"
 
-namespace graphics_engine
+namespace graphics_engine::entities
 {
 
 	namespace
@@ -76,7 +76,7 @@ namespace graphics_engine
 
 	}
 
-	auto InitEntity(const Attributes& attributes, const Types::Indices& indices) -> std::tuple<GLuint, GLsizei, GLsizei>
+	auto InitEntity(const attributes::Attributes& attributes, const Types::Indices& indices) -> std::tuple<GLuint, GLsizei, GLsizei>
 	{
 		size_t numAttributes = attributes.size();
 
@@ -118,7 +118,7 @@ namespace graphics_engine
 		return std::make_tuple(vao, static_cast<GLsizei>(indices.size()), numVertices);
 	}
 
-	Entity::Entity(const Attributes& attributes, const Types::Indices& indices)
+	Entity::Entity(const attributes::Attributes& attributes, const Types::Indices& indices)
 		: Entity(InitEntity(attributes, indices))
 	{
 	}

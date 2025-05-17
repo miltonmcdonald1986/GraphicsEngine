@@ -2,7 +2,7 @@
 
 #include "IEntityFactory.h"
 
-namespace graphics_engine
+namespace graphics_engine::entities
 {
 
 	class EntityFactory : public IEntityFactory
@@ -11,7 +11,7 @@ namespace graphics_engine
 		explicit EntityFactory(IEnginePtr spEngine);
 		~EntityFactory() override = default;
 
-		auto AddCube(const Attributes& attributes) -> Entity* override;
+		auto AddCube(const attributes::Attributes& attributes) -> Entity* override;
 
 	private:
 		IEnginePtr m_spEngine = nullptr;
