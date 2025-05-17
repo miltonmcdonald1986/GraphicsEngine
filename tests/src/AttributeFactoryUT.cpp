@@ -81,3 +81,24 @@ TEST (AttributeFactoryTests, Cube_TextureCoordinates)
 	EXPECT_EQ (pts[22], t2);
 	EXPECT_EQ (pts[23], t3);
 }
+
+TEST (AttributeFactoryTests, Triangle_AAS)
+{
+	std::expected<Types::VertexAttribute, Error> expectedAttribute = AttributeFactory::Triangle::AAS (0.5f, 1.f, 3.f);
+	EXPECT_TRUE (expectedAttribute.has_value ());
+	
+	const auto& attribute = expectedAttribute.value ();
+	EXPECT_TRUE (std::holds_alternative<std::vector<glm::vec3>> (attribute));
+
+	const auto& pts = std::get<std::vector<glm::vec3>> (attribute);
+	EXPECT_TRUE (pts.size () == 3);
+	EXPECT_EQ (pts[0].x, -3.62090683f);
+	EXPECT_EQ (pts[0].y, -0.841470957f);
+	EXPECT_EQ (pts[0].z, 0.f);
+	EXPECT_EQ (pts[1].x, 2.62090683f);
+	EXPECT_EQ (pts[1].y, -0.841470957f);
+	EXPECT_EQ (pts[1].z, 0.f);
+	EXPECT_EQ (pts[2].x, 1.f);
+	EXPECT_EQ (pts[2].y, 1.68294191f);
+	EXPECT_EQ (pts[2].z, 0.f);
+}

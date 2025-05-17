@@ -87,16 +87,16 @@ namespace GraphicsEngine::AttributeFactory
 
 		}
 
-		auto AAS(float A, float B, float a) -> Types::VertexAttribute
+		auto AAS(float A, float B, float a) -> std::expected<Types::VertexAttribute, Error>
 		{
 			if (A <= 0.f || B <= 0.f)
-				return {};
+				return std::unexpected(Error{ ErrorCode::kInvalidAngle, "Provided angle is less than or equal to zero." });
 
 			if (a <= 0.f)
-				return {};
+				return std::unexpected (Error{ ErrorCode::kInvalidSideLength, "Provided side is less than or equal to zero." });
 
 			if (A + B >= std::numbers::pi_v<float>)
-				return {};
+				return std::unexpected (Error{ ErrorCode::kAngleSumExceeded, "Sum of provided angles is greater than or equal to pi radians." });
 
 			glm::vec3 v0(0.f, 0.f, 0.f);
 

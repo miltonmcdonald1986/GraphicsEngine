@@ -1,5 +1,13 @@
+// Copyright (c) 2025 Milton McDonald (miltonmcdonald1986@gmail.com)
+//
+// This software is licensed under the MIT License.
+// See LICENSE file for details.
+
 #pragma once
 
+#include <expected>
+
+#include "Error.h"
 #include "Types.h"
 #include "DllImpExp.h"
 
@@ -42,8 +50,9 @@ namespace GraphicsEngine::AttributeFactory
 		/// @param A The first angle (in radians).
 		/// @param B The second angle (in radians).
 		/// @param a The length of the side opposite angle @p A.
-		/// @return A pointer to the created position attribute representing the triangle.
-		GRAPHICSENGINE_API auto AAS(float A, float B, float a) -> Types::VertexAttribute;
+		/// @return A `std::expected` containing the created position attribute if successful, 
+		///         or an `Error` if the input is invalid.
+		GRAPHICSENGINE_API auto AAS(float A, float B, float a) -> std::expected<Types::VertexAttribute, Error>;
 
 		/// @brief Creates a vertex attribute with three vertices based on the 
 		/// Angle-Side-Angle (ASA) triangle configuration.
