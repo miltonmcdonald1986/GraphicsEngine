@@ -57,14 +57,14 @@ jobs:
         sudo apt-get install -y build-essential
         sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
 
-    - name: Install Clang 18 and libc++ (Linux, Clang only)
+    - name: Install Clang 19 (Linux, Clang only)
       if: runner.os == 'Linux' && matrix.c_compiler == 'clang'
       run: |
+        sudo apt-get update
         sudo apt-get install -y wget lsb-release gnupg
         wget https://apt.llvm.org/llvm.sh
         chmod +x llvm.sh
-        sudo ./llvm.sh 18
-        sudo apt-get install -y libc++-18-dev libc++abi-18-dev
+        sudo ./llvm.sh 19
 
     - name: Verify installed packages (Linux)
       if: runner.os == 'Linux'
