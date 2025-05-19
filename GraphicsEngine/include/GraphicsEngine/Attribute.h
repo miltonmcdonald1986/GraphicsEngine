@@ -27,10 +27,6 @@ using Attribute = std::variant<std::vector<glm::vec2>, std::vector<glm::vec3>>;
 // collectively.
 using Attributes = std::vector<Attribute>;
 
-// Represents an expected result for an attribute, allowing error handling when
-// retrieving attributes.
-using ExpectAttribute = std::expected<Attribute, Error>;
-
 }  // namespace graphics_engine::attributes
 
 #endif  // GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ATTRIBUTE_H_

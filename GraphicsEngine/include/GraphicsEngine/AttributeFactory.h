@@ -53,7 +53,8 @@ namespace triangle {
 /// @param side_a The length of the side opposite angle @p A.
 /// @return A `std::expected` containing the created position attribute if
 /// successful, or an `Error` if the input is invalid.
-DLLEXPORT ExpectAttribute AAS(float angle_a, float angle_b, float side_a);
+DLLEXPORT std::expected<Attribute, Error> AAS(float angle_a, float angle_b,
+                                              float side_a);
 
 /// @brief Creates a vertex attribute with three vertices based on the
 /// Angle-Side-Angle (ASA) triangle configuration.
@@ -66,7 +67,8 @@ DLLEXPORT ExpectAttribute AAS(float angle_a, float angle_b, float side_a);
 /// @param angle_b The second angle (in radians).
 /// @return A pointer to the created position attribute representing the
 /// triangle.
-DLLEXPORT Attribute ASA(float angle_a, float side_c, float angle_b);
+DLLEXPORT std::expected<Attribute, Error> ASA(float angle_a, float side_c,
+                                              float angle_b);
 
 /// @brief Creates a vertex attribute with three vertices based on the
 /// Hypotenuse-Leg (HL) triangle configuration.

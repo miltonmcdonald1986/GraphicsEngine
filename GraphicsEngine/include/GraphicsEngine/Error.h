@@ -7,6 +7,7 @@ namespace graphics_engine
 	{
 		kAngleSumExceeded,
 		kInvalidAngle,
+		kInvalidInput,
 		kInvalidSideLength
 	};
 
