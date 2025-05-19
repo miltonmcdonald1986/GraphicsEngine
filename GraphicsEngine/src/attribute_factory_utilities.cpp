@@ -37,7 +37,7 @@ std::expected<glm::vec3, Error> compute_centroid(
          static_cast<float>(vertices.size());
 }
 
-bool is_valid_triangle(float side_a, float side_b, float side_c) {
+bool satisfies_triangle_inequality(float side_a, float side_b, float side_c) {
   return (side_a + side_b > side_c) && (side_a + side_c > side_b) &&
          (side_b + side_c > side_a);
 }

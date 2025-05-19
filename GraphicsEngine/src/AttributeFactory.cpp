@@ -9,14 +9,19 @@ namespace {
 const std::string kErrMsgInvalidAngle =
     "Provided angle is invalid. The angle must be between 0 and pi radians.";
 
-const std::string kErrMsgLegExceedsHypotenuse =
-    "Provided triangle is invalid. The leg must be less than the hypotenuse.";
-
 const std::string kErrMsgInvalidSideLength =
     "Provided side is less than or equal to zero.";
 
-const std::string kErrMessageSumOfAnglesExceeded =
+const std::string kErrMsgLegExceedsHypotenuse =
+    "Provided triangle is invalid. The leg must be less than the hypotenuse.";
+
+const std::string kErrMsgSumOfAnglesExceeded =
     "Sum of provided angles is greater than or equal to pi radians.";
+
+const std::string kErrMsgTriangleInequality =
+    "Provided triangle does not satisfy the triangle inequality theorem. The "
+    "sum of the lengths of any two sides must be greater than the length of "
+    "the third side.";
 
 }  // namespace
 
@@ -79,7 +84,7 @@ std::expected<Attribute, Error> AAS(float angle_a, float angle_b,
 
   if (angle_a + angle_b >= std::numbers::pi_v<float>)
     return std::unexpected(
-        Error{ErrorCode::kAngleSumExceeded, kErrMessageSumOfAnglesExceeded});
+        Error{ErrorCode::kAngleSumExceeded, kErrMsgSumOfAnglesExceeded});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
 
@@ -109,7 +114,7 @@ std::expected<Attribute, Error> ASA(float angle_a, float side_c,
 
   if (angle_a + angle_b >= std::numbers::pi_v<float>)
     return std::unexpected(
-        Error{ErrorCode::kAngleSumExceeded, kErrMessageSumOfAnglesExceeded});
+        Error{ErrorCode::kAngleSumExceeded, kErrMsgSumOfAnglesExceeded});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
   glm::vec3 v1(side_c, 0.f, 0.f);
@@ -145,9 +150,13 @@ std::expected<Attribute, Error> HL(float hypotenuse, float leg) {
 }
 
 std::expected<Attribute, Error> SAS(float side_a, float angle_c, float side_b) {
-  if (side_a <= 0.f || side_b <= 0.f) return std::unexpected(Error{ErrorCode::kInvalidSideLength, kErrMsgInvalidSideLength});
+  if (side_a <= 0.f || side_b <= 0.f)
+    return std::unexpected(
+        Error{ErrorCode::kInvalidSideLength, kErrMsgInvalidSideLength});
 
-  if (angle_c <= 0.f || angle_c >= std::numbers::pi_v<float>) return std::unexpected(Error{ErrorCode::kInvalidAngle, kErrMsgInvalidAngle});
+  if (angle_c <= 0.f || angle_c >= std::numbers::pi_v<float>)
+    return std::unexpected(
+        Error{ErrorCode::kInvalidAngle, kErrMsgInvalidAngle});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
   glm::vec3 v1(side_a, 0.f, 0.f);
@@ -161,19 +170,25 @@ std::expected<Attribute, Error> SAS(float side_a, float angle_c, float side_b) {
   return std::vector<glm::vec3>{v0, v1, v2};
 }
 
-Attribute SSS(float a, float b, float c) {
-  if (!utilities::is_valid_triangle(a, b, c)) return {};
+std::expected<Attribute, Error> SSS(float a, float b, float c) {
+  if (a <= 0.f || b <= 0.f || c <= 0.f)
+    return std::unexpected(
+        Error{ErrorCode::kInvalidSideLength, kErrMsgInvalidSideLength});
+
+  if (!utilities::satisfies_triangle_inequality(a, b, c))
+    return std::unexpected(
+        Error{ErrorCode::kInvalidTriangle, kErrMsgTriangleInequality});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
-  glm::vec3 v1(c, 0.f, 0.f);
+  glm::vec3 v1(a, 0.f, 0.f);
 
-  float x =
-      (std::pow(a, 2.f) - std::pow(b, 2.f) + std::pow(c, 2.f) / (2.f * c));
-  float y = std::sqrt(
-      std::pow(a, 2.f) -
-      std::pow(
-          (std::pow(a, 2.f) - std::pow(b, 2.f) + std::pow(c, 2.f)) / (2.f * c),
-          2.f));
+  float a_squared = std::pow(a, 2.f);
+  float b_squared = std::pow(b, 2.f);
+  float c_squared = std::pow(c, 2.f);
+  float cos_b = (a_squared - b_squared + c_squared) / (2.f*a*c);
+  float x = c * cos_b;
+  float angle_b = std::acos(x / c);
+  float y = c * std::sin(angle_b);
   glm::vec3 v2(x, y, 0.f);
 
   utilities::center_triangle(v0, v1, v2);

@@ -106,7 +106,7 @@ DLLEXPORT std::expected<Attribute, Error> SAS(float side_a, float angle_c, float
 /// @param c The length of the third side of the triangle.
 /// @return A pointer to the created position attribute representing the
 /// triangle.
-DLLEXPORT Attribute SSS(float a, float b, float c);
+DLLEXPORT std::expected<Attribute, Error> SSS(float a, float b, float c);
 
 }  // namespace triangle
 

@@ -21,7 +21,7 @@ namespace graphics_engine::attributes::attribute_factory::utilities {
 void center_triangle(glm::vec3& v0, glm::vec3& v1, glm::vec3& v2);
 std::expected<glm::vec3, Error> compute_centroid(
     const std::vector<glm::vec3>& vertices);
-bool is_valid_triangle(float side_a, float side_b, float side_c);
+bool satisfies_triangle_inequality(float side_a, float side_b, float side_c);
 
 }  // namespace graphics_engine::attributes::attribute_factory::utilities
 
