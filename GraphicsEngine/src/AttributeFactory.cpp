@@ -7,7 +7,7 @@ namespace graphics_engine::attributes::attribute_factory {
 namespace {
 
 const std::string kErrMsgInvalidAngle =
-    "Provided angle is less than or equal to zero.";
+    "Provided angle is invalid. The angle must be between 0 and pi radians.";
 
 const std::string kErrMsgLegExceedsHypotenuse =
     "Provided triangle is invalid. The leg must be less than the hypotenuse.";
@@ -144,16 +144,16 @@ std::expected<Attribute, Error> HL(float hypotenuse, float leg) {
   return std::vector<glm::vec3>{v0, v1, v2};
 }
 
-Attribute SAS(float a, float C, float b) {
-  if (a <= 0.f || b <= 0.f) return {};
+std::expected<Attribute, Error> SAS(float side_a, float angle_c, float side_b) {
+  if (side_a <= 0.f || side_b <= 0.f) return std::unexpected(Error{ErrorCode::kInvalidSideLength, kErrMsgInvalidSideLength});
 
-  if (C <= 0.f || C >= std::numbers::pi_v<float>) return {};
+  if (angle_c <= 0.f || angle_c >= std::numbers::pi_v<float>) return std::unexpected(Error{ErrorCode::kInvalidAngle, kErrMsgInvalidAngle});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
-  glm::vec3 v1(a, 0.f, 0.f);
+  glm::vec3 v1(side_a, 0.f, 0.f);
 
-  float y = b * std::sin(C);
-  float x = a - b * std::cos(C);
+  float y = side_b * std::sin(angle_c);
+  float x = side_a - side_b * std::cos(angle_c);
   glm::vec3 v2(x, y, 0.f);
 
   utilities::center_triangle(v0, v1, v2);

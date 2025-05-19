@@ -167,9 +167,87 @@ TEST(AttributeFactoryTests, Triangle_ASA) {
       gaat::ASA(angle_a, side_c, -1.f);
   EXPECT_FALSE(error_bad_angle_b.has_value());
   EXPECT_EQ(error_bad_angle_b.error().code, g::ErrorCode::kInvalidAngle);
-  
+
   std::expected<ga::Attribute, g::Error> error_bad_angles =
       gaat::ASA(kPiOver2, side_c, kPiOver2);
   EXPECT_FALSE(error_bad_angles.has_value());
   EXPECT_EQ(error_bad_angles.error().code, g::ErrorCode::kAngleSumExceeded);
+}
+
+TEST(AttributeFactoryTests, Triangle_HL) {
+  const float hypotenuse = 13.f;
+  const float leg = 5.f;
+  std::expected<ga::Attribute, g::Error> attr = gaat::HL(hypotenuse, leg);
+  EXPECT_TRUE(attr.has_value());
+  EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec3>>(attr.value()));
+
+  const auto& pts = std::get<std::vector<glm::vec3>>(attr.value());
+  EXPECT_TRUE(pts.size() == 3);
+  EXPECT_EQ(pts[0].x, -1.66666663f);
+  EXPECT_EQ(pts[0].y, -4.f);
+  EXPECT_EQ(pts[0].z, 0.f);
+  EXPECT_EQ(pts[1].x, 3.33333349f);
+  EXPECT_EQ(pts[1].y, -4.f);
+  EXPECT_EQ(pts[1].z, 0.f);
+  EXPECT_EQ(pts[2].x, -1.66666663f);
+  EXPECT_EQ(pts[2].y, 8.f);
+  EXPECT_EQ(pts[2].z, 0.f);
+
+  std::expected<ga::Attribute, g::Error> error_bad_hypotenuse =
+      gaat::HL(13.f, -5.f);
+  EXPECT_FALSE(error_bad_hypotenuse.has_value());
+  EXPECT_EQ(error_bad_hypotenuse.error().code,
+            g::ErrorCode::kInvalidSideLength);
+
+  std::expected<ga::Attribute, g::Error> error_bad_leg = gaat::HL(-13.f, 5.f);
+  EXPECT_FALSE(error_bad_leg.has_value());
+  EXPECT_EQ(error_bad_leg.error().code, g::ErrorCode::kInvalidSideLength);
+
+  std::expected<ga::Attribute, g::Error> error_leg_exceeds_hypotenuse =
+      gaat::HL(5.f, 13.f);
+  EXPECT_FALSE(error_leg_exceeds_hypotenuse.has_value());
+  EXPECT_EQ(error_leg_exceeds_hypotenuse.error().code,
+            g::ErrorCode::kInvalidTriangle);
+}
+
+TEST(AttributeFactoryTests, Triangle_SAS) {
+  const float side_a = 6.8f;
+  const float angle_c = 110.f * kDegsToRads;
+  const float side_b = 4.2f;
+  std::expected<ga::Attribute, g::Error> attr =
+      gaat::SAS(side_a, angle_c, side_b);
+
+  EXPECT_TRUE(attr.has_value());
+  EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec3>>(attr.value()));
+
+  const auto& pts = std::get<std::vector<glm::vec3>>(attr.value());
+  EXPECT_TRUE(pts.size() == 3);
+  EXPECT_EQ(pts[0].x, -5.01216173f);
+  EXPECT_EQ(pts[0].y, -1.31556964f);
+  EXPECT_EQ(pts[0].z, 0.f);
+  EXPECT_EQ(pts[1].x, 1.78783846f);
+  EXPECT_EQ(pts[1].y, -1.31556964f);
+  EXPECT_EQ(pts[1].z, 0.f);
+  EXPECT_EQ(pts[2].x, 3.2243228f);
+  EXPECT_EQ(pts[2].y, 2.63113928f);
+  EXPECT_EQ(pts[2].z, 0.f);
+
+  std::expected<ga::Attribute, g::Error> error_bad_side_a =
+      gaat::SAS(-1.f, angle_c, side_b);
+  EXPECT_FALSE(error_bad_side_a.has_value());
+  EXPECT_EQ(error_bad_side_a.error().code, g::ErrorCode::kInvalidSideLength);
+
+  std::expected<ga::Attribute, g::Error> error_bad_angle_c_lt_0 =
+      gaat::SAS(side_a, -1.f, side_b);
+  EXPECT_FALSE(error_bad_angle_c_lt_0.has_value());
+  EXPECT_EQ(error_bad_angle_c_lt_0.error().code, g::ErrorCode::kInvalidAngle);
+
+  std::expected<ga::Attribute, g::Error> error_bad_angle_c_gt_pi = gaat::SAS(side_a, 181.f * kDegsToRads, side_b);
+  EXPECT_FALSE(error_bad_angle_c_gt_pi.has_value());
+  EXPECT_EQ(error_bad_angle_c_gt_pi.error().code, g::ErrorCode::kInvalidAngle);
+
+  std::expected<ga::Attribute, g::Error> error_bad_side_b =
+      gaat::SAS(side_a, angle_c, -1.f);
+  EXPECT_FALSE(error_bad_side_b.has_value());
+  EXPECT_EQ(error_bad_side_b.error().code, g::ErrorCode::kInvalidSideLength);
 }

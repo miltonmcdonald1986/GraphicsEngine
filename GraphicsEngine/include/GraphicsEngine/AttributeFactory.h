@@ -93,7 +93,7 @@ DLLEXPORT std::expected<Attribute, Error> HL(float hypotenuse, float leg);
 /// @param side_b The length of the second side of the triangle.
 /// @return A pointer to the created position attribute representing the
 /// triangle.
-DLLEXPORT Attribute SAS(float side_a, float angle_c, float side_b);
+DLLEXPORT std::expected<Attribute, Error> SAS(float side_a, float angle_c, float side_b);
 
 /// @brief Creates a vertex attribute with three vertices based on the
 /// Side-Side-Side (SSS) triangle configuration.
