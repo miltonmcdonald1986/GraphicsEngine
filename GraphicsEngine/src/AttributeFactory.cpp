@@ -9,6 +9,9 @@ namespace {
 const std::string kErrMsgInvalidAngle =
     "Provided angle is less than or equal to zero.";
 
+const std::string kErrMsgLegExceedsHypotenuse =
+    "Provided triangle is invalid. The leg must be less than the hypotenuse.";
+
 const std::string kErrMsgInvalidSideLength =
     "Provided side is less than or equal to zero.";
 
@@ -22,10 +25,10 @@ namespace cube {
 Attribute TextureCoordinates() {
   // Each face has four texture coordinates, which we apply in counterclockwise
   // order.
-  auto t0 = glm::vec2(0.f, 0.f);
-  auto t1 = glm::vec2(1.f, 0.f);
-  auto t2 = glm::vec2(1.f, 1.f);
-  auto t3 = glm::vec2(0.f, 1.f);
+  glm::vec2 t0(0.f, 0.f);
+  glm::vec2 t1(1.f, 0.f);
+  glm::vec2 t2(1.f, 1.f);
+  glm::vec2 t3(0.f, 1.f);
 
   // Associate each face to the texture coordinates
   return std::vector<glm::vec2>{
@@ -40,14 +43,14 @@ Attribute TextureCoordinates() {
 
 Attribute Position() {
   // A cube has eight vertices
-  auto v0 = glm::vec3(-0.5f, -0.5f, 0.5f);
-  auto v1 = glm::vec3(0.5f, -0.5f, 0.5f);
-  auto v2 = glm::vec3(0.5f, 0.5f, 0.5f);
-  auto v3 = glm::vec3(-0.5f, 0.5f, 0.5f);
-  auto v4 = glm::vec3(0.5f, -0.5f, -0.5f);
-  auto v5 = glm::vec3(0.5f, 0.5f, -0.5f);
-  auto v6 = glm::vec3(-0.5f, -0.5f, -0.5f);
-  auto v7 = glm::vec3(-0.5f, 0.5f, -0.5f);
+  glm::vec3 v0(-0.5f, -0.5f, 0.5f);
+  glm::vec3 v1(0.5f, -0.5f, 0.5f);
+  glm::vec3 v2(0.5f, 0.5f, 0.5f);
+  glm::vec3 v3(-0.5f, 0.5f, 0.5f);
+  glm::vec3 v4(0.5f, -0.5f, -0.5f);
+  glm::vec3 v5(0.5f, 0.5f, -0.5f);
+  glm::vec3 v6(-0.5f, -0.5f, -0.5f);
+  glm::vec3 v7(-0.5f, 0.5f, -0.5f);
 
   // A cube has six faces
   return std::vector<glm::vec3>{
@@ -89,10 +92,7 @@ std::expected<Attribute, Error> AAS(float angle_a, float angle_b,
   glm::vec3 v1(side_c, 0.f, 0.f);
   glm::vec3 v2(c0, side_a * std::sin(angle_b), 0.f);
 
-  if (std::expected<void, Error> result =
-          utilities::center_triangle(v0, v1, v2);
-      !result.has_value())
-    return std::unexpected(result.error());
+  utilities::center_triangle(v0, v1, v2);
 
   return std::vector<glm::vec3>{v0, v1, v2};
 }
@@ -120,18 +120,19 @@ std::expected<Attribute, Error> ASA(float angle_a, float side_c,
   const float y = side_a * std::sin(angle_b);
   glm::vec3 v2(x, y, 0.f);
 
-  if (std::expected<void, Error> result =
-          utilities::center_triangle(v0, v1, v2);
-      !result.has_value())
-    return std::unexpected(result.error());
+  utilities::center_triangle(v0, v1, v2);
 
   return std::vector<glm::vec3>{v0, v1, v2};
 }
 
-Attribute HL(float hypotenuse, float leg) {
-  if (hypotenuse <= 0.f || leg <= 0.f) return {};
+std::expected<Attribute, Error> HL(float hypotenuse, float leg) {
+  if (hypotenuse <= 0.f || leg <= 0.f)
+    return std::unexpected(
+        Error{ErrorCode::kInvalidSideLength, kErrMsgInvalidSideLength});
 
-  if (hypotenuse <= leg) return {};
+  if (hypotenuse <= leg)
+    return std::unexpected(
+        Error{ErrorCode::kInvalidTriangle, kErrMsgLegExceedsHypotenuse});
 
   glm::vec3 v0(0.f, 0.f, 0.f);
   glm::vec3 v1(leg, 0.f, 0.f);

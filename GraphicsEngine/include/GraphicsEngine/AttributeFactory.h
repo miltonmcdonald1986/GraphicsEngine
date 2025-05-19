@@ -80,7 +80,7 @@ DLLEXPORT std::expected<Attribute, Error> ASA(float angle_a, float side_c,
 /// @param leg The length of a leg.
 /// @return A pointer to the created position attribute representing the
 /// triangle.
-DLLEXPORT Attribute HL(float hypotenuse, float leg);
+DLLEXPORT std::expected<Attribute, Error> HL(float hypotenuse, float leg);
 
 /// @brief Creates a vertex attribute with three vertices based on the
 /// Side-Angle-Side (SAS) triangle configuration.

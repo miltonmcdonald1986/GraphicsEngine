@@ -17,16 +17,13 @@ const std::string kErrMessageEmptyVector =
 
 }
 
-std::expected<void, Error> center_triangle(glm::vec3& v0, glm::vec3& v1,
+void center_triangle(glm::vec3& v0, glm::vec3& v1,
                                            glm::vec3& v2) {
   std::expected<glm::vec3, Error> centroid = compute_centroid({v0, v1, v2});
-  if (centroid.has_value()) {
-    for (auto v : {&v0, &v1, &v2}) {
-      *v -= *centroid;
-    }
-    return std::expected<void, Error>();
-  } else
-    return std::unexpected(centroid.error());
+  assert(centroid.has_value());
+  for (auto v : {&v0, &v1, &v2}) {
+    *v -= *centroid;
+  }
 }
 
 std::expected<glm::vec3, Error> compute_centroid(

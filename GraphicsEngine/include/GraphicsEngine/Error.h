@@ -8,7 +8,8 @@ namespace graphics_engine
 		kAngleSumExceeded,
 		kInvalidAngle,
 		kInvalidInput,
-		kInvalidSideLength
+		kInvalidSideLength,
+		kInvalidTriangle
 	};
 
 	struct Error
