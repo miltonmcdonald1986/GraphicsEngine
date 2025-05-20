@@ -149,7 +149,7 @@ jobs:
 
       - name: Run Tests
         working-directory: build/tests
-        run: ctest --build-config ${{ matrix.build_type }}
+        run: ctest --output-on-failure --build-config ${{ matrix.build_type }}
 
       - name: Capture Coverage Data
         if: matrix.c_compiler == 'gcc'
