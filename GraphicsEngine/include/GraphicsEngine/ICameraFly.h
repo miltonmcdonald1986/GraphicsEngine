@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ICamera.h"
-#include "DllImpExp.h"
+#include "dll_export.h"
 
 namespace graphics_engine
 {

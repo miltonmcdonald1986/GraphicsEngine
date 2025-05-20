@@ -3,7 +3,7 @@
 #include <functional>
 #include <memory>
 
-#include "DllImpExp.h"
+#include "dll_export.h"
 
 namespace graphics_engine
 {

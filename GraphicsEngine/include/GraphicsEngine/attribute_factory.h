@@ -10,7 +10,7 @@
 #define GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ATTRIBUTEFACTORY_H_
 
 #include "attribute.h"
-#include "DllImpExp.h"
+#include "dll_export.h"
 
 namespace graphics_engine::attributes::attribute_factory {
 

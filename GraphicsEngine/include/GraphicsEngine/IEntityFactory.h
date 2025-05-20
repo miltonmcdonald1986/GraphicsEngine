@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IEngine.h"
-#include "DllImpExp.h"
+#include "dll_export.h"
 
 namespace graphics_engine::entities
 {

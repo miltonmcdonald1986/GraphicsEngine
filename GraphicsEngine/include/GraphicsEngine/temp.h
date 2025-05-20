@@ -3,7 +3,7 @@
 // This software is licensed under the MIT License.
 // See LICENSE file for details.
 //
-// Entity.h - This file defines the Entity struct, which represents a renderable
+// entity.h - This file defines the Entity struct, which represents a renderable
 // entity within the graphics engine. An Entity encapsulates vertex attributes,
 // indices, shaders, textures, and transformation data, providing an essential
 // abstraction for rendering in world space. Entities should be managed via the
