@@ -149,7 +149,9 @@ jobs:
 
       - name: Run Tests
         working-directory: build/tests
-        run: ctest --output-on-failure --build-config ${{ matrix.build_type }}
+        run: |
+            sudo apt-get install libglfw3-dev libgl1-mesa-dev mesa-utils
+            ctest --output-on-failure --build-config ${{ matrix.build_type }}
 
       - name: Capture Coverage Data
         if: matrix.c_compiler == 'gcc'
