@@ -1,3 +1,5 @@
+[![ci](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml)
+
 # GraphicsEngine
 GraphicsEngine is a simple, cross-platform graphics engine written in C++ using OpenGL.
 
