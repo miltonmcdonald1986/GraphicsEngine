@@ -12,7 +12,7 @@
 #ifndef GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ENTITY_H_
 #define GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ENTITY_H_
 
-#include "Attribute.h"
+#include "attribute.h"
 #include "ITexture.h"
 #include "Observable.h"
 #include "Shader.h"
