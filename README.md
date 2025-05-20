@@ -1,6 +1,4 @@
-[![ci](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml)
-
-[![Cppcheck](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml)
+[![ci](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml) [![Cppcheck](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml)
 
 # GraphicsEngine
 GraphicsEngine is a simple, cross-platform graphics engine written in C++ using OpenGL.
