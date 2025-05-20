@@ -1,7 +1,4 @@
-<a href="https://scan.coverity.com/projects/miltonmcdonald1986-graphicsengine">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/31711/badge.svg"/>
-</a>
+[![ci](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cmake-multi-platform.yml) [![Cppcheck](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml)
 
 # GraphicsEngine
 GraphicsEngine is a simple, cross-platform graphics engine written in C++ using OpenGL.
