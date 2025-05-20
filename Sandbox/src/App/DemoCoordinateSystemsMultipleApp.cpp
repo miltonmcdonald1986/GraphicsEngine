@@ -25,8 +25,8 @@ auto DemoCoordinateSystemsMultipleApp::Iterate() -> void
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    auto pShader = GetEngine()->GetShaderManager()->GetCurrentShader();
-    pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
+    auto shader = GetEngine()->GetShaderManager()->GetCurrentShader();
+    shader->SetUniformData("projection", glm::perspective(glm::radians(45.f), static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.f));
 
     App::Iterate();
 }

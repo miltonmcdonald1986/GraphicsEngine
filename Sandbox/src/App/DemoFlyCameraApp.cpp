@@ -13,9 +13,9 @@ namespace
         if (!spEngine)
             return;
         
-        auto pShader = spEngine->GetShaderManager ()->GetCurrentShader ();
-        pShader->SetUniformData("view", view);
-        pShader->SetUniformData("projection", projection);
+        auto shader = spEngine->GetShaderManager ()->GetCurrentShader ();
+        shader->SetUniformData("view", view);
+        shader->SetUniformData("projection", projection);
     }
 
     void OnScroll(GLFWwindow* pWindow, double xOffset, double yOffset)

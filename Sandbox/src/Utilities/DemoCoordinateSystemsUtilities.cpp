@@ -10,7 +10,7 @@ namespace gaa = ::graphics_engine::attributes::attribute_factory;
 
 auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine)
     -> std::vector<graphics_engine::entities::Entity*> {
-  auto [pShader, textures] = PrepareShaderAndTextures(spEngine);
+  auto [shader, textures] = PrepareShaderAndTextures(spEngine);
 
   auto spEntityFactory =
       graphics_engine::entities::CreateEntityFactory(spEngine);
@@ -27,7 +27,7 @@ auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine)
     auto attrPos = gaa::cube::Position();
     auto attrTexCoords = gaa::cube::TextureCoordinates();
     auto spCube = spEntityFactory->AddCube({attrPos, attrTexCoords});
-    spCube->shader = pShader;
+    spCube->shader = shader;
     spCube->textures = textures;
 
     cubes.push_back(spCube);
@@ -43,15 +43,15 @@ auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine)
 
 auto PrepareShaderAndTextures(graphics_engine::IEnginePtr spEngine)
     -> std::pair<graphics_engine::Shader*, graphics_engine::ITextures> {
-  graphics_engine::Shader* pShader = nullptr;
-  auto result = std::make_pair(pShader, graphics_engine::ITextures{});
+  graphics_engine::Shader* shader = nullptr;
+  auto result = std::make_pair(shader, graphics_engine::ITextures{});
 
   if (!spEngine) return result;
 
-  pShader = spEngine->GetShaderManager()->AddShaderFromFiles(
+  shader = spEngine->GetShaderManager()->AddShaderFromFiles(
       std::filesystem::path(SHADERS_DIR) / "DemoCoordinateSystems.vert",
       std::filesystem::path(SHADERS_DIR) / "DemoCoordinateSystems.frag");
-  if (!pShader) {
+  if (!shader) {
     spEngine->GetLog()->Error("Failed to create shader.");
     return result;
   }
@@ -70,7 +70,7 @@ auto PrepareShaderAndTextures(graphics_engine::IEnginePtr spEngine)
     return result;
   }
 
-  result.first = pShader;
+  result.first = shader;
   result.second = {spTexture1, spTexture2};
 
   return result;

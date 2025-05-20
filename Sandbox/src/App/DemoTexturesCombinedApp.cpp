@@ -35,8 +35,8 @@ DemoTexturesCombinedApp::DemoTexturesCombinedApp(GLFWwindow* pWindow)
 
 	m_pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);
 
-	auto [pShader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
-	m_pEntity->shader = pShader;
+	auto [shader, textures] = Utilities::PrepareShaderAndTextures(spEngine);
+	m_pEntity->shader = shader;
 	m_pEntity->textures = textures;
 	
 	m_pEntity->modelMatrix = glm::mat4(1.f);

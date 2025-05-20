@@ -13,9 +13,9 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 	auto oldDisabledAlpha = ImGui::GetStyle ().DisabledAlpha;
 	ImGui::GetStyle ().DisabledAlpha = 1.f;
 
-	auto pShader = GetEngine ()->GetShaderManager ()->GetCurrentShader ();
+	auto shader = GetEngine ()->GetShaderManager ()->GetCurrentShader ();
 	
-	int shaderId = pShader->ID;
+	int shaderId = shader->ID;
 	ImGui::BeginDisabled ();
 	ImGui::DragInt ("Shader Id", &shaderId);
 
@@ -32,7 +32,7 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 			ImGui::PushID (id); ImGui::InputFloat4 ("##", row3.data ()); ImGui::PopID (); ++id;
 		};
 
-	if (auto oMat = pShader->GetUniformData ("model"))
+	if (auto oMat = shader->GetUniformData ("model"))
 	{
 		if (std::holds_alternative<glm::mat4> (*oMat))
 		{
@@ -40,7 +40,7 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 			DisplayMat4 (std::get<glm::mat4> (*oMat));
 		}
 	}
-	if (auto oMat = pShader->GetUniformData ("projection"))
+	if (auto oMat = shader->GetUniformData ("projection"))
 	{
 		if (std::holds_alternative<glm::mat4> (*oMat))
 		{
@@ -48,7 +48,7 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 			DisplayMat4 (std::get<glm::mat4>(*oMat));
 		}
 	}
-	if (auto oMat = pShader->GetUniformData ("transformationMatrix"))
+	if (auto oMat = shader->GetUniformData ("transformationMatrix"))
 	{
 		if (std::holds_alternative<glm::mat4> (*oMat))
 		{
@@ -56,7 +56,7 @@ auto ShaderWidget::Iterate (bool* pShow) -> void
 			DisplayMat4 (std::get<glm::mat4> (*oMat));
 		}
 	}
-	if (auto oMat = pShader->GetUniformData ("view"))
+	if (auto oMat = shader->GetUniformData ("view"))
 	{
 		if (std::holds_alternative<glm::mat4> (*oMat))
 		{

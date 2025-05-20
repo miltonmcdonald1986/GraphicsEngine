@@ -31,6 +31,6 @@ DemoContainerApp::DemoContainerApp(GLFWwindow* pWindow)
 	};
 	
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);	
-	pEntity->pShader = spEngine->GetShaderManager ()->AddShaderFromFiles (std::filesystem::path (SHADERS_DIR) / "DemoContainer.vert", std::filesystem::path (SHADERS_DIR) / "DemoContainer.frag");
+	pEntity->shader = spEngine->GetShaderManager ()->AddShaderFromFiles (std::filesystem::path (SHADERS_DIR) / "DemoContainer.vert", std::filesystem::path (SHADERS_DIR) / "DemoContainer.frag");
 	pEntity->textures = { spEngine->CreateNewTextureFromFile("uTexture", std::filesystem::path(TEXTURES_DIR)/"container.jpg") };
 }

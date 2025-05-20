@@ -28,8 +28,8 @@ namespace
 
         auto fWidth = std::bit_cast<float>(newWidth);
         auto fHeight = std::bit_cast<float>(newHeight);
-        auto pShader = pApp->GetEngine()->GetShaderManager()->GetCurrentShader();
-        pShader->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
+        auto shader = pApp->GetEngine()->GetShaderManager()->GetCurrentShader();
+        shader->SetUniformData("projection", glm::ortho(-fWidth / fHeight, fWidth / fHeight, -1.f, 1.f, -1.f, 1.f));
     }
 
 }
@@ -62,9 +62,9 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
 
     m_pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, texCoords }, indices);
 
-    auto [pShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
+    auto [shader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
 
-    m_pEntity->shader = pShader;
+    m_pEntity->shader = shader;
     m_pEntity->textures = textures;
 
     int width;
