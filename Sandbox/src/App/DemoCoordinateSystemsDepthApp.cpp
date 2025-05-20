@@ -18,7 +18,7 @@ auto InitCube(g::IEnginePtr spEngine) -> g::entities::Entity*
     auto spAttrPos = gaa::cube::Position();
     auto spAttrTexCoords = gaa::cube::TextureCoordinates();
     auto spCube = spEntityFactory->AddCube({ spAttrPos, spAttrTexCoords });
-    spCube->pShader = pShader;
+    spCube->shader = pShader;
     spCube->textures = textures;
 
     return spCube;

@@ -23,5 +23,5 @@ DemoTriangleRGBApp::DemoTriangleRGBApp(GLFWwindow* spWindow)
 	};
 
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices, colors });
-	pEntity->pShader = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.vert", std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.frag");
+	pEntity->shader = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.vert", std::filesystem::path(SHADERS_DIR)/"DemoTriangleRGB.frag");
 }

@@ -44,17 +44,17 @@ struct Entity {
          const Types::Indices& indices);
 
   /// @brief Unique identifier for the entity.
-  const Types::EntityId ENTITY_ID;
+  const Types::EntityId kEntityId;
 
   /// @brief Number of indices in the index buffer.
-  const int NUM_INDICES;
+  const int kNumIndices;
 
   /// @brief Number of vertices in the entity.
-  const int NUM_VERTICES;
+  const int kNumVertices;
 
   /// @brief Callback function for when camera view or projection matrices are
   /// updated.
-  Observable<glm::mat4, glm::mat4>::Callback fnCameraCallback = nullptr;
+  Observable<glm::mat4, glm::mat4>::Callback cameraCallback = nullptr;
 
   /// @brief Transformation matrix representing the entity's position, rotation,
   /// and scale.
@@ -62,13 +62,13 @@ struct Entity {
   glm::mat4 modelMatrix = glm::mat4(1.f);
 
   /// @brief The shader program associated with the entity.
-  Shader* pShader = nullptr;
+  Shader* shader = nullptr;
 
   /// @brief Collection of textures applied to the entity.
   ITextures textures;
 
  private:
-  explicit Entity(const std::tuple<GLuint, GLsizei, GLsizei>& data);
+  explicit Entity(const std::tuple<unsigned int, int, int>& data);
 };
 
 }  // namespace graphics_engine

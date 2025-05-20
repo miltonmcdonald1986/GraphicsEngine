@@ -3,7 +3,7 @@
 #include <memory>
 #include <unordered_map>
 
-#include "Entity.h"
+#include "entity.h"
 #include "EntityManager.h"
 #include "IEngine.h"
 

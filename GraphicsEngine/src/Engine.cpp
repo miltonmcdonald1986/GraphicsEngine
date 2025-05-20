@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-#include "Entity.h"
+#include "entity.h"
 #include "Log.h"
 #include "SafeGL.h"
 #include "Texture.h"
@@ -87,11 +87,11 @@ namespace graphics_engine
 			if (!pEntity)
 				continue;
 
-			if (!pEntity->pShader)
+			if (!pEntity->shader)
 				continue;
 
-			pEntity->pShader->Use();
-			pEntity->pShader->SetUniformData ("model", pEntity->modelMatrix);
+			pEntity->shader->Use();
+			pEntity->shader->SetUniformData ("model", pEntity->modelMatrix);
 
 			auto& textures = pEntity->textures;
 			for (size_t i = 0; i < textures.size(); ++i)
@@ -102,13 +102,13 @@ namespace graphics_engine
 				
 				GL::ActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(i));
 				GL::BindTexture(GL_TEXTURE_2D, spTexture->GetId());
-				pEntity->pShader->SetUniformData(spTexture->GetName(), static_cast<int>(i));
+				pEntity->shader->SetUniformData(spTexture->GetName(), static_cast<int>(i));
 			}
-			GL::BindVertexArray(pEntity->ENTITY_ID);
-			if (pEntity->NUM_INDICES> 0)
-				GL::DrawElements(GL_TRIANGLES, pEntity->NUM_INDICES, GL_UNSIGNED_INT, nullptr);
+			GL::BindVertexArray(pEntity->kEntityId);
+			if (pEntity->kNumIndices > 0)
+				GL::DrawElements(GL_TRIANGLES, pEntity->kNumIndices, GL_UNSIGNED_INT, nullptr);
 			else
-				GL::DrawArrays(GL_TRIANGLES, 0, pEntity->NUM_VERTICES);
+				GL::DrawArrays(GL_TRIANGLES, 0, pEntity->kNumVertices);
 		}
 	}
 

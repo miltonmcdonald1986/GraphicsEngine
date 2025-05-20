@@ -25,8 +25,8 @@ namespace graphics_engine::entities
 	) -> Entity*
 	{
 		Entity entity(attributes, indices);
-		m_Entities.try_emplace(entity.ENTITY_ID, entity);
-		return &m_Entities.at(entity.ENTITY_ID);
+		m_Entities.try_emplace(entity.kEntityId, entity);
+		return &m_Entities.at(entity.kEntityId);
 	}
 
 	auto EntityManagerImpl::GetEntity(

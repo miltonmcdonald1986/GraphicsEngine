@@ -42,7 +42,7 @@ DemoTriangleApp::DemoTriangleApp(GLFWwindow* pWindow) : App(pWindow) {
       g::ShaderSnippets::Transformation;
   std::string fragmentShader =
       g::ShaderUtilities::GetSourceFromFile(shadersDir / "DemoTriangle.frag");
-  pEntity->pShader = spEngine->GetShaderManager()->AddShaderFromSource(
+  pEntity->shader = spEngine->GetShaderManager()->AddShaderFromSource(
       vertexShader, fragmentShader);
 
   // Create a camera

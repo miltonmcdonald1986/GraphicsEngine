@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "entity.h"
 #include "Types.h"
 
 namespace graphics_engine::entities {

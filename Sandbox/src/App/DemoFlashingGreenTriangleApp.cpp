@@ -19,7 +19,7 @@ DemoFlashingGreenTriangleApp::DemoFlashingGreenTriangleApp(GLFWwindow* pWindow)
 	auto pEntity = spEngine->GetEntityManager()->AddEntity({ vertices });
 	auto pShader = spEngine->GetShaderManager()->AddShaderFromFiles(std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.vert", std::filesystem::path(SHADERS_DIR)/"DemoFlashingGreenTriangle.frag");
 	pShader->SetUniformData(m_UniformName, 1.f);
-	pEntity->pShader = pShader;
+	pEntity->shader = pShader;
 }
 
 auto DemoFlashingGreenTriangleApp::Iterate() -> void

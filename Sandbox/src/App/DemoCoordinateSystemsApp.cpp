@@ -46,7 +46,7 @@ DemoCoordinateSystemsApp::DemoCoordinateSystemsApp(GLFWwindow* pWindow)
     pShader->SetUniformData("view", glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -3.f)));
     pShader->SetUniformData("projection", glm::perspective(glm::radians(45.f), 800.f / 600.f, 0.1f, 100.f));
 
-    pEntity->pShader = pShader;
+    pEntity->shader = pShader;
     pEntity->textures = textures;
 }
 

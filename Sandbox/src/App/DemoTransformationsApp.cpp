@@ -64,13 +64,13 @@ DemoTransformationsApp::DemoTransformationsApp(GLFWwindow* pWindow)
 
     auto [pShader, textures] = Utilities::PrepareShaderAndTextures(GetEngine());
 
-    m_pEntity->pShader = pShader;
+    m_pEntity->shader = pShader;
     m_pEntity->textures = textures;
 
     int width;
     int height;
     glfwGetWindowSize(GetWindow(), &width, &height);
-    m_pEntity->pShader->SetUniformData("projection", glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
+    m_pEntity->shader->SetUniformData("projection", glm::ortho(-std::bit_cast<float>(width) / std::bit_cast<float>(height), std::bit_cast<float>(width) / std::bit_cast<float>(height), -1.f, 1.f, -1.f, 1.f));
 }
 
 DemoTransformationsApp::~DemoTransformationsApp()
@@ -90,7 +90,7 @@ auto DemoTransformationsApp::Iterate() -> void
     trans = glm::rotate(trans, seconds, glm::vec3(0.f, 0.f, 1.f));
 	glfwSetWindowTitle(GetWindow(), std::format("Seconds: {}", seconds).c_str());
     m_pEntity->modelMatrix = trans;
-    m_pEntity->pShader->SetUniformData("view", glm::mat4(1.f));
+    m_pEntity->shader->SetUniformData("view", glm::mat4(1.f));
 
     App::Iterate();
 }

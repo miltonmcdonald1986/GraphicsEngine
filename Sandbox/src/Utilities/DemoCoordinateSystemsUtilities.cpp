@@ -27,7 +27,7 @@ auto CreateTenTexturedCubes(graphics_engine::IEnginePtr spEngine)
     auto attrPos = gaa::cube::Position();
     auto attrTexCoords = gaa::cube::TextureCoordinates();
     auto spCube = spEntityFactory->AddCube({attrPos, attrTexCoords});
-    spCube->pShader = pShader;
+    spCube->shader = pShader;
     spCube->textures = textures;
 
     cubes.push_back(spCube);

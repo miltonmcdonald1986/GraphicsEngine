@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "entity.h"
 
 #include "Log.h"
 #include "SafeGL.h"
@@ -123,10 +123,10 @@ namespace graphics_engine::entities
 	{
 	}
 
-	Entity::Entity(const std::tuple<GLuint, GLsizei, GLsizei>& data)
-		:	ENTITY_ID(std::get<0>(data)),
-			NUM_INDICES(std::get<1>(data)),
-			NUM_VERTICES(std::get<2>(data))
+	Entity::Entity(const std::tuple<unsigned int, int, int>& data)
+		:	kEntityId(std::get<0>(data)),
+			kNumIndices(std::get<1>(data)),
+			kNumVertices(std::get<2>(data))
 	{
 	}
 
