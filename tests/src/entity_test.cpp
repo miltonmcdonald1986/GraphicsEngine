@@ -13,6 +13,16 @@
 class GraphicsEngineTestFixture : public ::testing::Test {
  protected:
   void SetUp() override {
+    ASSERT_EQ(glfwInit(), GL_TRUE);
+
+    // Create an invisible window for an OpenGL context
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    GLFWwindow* window =
+        glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
+    ASSERT_TRUE(window);
+
+    // Make the context current
+    glfwMakeContextCurrent(window);
   }
 
   void TearDown() override {
