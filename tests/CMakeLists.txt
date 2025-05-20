@@ -1,5 +1,6 @@
 enable_testing()
-    
+
+find_package(glfw3 CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 
 file(GLOB TEST_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
