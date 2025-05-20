@@ -151,6 +151,8 @@ jobs:
         working-directory: build/tests
         run: |
             sudo apt-get install libglfw3-dev libgl1-mesa-dev mesa-utils
+            Xvfb :99 -screen 0 1024x768x24 &
+            export DISPLAY=:99
             ctest --output-on-failure --build-config ${{ matrix.build_type }}
 
       - name: Capture Coverage Data
