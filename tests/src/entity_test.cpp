@@ -13,23 +13,10 @@
 class GraphicsEngineTestFixture : public ::testing::Test {
  protected:
   void SetUp() override {
-    ASSERT_TRUE(glfwInit());
-
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-    window_ = glfwCreateWindow(800, 600, "Hidden Window", nullptr, nullptr);
-    ASSERT_TRUE(window_);
-
-    glfwMakeContextCurrent(window_);
-    ASSERT_EQ(glfwGetError(nullptr), GLFW_NO_ERROR);
   }
 
   void TearDown() override {
-    glfwDestroyWindow(window_);
-    glfwTerminate();
   }
-
- private:
-  GLFWwindow* window_ = nullptr;
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {

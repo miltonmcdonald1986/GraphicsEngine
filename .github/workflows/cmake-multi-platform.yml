@@ -131,9 +131,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set DISPLAY variable
-        run: export DISPLAY=:99
-
       - name: Install lcov (Linux)
         if: matrix.c_compiler == 'gcc' && runner.os == 'Linux'
         run: |
