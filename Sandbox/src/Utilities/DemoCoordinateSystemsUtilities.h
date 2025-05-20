@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "GraphicsEngine/Entity.h"
+#include "GraphicsEngine/entity.h"
 #include "GraphicsEngine/Types.h"
 
 namespace graphics_engine
