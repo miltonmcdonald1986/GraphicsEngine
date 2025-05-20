@@ -2,7 +2,7 @@
 
 #include <numbers>
 
-#include "GraphicsEngine/AttributeFactory.h"
+#include "GraphicsEngine/attribute_factory.h"
 #include "GraphicsEngine/ICameraViewport.h"
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/ShaderSnippets.h"

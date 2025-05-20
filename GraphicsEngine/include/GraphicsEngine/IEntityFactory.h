@@ -21,7 +21,7 @@ namespace graphics_engine::entities
 		/// @note	Each attribute must contain **24 vertices** due to the underlying **Element Buffer Object (EBO)**
 		///			in the generated cube.
 		/// @note	Attribute factory functions for **Pos, TexCoords**, etc., which generate **24-vertex attributes**,
-		///			can be found in @ref AttributeFactory.h.
+		///			can be found in @ref attribute_factory.h.
 		virtual auto AddCube(const attributes::Attributes& attributes) -> Entity* = 0;
 	};
 	

@@ -3,7 +3,7 @@
 // This software is licensed under the MIT License.
 // See LICENSE file for details.
 //
-// AttributeFactory.h - Defines utility functions for creating vertex
+// attribute_factory.h - Defines utility functions for creating vertex
 // attributes.
 
 #ifndef GRAPHICSENGINE_INCLUDE_GRAPHICSENGINE_ATTRIBUTEFACTORY_H_

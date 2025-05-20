@@ -2,7 +2,7 @@
 
 #include <numbers>
 
-#include "GraphicsEngine/AttributeFactory.h"
+#include "GraphicsEngine/attribute_factory.h"
 
 namespace g = ::graphics_engine;
 namespace ga = g::attributes;
@@ -14,7 +14,7 @@ constexpr float kPi = std::numbers::pi_v<float>;
 constexpr float kPiOver2 = kPi / 2.f;
 constexpr float kDegsToRads = kPi / 180.f;
 
-TEST(AttributeFactoryTests, Cube_Position) {
+TEST(AttributeFactoryTests, CubePosition) {
   ga::Attribute attribute = gaac::Position();
   EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec3>>(attribute));
 
@@ -54,7 +54,7 @@ TEST(AttributeFactoryTests, Cube_Position) {
   EXPECT_EQ(pts[23], v7);
 }
 
-TEST(AttributeFactoryTests, Cube_TextureCoordinates) {
+TEST(AttributeFactoryTests, CubeTextureCoordinates) {
   ga::Attribute attribute = gaac::TextureCoordinates();
   EXPECT_TRUE(std::holds_alternative<std::vector<glm::vec2>>(attribute));
 
@@ -90,7 +90,7 @@ TEST(AttributeFactoryTests, Cube_TextureCoordinates) {
   EXPECT_EQ(pts[23], t3);
 }
 
-TEST(AttributeFactoryTests, Triangle_AAS) {
+TEST(AttributeFactoryTests, TriangleAAS) {
   std::expected<ga::Attribute, g::Error> expectedAttribute =
       gaat::AAS(0.5f, 1.f, 3.f);
   EXPECT_TRUE(expectedAttribute.has_value());
@@ -131,7 +131,7 @@ TEST(AttributeFactoryTests, Triangle_AAS) {
   EXPECT_EQ(error_bad_angles.error().code, g::ErrorCode::kAngleSumExceeded);
 }
 
-TEST(AttributeFactoryTests, Triangle_ASA) {
+TEST(AttributeFactoryTests, TriangleASA) {
   auto angle_a = 40.f * kDegsToRads;
   auto side_c = 5.f;
   auto angle_b = 60.f * kDegsToRads;
@@ -174,7 +174,7 @@ TEST(AttributeFactoryTests, Triangle_ASA) {
   EXPECT_EQ(error_bad_angles.error().code, g::ErrorCode::kAngleSumExceeded);
 }
 
-TEST(AttributeFactoryTests, Triangle_HL) {
+TEST(AttributeFactoryTests, TriangleHL) {
   const float hypotenuse = 13.f;
   const float leg = 5.f;
   std::expected<ga::Attribute, g::Error> attr = gaat::HL(hypotenuse, leg);
@@ -210,7 +210,7 @@ TEST(AttributeFactoryTests, Triangle_HL) {
             g::ErrorCode::kInvalidTriangle);
 }
 
-TEST(AttributeFactoryTests, Triangle_SAS) {
+TEST(AttributeFactoryTests, TriangleSAS) {
   const float side_a = 6.8f;
   const float angle_c = 110.f * kDegsToRads;
   const float side_b = 4.2f;
@@ -253,7 +253,7 @@ TEST(AttributeFactoryTests, Triangle_SAS) {
   EXPECT_EQ(error_bad_side_b.error().code, g::ErrorCode::kInvalidSideLength);
 }
 
-TEST(AttributeFactoryTests, Triangle_SSS) {
+TEST(AttributeFactoryTests, TriangleSSS) {
   const float side_a = 8.f;
   const float side_b = 6.f;
   const float side_c = 7.f;

@@ -1,6 +1,6 @@
 #include "DemoCoordinateSystemsUtilities.h"
 
-#include "GraphicsEngine/AttributeFactory.h"
+#include "GraphicsEngine/attribute_factory.h"
 #include "GraphicsEngine/IEngine.h"
 #include "GraphicsEngine/IEntityFactory.h"
 

@@ -2,7 +2,7 @@
 #include "DemoCoordinateSystemsUtilities.h"
 #include "EngineLogWidget.h"
 
-#include "GraphicsEngine/AttributeFactory.h"
+#include "GraphicsEngine/attribute_factory.h"
 #include "GraphicsEngine/IEntityFactory.h"
 
 #include "glm/ext/matrix_clip_space.hpp"

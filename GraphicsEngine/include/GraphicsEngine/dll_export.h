@@ -3,7 +3,7 @@
 // This software is licensed under the MIT License.
 // See LICENSE file for details.
 //
-// DllImpExp.h - Defines the DLLEXPORT macro for cross-platform compatibility.
+// dll_export.h - Defines the DLLEXPORT macro for cross-platform compatibility.
 // It ensures proper symbol exporting/importing for Windows while handling
 // other platforms gracefully.
 
