@@ -8,7 +8,7 @@ namespace graphics_engine {
 
 class Engine : public IEngine {
  public:
-  Engine(const std::optional<GLProcAddressFunc>& proc_address_func);
+  explicit Engine(const std::optional<GLProcAddressFunc>& proc_address_func);
   ~Engine() override;
 
   auto CreateNewTextureFromFile(std::string_view textureName,
