@@ -18,8 +18,13 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 
     ASSERT_EQ(glfwInit(), GL_TRUE);
 
+    glfwSetErrorCallback([](int error, const char* description) {
+      std::cerr << "GLFW Error " << error << ": " << description << std::endl;
+    });
+
     // Create an invisible window for an OpenGL context
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_NATIVE_CONTEXT_API);
     window_ = glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
     ASSERT_TRUE(window_);
 
