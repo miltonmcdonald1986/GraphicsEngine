@@ -7,8 +7,11 @@
 
 #include <gtest/gtest.h>
 
+#ifdef _WIN32
 #include "EGL/egl.h"
+#else
 #include "GLFW/glfw3.h"
+#endif
 #include "GraphicsEngine/IEngine.h"
 
 class GraphicsEngineTestFixture : public ::testing::Test {
