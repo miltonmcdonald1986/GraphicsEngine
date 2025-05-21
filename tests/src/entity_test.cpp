@@ -25,9 +25,6 @@ class GraphicsEngineTestFixture : public ::testing::Test {
     // Create an invisible window for an OpenGL context
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     window_ = glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
     ASSERT_TRUE(window_);
 
