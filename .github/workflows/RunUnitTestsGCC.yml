@@ -24,7 +24,9 @@ jobs:
       - name: Install Mesa3D
         run: sudo apt-get update && sudo apt-get install -y mesa-utils libgl1-mesa-dev libegl1-mesa-dev
       - name: Enable Mesa software rendering
-        run: export LIBGL_ALWAYS_SOFTWARE=1
+        run: |
+          export LIBGL_ALWAYS_SOFTWARE=1
+          export __GLX_VENDOR_LIBRARY_NAME=mesa
       - name: Run Tests
         working-directory: build/tests
         run: ctest --output-on-failure --build-config Release
