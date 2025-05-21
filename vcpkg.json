@@ -1,5 +1,8 @@
 {
   "dependencies": [
+    { 
+	  "name": "angle" 
+	},
     {
       "name": "glm",
       "version>=": "1.0.1#3"
