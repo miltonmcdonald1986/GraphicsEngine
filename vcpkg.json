@@ -1,7 +1,8 @@
 {
   "dependencies": [
     { 
-	  "name": "angle" 
+	  "name": "angle",
+	  "supports": "windows"
 	},
     {
       "name": "glm",
