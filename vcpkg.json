@@ -1,9 +1,5 @@
 {
   "dependencies": [
-    { 
-	  "name": "angle",
-	  "platform": "windows"
-	},
     {
       "name": "glm",
       "version>=": "1.0.1#3"
