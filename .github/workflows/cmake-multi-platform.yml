@@ -50,16 +50,6 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install Mesa (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/latest/download/mesa3d-release-msvc.7z
-        & "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-        cmd /c mklink opengl32.dll "x64\opengl32.dll"
-        cmd /c mklink libglapi.dll "x64\libglapi.dll"
-        set PATH=%PATH%;C:\path\to\mesa\x64
-        set LIBGL_ALWAYS_SOFTWARE=1
-
     - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
       run: |
@@ -174,6 +164,11 @@ jobs:
         if: runner.os == 'Windows'
         working-directory: build/tests
         run: |
+          curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/latest/download/mesa3d-release-msvc.7z
+          & "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+          cmd /c mklink opengl32.dll "x64\opengl32.dll"
+          cmd /c mklink libglapi.dll "x64\libglapi.dll"
+          set PATH=%PATH%;C:\path\to\mesa\x64
           set LIBGL_ALWAYS_SOFTWARE=1
           echo %PATH% | findstr "libEGL.dll"
           ctest --output-on-failure --build-config ${{ matrix.build_type }}
