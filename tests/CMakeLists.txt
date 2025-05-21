@@ -2,12 +2,11 @@ enable_testing()
 
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
-find_package(OSMesa REQUIRED)
 
 file(GLOB TEST_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 add_executable(GraphicsEngineTests ${TEST_SOURCES})
 
-target_link_libraries(GraphicsEngineTests PRIVATE GraphicsEngine glfw GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main OSMesa::OSMesa)
+target_link_libraries(GraphicsEngineTests PRIVATE GraphicsEngine glfw GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(GraphicsEngineTests)
