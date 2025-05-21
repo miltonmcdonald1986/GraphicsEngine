@@ -1,5 +1,6 @@
 enable_testing()
 
+find_package(EGL REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 
