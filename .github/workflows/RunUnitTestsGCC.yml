@@ -19,6 +19,8 @@ jobs:
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-gcc
           path: build
+      - name: Set executable permissions for test binaries
+        run: chmod +x build/bin/GraphicsEngineTests
       - name: Run Tests
         working-directory: build/tests
         run: ctest --output-on-failure --build-config Release
