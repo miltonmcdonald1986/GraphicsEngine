@@ -43,12 +43,11 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 
     // Create an invisible window for an OpenGL context
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-    GLFWwindow* window =
-        glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
-    ASSERT_TRUE(window);
+    window_ = glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
+    ASSERT_TRUE(window_);
 
     // Make the context current
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(window_);
 #endif
   }
 
@@ -57,14 +56,18 @@ class GraphicsEngineTestFixture : public ::testing::Test {
     eglDestroyContext(display_, context_);
     eglTerminate(display_);
 #else
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(window_);
     glfwTerminate();
 #endif
   }
 
  private:
+#ifdef _WIN32
   EGLContext context_;
   EGLDisplay display_;
+#else
+  GLFWwindow* window_;
+#endif
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {
