@@ -56,6 +56,15 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential
         sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+        sudo apt-get install libglfw3-dev libgl1-mesa-dev mesa-utils
+
+    - name: Install dependencies (Windows)
+      if: runner.os == 'Windows'
+      run: |
+          curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/latest/download/mesa3d-release-msvc.7z
+          & "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+          cmd /c mklink opengl32.dll "x64\opengl32.dll"
+          cmd /c mklink libglapi.dll "x64\libglapi.dll"
 
     - name: Install Clang 19 (Linux, Clang only)
       if: runner.os == 'Linux' && matrix.c_compiler == 'clang'
@@ -151,7 +160,6 @@ jobs:
         if: runner.os == 'Linux'
         working-directory: build/tests
         run: |
-            sudo apt-get install libglfw3-dev libgl1-mesa-dev mesa-utils
             Xvfb :99 -screen 0 1024x768x24 &
             export DISPLAY=:99
             ctest --output-on-failure --build-config ${{ matrix.build_type }}
@@ -164,13 +172,6 @@ jobs:
         if: runner.os == 'Windows'
         working-directory: build/tests
         run: |
-          curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/latest/download/mesa3d-release-msvc.7z
-          & "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-          cmd /c mklink opengl32.dll "x64\opengl32.dll"
-          cmd /c mklink libglapi.dll "x64\libglapi.dll"
-          set PATH=%PATH%;C:\path\to\mesa\x64
-          set LIBGL_ALWAYS_SOFTWARE=1
-          echo %PATH% | findstr "libEGL.dll"
           ctest --output-on-failure --build-config ${{ matrix.build_type }}
 
       - name: Capture Coverage Data
