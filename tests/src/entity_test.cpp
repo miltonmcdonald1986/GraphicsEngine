@@ -74,8 +74,12 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {
+  #ifdef _WIN32
   graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine(
       graphics_engine::GLProcAddressFunc(eglGetProcAddress));
+  #else
+  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine();
+  #endif
   EXPECT_TRUE(engine);
 
   graphics_engine::entities::Entity* entity =
