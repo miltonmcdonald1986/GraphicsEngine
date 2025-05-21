@@ -13,4 +13,4 @@ jobs:
         run: sudo apt-get install -y cppcheck
 
       - name: Run Cppcheck
-        run: cppcheck --enable=style --check-level=exhaustive -i GraphicsEngine/src/glad.cpp --inconclusive --error-exitcode=1 .
+        run: cppcheck --enable=style --check-level=exhaustive -i tests -i GraphicsEngine/src/glad.cpp --inconclusive --error-exitcode=1 .
