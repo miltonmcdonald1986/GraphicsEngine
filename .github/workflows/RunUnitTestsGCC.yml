@@ -21,6 +21,10 @@ jobs:
           path: build
       - name: Set executable permissions for test binaries
         run: chmod +x build/bin/GraphicsEngineTests
+      - name: Install Mesa3D
+        run: sudo apt-get update && sudo apt-get install -y mesa-utils libgl1-mesa-dev libegl1-mesa-dev
+      - name: Verify Mesa installation
+        run: glxinfo | grep "OpenGL"
       - name: Run Tests
         working-directory: build/tests
         run: ctest --output-on-failure --build-config Release
