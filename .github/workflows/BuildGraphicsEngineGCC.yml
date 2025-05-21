@@ -18,3 +18,8 @@ jobs:
       run: cmake -S ${{ github.workspace }} -B ${{ github.workspace }}/build -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config Release
+    - name: Upload Build Directory
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact-ubuntu-latest-gcc
+        path: build
