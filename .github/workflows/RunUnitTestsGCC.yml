@@ -20,7 +20,7 @@ jobs:
           name: build-artifact-ubuntu-latest-gcc
           path: build
       - name: Set Library Path
-        run: export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+        run: export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
       - name: Set executable permissions for test binaries
         run: chmod +x build/bin/GraphicsEngineTests
       - name: Install Mesa3D
