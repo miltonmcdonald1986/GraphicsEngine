@@ -18,16 +18,9 @@ class GraphicsEngineTestFixture : public ::testing::Test {
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_NULL);
     ASSERT_EQ(glfwInit(), GL_TRUE);
 
-    glfwSetErrorCallback([](int error, const char* description) {
-      std::cerr << "GLFW Error " << error << ": " << description << std::endl;
-    });
-
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
-    window_ = glfwCreateWindow(800, 600, "Headless", NULL, NULL);
-    if (!window_) {
-      std::cerr << "Failed to create an off-screen context!" << std::endl;
-    }
+    window_ = glfwCreateWindow(800, 600, "Headless", nullptr, nullptr);
     ASSERT_TRUE(window_);
 
     glfwMakeContextCurrent(window_);
@@ -43,9 +36,7 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {
-  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine(
-      std::optional<graphics_engine::GLProcAddressFunc>{
-          reinterpret_cast<graphics_engine::GLProcAddressFunc> (glfwGetProcAddress) });
+  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine();
   EXPECT_TRUE(engine);
 
   graphics_engine::entities::Entity* entity =
