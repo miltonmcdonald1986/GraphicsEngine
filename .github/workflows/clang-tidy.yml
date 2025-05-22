@@ -19,6 +19,8 @@ jobs:
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-clang
           path: build
+      - name: Rebuild Precompiled Headers
+        run: cmake --build build --target precompile_headers
       - name: Install Clang 19 and Clang-Tidy 19
         run: |
           sudo apt-get update
