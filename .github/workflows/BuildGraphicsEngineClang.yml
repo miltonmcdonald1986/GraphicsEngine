@@ -22,7 +22,7 @@ jobs:
     - name: Install Dependencies
       run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
     - name: Configure CMake
-      run: cmake -S ${{ github.workspace }} -B ${{ github.workspace }}/build -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+      run: cmake -S ${{ github.workspace }} -B ${{ github.workspace }}/build -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19 -DCMAKE_BUILD_TYPE=Release
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config Release
     - name: Upload Build Directory
