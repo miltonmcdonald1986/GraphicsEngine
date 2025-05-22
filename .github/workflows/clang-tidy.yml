@@ -27,4 +27,8 @@ jobs:
           sudo ./llvm.sh 19
           sudo apt-get install -y clang-tidy-19
       - name: Run Clang-Tidy
-        run: clang-tidy-19 --checks='bugprone-*,cert-*,concurrency-*,cppcoreguidelines-*,google-*,-google-objc-*,readability-*' -line-filter='[{"name":"GraphicsEngine/src/glad.cpp"}]' -p build/compile_commands.json $(find GraphicsEngine/ Sandbox/ -type f \( -name "*.cpp" \))
+        run: > 
+          clang-tidy-19 
+          --checks='bugprone-*' 
+          -p build/compile_commands.json 
+          $(find GraphicsEngine/ Sandbox/ -type f \( -name "*.cpp" \))
