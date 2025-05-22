@@ -30,6 +30,7 @@ jobs:
       - name: Rebuild Precompiled Headers
         run: |
           find build/ -name "*.pch" -delete
-          cmake --build build -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19 --config Release
+          cmake -S . -B build -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19
+          cmake --build build --config Release
       - name: Run Clang-Tidy
         run: clang-tidy-19 -p build/compile_commands.json $(find . -name "*.cpp")
