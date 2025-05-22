@@ -20,4 +20,4 @@ jobs:
           name: build-artifact-ubuntu-latest-clang
           path: build
       - name: Run Clang-Tidy
-        run: clang-tidy -p build/compile_commands.json      
+        run: clang-tidy -p build/compile_commands.json $(find . -name "*.cpp")
