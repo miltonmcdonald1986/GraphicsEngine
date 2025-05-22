@@ -1,4 +1,5 @@
 [![Build Graphics Engine (ubuntu-latest, gcc)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/BuildGraphicsEngineGCC.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/BuildGraphicsEngineGCC.yml)
+[![Test (ubuntu-latest, gcc)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/RunUnitTestsGCC.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/RunUnitTestsGCC.yml)
 [![Build Graphics Engine (ubuntu-latest, clang)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/BuildGraphicsEngineClang.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/BuildGraphicsEngineClang.yml)
 [![clang-tidy (ubuntu-latest, clang)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/clang-tidy.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/clang-tidy.yml)
 [![Cppcheck](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/miltonmcdonald1986/GraphicsEngine/actions/workflows/cppcheck.yml)
