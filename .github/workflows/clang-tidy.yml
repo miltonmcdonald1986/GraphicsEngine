@@ -18,7 +18,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-clang
-          path: build.tar
+          path: .
       - name: Extract Tar Archive
         run: tar -xvf build.tar
       - name: Install Clang 19 and Clang-Tidy 19
