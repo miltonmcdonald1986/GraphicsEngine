@@ -41,7 +41,9 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {
-  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine();
+  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine(
+      std::optional<graphics_engine::GLProcAddressFunc>{
+          reinterpret_cast<graphics_engine::GLProcAddressFunc> (glfwGetProcAddress) });
   EXPECT_TRUE(engine);
 
   graphics_engine::entities::Entity* entity =
