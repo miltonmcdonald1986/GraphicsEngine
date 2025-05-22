@@ -15,10 +15,8 @@ class GraphicsEngineTestFixture : public ::testing::Test {
  protected:
   void SetUp() override {
 
-    glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_NULL);
     ASSERT_EQ(glfwInit(), GL_TRUE);
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
     window_ = glfwCreateWindow(800, 600, "Headless", nullptr, nullptr);
     ASSERT_TRUE(window_);
