@@ -15,22 +15,20 @@ class GraphicsEngineTestFixture : public ::testing::Test {
  protected:
   void SetUp() override {
 
-
+    glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_NULL);
     ASSERT_EQ(glfwInit(), GL_TRUE);
 
     glfwSetErrorCallback([](int error, const char* description) {
       std::cerr << "GLFW Error " << error << ": " << description << std::endl;
     });
 
-    // Create an invisible window for an OpenGL context
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
-    window_ = glfwCreateWindow(640, 480, "Hidden Context", nullptr, nullptr);
+    window_ = glfwCreateWindow(800, 600, "Headless", NULL, NULL);
+    if (!window_) {
+      std::cerr << "Failed to create an off-screen context!" << std::endl;
+    }
     ASSERT_TRUE(window_);
-
-    // Make the context current
-    glfwMakeContextCurrent(window_);
-
   }
 
   void TearDown() override {
