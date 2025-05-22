@@ -8,12 +8,12 @@
 
 namespace graphics_engine {
 
-auto CreateEngine(const std::optional<GLProcAddressFunc>& proc_address_func)
+auto CreateEngine(const MaybeGLLoadProc& proc_address_func)
     -> IEnginePtr {
   return std::make_shared<Engine>(proc_address_func);
 }
 
-Engine::Engine(const std::optional<GLProcAddressFunc>& proc_address_func)
+Engine::Engine(const MaybeGLLoadProc& proc_address_func)
     : m_upEntityManagerImpl(entities::CreateEntityManagerImpl(this)),
       m_upShaderManagerImpl(CreateShaderManagerImpl(this)),
       m_spLog(CreateLog()) {

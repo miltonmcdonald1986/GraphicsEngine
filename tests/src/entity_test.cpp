@@ -16,19 +16,37 @@
 #include "GLFW/glfw3.h"
 #include "GraphicsEngine/IEngine.h"
 
+namespace g = graphics_engine;
+namespace ge = g::entities;
+
+namespace {
+
+bool IsCi() {
+  const char* env = std::getenv("GITHUB_ACTIONS");
+  return env && (std::string(env) == "true");
+}
+
+g::GLLoadProc GetProcAddress() {
+  return reinterpret_cast<g::GLLoadProc>(glfwGetProcAddress);  // NOSONAR
+}
+
+}  // namespace
+
 class GraphicsEngineTestFixture : public ::testing::Test {
  protected:
   void SetUp() override {
-    const char* github_actions = std::getenv("GITHUB_ACTIONS");
-    bool is_ci = github_actions && (std::string(github_actions) == "true");
-
-    if (is_ci)
+    
+    if (IsCi()) {
       glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_NULL);
+    }
 
     ASSERT_EQ(glfwInit(), GL_TRUE);
 
-    if (is_ci)
+    if (IsCi()) {
       glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_OSMESA_CONTEXT_API);
+    } else {
+      glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+    }
 
     window_ = glfwCreateWindow(800, 600, "Headless", nullptr, nullptr);
     ASSERT_TRUE(window_);
@@ -46,19 +64,15 @@ class GraphicsEngineTestFixture : public ::testing::Test {
 };
 
 TEST_F(GraphicsEngineTestFixture, Entity) {
-  graphics_engine::IEnginePtr engine = graphics_engine::CreateEngine(
-      std::optional<graphics_engine::GLProcAddressFunc>{
-          reinterpret_cast<graphics_engine::GLProcAddressFunc>(
-              glfwGetProcAddress)});
+  g::IEnginePtr engine = g::CreateEngine(GetProcAddress());
   EXPECT_TRUE(engine);
 
-  graphics_engine::entities::Entity* entity =
-      engine->GetEntityManager()->AddEntity({});
+  ge::Entity* entity = engine->GetEntityManager()->AddEntity({});
   EXPECT_FALSE(entity->cameraCallback);
   EXPECT_EQ(entity->kEntityId, 1);
   EXPECT_EQ(entity->kNumIndices, 0);
   EXPECT_EQ(entity->kNumVertices, 0);
   EXPECT_EQ(entity->modelMatrix, glm::mat4(1.f));
   EXPECT_EQ(entity->shader, nullptr);
-  EXPECT_EQ(entity->textures, graphics_engine::ITextures{});
+  EXPECT_EQ(entity->textures, g::ITextures{});
 }

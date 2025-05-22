@@ -37,14 +37,15 @@ class IEngine {
   virtual auto SetPolygonMode(Types::PolygonMode mode) -> void = 0;
 };
 
-/// @typedef GLProcAddressFunc
+/// @typedef GLLoadProc
 /// @brief Function pointer type for resolving OpenGL function addresses.
 /// 
 /// This type represents a function pointer that takes a function name as a `const char*` 
 /// and returns a pointer to the corresponding OpenGL function. It enables flexibility 
 /// in selecting the appropriate OpenGL function loader, whether it's `eglGetProcAddress`, 
 /// `wglGetProcAddress`, or another platform-specific resolver.
-using GLProcAddressFunc = void* (*)(const char*);
+using GLLoadProc = void* (*)(const char*);
+using MaybeGLLoadProc = std::optional<GLLoadProc>;
 
 /// @brief Alias for shared_ptr to IEngine.
 using IEnginePtr = std::shared_ptr<IEngine>;
@@ -52,8 +53,8 @@ using IEnginePtr = std::shared_ptr<IEngine>;
 // Creates an engine instance, optionally accepting a custom OpenGL function
 // resolver. If `proc_address_func` is not provided, a default resolver will be
 // used.
-DLLEXPORT auto CreateEngine(
-    const std::optional<GLProcAddressFunc>& proc_address_func = std::nullopt)
+DLLEXPORT auto CreateEngine(const MaybeGLLoadProc& proc_address_func =
+                                std::nullopt)
     -> IEnginePtr;
 
 }  // namespace graphics_engine
