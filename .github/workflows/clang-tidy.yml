@@ -19,5 +19,13 @@ jobs:
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-clang
           path: build
+      - name: Install Clang 19 and Clang-Tidy 19
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget lsb-release gnupg
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 19
+          sudo apt-get install -y clang-tidy-19
       - name: Run Clang-Tidy
-        run: clang-tidy -p build/compile_commands.json $(find . -name "*.cpp")
+        run: clang-tidy-19 -p build/compile_commands.json $(find . -name "*.cpp")
