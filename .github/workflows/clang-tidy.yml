@@ -22,7 +22,8 @@ jobs:
       - name: Rebuild Precompiled Headers
         run: |
           find build/ -name "*.pch" -delete
-          cmake --build build
+          cmake --build build -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19 --config Release
+
       - name: Install Clang 19 and Clang-Tidy 19
         run: |
           sudo apt-get update
