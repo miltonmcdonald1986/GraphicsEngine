@@ -29,6 +29,8 @@ class GraphicsEngineTestFixture : public ::testing::Test {
       std::cerr << "Failed to create an off-screen context!" << std::endl;
     }
     ASSERT_TRUE(window_);
+
+    glfwMakeContextCurrent(window_);
   }
 
   void TearDown() override {
