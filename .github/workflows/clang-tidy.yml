@@ -10,17 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Download Build Directory
+      - name: Download Repository Artifact
         uses: actions/download-artifact@v4
         with:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-clang
-          path: .
       - name: Extract Tar Archive
-        run: tar -xvf build.tar
+        run: tar -xvf repo.tar
       - name: Install Clang 19 and Clang-Tidy 19
         run: |
           sudo apt-get update
