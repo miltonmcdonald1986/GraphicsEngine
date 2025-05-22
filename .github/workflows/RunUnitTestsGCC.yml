@@ -19,10 +19,14 @@ jobs:
           github-token: ${{ github.token }}
           name: build-artifact-ubuntu-latest-gcc
           path: build
+      - name: Set Library Path
+        run: export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
       - name: Set executable permissions for test binaries
         run: chmod +x build/bin/GraphicsEngineTests
       - name: Install Mesa3D
-        run: sudo apt-get update && sudo apt-get install -y mesa-utils libgl1-mesa-dev libegl1-mesa-dev libgl1-mesa-swx11
+        run: |
+          sudo apt-get update && sudo apt-get install -y libosmesa6-dev
+          ldconfig -p | grep OSMesa
       - name: Enable Mesa software rendering
         run: |
           export LIBGL_ALWAYS_SOFTWARE=1
