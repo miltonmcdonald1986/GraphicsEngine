@@ -31,4 +31,4 @@ jobs:
           clang-tidy-19 
           --checks='bugprone-*' 
           -p build/compile_commands.json 
-          $(find GraphicsEngine/ Sandbox/ -type f \( -name "*.cpp" \))
+          $(find GraphicsEngine/ Sandbox/ -type f \( -name "*.cpp" ! -name 'glad.cpp'\))
