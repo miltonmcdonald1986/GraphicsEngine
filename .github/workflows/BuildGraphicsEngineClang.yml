@@ -1,0 +1,32 @@
+name: "Build Graphics Engine (ubuntu-latest, clang)"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    name: Build Graphics Engine (ubuntu-latest, clang)
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install Clang 19
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget lsb-release gnupg
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 19
+    - name: Install Dependencies
+      run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+    - name: Configure CMake
+      run: cmake -S ${{ github.workspace }} -B ${{ github.workspace }}/build -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_BUILD_TYPE=Release
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/build --config Release
+    - name: Upload Build Directory
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact-ubuntu-latest-clang
+        path: build
