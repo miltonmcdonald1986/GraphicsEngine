@@ -1,4 +1,4 @@
-name: "Run Unit Tests (ubuntu-latest, gcc)"
+name: "Test (ubuntu-latest, gcc)"
 on:
   workflow_run:
     workflows: ["Build Graphics Engine (ubuntu-latest, gcc)"]
