@@ -31,6 +31,6 @@ jobs:
           clang-tidy-19 
           --checks='*'
           -warnings-as-errors='*'
-          -extra-arg=-v
+          --header-filter=.*GraphicsEngine.*
           -p build/compile_commands.json 
           $(find GraphicsEngine/ Sandbox/ -type f -name "*.cpp" ! -name 'glad.cpp')
