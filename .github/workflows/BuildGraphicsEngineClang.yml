@@ -25,8 +25,10 @@ jobs:
       run: cmake -S ${{ github.workspace }} -B ${{ github.workspace }}/build -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_C_COMPILER=clang-19 -DCMAKE_BUILD_TYPE=Release
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config Release
+    - name: Create Tar Archive (Preserve Timestamps)
+      run: tar -cvf build.tar build/
     - name: Upload Build Directory
       uses: actions/upload-artifact@v4
       with:
         name: build-artifact-ubuntu-latest-clang
-        path: build
+        path: build.tar
