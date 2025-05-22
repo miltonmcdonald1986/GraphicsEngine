@@ -22,9 +22,7 @@ jobs:
       - name: Set executable permissions for test binaries
         run: chmod +x build/bin/GraphicsEngineTests
       - name: Install Mesa3D
-        run: |
-          sudo apt-get update && sudo apt-get install -y libosmesa6-dev
-          ldconfig -p | grep OSMesa
+        run: sudo apt-get update && sudo apt-get install -y libosmesa6-dev
       - name: Enable Mesa software rendering
         run: |
           export LIBGL_ALWAYS_SOFTWARE=1
