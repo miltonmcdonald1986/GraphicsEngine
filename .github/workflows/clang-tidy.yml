@@ -29,6 +29,7 @@ jobs:
       - name: Run Clang-Tidy
         run: > 
           clang-tidy-19 
-          --checks='bugprone-*' 
+          --checks='*'
+          -warnings-as-errors='*'
           -p build/compile_commands.json 
           $(find GraphicsEngine/ Sandbox/ -type f -name "*.cpp" ! -name 'glad.cpp')
