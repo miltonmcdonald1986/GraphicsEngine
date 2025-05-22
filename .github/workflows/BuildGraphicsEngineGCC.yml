@@ -1,4 +1,4 @@
-name: "Build Graphics Engine (ubuntu-latest, gcc)"
+name: "Build (ubuntu-latest, gcc)"
 on:
   push:
     branches: [ "main" ]
