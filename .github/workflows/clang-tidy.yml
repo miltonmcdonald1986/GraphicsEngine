@@ -21,7 +21,7 @@ jobs:
       - name: Install Clang 19 and Clang-Tidy 19
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget lsb-release gnupg
+          sudo apt-get install -y wget lsb-release gnupg mesa-common-dev
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 19
