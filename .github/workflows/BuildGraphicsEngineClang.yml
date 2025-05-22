@@ -1,4 +1,4 @@
-name: "Build Graphics Engine (ubuntu-latest, clang)"
+name: "Build (ubuntu-latest, clang)"
 on:
   push:
     branches: [ "main" ]
