@@ -1,19 +1,29 @@
 #pragma once
 
-#include "entity.h"
 #include "Types.h"
+#include "entity.h"
 
 namespace graphics_engine::entities {
 
-/// @brief Manages the lifecycle and retrieval of Entity objects within the
-/// graphics engine.
+/// @class EntityManager
+/// @brief Abstract base class for managing the lifecycle and retrieval of
+/// entities within the graphics engine.
 ///
-/// Provides functionality for adding entities, accessing individual entities by
-/// ID, and retrieving a list of all registered entity IDs.
+/// This class defines the interface for entity management and ensures that it
+/// cannot be instantiated or copied/moved outside the Engine.
 class EntityManager {
  public:
-  /// @brief Virtual destructor for proper cleanup of derived classes.
-  virtual ~EntityManager() = default;
+  /// @brief Deleted copy constructor to prevent copying.
+  EntityManager(const EntityManager&) = delete;
+
+  /// @brief Deleted copy assignment operator to prevent assignment.
+  EntityManager& operator=(const EntityManager&) = delete;
+
+  /// @brief Deleted move constructor to prevent moving.
+  EntityManager(EntityManager&&) = delete;
+
+  /// @brief Deleted move assignment operator to prevent move assignment.
+  EntityManager& operator=(EntityManager&&) = delete;
 
   /// @brief Adds a new entity to the manager.
   /// @param attributes Vertex attributes defining the entity's geometry.
@@ -31,6 +41,15 @@ class EntityManager {
   /// @brief Gets a collection of all registered entity IDs.
   /// @return A list of entity IDs currently managed by the EntityManager.
   virtual auto GetEntityIds() const -> Types::EntityIds = 0;
+
+ protected:
+  /// @brief Protected to prevent direct instantiation.
+  ///
+  /// Only derived classes created by Engine can be instantiated.
+  EntityManager() = default;
+
+  /// @brief Virtual destructor for proper cleanup of derived classes.
+  virtual ~EntityManager() = default;
 };
 
 }  // namespace graphics_engine::entities
