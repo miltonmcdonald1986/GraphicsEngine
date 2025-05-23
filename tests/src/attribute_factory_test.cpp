@@ -113,22 +113,24 @@ TEST(AttributeFactoryTests, TriangleAAS) {
   std::expected<ga::Attribute, g::Error> error_bad_angle_a =
       gaat::AAS(0.f, 1.f, 3.f);
   EXPECT_FALSE(error_bad_angle_a.has_value());
-  EXPECT_EQ(error_bad_angle_a.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_a.error().GetCode(), g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_angle_b =
       gaat::AAS(0.5f, 0.f, 3.f);
   EXPECT_FALSE(error_bad_angle_b.has_value());
-  EXPECT_EQ(error_bad_angle_b.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_b.error().GetCode(), g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_side_a =
       gaat::AAS(0.5f, 1.f, 0.f);
   EXPECT_FALSE(error_bad_side_a.has_value());
-  EXPECT_EQ(error_bad_side_a.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_a.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_angles =
       gaat::AAS(kPiOver2, kPiOver2, 3.f);
   EXPECT_FALSE(error_bad_angles.has_value());
-  EXPECT_EQ(error_bad_angles.error().code, g::ErrorCode::kAngleSumExceeded);
+  EXPECT_EQ(error_bad_angles.error().GetCode(),
+            g::ErrorCode::kAngleSumExceeded);
 }
 
 TEST(AttributeFactoryTests, TriangleASA) {
@@ -156,22 +158,24 @@ TEST(AttributeFactoryTests, TriangleASA) {
   std::expected<ga::Attribute, g::Error> error_bad_angle_a =
       gaat::ASA(-1.f, side_c, angle_b);
   EXPECT_FALSE(error_bad_angle_a.has_value());
-  EXPECT_EQ(error_bad_angle_a.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_a.error().GetCode(), g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_side_c =
       gaat::ASA(angle_a, -1.f, angle_b);
   EXPECT_FALSE(error_bad_side_c.has_value());
-  EXPECT_EQ(error_bad_side_c.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_c.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_angle_b =
       gaat::ASA(angle_a, side_c, -1.f);
   EXPECT_FALSE(error_bad_angle_b.has_value());
-  EXPECT_EQ(error_bad_angle_b.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_b.error().GetCode(), g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_angles =
       gaat::ASA(kPiOver2, side_c, kPiOver2);
   EXPECT_FALSE(error_bad_angles.has_value());
-  EXPECT_EQ(error_bad_angles.error().code, g::ErrorCode::kAngleSumExceeded);
+  EXPECT_EQ(error_bad_angles.error().GetCode(),
+            g::ErrorCode::kAngleSumExceeded);
 }
 
 TEST(AttributeFactoryTests, TriangleHL) {
@@ -196,17 +200,17 @@ TEST(AttributeFactoryTests, TriangleHL) {
   std::expected<ga::Attribute, g::Error> error_bad_hypotenuse =
       gaat::HL(13.f, -5.f);
   EXPECT_FALSE(error_bad_hypotenuse.has_value());
-  EXPECT_EQ(error_bad_hypotenuse.error().code,
+  EXPECT_EQ(error_bad_hypotenuse.error().GetCode(),
             g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_leg = gaat::HL(-13.f, 5.f);
   EXPECT_FALSE(error_bad_leg.has_value());
-  EXPECT_EQ(error_bad_leg.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_leg.error().GetCode(), g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_leg_exceeds_hypotenuse =
       gaat::HL(5.f, 13.f);
   EXPECT_FALSE(error_leg_exceeds_hypotenuse.has_value());
-  EXPECT_EQ(error_leg_exceeds_hypotenuse.error().code,
+  EXPECT_EQ(error_leg_exceeds_hypotenuse.error().GetCode(),
             g::ErrorCode::kInvalidTriangle);
 }
 
@@ -235,22 +239,26 @@ TEST(AttributeFactoryTests, TriangleSAS) {
   std::expected<ga::Attribute, g::Error> error_bad_side_a =
       gaat::SAS(-1.f, angle_c, side_b);
   EXPECT_FALSE(error_bad_side_a.has_value());
-  EXPECT_EQ(error_bad_side_a.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_a.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_angle_c_lt_0 =
       gaat::SAS(side_a, -1.f, side_b);
   EXPECT_FALSE(error_bad_angle_c_lt_0.has_value());
-  EXPECT_EQ(error_bad_angle_c_lt_0.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_c_lt_0.error().GetCode(),
+            g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_angle_c_gt_pi =
       gaat::SAS(side_a, 181.f * kDegsToRads, side_b);
   EXPECT_FALSE(error_bad_angle_c_gt_pi.has_value());
-  EXPECT_EQ(error_bad_angle_c_gt_pi.error().code, g::ErrorCode::kInvalidAngle);
+  EXPECT_EQ(error_bad_angle_c_gt_pi.error().GetCode(),
+            g::ErrorCode::kInvalidAngle);
 
   std::expected<ga::Attribute, g::Error> error_bad_side_b =
       gaat::SAS(side_a, angle_c, -1.f);
   EXPECT_FALSE(error_bad_side_b.has_value());
-  EXPECT_EQ(error_bad_side_b.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_b.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 }
 
 TEST(AttributeFactoryTests, TriangleSSS) {
@@ -278,20 +286,24 @@ TEST(AttributeFactoryTests, TriangleSSS) {
   std::expected<ga::Attribute, g::Error> error_bad_side_a =
       gaat::SSS(-1.f, side_b, side_c);
   EXPECT_FALSE(error_bad_side_a.has_value());
-  EXPECT_EQ(error_bad_side_a.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_a.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_side_b =
       gaat::SSS(side_a, -1.f, side_c);
   EXPECT_FALSE(error_bad_side_b.has_value());
-  EXPECT_EQ(error_bad_side_b.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_b.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_side_c =
       gaat::SSS(side_a, side_b, -1.f);
   EXPECT_FALSE(error_bad_side_c.has_value());
-  EXPECT_EQ(error_bad_side_c.error().code, g::ErrorCode::kInvalidSideLength);
+  EXPECT_EQ(error_bad_side_c.error().GetCode(),
+            g::ErrorCode::kInvalidSideLength);
 
   std::expected<ga::Attribute, g::Error> error_bad_triangle =
       gaat::SSS(3.f, 7.f, 2.f);
   EXPECT_FALSE(error_bad_triangle.has_value());
-  EXPECT_EQ(error_bad_triangle.error().code, g::ErrorCode::kInvalidTriangle);
+  EXPECT_EQ(error_bad_triangle.error().GetCode(),
+            g::ErrorCode::kInvalidTriangle);
 }

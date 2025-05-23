@@ -7,8 +7,6 @@
 #include "glm/mat4x4.hpp"
 #include "glm/vec2.hpp"
 
-#include "Error.h"
-
 namespace graphics_engine::Types
 {
 
