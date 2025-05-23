@@ -40,7 +40,7 @@ class EntityManager {
 
   /// @brief Gets a collection of all registered entity IDs.
   /// @return A list of entity IDs currently managed by the EntityManager.
-  virtual auto GetEntityIds() const -> Types::EntityIds = 0;
+  [[nodiscard]] virtual auto GetEntityIds() const -> Types::EntityIds = 0;
 
  protected:
   /// @brief Protected to prevent direct instantiation.

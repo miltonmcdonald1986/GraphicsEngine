@@ -27,7 +27,7 @@ class ICamera {
 
   /// @brief Get the viewing direction of the camera.
   /// @return The direction the camera is looking.
-  virtual auto GetFront() const -> glm::vec3 = 0;
+  [[nodiscard]] virtual auto GetFront() const -> glm::vec3 = 0;
 
   /// @brief Retrieves an observable object for the camera's view and projection
   /// matrices.
@@ -35,23 +35,24 @@ class ICamera {
   /// of the camera.
   /// @note The observable allows tracking changes to the camera's matrices in
   /// real-time.
-  virtual auto GetObservable() const -> Observable<glm::mat4, glm::mat4>* = 0;
+  [[nodiscard]] virtual auto GetObservable() const
+      -> Observable<glm::mat4, glm::mat4>* = 0;
 
   /// @brief Gets the projection matrix of the camera.
   /// @return A 4x4 projection matrix.
-  virtual auto GetProjectionMatrix() const -> glm::mat4 = 0;
+  [[nodiscard]] virtual auto GetProjectionMatrix() const -> glm::mat4 = 0;
 
   /// @brief Gets the right direction relative to the view and up directions.
   /// @return The right direction of the camera.
-  virtual auto GetRight() const -> glm::vec3 = 0;
+  [[nodiscard]] virtual auto GetRight() const -> glm::vec3 = 0;
 
   /// @brief Gets the up direction relative to the view and right directions.
   /// @return The up direction of the camera.
-  virtual auto GetUp() const -> glm::vec3 = 0;
+  [[nodiscard]] virtual auto GetUp() const -> glm::vec3 = 0;
 
   /// @brief Gets the view matrix of the camera.
   /// @return A 4x4 view matrix.
-  virtual auto GetViewMatrix() const -> glm::mat4 = 0;
+  [[nodiscard]] virtual auto GetViewMatrix() const -> glm::mat4 = 0;
 
   /// @brief Set the aspect ration for the camera.
   /// @param aspectRatio the aspect ratio.
