@@ -38,6 +38,6 @@ using IEntityFactoryPtr = std::shared_ptr<IEntityFactory>;
 /// @brief Creates an IEntityFactory instance.
 /// @param spEngine Shared pointer to the IEngine instance.
 /// @return A shared pointer to the created IEntityFactory.
-DLLEXPORT auto CreateEntityFactory(IEnginePtr spEngine) -> IEntityFactoryPtr;
+DLLEXPORT auto CreateEntityFactory(const IEnginePtr& spEngine) -> IEntityFactoryPtr;
 
 }  // namespace graphics_engine::entities
