@@ -3,6 +3,7 @@
 #include <expected>
 #include <filesystem>
 #include <variant>
+#include <vector>
 
 #include "glm/mat4x4.hpp"
 #include "glm/vec2.hpp"
