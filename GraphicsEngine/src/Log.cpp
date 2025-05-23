@@ -56,7 +56,7 @@ Log::Log()
 }
 
 Log::Log(std::shared_ptr<spdlog::logger> spLogger)
-	: m_spLogger(spLogger)
+	: m_spLogger(std::move(spLogger))
 {
 }
 

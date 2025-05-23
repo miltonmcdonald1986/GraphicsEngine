@@ -2,20 +2,25 @@
 
 #include "Types.h"
 
-namespace graphics_engine
-{
+namespace graphics_engine {
 
-	struct Uniform
-	{
-		Uniform() = delete;
-		Uniform(Types::StringView name, int location);
-		Uniform (const Uniform& other);
+class Uniform {
+ public:
+  Uniform(Types::StringView name, int location);
 
-		const Types::String name;
-		const int location;
-		Types::UniformData data;
-	};
+  [[nodiscard]] auto GetData() const -> Types::UniformData;
+  auto SetData(const Types::UniformData& data) -> void;
 
-	using Uniforms = std::unordered_map<Types::String, Uniform, Types::StringHash, std::equal_to<>>;
+  [[nodiscard]] auto GetName() const -> Types::String;
+  [[nodiscard]] auto GetLocation() const -> int;
 
-}
+ private:
+  Types::String name_{};
+  int location_{};
+  Types::UniformData data_{};
+};
+
+using Uniforms = std::unordered_map<Types::String, Uniform, Types::StringHash,
+                                    std::equal_to<>>;
+
+}  // namespace graphics_engine

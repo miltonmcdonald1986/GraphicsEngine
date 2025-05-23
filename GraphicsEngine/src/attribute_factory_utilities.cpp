@@ -12,13 +12,12 @@ namespace graphics_engine::attributes::attribute_factory::utilities {
 
 namespace {
 
-const std::string kErrMessageEmptyVector =
+inline const std::string kErrMessageEmptyVector =
     "Empty vector was provided to a function that requires a non-empty vector.";
 
 }
 
-void center_triangle(glm::vec3& v0, glm::vec3& v1,
-                                           glm::vec3& v2) {
+void center_triangle(glm::vec3& v0, glm::vec3& v1, glm::vec3& v2) {
   std::expected<glm::vec3, Error> centroid = compute_centroid({v0, v1, v2});
   assert(centroid.has_value());
   for (auto v : {&v0, &v1, &v2}) {
@@ -26,8 +25,8 @@ void center_triangle(glm::vec3& v0, glm::vec3& v1,
   }
 }
 
-std::expected<glm::vec3, Error> compute_centroid(
-    const std::vector<glm::vec3>& vertices) {
+auto compute_centroid(const std::vector<glm::vec3>& vertices)
+    -> std::expected<glm::vec3, Error> {
   if (vertices.empty())
     return std::unexpected(
         Error{ErrorCode::kInvalidInput, kErrMessageEmptyVector});
@@ -37,7 +36,8 @@ std::expected<glm::vec3, Error> compute_centroid(
          static_cast<float>(vertices.size());
 }
 
-bool satisfies_triangle_inequality(float side_a, float side_b, float side_c) {
+auto satisfies_triangle_inequality(float side_a, float side_b, float side_c)
+    -> bool {
   return (side_a + side_b > side_c) && (side_a + side_c > side_b) &&
          (side_b + side_c > side_a);
 }

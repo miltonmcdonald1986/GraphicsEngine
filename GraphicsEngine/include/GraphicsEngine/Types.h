@@ -42,6 +42,7 @@ namespace graphics_engine::Types
 	using OptShaderId = std::optional<ShaderId>;
 
 	using String = std::string;
+	using Strings = std::vector<String>;
 	
 	struct StringHash {
 		using is_transparent = void;
@@ -56,6 +57,7 @@ namespace graphics_engine::Types
 	using OptStringView = std::optional<StringView>;
 
 	using UniformData = std::variant<
+		std::monostate,
 		float,
 		glm::mat4x4,
 		glm::vec4,

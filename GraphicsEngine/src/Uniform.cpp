@@ -1,17 +1,16 @@
 #include "Uniform.h"
 
-namespace graphics_engine
-{
+namespace graphics_engine {
 
-	Uniform::Uniform(Types::StringView name, int location)
-		:	name(std::string(name)),
-			location(location)
-	{
-	}
+Uniform::Uniform(Types::StringView name, int location)
+    : name_(std::string(name)), location_(location) {}
 
-	Uniform::Uniform (const Uniform& other)
-		: name (std::string(other.name)), location (other.location), data (other.data) 
-	{
-	}
+auto Uniform::GetData() const -> Types::UniformData { return data_; }
 
-}
+auto Uniform::SetData(const Types::UniformData& data) -> void { data_ = data; }
+
+auto Uniform::GetName() const -> Types::String { return name_; }
+
+auto Uniform::GetLocation() const -> int { return location_; }
+
+}  // namespace graphics_engine
