@@ -30,6 +30,6 @@ jobs:
         run: > 
           clang-tidy-19
           -warnings-as-errors="bugprone-*,cert-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,performance-*,readability*-"
-          $(ls GraphicsEngine/src/*.{cpp,h} GraphicsEngine/include/GraphicsEngine/*.h | grep -v glad.cpp)
+          $(ls GraphicsEngine/src/*.{cpp,h} GraphicsEngine/include/GraphicsEngine/*.h | grep -v -E 'glad.cpp|stb_image.cpp')
           -p build/compile_commands.json
           --checks="bugprone-*,cert-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,performance-*,readability*-"
