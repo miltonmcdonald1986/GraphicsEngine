@@ -17,13 +17,13 @@ class EntityManager {
   EntityManager(const EntityManager&) = delete;
 
   /// @brief Deleted copy assignment operator to prevent assignment.
-  EntityManager& operator=(const EntityManager&) = delete;
+  auto operator=(const EntityManager&) -> EntityManager& = delete;
 
   /// @brief Deleted move constructor to prevent moving.
   EntityManager(EntityManager&&) = delete;
 
   /// @brief Deleted move assignment operator to prevent move assignment.
-  EntityManager& operator=(EntityManager&&) = delete;
+  auto operator=(EntityManager&&) -> EntityManager& = delete;
 
   /// @brief Adds a new entity to the manager.
   /// @param attributes Vertex attributes defining the entity's geometry.
@@ -49,6 +49,7 @@ class EntityManager {
   EntityManager() = default;
 
   /// @brief Virtual destructor for proper cleanup of derived classes.
+  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~EntityManager() = default;
 };
 

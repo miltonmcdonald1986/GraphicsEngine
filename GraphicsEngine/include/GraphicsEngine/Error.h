@@ -14,10 +14,10 @@ enum class ErrorCode : std::uint8_t {
 
 class Error {
  public:
-  Error(ErrorCode code, const std::string& msg) : code_(code), msg_(msg) {}
+  Error(ErrorCode code, std::string msg) : code_(code), msg_(std::move(msg)) {}
 
-  ErrorCode GetCode() const { return code_; };
-  Types::String GetMsg() const { return msg_; };
+  [[nodiscard]] auto GetCode() const -> ErrorCode { return code_; };
+  [[nodiscard]] auto GetMsg() const -> Types::String { return msg_; };
 
  private:
   ErrorCode code_;

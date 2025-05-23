@@ -17,13 +17,13 @@ class ICamera {
   ICamera(const ICamera&) = delete;
 
   /// @brief Deleted copy assignment operator to prevent assignment.
-  ICamera& operator=(const ICamera&) = delete;
+  auto operator=(const ICamera&) -> ICamera& = delete;
 
   /// @brief Deleted move constructor to prevent moving.
   ICamera(ICamera&&) = delete;
 
   /// @brief Deleted move assignment operator to prevent move assignment.
-  ICamera& operator=(ICamera&&) = delete;
+  auto operator=(ICamera&&) -> ICamera& = delete;
 
   /// @brief Get the viewing direction of the camera.
   /// @return The direction the camera is looking.
@@ -67,6 +67,7 @@ class ICamera {
   ICamera() = default;
 
   /// @brief Ensures proper cleanup in derived classes.
+  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~ICamera() = default;
 };
 
