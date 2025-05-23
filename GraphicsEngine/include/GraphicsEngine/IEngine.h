@@ -11,6 +11,7 @@
 
 namespace graphics_engine {
 
+// NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
 class IEngine {
  public:
   IEngine(const IEngine&) = delete;
@@ -41,7 +42,6 @@ class IEngine {
 
  protected:
   IEngine() = default;
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~IEngine() = default;
 };
 

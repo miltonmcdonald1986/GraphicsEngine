@@ -11,7 +11,7 @@ namespace graphics_engine::entities {
 ///
 /// This class defines the interface for entity management and ensures that it
 /// cannot be instantiated or copied/moved outside the Engine.
-class EntityManager {
+class EntityManager {  // NOLINT(cppcoreguidelines-virtual-class-destructor)
  public:
   /// @brief Deleted copy constructor to prevent copying.
   EntityManager(const EntityManager&) = delete;
@@ -49,7 +49,6 @@ class EntityManager {
   EntityManager() = default;
 
   /// @brief Virtual destructor for proper cleanup of derived classes.
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~EntityManager() = default;
 };
 

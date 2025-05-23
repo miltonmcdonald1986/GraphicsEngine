@@ -6,6 +6,7 @@
 namespace graphics_engine {
 
 /// @brief A first-person style camera; can strafe, and adjust pitch and yaw.
+// NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
 class ICameraFly : public ICamera {
  public:
   ICameraFly(const ICameraFly&) = delete;
@@ -21,7 +22,6 @@ class ICameraFly : public ICamera {
  protected:
   ICameraFly() = default;
 
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   ~ICameraFly() override = default;
 };
 

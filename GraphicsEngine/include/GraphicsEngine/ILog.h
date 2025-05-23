@@ -14,6 +14,7 @@ enum class LogLevel : std::uint8_t {
   Off
 };
 
+// NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
 class ILog {
  public:
   ILog(const ILog&) = delete;
@@ -49,7 +50,7 @@ class ILog {
 
  protected:
   ILog() = default;
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
+
   virtual ~ILog() = default;
 };
 

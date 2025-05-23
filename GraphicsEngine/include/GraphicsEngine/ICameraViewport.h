@@ -6,6 +6,7 @@
 namespace graphics_engine {
 
 /// @brief A static camera that simply adjusts for window-resizing.
+// NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
 class ICameraViewport : public ICamera {
  public:
   ICameraViewport(const ICameraViewport&) = delete;

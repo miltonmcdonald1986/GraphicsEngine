@@ -6,6 +6,7 @@
 namespace graphics_engine::entities {
 
 /// @brief Interface for creating entity objects.
+// NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
 class IEntityFactory {
  public:
   IEntityFactory(const IEntityFactory&) = delete;
@@ -27,8 +28,8 @@ class IEntityFactory {
 
  protected:
   IEntityFactory() = default;
+
   /// @brief Virtual destructor for IEntityFactory.
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~IEntityFactory() = default;
 };
 

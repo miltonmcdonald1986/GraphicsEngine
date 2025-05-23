@@ -11,7 +11,7 @@
 namespace graphics_engine {
 
 /// @brief The ICamera interface represents a camera in the graphics engine.
-class ICamera {
+class ICamera { // NOLINT(cppcoreguidelines-virtual-class-destructor)
  public:
   /// @brief Deleted copy constructor to prevent copying.
   ICamera(const ICamera&) = delete;
@@ -67,7 +67,6 @@ class ICamera {
   ICamera() = default;
 
   /// @brief Ensures proper cleanup in derived classes.
-  // NOLINTNEXTLINE(cppcoreguidelines-virtual-class-destructor)
   virtual ~ICamera() = default;
 };
 
