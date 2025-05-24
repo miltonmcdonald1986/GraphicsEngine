@@ -18,9 +18,9 @@ enum class LogLevel : std::uint8_t {
 class ILog {
  public:
   ILog(const ILog&) = delete;
-  ILog& operator=(const ILog&) = delete;
+  auto operator=(const ILog&) -> ILog& = delete;
   ILog(ILog&&) = delete;
-  ILog& operator=(ILog&&) = delete;
+  auto operator=(ILog&&) -> ILog& = delete;
 
   virtual auto ClearMessages() -> void = 0;
   [[nodiscard]] virtual auto GetLatestMessages() const

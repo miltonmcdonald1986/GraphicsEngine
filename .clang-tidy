@@ -1,0 +1,9 @@
+CheckOptions:
+    cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: 'true'
+    
+Checks:
+    'bugprone-*,cert-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,performance-*,readability*-'
+    
+WarningsAsErrors:
+    'bugprone-*,cert-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,performance-*,readability*-'
+    

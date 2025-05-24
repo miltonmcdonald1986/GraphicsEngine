@@ -3,16 +3,21 @@
 #include <memory>
 #include <vector>
 
-namespace graphics_engine
-{
+namespace graphics_engine {
 
-	class ITexture
-	{
-	public:
-		virtual ~ITexture() = default;
-	};
+class ITexture {
+ public:
+  ITexture(const ITexture&) = delete;
+  auto operator=(const ITexture&) -> ITexture& = delete;
+  ITexture(ITexture&&) = delete;
+  auto operator=(ITexture&&) -> ITexture& = delete;
 
-	using ITexturePtr = std::shared_ptr<ITexture>;
-	using ITextures = std::vector<ITexturePtr>;
+ protected:
+  ITexture() = default;
+  virtual ~ITexture() = default;
+};
 
-}
+using ITexturePtr = std::shared_ptr<ITexture>;
+using ITextures = std::vector<ITexturePtr>;
+
+}  // namespace graphics_engine
